@@ -1,7 +1,14 @@
 @use './typography' as *;
+@use '../helpers/helpers-dir' as *;
 
 body {
   font-family: $font-family;
+}
+
+:root {
+  @include respond-to(huge) {
+    font-size: 18px;
+  }
 }
 
 /* resets */

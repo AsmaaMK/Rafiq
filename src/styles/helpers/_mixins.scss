@@ -1,4 +1,5 @@
 @use "./colors" as *;
+@use "./variables" as *;
 
 @mixin animation {
   transition: all 0.3s ease-in-out;
@@ -65,5 +66,29 @@
 
   } @else {
     @error "Unknown flex direction #{$direction}.";
+  }
+}
+
+
+/// Responsive breakpoint manager
+/// @param {String} $breakpoint - Breakpoint
+/// @requires $breakpoints
+///
+@mixin respond-to($breakpoint) {
+  $raw-query: map-get($breakpoints, $breakpoint);
+
+  @if $raw-query {
+    $query: if(
+      type-of($raw-query) == 'string',
+      unquote($raw-query),
+      inspect($raw-query)
+    );
+
+    @media #{$query} {
+      @content;
+    }
+  } @else {
+    @error 'No value found for `#{$breakpoint}`. '
+         + 'Please make sure it is defined in `$breakpoints` map.';
   }
 }

@@ -7,43 +7,55 @@
   $label-position-top: -1.5em;
   $label-position-left: 0;
 
-  input {
-    display: block;
-
-    width: 100%;
-    height: 3.313rem;
-    padding: 0.6em;
-
-    box-shadow: 0 0.18rem 0.37rem 0 $primary;
-    border: solid 0.18em $primary;
-    border-radius: 0.75rem;
-
-    font-family: $font-family;
-    color: $primary;
-    font-size: 1rem;
-
-    /* for icons */
-    background-position-y: center;
-    background-position-x: 0.8em;
-    background-repeat: no-repeat;
-    background-size: 1.4rem;
-
-    @include animation;
-
-    &:focus {
-      outline: none;
-      background-image: none !important;
-      padding-left: 1em;
+  [class$="-input-field"] {
+    @include respond-to("large") {
+      width: 70%;
+      margin: auto;
     }
 
-    &:focus + .floating-label {
-      top: $label-position-top;
-      left: $label-position-left;
-    }
+    input {
+      display: block;
 
-    &.input-touched {
-      background-image: none !important;
-      padding-left: 1em !important;
+      width: 100%;
+      height: 3.313rem;
+      padding: 0.6em;
+
+      box-shadow: 0 0.18rem 0.37rem 0 $primary;
+      border: solid 0.18em $primary;
+      border-radius: 0.75rem;
+
+      font-family: $font-family;
+      color: $primary;
+      font-size: 1rem;
+
+      @include respond-to(large) {
+        font-size: 1.2rem;
+        font-weight: bold;
+      }
+
+      /* for icons */
+      background-position-y: center;
+      background-position-x: 0.8em;
+      background-repeat: no-repeat;
+      background-size: 1.4rem;
+
+      @include animation;
+
+      &:focus {
+        outline: none;
+        background-image: none !important;
+        padding-left: 1em;
+      }
+
+      &:focus + .floating-label {
+        top: $label-position-top;
+        left: $label-position-left;
+      }
+
+      &.input-touched {
+        background-image: none !important;
+        padding-left: 1em !important;
+      }
     }
   }
 
@@ -52,6 +64,7 @@
     position: relative;
 
     .floating-label {
+      pointer-events: none;
       position: absolute;
       top: 1.2em;
       left: 2.5em;
@@ -60,7 +73,11 @@
       color: $primary;
       font-size: 0.9rem;
 
-      pointer-events: none;
+      @include respond-to(large) {
+        font-size: 1.2rem;
+        top: 0.8em;
+        left: 2.5em;
+      }
 
       @include animation;
 
@@ -89,12 +106,25 @@
     font-size: 1.3rem;
     font-weight: bold;
 
+    @include respond-to(large) {
+      font-size: 1.7rem;
+    }
+
     border-radius: 0.75rem;
-    border: none;
+    border: 0.12em solid $primary;
+
     cursor: pointer;
+
+    @include animation;
 
     &:disabled {
       opacity: 60%;
+    }
+
+    &:hover {
+      border: 0.12em solid $primary;
+      background-color: transparent;
+      color: $primary;
     }
   }
 }
