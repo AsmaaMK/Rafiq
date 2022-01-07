@@ -1,0 +1,68 @@
+@use "./colors" as *;
+
+@mixin animation {
+  transition: all 0.3s ease-in-out;
+}
+
+/// Mixin makes a gradient background with specific degree
+/// @param {integer (deg)} $degree - degree of gradient
+@mixin gradient($degree: 0deg) {
+  background-image: linear-gradient(
+    $degree,
+    $gradient-lighter 0%,
+    $gradient-light 26%,
+    $gradient-darker 45%,
+    $gradient-dark 70%,
+    $gradient-lighter 100%
+  );
+}
+
+/// Mixin displays an element as flex and specifies alignment in x and y directions.
+///
+/// @param {string} $direction - flex direction column or row
+/// @param {string} $align-x - row: justify-content, column: align-items
+/// @param {string} $align-y - row: align-items, column: justify-content
+///
+/// @example scss - Usage
+///   .foo {
+///     @include flex;
+///   }
+///
+/// @example css - Output
+///   .foo {
+///     display: flex;
+///     flex-direction: column;
+///     justify-content: center;
+///     align-items: center;
+///   }
+///
+/// @example scss - Usage
+///   .foo {
+///     @include flex(row, flex-start, center);
+///   }
+///
+/// @example css - Output
+///   .foo {
+///     display: flex;
+///     flex-direction: row;
+///     justify-content: flex-start;
+///     align-items: center;
+///   }
+///
+@mixin flex($direction: column, $align-x: center, $align-y: center) {
+  display: flex;
+
+  @if $direction == row {
+    flex-direction: row;
+    justify-content: $align-x; // main axis
+    align-items: $align-y; // cross axis
+
+  } @else if $direction == column {
+    flex-direction: column;
+    justify-content: $align-y; // main axis
+    align-items: $align-x; // cross axis
+
+  } @else {
+    @error "Unknown flex direction #{$direction}.";
+  }
+}

@@ -1,13 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="19.428" height="19.119" viewBox="0 0 19.428 19.119">
-  <defs>
-    <clipPath id="clip-path">
-      <rect id="Rectangle_23" data-name="Rectangle 23" width="19.428" height="19.119" fill="#fff" stroke="#707070" stroke-width="1"/>
-    </clipPath>
-  </defs>
-  <g id="Email" clip-path="url(#clip-path)">
-    <g id="email_black_24dp" transform="translate(0 0.053)">
-      <path id="Path_217" data-name="Path 217" d="M0,0H24.031V21.848H0Z" fill="none"/>
-      <path id="Path_218" data-name="Path 218" d="M15.183,4.333H3.613A1.488,1.488,0,0,0,2.174,5.863l-.007,9.176a1.494,1.494,0,0,0,1.446,1.529h11.57a1.494,1.494,0,0,0,1.446-1.529V5.863A1.494,1.494,0,0,0,15.183,4.333Zm0,3.059L9.4,11.215,3.613,7.392V5.863L9.4,9.686l5.785-3.823Z" transform="translate(-0.164 -0.692)" fill="#6e75a0"/>
-    </g>
-  </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#6E75A0"><path d="M0 0h24v24H0z" fill="none"/><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>

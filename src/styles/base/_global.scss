@@ -1,0 +1,13 @@
+@use './typography' as *;
+
+body {
+  font-family: $font-family;
+}
+
+/* resets */
+
+input {
+  &:focus {
+    outline: none;
+  }
+}

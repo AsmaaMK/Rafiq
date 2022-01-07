@@ -16,12 +16,10 @@ export class ForgetPasswordComponent implements OnInit {
   ngOnInit(): void {
     this.forgetPassForm = new FormGroup({
       userName: new FormControl('', Validators.required),
-      password: new FormControl('', Validators.required),
     });
   }
 
   get userName() { return this.forgetPassForm.get('userName'); }
-  get password() { return this.forgetPassForm.get('password'); }
 
 
   onSubmit() {
