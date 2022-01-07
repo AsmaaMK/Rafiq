@@ -4,23 +4,23 @@
 .forget-password-section__form,
 .login-manual-section__form,
 .sign-up-manual-section__form {
-  /* input and select styles */
+  $label-position-top: -1.5em;
+  $label-position-left: 0;
+
   input {
     display: block;
 
-    // width: 29rem;
     width: 100%;
     height: 3.313rem;
     padding: 0.6em;
 
     box-shadow: 0 0.18rem 0.37rem 0 $primary;
-    border: solid 0.2em $primary;
+    border: solid 0.18em $primary;
     border-radius: 0.75rem;
 
     font-family: $font-family;
     color: $primary;
-    font-size: 1.2rem;
-    font-weight: bold;
+    font-size: 1rem;
 
     /* for icons */
     background-position-y: center;
@@ -37,14 +37,11 @@
     }
 
     &:focus + .floating-label {
-      top: -1.5em;
-      left: 0;
-      // border: solid 0.2em $primary;
-      // border-radius: 0.75rem;
+      top: $label-position-top;
+      left: $label-position-left;
     }
 
     &.input-touched {
-      // background-color: transparent;
       background-image: none !important;
       padding-left: 1em !important;
     }
@@ -56,23 +53,20 @@
 
     .floating-label {
       position: absolute;
-      top: 1em;
+      top: 1.2em;
       left: 2.5em;
       padding: 0.2em 0.7em;
 
-      // background-color: $neutral-lighter;
       color: $primary;
-      // font-size: 0.9rem;
+      font-size: 0.9rem;
 
       pointer-events: none;
 
       @include animation;
 
-
-
       &.label-touched {
-        top: -1.5em !important;
-        left: 0 !important;
+        top: $label-position-top !important;
+        left: $label-position-left !important;
       }
     }
   }
@@ -85,14 +79,14 @@
   button[type="submit"] {
     display: block;
 
-    width: 15rem;
-    margin: 0 auto 2.6rem;
+    width: 13rem;
+    margin: 0 auto 3em;
     padding: 0.6em;
 
     background-color: $primary;
     color: $neutral-lighter;
     font-family: $font-family;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: bold;
 
     border-radius: 0.75rem;
@@ -104,23 +98,3 @@
     }
   }
 }
-
-// .floating-label {
-//   position: relative;
-//   // background-color: aqua;
-//   z-index: 10;
-//   // color: red;
-//   div {
-//     z-index: -1;
-//     display: inline-block;
-//     position: absolute;
-//     width: 10em;
-//     height: 0.2em;
-//     left: -0.25em;
-//     top: 45%;
-//     background-color: $neutral-lighter;
-//   }
-
-// }
-
-/* form validation */
