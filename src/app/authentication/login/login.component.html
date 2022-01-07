@@ -1,1 +1,105 @@
-<p>login works!</p>
+<section class="login-social-section">
+  <div class="login-social-section__desc">
+    <h1>Go to your account</h1>
+    <p>We are so happy to see you again, let's start.</p>
+  </div>
+
+  <form class="login-social-section__form">
+    <h2 class="login-social-section__form__title">Login with</h2>
+    <a href="#">
+      <img
+        class="facebook-logo"
+        src="../../../assets/logos/facebook.svg"
+        alt="facebook"
+      />
+    </a>
+    <a href="#">
+      <img
+        class="google-logo"
+        src="../../../assets/logos/google.svg"
+        alt="google"
+      />
+    </a>
+  </form>
+</section>
+
+<section class="login-manual-section">
+  <form
+    class="login-manual-section__form"
+    [formGroup]="loginForm"
+    (ngSubmit)="onSubmit()"
+  >
+    <h1 class="login-manual-section__form__title">Log in</h1>
+
+    <div class="login-manual-section__form__fields">
+      <div class="email-input-field">
+        <input
+          class="email-input"
+          id="username"
+          type="text"
+          formControlName="userName"
+          [ngClass]="{
+            'input-touched': userName?.dirty || userName?.touched
+          }"
+        />
+        <label
+          class="floating-label"
+          for="username"
+          [ngClass]="{
+            'label-touched': userName?.dirty || userName?.touched
+          }"
+          >Username or Email</label
+        >
+      </div>
+
+      <div class="password-component">
+        <div class="info">
+          <img src="../../../assets/icons/info.svg" alt="" />
+          <p class="message"></p>
+        </div>
+
+        <div class="password-input-field">
+          <input
+            class="password-input"
+            id="password"
+            type="password"
+            formControlName="password"
+            [ngClass]="{
+              'input-touched': password?.dirty || password?.touched
+            }"
+          />
+          <label
+            class="floating-label"
+            for="password"
+            [ngClass]="{
+              'label-touched': password?.dirty || password?.touched
+            }"
+            >Password</label
+          >
+        </div>
+
+        <button class="seen">
+          <img src="../../../assets/icons/Seen.svg" alt="" />
+        </button>
+
+        <input
+          type="checkbox"
+          name="remember-me"
+          id="remember-me-checkbox"
+          class="remember-me"
+        />
+        <label for="remember-me-checkbox">Remember me</label>
+        <a routerLink="/forget-password" class="forget-password"
+          >Forget password?</a
+        >
+      </div>
+
+      <button type="submit" [disabled]="!loginForm.valid">Log in</button>
+    </div>
+  </form>
+
+  <div class="switch">
+    <span>Don't have an account? </span>
+    <a routerLink="/sign-up">Sign up</a>
+  </div>
+</section>

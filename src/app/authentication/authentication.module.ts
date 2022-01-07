@@ -7,6 +7,8 @@ import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -17,7 +19,8 @@ import { ForgetPasswordComponent } from './forget-password/forget-password.compo
   ],
   imports: [
     CommonModule,
-    AuthenticationRoutingModule
+    AuthenticationRoutingModule,
+    ReactiveFormsModule
   ]
 })
 export class AuthenticationModule { }
