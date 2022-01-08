@@ -13,7 +13,8 @@
       margin: auto;
     }
 
-    input {
+    input,
+    select {
       display: block;
 
       width: 100%;
@@ -126,5 +127,155 @@
       background-color: transparent;
       color: $primary;
     }
+  }
+}
+
+.login-manual-section__form,
+.sign-up-manual-section__form {
+  [class$="-manual-section__form__title"] {
+    font-size: 2.4rem;
+    text-align: center;
+    color: $primary;
+    margin-bottom: 1em;
+  }
+
+  margin-top: 35vh;
+  @include padding(x);
+
+  input,
+  select {
+    margin-bottom: 3em;
+  }
+
+  .name {
+    display: flex;
+    gap: 1em;
+    justify-content: space-between;
+  }
+
+  .fn-input,
+  .ln-input {
+    width: 13.5rem;
+  }
+
+  .fn-input,
+  .ln-input,
+  .username-input {
+    background-image: url("../../assets/icons/User\ icon.svg");
+  }
+
+  .password-input {
+    background-image: url("../../assets/icons/password.svg");
+  }
+
+  /* password component syles */
+  .password-component {
+    position: relative;
+    min-width: fit-content;
+    width: 100%;
+
+    .info {
+      position: absolute;
+      right: 0.2em;
+      top: -2em;
+
+      img {
+        width: 1.8rem;
+      }
+    }
+
+    .seen {
+      position: absolute;
+      right: 0.6em;
+      top: 1.2em;
+
+      width: fit-content;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+
+      img {
+        width: 1.4rem;
+      }
+    }
+  }
+
+  /* country input filed styles */
+  .country-input-field,
+  .gender-input-field {
+    position: relative;
+
+    select {
+      background-color: $neutral-lighter;
+
+      -moz-appearance: none;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    &:after {
+      content: url("../../assets/icons/arrow.svg");
+      position: absolute;
+      top: 1em;
+      right: 1em;
+    }
+  }
+
+  .country-input-field {
+    select {
+      background-image: url("../../assets/icons/country.svg");
+    }
+  }
+
+  .gender-input-field {
+    select {
+      background-image: url("../../assets/icons/gender.svg");
+    }
+  }
+
+  /* date of birth input field styles */
+  .dob-input-field {
+    position: relative;
+
+    input {
+      background-image: url("../../assets/icons/calander.svg");
+      padding-left: 3em;
+      color: $neutral-lighter;
+      // background-size: 1rem;
+
+      &::-webkit-calendar-picker-indicator {
+        background-image: none;
+      }
+
+      &:focus {
+        color: $primary;
+        &::-webkit-calendar-picker-indicator {
+          background-image: url("../../assets/icons/calander.svg");
+        }
+      }
+
+      &.input-touched {
+        color: $primary;
+        &::-webkit-calendar-picker-indicator {
+          background-image: url("../../assets/icons/calander.svg");
+        }
+      }
+    }
+  }
+
+  button[type="submit"] {
+    margin-bottom: 1em;
+  }
+}
+
+.switch {
+  padding: 1em;
+  text-align: center;
+  color: $primary;
+  font-size: 1.2rem;
+  font-weight: bold;
+
+  a {
+    color: $primary;
   }
 }

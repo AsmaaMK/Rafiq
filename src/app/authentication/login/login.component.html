@@ -29,7 +29,7 @@
     [formGroup]="loginForm"
     (ngSubmit)="onSubmit()"
   >
-    <h1 class="login-manual-section__form__title">Log in</h1>
+    <h2 class="login-manual-section__form__title">Log in</h2>
 
     <div class="login-manual-section__form__fields">
       <div class="email-input-field">
@@ -82,16 +82,16 @@
           <img src="../../../assets/icons/Seen.svg" alt="" />
         </button>
 
-        <input
+        <!-- <input
           type="checkbox"
           name="remember-me"
           id="remember-me-checkbox"
           class="remember-me"
         />
         <label for="remember-me-checkbox">Remember me</label>
-        <a routerLink="/forget-password" class="forget-password"
+        <a routerLink="/forget-password" target="_blank" class="forget-password"
           >Forget password?</a
-        >
+        > -->
       </div>
 
       <button type="submit" [disabled]="!loginForm.valid">Log in</button>

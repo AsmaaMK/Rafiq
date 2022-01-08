@@ -5,6 +5,7 @@
   transition: all 0.3s ease-in-out;
 }
 
+
 /// Mixin makes a gradient background with specific degree
 /// @param {integer (deg)} $degree - degree of gradient
 @mixin gradient($degree: 0deg) {
@@ -18,6 +19,7 @@
     $gradient-lighter 100%
   );
 }
+
 
 /// Mixin displays an element as flex and specifies alignment in x and y directions.
 ///
@@ -90,5 +92,40 @@
   } @else {
     @error 'No value found for `#{$breakpoint}`. '
          + 'Please make sure it is defined in `$breakpoints` map.';
+  }
+}
+
+/// Mixin let you make padding in x or y directions
+/// @param {string} $dirc - direction (x or y)
+/// @param {integer (unit)} $value - value of padding with unites
+/// @requires $base-padding
+///
+@mixin padding($dirc: y, $value: $base-padding) {
+  @if $dirc == y {
+    padding-top: $value;
+    padding-bottom: $value;
+  } @else if $dirc == x {
+    padding-left: $value;
+    padding-right: $value;
+  } @else {
+    @error "Invalid padding direction it must be: (x or y).";
+  }
+}
+
+
+/// Mixin let you make margin in x or y directions
+/// @param {string} $dirc - direction (x or y)
+/// @param {integer (unit)} $value - value of margin with unites
+/// @requires $base-margin
+///
+@mixin margin($dirc: y, $value: $base-margin) {
+  @if $dirc == y {
+    margin-top: $value;
+    margin-bottom: $value;
+  } @else if $dirc == x {
+    margin-left: $value;
+    margin-right: $value;
+  } @else {
+    @error "Invalid margin direction it must be: (x or y).";
   }
 }
