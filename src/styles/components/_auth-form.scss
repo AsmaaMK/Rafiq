@@ -279,3 +279,11 @@
     color: $primary;
   }
 }
+
+[class$="-manual-section"] {
+  background-image: url('../../assets/images/World.svg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: contain;
+  background-position: bottom ;
+}
