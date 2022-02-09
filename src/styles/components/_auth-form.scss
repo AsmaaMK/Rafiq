@@ -286,8 +286,11 @@
       background-color: $neutral-lighter;
       // background-size: 1rem;
 
-      &::-webkit-calendar-picker-indicator {
-        background-image: none !important;
+      &::-webkit-calendar-picker-indicator,
+      &::-webkit-inner-spin-button {
+        // display: none;
+        -webkit-appearance: none;
+        background-image: none;
       }
 
       &:focus,
