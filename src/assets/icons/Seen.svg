@@ -1,10 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="23" viewBox="0 0 20 23">
   <defs>
     <clipPath id="clip-path">
-      <rect id="Rectangle_111" data-name="Rectangle 111" width="20" height="23" transform="translate(275.371 386.178)" fill="#fff" stroke="#707070" stroke-width="1"/>
+      <rect id="Rectangle_111" data-name="Rectangle 111" width="20" height="23" transform="translate(275.371 386.178)" fill="#fff" stroke="#5B618A" stroke-width="1"/>
     </clipPath>
   </defs>
-  <g id="Seen" transform="translate(-275.371 -386.178)" opacity="0.85" clip-path="url(#clip-path)">
+  <g id="Seen" transform="translate(-275.371 -386.178)" clip-path="url(#clip-path)">
     <g id="visibility_black_24dp" transform="translate(275.174 387.482)">
       <path id="Path_1447" data-name="Path 1447" d="M0,0H20.375V20.375H0Z" fill="none"/>
       <path id="Path_1448" data-name="Path 1448" d="M11.589,10.125A10.041,10.041,0,0,0,2.25,16.492a10.032,10.032,0,0,0,18.677,0A10.041,10.041,0,0,0,11.589,10.125Zm0,10.612a4.245,4.245,0,1,1,4.245-4.245A4.246,4.246,0,0,1,11.589,20.737Zm0-6.792a2.547,2.547,0,1,0,2.547,2.547A2.543,2.543,0,0,0,11.589,13.945Z" transform="translate(-1.401 -6.305)" fill="#5B618A"/>

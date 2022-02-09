@@ -287,16 +287,10 @@
       // background-size: 1rem;
 
       &::-webkit-calendar-picker-indicator {
-        background-image: none;
+        background-image: none !important;
       }
 
-      &:focus {
-        color: $primary;
-        &::-webkit-calendar-picker-indicator {
-          background-image: url("../../assets/icons/calander.svg") !important;
-        }
-      }
-
+      &:focus,
       &.input-touched {
         color: $primary;
         &::-webkit-calendar-picker-indicator {
