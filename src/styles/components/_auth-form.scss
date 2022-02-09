@@ -1,7 +1,6 @@
 @use "../helpers/helpers-dir" as *;
 @use "../base/base-dir" as *;
 
-
 [class$="-manual-section"] {
   min-height: calc(100vh - 50vw);
   background-image: url("../../assets/images/World.svg");
@@ -149,14 +148,12 @@
   margin-top: 50vw;
   @include padding(x, 8vw);
 
-
   [class$="-manual-section__form__title"] {
     font-size: 2.4rem;
     text-align: center;
     color: $primary;
     margin-bottom: 1.3em;
   }
-
 
   input,
   select {
@@ -191,13 +188,42 @@
     width: 100%;
 
     .info {
-      position: absolute;
-      right: 0.2em;
-      top: -1.8em;
+      position: relative;
+      cursor: pointer;
+
+      &:hover .message {
+        visibility: visible;
+      }
+      
+      .message {
+        visibility: hidden;
+        position: absolute;
+        right: 2.5em;
+        top: -3.5em;
+        padding: 0.25em 0.5em;
+        width: max-content;
+        background-color: $primary;
+        color: $neutral-lighter;
+
+        &::after {
+          content: "";
+          position: absolute;
+          width: 10px;
+          height: 10px;
+          right: -10px;
+          top: 5px;
+          border-right: 15px solid transparent;
+          border-bottom: 15px solid $primary;
+        }
+      }
 
       img {
+        position: absolute;
+        right: 0.2em;
+        top: -1.8em;
         width: 1.5rem;
       }
+
     }
 
     .seen {
@@ -254,9 +280,10 @@
     position: relative;
 
     input {
-      background-image: url("../../assets/icons/calander.svg");
+      background-image: url("../../assets/icons/calander.svg") !important;
       padding-left: 3em;
       color: $neutral-lighter;
+      background-color: $neutral-lighter;
       // background-size: 1rem;
 
       &::-webkit-calendar-picker-indicator {
@@ -266,7 +293,7 @@
       &:focus {
         color: $primary;
         &::-webkit-calendar-picker-indicator {
-          background-image: url("../../assets/icons/calander.svg");
+          background-image: url("../../assets/icons/calander.svg") !important;
         }
       }
 
@@ -296,4 +323,3 @@
     color: $primary;
   }
 }
-
