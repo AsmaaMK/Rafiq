@@ -194,7 +194,7 @@
       &:hover .message {
         visibility: visible;
       }
-      
+
       .message {
         visibility: hidden;
         position: absolute;
@@ -223,7 +223,6 @@
         top: -1.8em;
         width: 1.5rem;
       }
-
     }
 
     .seen {
@@ -280,24 +279,30 @@
     position: relative;
 
     input {
-      background-image: url("../../assets/icons/calander.svg") !important;
+      background-image: url("../../assets/icons/calander.svg");
       padding-left: 3em;
       color: $neutral-lighter;
       background-color: $neutral-lighter;
       // background-size: 1rem;
 
-      &::-webkit-calendar-picker-indicator,
-      &::-webkit-inner-spin-button {
+      &::-webkit-calendar-picker-indicator {
         // display: none;
-        -webkit-appearance: none;
-        background-image: none;
+        // -webkit-appearance: none;
+        // background-image: none;
+        opacity: 0;
+        display: block;
+        background: url("../../assets/icons/calander.svg")
+          no-repeat;
+        width: 20px;
+        height: 20px;
+        border-width: thin;
       }
 
       &:focus,
       &.input-touched {
         color: $primary;
         &::-webkit-calendar-picker-indicator {
-          background-image: url("../../assets/icons/calander.svg") !important;
+          opacity: 1;
         }
       }
     }
