@@ -1,6 +1,17 @@
 @use "../helpers/helpers-dir" as *;
 @use "../base/base-dir" as *;
 
+
+[class$="-manual-section"] {
+  min-height: calc(100vh - 50vw);
+  background-image: url("../../assets/images/World.svg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 125vw;
+  background-position-x: -5vw;
+  background-position-y: 60vw;
+}
+
 .forget-password-section__form,
 .login-manual-section__form,
 .sign-up-manual-section__form {
@@ -21,17 +32,17 @@
       height: 3.313rem;
       padding: 0.6em;
 
-      box-shadow: 0 0.18rem 0.37rem 0 $primary;
-      border: solid 0.18em $primary;
-      border-radius: 0.75rem;
+      box-shadow: 0 3px 6px $primary;
+      border: solid 2px $primary;
+      border-radius: 10px;
 
       font-family: $font-family;
+      font-weight: 500;
       color: $primary;
-      font-size: 1rem;
+      font-size: 1.2rem;
 
       @include respond-to(large) {
         font-size: 1.2rem;
-        font-weight: bold;
       }
 
       /* for icons */
@@ -51,6 +62,7 @@
       &:focus + .floating-label {
         top: $label-position-top;
         left: $label-position-left;
+        font-size: 1rem;
       }
 
       &.input-touched {
@@ -67,12 +79,13 @@
     .floating-label {
       pointer-events: none;
       position: absolute;
-      top: 1.2em;
-      left: 2.5em;
+      top: 0.75em;
+      left: 1.5em;
       padding: 0.2em 0.7em;
 
       color: $primary;
-      font-size: 0.9rem;
+      font-size: 1.2rem;
+      font-weight: 500;
 
       @include respond-to(large) {
         font-size: 1.2rem;
@@ -85,6 +98,7 @@
       &.label-touched {
         top: $label-position-top !important;
         left: $label-position-left !important;
+        font-size: 1rem !important;
       }
     }
   }
@@ -132,19 +146,21 @@
 
 .login-manual-section__form,
 .sign-up-manual-section__form {
+  margin-top: 50vw;
+  @include padding(x, 8vw);
+
+
   [class$="-manual-section__form__title"] {
     font-size: 2.4rem;
     text-align: center;
     color: $primary;
-    margin-bottom: 1em;
+    margin-bottom: 1.3em;
   }
 
-  margin-top: 35vh;
-  @include padding(x);
 
   input,
   select {
-    margin-bottom: 3em;
+    margin-bottom: 3.5em;
   }
 
   .name {
@@ -177,17 +193,17 @@
     .info {
       position: absolute;
       right: 0.2em;
-      top: -2em;
+      top: -1.8em;
 
       img {
-        width: 1.8rem;
+        width: 1.5rem;
       }
     }
 
     .seen {
       position: absolute;
       right: 0.6em;
-      top: 1.2em;
+      top: 1em;
 
       width: fit-content;
       background-color: transparent;
@@ -216,7 +232,7 @@
     &:after {
       content: url("../../assets/icons/arrow.svg");
       position: absolute;
-      top: 1em;
+      top: 1.2em;
       right: 1em;
     }
   }
@@ -265,11 +281,12 @@
 
   button[type="submit"] {
     margin-bottom: 1em;
+    box-sizing: 0 3px 6px $primary;
   }
 }
 
 .switch {
-  padding: 1em;
+  padding: 1em 1em 2em;
   text-align: center;
   color: $primary;
   font-size: 1.2rem;
@@ -280,10 +297,3 @@
   }
 }
 
-[class$="-manual-section"] {
-  background-image: url('../../assets/images/World.svg');
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: contain;
-  background-position: bottom ;
-}
