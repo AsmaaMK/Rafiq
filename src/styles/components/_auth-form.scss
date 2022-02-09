@@ -302,7 +302,7 @@
       &.input-touched {
         color: $primary;
         &::-webkit-calendar-picker-indicator {
-          opacity: 1;
+          // opacity: 1;
         }
       }
     }
