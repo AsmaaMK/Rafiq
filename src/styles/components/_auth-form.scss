@@ -300,7 +300,7 @@
       &.input-touched {
         color: $primary;
         &::-webkit-calendar-picker-indicator {
-          background-image: url("../../assets/icons/calander.svg");
+          background-image: url("../../assets/icons/calander.svg") !important;
         }
       }
     }
