@@ -1,4 +1,4 @@
-@use "../helpers/helpers-dir" as *;
+@use "../../helpers/helpers-dir" as *;
 
 [class$="-social-section"] {
   position: fixed;
@@ -22,7 +22,7 @@
 
   /* cloud content */
   [class$="-social-section__desc"] {
-    background-image: url("../../assets/images/clouds.svg");
+    background-image: url("../../../assets/images/clouds.svg");
     background-repeat: no-repeat;
     background-size: contain;
 

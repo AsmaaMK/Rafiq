@@ -76,16 +76,19 @@
           <img src="../../../assets/icons/Seen.svg" alt="" />
         </button>
 
-        <!-- <input
-          type="checkbox"
-          name="remember-me"
-          id="remember-me-checkbox"
-          class="remember-me"
-        />
-        <label for="remember-me-checkbox">Remember me</label>
-        <a routerLink="/forget-password" target="_blank" class="forget-password"
-          >Forget password?</a
-        > -->
+        <div class="password-options custom-checkbox">
+          <div class="remember-me">
+            <input
+            type="checkbox"
+            name="remember-me"
+            id="remember-me__checkbox"
+          />
+          <label for="remember-me__checkbox" class="remember-me__label">Remember me</label>
+          </div>
+          <a routerLink="/forget-password" target="_blank" class="forget-password"
+            >Forget password?</a
+          >
+        </div>
       </div>
 
       <button type="submit" [disabled]="!loginForm.valid">Log in</button>

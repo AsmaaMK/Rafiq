@@ -1,9 +1,9 @@
-@use "../helpers/helpers-dir" as *;
-@use "../base/base-dir" as *;
+@use "../../helpers/helpers-dir" as *;
+@use "../../base/base-dir" as *;
 
 [class$="-manual-section"] {
   min-height: calc(100vh - 50vw);
-  background-image: url("../../assets/images/World.svg");
+  background-image: url("../../../assets/images/World.svg");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: 125vw;
@@ -103,7 +103,7 @@
   }
 
   .email-input {
-    background-image: url("../../assets/icons/email.svg");
+    background-image: url("../../../assets/icons/email.svg");
   }
 
   /* submit buttons (login, sign up, forget password) styles */
@@ -125,20 +125,20 @@
     }
 
     border-radius: 0.75rem;
-    border: 0.12em solid $primary;
+    border: none;
 
     cursor: pointer;
 
     @include animation;
 
     &:disabled {
-      opacity: 60%;
+      background-color: mix($primary, white, 80%);
+      pointer-events: none;
     }
 
     &:hover {
-      border: 0.12em solid $primary;
-      background-color: transparent;
-      color: $primary;
+      background-color: mix($primary, white, 95%);
+      transform: translateY(-2px);
     }
   }
 }
@@ -174,11 +174,11 @@
   .fn-input,
   .ln-input,
   .username-input {
-    background-image: url("../../assets/icons/User\ icon.svg");
+    background-image: url("../../../assets/icons/User\ icon.svg");
   }
 
   .password-input {
-    background-image: url("../../assets/icons/password.svg");
+    background-image: url("../../../assets/icons/password.svg");
   }
 
   /* password component syles */
@@ -255,7 +255,7 @@
     }
 
     &:after {
-      content: url("../../assets/icons/arrow.svg");
+      content: url("../../../assets/icons/arrow.svg");
       position: absolute;
       top: 1.2em;
       right: 1em;
@@ -264,13 +264,13 @@
 
   .country-input-field {
     select {
-      background-image: url("../../assets/icons/country.svg");
+      background-image: url("../../../assets/icons/country.svg");
     }
   }
 
   .gender-input-field {
     select {
-      background-image: url("../../assets/icons/gender.svg");
+      background-image: url("../../../assets/icons/gender.svg");
     }
   }
 
@@ -279,7 +279,7 @@
     position: relative;
 
     input {
-      background-image: url("../../assets/icons/calander.svg");
+      background-image: url("../../../assets/icons/calander.svg");
       padding-left: 3em;
       color: $neutral-lighter;
       background-color: $neutral-lighter;
@@ -291,7 +291,7 @@
         // background-image: none;
         opacity: 0;
         display: block;
-        background: url("../../assets/icons/calander.svg")
+        background: url("../../../assets/icons/calander.svg")
           no-repeat;
         width: 20px;
         height: 20px;
@@ -301,16 +301,14 @@
       &:focus,
       &.input-touched {
         color: $primary;
-        &::-webkit-calendar-picker-indicator {
-          // opacity: 1;
-        }
+        
       }
     }
   }
 
   button[type="submit"] {
     margin-bottom: 1em;
-    box-sizing: 0 3px 6px $primary;
+    box-shadow: 0 3px 6px $primary;
   }
 }
 
