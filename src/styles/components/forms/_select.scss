@@ -7,14 +7,15 @@
   select {
     // background: transparent;
     background-color: $neutral-lighter;
-    // -moz-appearance: none;
-    // -webkit-appearance: none;
-    // appearance: unset;
-    // overflow: hidden;
+    
+    -moz-appearance: unset;
+    -webkit-appearance: unset;
+    appearance: unset;
   }
 
   &:after {
     content: url("../../../assets/icons/arrow.svg");
+    pointer-events: inherit;
     position: absolute;
     top: 1.2em;
     right: 1em;

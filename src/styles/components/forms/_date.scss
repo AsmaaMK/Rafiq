@@ -14,14 +14,19 @@
     &::-webkit-calendar-picker-indicator {
       opacity: 0;
       display: block;
-      background: url("../../../assets/icons/calander.svg") no-repeat;
+      background: url("../../../assets/icons/calander.svg") no-repeat !important;
       width: 20px;
       height: 20px;
-      border-width: thin;
+      -moz-appearance: unset;
+      -webkit-appearance: unset;
+      appearance: unset;
     }
 
     &:focus,
     &.input-touched {
+      &::-webkit-calendar-picker-indicator {
+        opacity: 1;
+      }
       color: $primary !important;
     }
   }
