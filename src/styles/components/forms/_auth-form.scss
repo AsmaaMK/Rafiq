@@ -10,6 +10,12 @@
   background-position-x: -5vw;
   background-position-y: 60vw;
 
+  @include respond-to(medium) {
+    background-size: 45vw;
+    background-position-x: 60vw;
+    background-position-y: 25vh;
+  }
+
   .login-manual-section__form,
   .sign-up-manual-section__form {
     margin-top: 50vw; /* height of social section */
@@ -20,8 +26,23 @@
       text-align: center;
       color: $primary;
       margin-bottom: 1.3em;
+      @include respond-to(medium) {
+        margin-top: 4rem;
+      }
     }
   }
+  .login-manual-section__form {
+    @include respond-to(medium) {
+      height: 100vh;
+      @include flex(column, stretch, center);
+      @include margin(y, 0);
+    }
+  }
+
+  .sign-up-manual-section__form {
+    @include respond-to(medium) {
+      margin-top: 1.5rem;
+    }}
 
   input,
   select {
@@ -31,6 +52,11 @@
   .name {
     @include flex(row, space-between);
     gap: 1em;
+  }
+
+  .fn-input-field,
+  .ln-input-field {
+    width: 100%;
   }
 
   .fn-input,
@@ -74,5 +100,20 @@
     a {
       color: $primary;
     }
+  }
+}
+
+
+.or-social {
+  display: none;
+
+  @include respond-to(medium) {
+    display: unset;
+  }
+}
+
+.or-manual {
+  @include respond-to(medium) {
+    display: none;
   }
 }

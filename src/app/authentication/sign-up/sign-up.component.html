@@ -1,249 +1,261 @@
-<section class="sign-up-social-section">
-  <div class="sign-up-social-section__desc">
-    <h1>Create an <br> &nbsp; account</h1>
-    <p>Let's Create Your account to take tour to Rafiq and have some fun.</p>
-  </div>
-
-  <form class="sign-up-social-section__form">
-    <h2 class="sign-up-social-section__form__title">Sign up with</h2>
-    <div class="logos">
-      <a href="#">
-        <img class="google-logo" src="../../../assets/logos/google.svg" alt="google" />
-      </a>
-      <a href="#">
-        <img class="facebook-logo" src="../../../assets/logos/facebook.svg" alt="facebook" />
-      </a>
+<div class="sign-up-page">
+  <section class="sign-up-social-section">
+    <div class="sign-up-social-section__desc">
+      <h1>
+        Create an <br />
+        &nbsp; account
+      </h1>
+      <p>Let's Create Your account to take tour to Rafiq and have some fun.</p>
     </div>
-  </form>
-</section>
 
-<section class="sign-up-manual-section">
-  <form
-    class="sign-up-manual-section__form"
-    [formGroup]="signUpForm"
-    (ngSubmit)="onSubmit()"
-  >
-    <h2 class="sign-up-manual-section__form__title">Or<br>Sign up</h2>
+    <form class="sign-up-social-section__form">
+      <h2 class="sign-up-social-section__form__title"><span class="or-social">Or </span>Sign up with</h2>
+      <div class="logos">
+        <a href="#">
+          <img
+            class="google-logo"
+            src="../../../assets/logos/google.svg"
+            alt="google"
+          />
+        </a>
+        <a href="#">
+          <img
+            class="facebook-logo"
+            src="../../../assets/logos/facebook.svg"
+            alt="facebook"
+          />
+        </a>
+      </div>
+    </form>
+  </section>
 
-    <div class="sign-up-manual-section__form__fields">
-      <div class="name">
-        <div class="fn-input-field">
+  <section class="sign-up-manual-section">
+    <form
+      class="sign-up-manual-section__form"
+      [formGroup]="signUpForm"
+      (ngSubmit)="onSubmit()"
+    >
+      <h2 class="sign-up-manual-section__form__title"><span class="or-manual">Or<br /></span>Sign up</h2>
+
+      <div class="sign-up-manual-section__form__fields">
+        <div class="name">
+          <div class="fn-input-field">
+            <input
+              class="fn-input"
+              id="first-name"
+              type="text"
+              formControlName="firstName"
+              [ngClass]="{
+                'input-touched': firstName?.dirty || firstName?.touched
+              }"
+            />
+            <label
+              class="floating-label"
+              for="first-name"
+              [ngClass]="{
+                'label-touched': firstName?.dirty || firstName?.touched
+              }"
+              >First Name</label
+            >
+          </div>
+
+          <div class="ln-input-field">
+            <input
+              class="ln-input"
+              id="last-name"
+              type="text"
+              formControlName="lastName"
+              [ngClass]="{
+                'input-touched': lastName?.dirty || lastName?.touched
+              }"
+            />
+            <label
+              class="floating-label"
+              for="last-name"
+              [ngClass]="{
+                'label-touched': lastName?.dirty || lastName?.touched
+              }"
+              >Last Name</label
+            >
+          </div>
+        </div>
+
+        <div class="username-input-field">
           <input
-            class="fn-input"
-            id="first-name"
+            class="username-input"
+            id="username"
             type="text"
-            formControlName="firstName"
+            formControlName="userName"
             [ngClass]="{
-              'input-touched': firstName?.dirty || firstName?.touched
+              'input-touched': userName?.dirty || userName?.touched
             }"
           />
           <label
             class="floating-label"
-            for="first-name"
+            for="username"
             [ngClass]="{
-              'label-touched': firstName?.dirty || firstName?.touched
+              'label-touched': userName?.dirty || userName?.touched
             }"
-            >First Name</label
+            >Username</label
           >
         </div>
 
-        <div class="ln-input-field">
+        <div class="email-input-field">
           <input
-            class="ln-input"
-            id="last-name"
-            type="text"
-            formControlName="lastName"
+            class="email-input"
+            id="email"
+            type="email"
+            formControlName="email"
             [ngClass]="{
-              'input-touched': lastName?.dirty || lastName?.touched
+              'input-touched': email?.dirty || email?.touched
             }"
           />
           <label
             class="floating-label"
-            for="last-name"
+            for="email"
             [ngClass]="{
-              'label-touched': lastName?.dirty || lastName?.touched
+              'label-touched': email?.dirty || email?.touched
             }"
-            >Last Name</label
+            >Email</label
           >
         </div>
-      </div>
 
-      <div class="username-input-field">
-        <input
-          class="username-input"
-          id="username"
-          type="text"
-          formControlName="userName"
-          [ngClass]="{
-            'input-touched': userName?.dirty || userName?.touched
-          }"
-        />
-        <label
-          class="floating-label"
-          for="username"
-          [ngClass]="{
-            'label-touched': userName?.dirty || userName?.touched
-          }"
-          >Username</label
-        >
-      </div>
+        <div class="password-component">
+          <div class="info">
+            <img src="../../../assets/icons/info.svg" alt="" />
+            <p class="message">Must have at least 8 characters</p>
+          </div>
 
-      <div class="email-input-field">
-        <input
-          class="email-input"
-          id="email"
-          type="email"
-          formControlName="email"
-          [ngClass]="{
-            'input-touched': email?.dirty || email?.touched
-          }"
-        />
-        <label
-          class="floating-label"
-          for="email"
-          [ngClass]="{
-            'label-touched': email?.dirty || email?.touched
-          }"
-          >Email</label
-        >
-      </div>
+          <div class="password-input-field">
+            <input
+              class="password-input"
+              id="password"
+              type="password"
+              formControlName="password"
+              [ngClass]="{
+                'input-touched': password?.dirty || password?.touched
+              }"
+            />
+            <label
+              class="floating-label"
+              for="password"
+              [ngClass]="{
+                'label-touched': password?.dirty || password?.touched
+              }"
+              >Password</label
+            >
+          </div>
 
-      <div class="password-component">
-        <div class="info">
-          <img src="../../../assets/icons/info.svg" alt="" />
-          <p class="message">Must have at least 8 characters</p>
+          <button class="seen">
+            <img src="../../../assets/icons/Seen.svg" alt="" />
+          </button>
         </div>
 
-        <div class="password-input-field">
+        <div class="password-component">
+          <div class="info">
+            <img src="../../../assets/icons/info.svg" alt="" />
+            <p class="message">Must have at least 8 characters</p>
+          </div>
+
+          <div class="password-input-field">
+            <input
+              class="password-input"
+              id="confirm-password"
+              type="password"
+              formControlName="confirmPassword"
+              [ngClass]="{
+                'input-touched':
+                  confirmPassword?.dirty || confirmPassword?.touched
+              }"
+            />
+            <label
+              class="floating-label"
+              for="confirm-password"
+              [ngClass]="{
+                'label-touched':
+                  confirmPassword?.dirty || confirmPassword?.touched
+              }"
+              >Confirm Password</label
+            >
+          </div>
+
+          <button class="seen">
+            <img src="../../../assets/icons/Seen.svg" alt="" />
+          </button>
+        </div>
+
+        <div class="country-input-field">
+          <select
+            id="country"
+            name="country"
+            formControlName="country"
+            [ngClass]="{
+              'input-touched': country?.dirty || country?.touched
+            }"
+          >
+            <option value="" disabled selected hidden></option>
+            <option value="">Egypt</option>
+          </select>
+          <label
+            class="floating-label"
+            for="country"
+            [ngClass]="{
+              'label-touched': country?.dirty || country?.touched
+            }"
+            >Country</label
+          >
+        </div>
+
+        <div class="gender-input-field">
+          <select
+            id="gender"
+            name="gender"
+            formControlName="gender"
+            [ngClass]="{
+              'input-touched': gender?.dirty || gender?.touched
+            }"
+          >
+            <option value="" disabled selected hidden></option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+          </select>
+          <label
+            class="floating-label"
+            for="gender"
+            [ngClass]="{
+              'label-touched': gender?.dirty || gender?.touched
+            }"
+            >Gender</label
+          >
+        </div>
+
+        <div class="dob-input-field">
           <input
-            class="password-input"
-            id="password"
-            type="password"
-            formControlName="password"
+            id="date"
+            type="date"
+            formControlName="date"
             [ngClass]="{
-              'input-touched': password?.dirty || password?.touched
+              'input-touched date-touched': date?.dirty || date?.touched
             }"
           />
           <label
             class="floating-label"
-            for="password"
+            for="date"
             [ngClass]="{
-              'label-touched': password?.dirty || password?.touched
+              'label-touched': date?.dirty || date?.touched
             }"
-            >Password</label
+            >Date of Birth</label
           >
         </div>
 
-        <button class="seen">
-          <img src="../../../assets/icons/Seen.svg" alt="" />
-        </button>
+        <button type="submit" [disabled]="!signUpForm.valid">Sign up</button>
       </div>
 
-      <div class="password-component">
-        <div class="info">
-          <img src="../../../assets/icons/info.svg" alt="" />
-          <p class="message">Must have at least 8 characters</p>
-        </div>
-
-        <div class="password-input-field">
-          <input
-            class="password-input"
-            id="confirm-password"
-            type="password"
-            formControlName="confirmPassword"
-            [ngClass]="{
-              'input-touched':
-                confirmPassword?.dirty || confirmPassword?.touched
-            }"
-          />
-          <label
-            class="floating-label"
-            for="confirm-password"
-            [ngClass]="{
-              'label-touched':
-                confirmPassword?.dirty || confirmPassword?.touched
-            }"
-            >Confirm Password</label
-          >
-        </div>
-
-        <button class="seen">
-          <img src="../../../assets/icons/Seen.svg" alt="" />
-        </button>
+      <div class="switch">
+        <span>Have an account? </span>
+        <a routerLink="/login">Log in</a>
       </div>
-
-      <div class="country-input-field">
-        <select
-          id="country"
-          name="country"
-          formControlName="country"
-          [ngClass]="{
-            'input-touched': country?.dirty || country?.touched
-          }"
-        >
-          <option value="" disabled selected hidden></option>
-          <option value="">Egypt</option>
-        </select>
-        <label
-          class="floating-label"
-          for="country"
-          [ngClass]="{
-            'label-touched': country?.dirty || country?.touched
-          }"
-          >Country</label
-        >
-      </div>
-
-      <div class="gender-input-field">
-        <select
-          id="gender"
-          name="gender"
-          formControlName="gender"
-          [ngClass]="{
-            'input-touched': gender?.dirty || gender?.touched
-          }"
-        >
-          <option value="" disabled selected hidden></option>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-          <option value="other">Other</option>
-
-        </select>
-        <label
-          class="floating-label"
-          for="gender"
-          [ngClass]="{
-            'label-touched': gender?.dirty || gender?.touched
-          }"
-          >Gender</label
-        >
-      </div>
-
-      <div class="dob-input-field">
-        <input
-          id="date"
-          type="date"
-          formControlName="date"
-          [ngClass]="{
-            'input-touched date-touched': date?.dirty || date?.touched
-          }"
-        />
-        <label
-          class="floating-label"
-          for="date"
-          [ngClass]="{
-            'label-touched': date?.dirty || date?.touched
-          }"
-          >Date of Birth</label
-        >
-      </div>
-
-      <button type="submit" [disabled]="!signUpForm.valid">Sign up</button>
-    </div>
-  </form>
-
-  <div class="switch">
-    <span>Have an account? </span>
-    <a routerLink="/login">Log in</a>
-  </div>
-</section>
+    </form>
+  </section>
+</div>

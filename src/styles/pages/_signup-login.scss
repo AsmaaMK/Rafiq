@@ -1,0 +1,36 @@
+@use "../helpers/helpers-dir" as *;
+
+.sign-up-page,
+.login-page {
+  @include respond-to(medium) {
+    @include flex(row, flex-end);
+    
+    [class$="-social-section"] {
+      width: 50vw;
+      height: 100vh;
+      @include flex(column, flex-start, space-between);
+      // position: static;
+
+      &::before {
+        display: none;
+      }
+
+       [class$=-social-section__desc] {
+        width: 100%;
+      }
+    }
+  }
+
+  [class$="-manual-section"] {
+    @include respond-to(medium) {
+      width: 50vw;
+      height: auto;
+      min-height: 100vh;
+
+      margin-top: 0;
+      // background-color: red;
+      // align-self: flex-end;
+    }
+  }
+  
+}

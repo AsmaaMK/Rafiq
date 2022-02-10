@@ -1,97 +1,112 @@
-<section class="login-social-section">
-  <div class="login-social-section__desc">
-    <h1>Go to your <br> &nbsp; account</h1>
-    <p>We are so happy to see you again, let's start.</p>
-  </div>
-
-  <form class="login-social-section__form">
-    <h2 class="login-social-section__form__title">Login with</h2>
-    <div class="logos">
-      <a href="#">
-        <img class="google-logo" src="../../../assets/logos/google.svg" alt="google" />
-      </a>
-      <a href="#">
-        <img class="facebook-logo" src="../../../assets/logos/facebook.svg" alt="facebook" />
-      </a>
+<div class="login-page">
+  <section class="login-social-section">
+    <div class="login-social-section__desc">
+      <h1>
+        Go to your <br />
+        &nbsp; account
+      </h1>
+      <p>We are so happy to see you again, let's start.</p>
     </div>
-  </form>
-</section>
 
-<section class="login-manual-section">
-  <form
-    class="login-manual-section__form"
-    [formGroup]="loginForm"
-    (ngSubmit)="onSubmit()"
-  >
-    <h2 class="login-manual-section__form__title">Or<br>Log in</h2>
-
-    <div class="login-manual-section__form__fields">
-      <div class="email-input-field">
-        <input
-          class="email-input"
-          id="username"
-          type="text"
-          formControlName="userName"
-          [ngClass]="{
-            'input-touched': userName?.dirty || userName?.touched
-          }"
-        />
-        <label
-          class="floating-label"
-          for="username"
-          [ngClass]="{
-            'label-touched': userName?.dirty || userName?.touched
-          }"
-          >Username or Email</label
-        >
+    <form class="login-social-section__form">
+      <h2 class="login-social-section__form__title"><span class="or-social">Or </span>Log in with</h2>
+      <div class="logos">
+        <a href="#">
+          <img
+            class="google-logo"
+            src="../../../assets/logos/google.svg"
+            alt="google"
+          />
+        </a>
+        <a href="#">
+          <img
+            class="facebook-logo"
+            src="../../../assets/logos/facebook.svg"
+            alt="facebook"
+          />
+        </a>
       </div>
+    </form>
+  </section>
 
-      <div class="password-component">
-        <div class="password-input-field">
+  <section class="login-manual-section">
+    <form
+      class="login-manual-section__form"
+      [formGroup]="loginForm"
+      (ngSubmit)="onSubmit()"
+    >
+      <h2 class="login-manual-section__form__title"><span class="or-manual">Or<br /></span>Log in</h2>
+
+      <div class="login-manual-section__form__fields">
+        <div class="email-input-field">
           <input
-            class="password-input"
-            id="password"
-            type="password"
-            formControlName="password"
+            class="email-input"
+            id="username"
+            type="text"
+            formControlName="userName"
             [ngClass]="{
-              'input-touched': password?.dirty || password?.touched
+              'input-touched': userName?.dirty || userName?.touched
             }"
           />
           <label
             class="floating-label"
-            for="password"
+            for="username"
             [ngClass]="{
-              'label-touched': password?.dirty || password?.touched
+              'label-touched': userName?.dirty || userName?.touched
             }"
-            >Password</label
+            >Username or Email</label
           >
         </div>
 
-        <button class="seen">
-          <img src="../../../assets/icons/Seen.svg" alt="" />
-        </button>
-
-        <div class="password-options custom-checkbox">
-          <div class="remember-me">
+        <div class="password-component">
+          <div class="password-input-field">
             <input
-            type="checkbox"
-            name="remember-me"
-            id="remember-me__checkbox"
-          />
-          <label for="remember-me__checkbox" class="remember-me__label">Remember me</label>
+              class="password-input"
+              id="password"
+              type="password"
+              formControlName="password"
+              [ngClass]="{
+                'input-touched': password?.dirty || password?.touched
+              }"
+            />
+            <label
+              class="floating-label"
+              for="password"
+              [ngClass]="{
+                'label-touched': password?.dirty || password?.touched
+              }"
+              >Password</label
+            >
           </div>
-          <a routerLink="/forget-password" class="forget-password"
-            >Forget password?</a
-          >
+
+          <button class="seen">
+            <img src="../../../assets/icons/Seen.svg" alt="" />
+          </button>
+
+          <div class="password-options custom-checkbox">
+            <div class="remember-me">
+              <input
+                type="checkbox"
+                name="remember-me"
+                id="remember-me__checkbox"
+              />
+              <label for="remember-me__checkbox" class="remember-me__label"
+                >Remember me</label
+              >
+            </div>
+            <a routerLink="/forget-password" class="forget-password"
+              >Forget password?</a
+            >
+          </div>
         </div>
+
+        <button type="submit" [disabled]="!loginForm.valid">Log in</button>
       </div>
 
-      <button type="submit" [disabled]="!loginForm.valid">Log in</button>
-    </div>
-  </form>
-
-  <div class="switch">
-    <span>Don't have an account? </span>
-    <a routerLink="/sign-up">Sign up</a>
-  </div>
-</section>
+      <div class="switch">
+        <span>Don't have an account? </span>
+        <a routerLink="/sign-up">Sign up</a>
+      </div>
+    </form>
+  </section>
+</div>

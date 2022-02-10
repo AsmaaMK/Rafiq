@@ -34,13 +34,28 @@
     padding-top: 7vw;
     padding-left: 8vw;
 
+    @include respond-to(medium) {
+      $width-of-cloud:50vw;
+      padding-left: 4vw;
+    }
+
     h1 {
       font-size: 5vw;
+
+      @include respond-to(medium) {
+        font-size: 3.5rem;
+      }
     }
 
     p {
       font-size: 3.8vw;
       padding-right: 20vw;
+
+      @include respond-to(medium) {
+        font-size: 1.7rem;
+      padding-right: 25vw;
+        
+      }
     }
   }
 
@@ -48,6 +63,12 @@
   [class$="-social-section__form"] {
     width: 40vw;
     padding-right: 8vw;
+    @include margin(y, 3rem);
+
+    @include respond-to(medium) {
+      padding-right: 0;
+      
+    }
 
     @include flex;
 
@@ -55,11 +76,15 @@
       color: $primary;
       font-size: 5.5vw;
       text-align: center;
+
+      @include respond-to(medium) {
+        font-size: 2.5rem
+      }
     }
 
     .logos {
       @include flex(row, center, center);
-      gap: 4vw;
+      gap: 1.5em;
 
       img {
         display: inline-block;
@@ -68,12 +93,26 @@
         padding: 2.5vw;
         border-radius: 50%;
 
+        @include animation;
+
         &.facebook-logo {
           background-color: #4267b2;
         }
 
         &.google-logo {
           background-color: #c82323;
+        }
+
+        &:hover,
+        &:focus {
+          transform: translateY(-2px);
+          opacity: 0.9;
+        }
+
+        @include respond-to(medium) {
+          width: 4rem;
+          height: 4rem;
+          padding: 0.8em;
         }
       }
     }
