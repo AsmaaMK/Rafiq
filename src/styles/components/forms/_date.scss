@@ -11,6 +11,17 @@
     background-color: $neutral-lighter;
     // background-size: 1rem;
 
+    &::after {
+      content: '';
+      width: 0.5em;
+      height: 0.5em;
+      background-color: $neutral-lighter;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 6px;
+    }
+
     &::-webkit-calendar-picker-indicator {
       opacity: 0;
       display: block;
