@@ -1,14 +1,14 @@
 @use './typography' as *;
 @use '../helpers/helpers-dir' as *;
 
-body {
-  font-family: $font-family;
-}
-
 :root {
   @include respond-to(huge) {
     font-size: 18px;
   }
+}
+
+* {
+  font-family: $font-family !important;
 }
 
 /* resets */
@@ -17,8 +17,4 @@ input {
   &:focus {
     outline: none;
   }
-}
-
-button {
-  font-family: $font-family;
 }

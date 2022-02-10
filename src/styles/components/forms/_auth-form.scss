@@ -2,7 +2,7 @@
 @use "../../base/base-dir" as *;
 
 [class$="-manual-section"] {
-  min-height: calc(100vh - 50vw);
+  min-height: calc(100vh - 50vw); /* view height - height of social section */
   background-image: url("../../../assets/images/World.svg");
   background-repeat: no-repeat;
   background-attachment: fixed;

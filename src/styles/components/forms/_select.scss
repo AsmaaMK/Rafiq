@@ -5,10 +5,12 @@
   position: relative;
 
   select {
+    // background: transparent;
     background-color: $neutral-lighter;
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    appearance: none;
+    // -moz-appearance: none;
+    // -webkit-appearance: none;
+    // appearance: unset;
+    // overflow: hidden;
   }
 
   &:after {
