@@ -9,150 +9,18 @@
   background-size: 125vw;
   background-position-x: -5vw;
   background-position-y: 60vw;
-}
 
-.forget-password-section__form,
-.login-manual-section__form,
-.sign-up-manual-section__form {
-  $label-position-top: -1.5em;
-  $label-position-left: 0;
+  .login-manual-section__form,
+  .sign-up-manual-section__form {
+    margin-top: 50vw; /* height of social section */
+    @include padding(x, 8vw);
 
-  [class$="-input-field"] {
-    @include respond-to("large") {
-      width: 70%;
-      margin: auto;
-    }
-
-    input,
-    select {
-      display: block;
-
-      width: 100%;
-      height: 3.2rem;
-      padding: 0.6em;
-
-      box-shadow: 0 3px 6px $primary;
-      border: solid 2px $primary;
-      border-radius: 10px;
-
-      font-family: $font-family;
-      font-weight: 500;
+    [class$="-manual-section__form__title"] {
+      font-size: $base-font-size * 2;
+      text-align: center;
       color: $primary;
-      font-size: 1.2rem;
-
-      @include respond-to(large) {
-        font-size: 1.2rem;
-      }
-
-      /* for icons */
-      background-position-y: center;
-      background-position-x: 0.8em;
-      background-repeat: no-repeat;
-      background-size: 1.4rem;
-
-      @include animation;
-
-      &:focus {
-        outline: none;
-        background-image: none !important;
-        padding-left: 1em;
-      }
-
-      &:focus + .floating-label {
-        top: $label-position-top;
-        left: $label-position-left;
-        font-size: 1rem;
-      }
-
-      &.input-touched {
-        background-image: none !important;
-        padding-left: 1em !important;
-      }
+      margin-bottom: 1.3em;
     }
-  }
-
-  /* all input labels */
-  [class$="-input-field"] {
-    position: relative;
-
-    .floating-label {
-      pointer-events: none;
-      position: absolute;
-      top: 0.75em;
-      left: 1.5em;
-      padding: 0.2em 0.7em;
-
-      color: $primary;
-      font-size: 1.2rem;
-      font-weight: 500;
-
-      @include respond-to(large) {
-        font-size: 1.2rem;
-        top: 0.8em;
-        left: 2.5em;
-      }
-
-      @include animation;
-
-      &.label-touched {
-        top: $label-position-top !important;
-        left: $label-position-left !important;
-        font-size: 1rem !important;
-      }
-    }
-  }
-
-  .email-input {
-    background-image: url("../../../assets/icons/email.svg");
-  }
-
-  /* submit buttons (login, sign up, forget password) styles */
-  button[type="submit"] {
-    display: block;
-
-    width: 13rem;
-    margin: 0 auto 3em;
-    padding: 0.6em;
-
-    background-color: $primary;
-    color: $neutral-lighter;
-    font-family: $font-family;
-    font-size: 1.3rem;
-    font-weight: bold;
-
-    @include respond-to(large) {
-      font-size: 1.7rem;
-    }
-
-    border-radius: 0.75rem;
-    border: none;
-
-    cursor: pointer;
-
-    @include animation;
-
-    &:disabled {
-      background-color: mix($primary, white, 80%);
-      pointer-events: none;
-    }
-
-    &:hover {
-      background-color: mix($primary, white, 95%);
-      transform: translateY(-2px);
-    }
-  }
-}
-
-.login-manual-section__form,
-.sign-up-manual-section__form {
-  margin-top: 50vw;
-  @include padding(x, 8vw);
-
-  [class$="-manual-section__form__title"] {
-    font-size: 2.4rem;
-    text-align: center;
-    color: $primary;
-    margin-bottom: 1.3em;
   }
 
   input,
@@ -161,14 +29,8 @@
   }
 
   .name {
-    display: flex;
+    @include flex(row, space-between);
     gap: 1em;
-    justify-content: space-between;
-  }
-
-  .fn-input,
-  .ln-input {
-    width: 13.5rem;
   }
 
   .fn-input,
@@ -177,89 +39,12 @@
     background-image: url("../../../assets/icons/User\ icon.svg");
   }
 
+  .email-input {
+    background-image: url("../../../assets/icons/email.svg");
+  }
+
   .password-input {
     background-image: url("../../../assets/icons/password.svg");
-  }
-
-  /* password component syles */
-  .password-component {
-    position: relative;
-    min-width: fit-content;
-    width: 100%;
-
-    .info {
-      position: relative;
-      cursor: pointer;
-
-      &:hover .message {
-        visibility: visible;
-      }
-
-      .message {
-        visibility: hidden;
-        position: absolute;
-        right: 2.5em;
-        top: -3.5em;
-        padding: 0.25em 0.5em;
-        width: max-content;
-        background-color: $primary;
-        color: $neutral-lighter;
-
-        &::after {
-          content: "";
-          position: absolute;
-          width: 10px;
-          height: 10px;
-          right: -10px;
-          top: 5px;
-          border-right: 15px solid transparent;
-          border-bottom: 15px solid $primary;
-        }
-      }
-
-      img {
-        position: absolute;
-        right: 0.2em;
-        top: -1.8em;
-        width: 1.5rem;
-      }
-    }
-
-    .seen {
-      position: absolute;
-      right: 0.6em;
-      top: 1em;
-
-      width: fit-content;
-      background-color: transparent;
-      border: none;
-      cursor: pointer;
-
-      img {
-        width: 1.4rem;
-      }
-    }
-  }
-
-  /* country input filed styles */
-  .country-input-field,
-  .gender-input-field {
-    position: relative;
-
-    select {
-      background-color: $neutral-lighter;
-
-      -moz-appearance: none;
-      -webkit-appearance: none;
-      appearance: none;
-    }
-
-    &:after {
-      content: url("../../../assets/icons/arrow.svg");
-      position: absolute;
-      top: 1.2em;
-      right: 1em;
-    }
   }
 
   .country-input-field {
@@ -274,52 +59,20 @@
     }
   }
 
-  /* date of birth input field styles */
-  .dob-input-field {
-    position: relative;
-
-    input {
-      background-image: url("../../../assets/icons/calander.svg");
-      padding-left: 3em;
-      color: $neutral-lighter;
-      background-color: $neutral-lighter;
-      // background-size: 1rem;
-
-      &::-webkit-calendar-picker-indicator {
-        // display: none;
-        // -webkit-appearance: none;
-        // background-image: none;
-        opacity: 0;
-        display: block;
-        background: url("../../../assets/icons/calander.svg")
-          no-repeat;
-        width: 20px;
-        height: 20px;
-        border-width: thin;
-      }
-
-      &:focus,
-      &.input-touched {
-        color: $primary;
-        
-      }
-    }
-  }
-
   button[type="submit"] {
     margin-bottom: 1em;
     box-shadow: 0 3px 6px $primary;
   }
-}
 
-.switch {
-  padding: 1em 1em 2em;
-  text-align: center;
-  color: $primary;
-  font-size: 1.2rem;
-  font-weight: bold;
-
-  a {
+  .switch {
+    padding: 1em 1em 2em;
+    text-align: center;
     color: $primary;
+    font-size: $base-font-size;
+    font-weight: 500;
+
+    a {
+      color: $primary;
+    }
   }
 }

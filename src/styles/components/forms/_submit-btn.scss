@@ -1,0 +1,36 @@
+@use "../../helpers/helpers-dir" as *;
+
+/* submit buttons (login, sign up, forget password) styles */
+button[type="submit"] {
+  display: block;
+
+  width: 13rem;
+  margin: 0 auto 3em;
+  padding: 0.6em;
+
+  background-color: $primary;
+  color: $neutral-lighter;
+  font-size: $base-font-size * 1.2;
+  font-weight: bold;
+
+  @include respond-to(large) {
+    font-size: 1.7rem;
+  }
+
+  border-radius: 0.75rem;
+  border: none;
+
+  cursor: pointer;
+
+  @include animation;
+
+  &:disabled {
+    background-color: mix($primary, white, 80%);
+    pointer-events: none;
+  }
+
+  &:hover {
+    background-color: mix($primary, white, 95%);
+    transform: translateY(-2px);
+  }
+}

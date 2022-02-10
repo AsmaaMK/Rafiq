@@ -6,7 +6,7 @@
   width: 100%;
   top: 0;
   left: 0;
-  
+
   @include flex(row, space-between, stretch);
 
   /* white background */
@@ -67,13 +67,13 @@
         height: 11.5vw;
         padding: 2.5vw;
         border-radius: 50%;
-  
+
         &.facebook-logo {
           background-color: #4267b2;
         }
-  
+
         &.google-logo {
-          background-color: #C82323;
+          background-color: #c82323;
         }
       }
     }

@@ -9,13 +9,19 @@
   @include padding(x);
   @include flex(row, space-between);
 
+  /* checkbox */
   .remember-me {
     input {
       margin: 0;
     }
   }
+
+  a {
+    color: $primary;
+    font-size: 1.2rem;
+  }
 }
 
 button[type="submit"] {
-  margin-top: 4em;
+  margin-top: 4.5em;
 }

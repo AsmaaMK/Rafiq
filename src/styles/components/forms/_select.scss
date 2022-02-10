@@ -1,0 +1,20 @@
+@use "../../helpers/helpers-dir" as *;
+
+.country-input-field,
+.gender-input-field {
+  position: relative;
+
+  select {
+    background-color: $neutral-lighter;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  &:after {
+    content: url("../../../assets/icons/arrow.svg");
+    position: absolute;
+    top: 1.2em;
+    right: 1em;
+  }
+}

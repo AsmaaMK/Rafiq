@@ -1,0 +1,28 @@
+@use "../../helpers/helpers-dir" as *;
+
+/* date of birth input field styles */
+.dob-input-field {
+  position: relative;
+
+  input {
+    background-image: url("../../../assets/icons/calander.svg");
+    padding-left: 3em;
+    color: transparent !important;
+    background-color: $neutral-lighter;
+    // background-size: 1rem;
+
+    &::-webkit-calendar-picker-indicator {
+      opacity: 0;
+      display: block;
+      background: url("../../../assets/icons/calander.svg") no-repeat;
+      width: 20px;
+      height: 20px;
+      border-width: thin;
+    }
+
+    &:focus,
+    &.input-touched {
+      color: $primary !important;
+    }
+  }
+}
