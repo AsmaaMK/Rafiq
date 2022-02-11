@@ -39,7 +39,8 @@
   [class$="-social-section__desc"] {
     background-image: url("../../../assets/images/clouds.svg");
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: cover;
+    background-position: bottom 0 right 0;
 
     $width-of-cloud: 65vw;
     width: $width-of-cloud;
@@ -50,7 +51,7 @@
     padding-left: 8vw;
 
     @include respond-to(medium) {
-      $width-of-cloud: min(50vw, 80vh);
+      $width-of-cloud: 50vw;
       width: $width-of-cloud;
       padding-top: 6vw;
     padding-left: 5vw;
@@ -70,7 +71,7 @@
 
       @include respond-to(medium) {
         font-size: 1.6rem;
-        padding-right: 8em;
+        // padding-right: 8em;
       }
     }
   }
