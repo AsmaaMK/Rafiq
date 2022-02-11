@@ -18,13 +18,17 @@ $label-position-left: 0;
     border: solid 2px $primary;
     border-radius: 10px;
 
-    font-size: $base-font-size;
+    font-size: $base-font-size * 0.9;
+    @include respond-to(medium) {
+      font-size: $base-font-size;
+    }
+
     font-weight: 500;
     color: $primary;
 
     /* for icons */
     background-position-y: center;
-    background-position-x: 0.8em;
+    background-position-x: 0.5em;
     background-repeat: no-repeat;
     background-size: 1.4rem;
 
@@ -39,7 +43,10 @@ $label-position-left: 0;
     &:focus + .floating-label {
       top: $label-position-top;
       left: $label-position-left;
-      font-size: $base-font-size * 0.85;
+      font-size: $base-font-size * 0.75;
+      @include respond-to(medium) {
+        font-size: $base-font-size * 0.85;
+      }
     }
 
     &.input-touched {
@@ -51,12 +58,21 @@ $label-position-left: 0;
   .floating-label {
     pointer-events: none;
     position: absolute;
-    top: 0.75em;
-    left: 1.5em;
-    padding: 0.2em 0.7em;
+    top: 0.85em;
+    left: 1.3em;
+
+    @include respond-to(medium) {
+      top: 0.75em;
+      left: 1.5em;
+    }
+
+    padding: 0.2em 0.2em 0.2em 0.65em;
 
     color: $primary;
-    font-size: $base-font-size;
+    font-size: $base-font-size * 0.9;
+    @include respond-to(medium) {
+      font-size: $base-font-size;
+    }
     font-weight: 500;
 
     @include animation;
@@ -64,7 +80,10 @@ $label-position-left: 0;
     &.label-touched {
       top: $label-position-top !important;
       left: $label-position-left !important;
-      font-size: $base-font-size * 0.85 !important;
+      font-size: $base-font-size * 0.75 !important;
+      @include respond-to(medium) {
+        font-size: $base-font-size * 0.85 !important;
+      }
     }
   }
 }

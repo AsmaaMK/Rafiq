@@ -9,6 +9,21 @@
 
   @include flex(row, space-between, stretch);
 
+  @include respond-to(medium) {
+    width: 50vw;
+    height: 100vh;
+    @include flex(column, flex-start, space-between);
+    // position: static;
+
+    &::before {
+      display: none;
+    }
+
+    // [class$="-social-section__desc"] {
+    //   // width: 100%;
+    // }
+  }
+
   /* white background */
   &::before {
     content: "";
@@ -35,15 +50,17 @@
     padding-left: 8vw;
 
     @include respond-to(medium) {
-      $width-of-cloud:50vw;
-      padding-left: 4vw;
+      $width-of-cloud: min(50vw, 80vh);
+      width: $width-of-cloud;
+      padding-top: 6vw;
+    padding-left: 5vw;
     }
 
     h1 {
       font-size: 5vw;
 
       @include respond-to(medium) {
-        font-size: 3.5rem;
+        font-size: 300%;
       }
     }
 
@@ -52,9 +69,8 @@
       padding-right: 20vw;
 
       @include respond-to(medium) {
-        font-size: 1.7rem;
-      padding-right: 25vw;
-        
+        font-size: 200%;
+        padding-right: 34%;
       }
     }
   }
@@ -67,7 +83,6 @@
 
     @include respond-to(medium) {
       padding-right: 0;
-      
     }
 
     @include flex;
@@ -78,7 +93,7 @@
       text-align: center;
 
       @include respond-to(medium) {
-        font-size: 2.5rem
+        font-size: $base-font-size * 2;
       }
     }
 
