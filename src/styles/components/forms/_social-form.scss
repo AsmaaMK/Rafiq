@@ -60,7 +60,7 @@
       font-size: 5vw;
 
       @include respond-to(medium) {
-        font-size: 350%;
+        font-size: 3rem;
       }
     }
 
@@ -69,8 +69,8 @@
       padding-right: 20vw;
 
       @include respond-to(medium) {
-        font-size: 170%;
-        padding-right: 34%;
+        font-size: 1.8rem;
+        padding-right: 8em;
       }
     }
   }
