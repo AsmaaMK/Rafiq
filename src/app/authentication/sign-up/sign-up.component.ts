@@ -10,6 +10,10 @@ import { CountriesService } from 'src/app/shared/services/countries.service';
 export class SignUpComponent implements OnInit {
   signUpForm!: FormGroup;
   allCountries!: string[];
+  passwordType = false;
+  confirmPasswordType = false;
+  passwordIconPath = '../../../assets/icons/visibility.svg';
+  confirmpasswordIconPath = '../../../assets/icons/visibility.svg';
 
   constructor(private countries: CountriesService) {}
 
@@ -60,5 +64,21 @@ export class SignUpComponent implements OnInit {
   onSubmit() {
     // TODO: Use EventEmitter with form value
     console.warn(this.signUpForm.value);
+  }
+
+  togglePasswordType() {
+    this.passwordType = !this.passwordType;
+
+    this.passwordIconPath = this.passwordType
+      ? '../../../assets/icons/Seen.svg'
+      : '../../../assets/icons/visibility.svg';
+  }
+
+  toggleConfirmPasswordType() {
+    this.confirmPasswordType = !this.confirmPasswordType;
+
+    this.confirmpasswordIconPath = this.confirmPasswordType
+      ? '../../../assets/icons/Seen.svg'
+      : '../../../assets/icons/visibility.svg';
   }
 }

@@ -9,7 +9,9 @@
     </div>
 
     <form class="sign-up-social-section__form">
-      <h2 class="sign-up-social-section__form__title"><span class="or-social">Or </span>Sign up with</h2>
+      <h2 class="sign-up-social-section__form__title">
+        <span class="or-social">Or </span>Sign up with
+      </h2>
       <div class="logos">
         <a href="#">
           <img
@@ -35,7 +37,9 @@
       [formGroup]="signUpForm"
       (ngSubmit)="onSubmit()"
     >
-      <h2 class="sign-up-manual-section__form__title"><span class="or-manual">Or<br /></span>Sign up</h2>
+      <h2 class="sign-up-manual-section__form__title">
+        <span class="or-manual">Or<br /></span>Sign up
+      </h2>
 
       <div class="sign-up-manual-section__form__fields">
         <div class="name">
@@ -130,7 +134,7 @@
             <input
               class="password-input"
               id="password"
-              type="password"
+              [type]="passwordType ? 'text' : 'password'"
               formControlName="password"
               [ngClass]="{
                 'input-touched': password?.dirty || password?.touched
@@ -146,8 +150,8 @@
             >
           </div>
 
-          <button class="seen">
-            <img src="../../../assets/icons/Seen.svg" alt="" />
+          <button class="seen" (click)="togglePasswordType()">
+            <img [src]="passwordIconPath" alt="" />
           </button>
         </div>
 
@@ -161,7 +165,7 @@
             <input
               class="password-input"
               id="confirm-password"
-              type="password"
+              [type]="confirmPasswordType ? 'text' : 'password'"
               formControlName="confirmPassword"
               [ngClass]="{
                 'input-touched':
@@ -179,8 +183,8 @@
             >
           </div>
 
-          <button class="seen">
-            <img src="../../../assets/icons/Seen.svg" alt="" />
+          <button class="seen" (click)="toggleConfirmPasswordType()">
+            <img [src]="confirmpasswordIconPath" alt="" />
           </button>
         </div>
 
@@ -193,10 +197,9 @@
               'input-touched': country?.dirty || country?.touched
             }"
           >
-            <option value="" disabled selected></option>
-            <option *ngFor="let country of allCountries" value="{{country}}">{{country}}</option>
-            <option value="" disabled selected></option>
-
+            <option *ngFor="let country of allCountries" value="{{ country }}">
+              {{ country }}
+            </option>
           </select>
           <label
             class="floating-label"
@@ -217,12 +220,9 @@
               'input-touched': gender?.dirty || gender?.touched
             }"
           >
-            <option value="" disabled></option>
             <option value="male">Male</option>
             <option value="female">Female</option>
             <option value="other">Other</option>
-            <option value="" disabled></option>
-
           </select>
           <label
             class="floating-label"

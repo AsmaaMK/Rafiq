@@ -9,7 +9,9 @@
     </div>
 
     <form class="login-social-section__form">
-      <h2 class="login-social-section__form__title"><span class="or-social">Or </span>Log in with</h2>
+      <h2 class="login-social-section__form__title">
+        <span class="or-social">Or </span>Log in with
+      </h2>
       <div class="logos">
         <a href="#">
           <img
@@ -35,7 +37,9 @@
       [formGroup]="loginForm"
       (ngSubmit)="onSubmit()"
     >
-      <h2 class="login-manual-section__form__title"><span class="or-manual">Or<br /></span>Log in</h2>
+      <h2 class="login-manual-section__form__title">
+        <span class="or-manual">Or<br /></span>Log in
+      </h2>
 
       <div class="login-manual-section__form__fields">
         <div class="email-input-field">
@@ -63,7 +67,7 @@
             <input
               class="password-input"
               id="password"
-              type="password"
+              [type]="fieldTextType ? 'text' : 'password'"
               formControlName="password"
               [ngClass]="{
                 'input-touched': password?.dirty || password?.touched
@@ -79,8 +83,8 @@
             >
           </div>
 
-          <button class="seen">
-            <img src="../../../assets/icons/Seen.svg" alt="" />
+          <button class="seen" (click)="togglePasswordType()">
+            <img [src]="seenIconPath" alt="" />
           </button>
 
           <div class="password-options custom-checkbox">
