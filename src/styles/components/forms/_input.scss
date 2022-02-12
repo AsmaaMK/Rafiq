@@ -18,6 +18,11 @@ $label-position-left: 0;
     border: solid 2px $primary;
     border-radius: 10px;
 
+    &.invalid {
+      box-shadow: 0 2px 4px $invalid;
+      border: solid 2px $invalid;
+    }
+
     font-size: $base-font-size * 0.9;
     @include respond-to(medium) {
       font-size: $base-font-size;
@@ -25,6 +30,10 @@ $label-position-left: 0;
 
     font-weight: 500;
     color: $primary;
+
+    &.invalid {
+      color: $invalid;
+    }
 
     /* for icons */
     background-position-y: center;
@@ -69,6 +78,10 @@ $label-position-left: 0;
     padding: 0.2em 0.2em 0.2em 0.65em;
 
     color: $primary;
+    &.invalid {
+      color: $invalid;
+    }
+
     font-size: $base-font-size * 0.9;
     @include respond-to(medium) {
       font-size: $base-font-size;
@@ -86,4 +99,14 @@ $label-position-left: 0;
       }
     }
   }
+}
+
+
+.invalid-message {
+  position: absolute;
+  font-weight: 500;
+  color: $invalid;
+  bottom: -25px;
+  left: 0;
+  padding: 0 10px;
 }

@@ -49,17 +49,22 @@
             type="text"
             formControlName="userName"
             [ngClass]="{
-              'input-touched': userName?.dirty || userName?.touched
+              'input-touched': userName?.dirty || userName?.touched,
+              'invalid':  userName?.invalid && (userName?.dirty || userName?.touched)
             }"
           />
           <label
             class="floating-label"
             for="username"
             [ngClass]="{
-              'label-touched': userName?.dirty || userName?.touched
+              'label-touched': userName?.dirty || userName?.touched,
+              'invalid':  userName?.invalid && (userName?.dirty || userName?.touched)
             }"
             >Username or Email</label
           >
+          <span class="invalid-message" *ngIf="userName?.invalid && (userName?.dirty || userName?.touched)">
+            Your username or email is not correct!
+          </span>
         </div>
 
         <div class="password-component">
