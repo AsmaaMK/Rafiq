@@ -193,8 +193,10 @@
               'input-touched': country?.dirty || country?.touched
             }"
           >
-            <option value="" disabled selected hidden></option>
-            <option value="">Egypt</option>
+            <option value="" disabled selected></option>
+            <option *ngFor="let country of allCountries" value="{{country}}">{{country}}</option>
+            <option value="" disabled selected></option>
+
           </select>
           <label
             class="floating-label"
@@ -215,10 +217,12 @@
               'input-touched': gender?.dirty || gender?.touched
             }"
           >
-            <option value="" disabled selected hidden></option>
+            <option value="" disabled></option>
             <option value="male">Male</option>
             <option value="female">Female</option>
             <option value="other">Other</option>
+            <option value="" disabled></option>
+
           </select>
           <label
             class="floating-label"

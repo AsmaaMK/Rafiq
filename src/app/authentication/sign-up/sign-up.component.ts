@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { CountriesService } from 'src/app/shared/services/countries.service';
 
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.scss']
+  styleUrls: ['./sign-up.component.scss'],
 })
 export class SignUpComponent implements OnInit {
-
   signUpForm!: FormGroup;
+  allCountries!: string[];
 
-  constructor() {
-  }
+  constructor(private countries: CountriesService) {}
 
   ngOnInit(): void {
     this.signUpForm = new FormGroup({
@@ -25,22 +25,40 @@ export class SignUpComponent implements OnInit {
       gender: new FormControl('', Validators.required),
       date: new FormControl('', Validators.required),
     });
+
+    this.allCountries = this.countries.getAllCountries();
   }
 
-  get firstName() { return this.signUpForm.get('firstName'); }
-  get lastName() { return this.signUpForm.get('lastName'); }
-  get userName() { return this.signUpForm.get('userName'); }
-  get email() { return this.signUpForm.get('email'); }
-  get password() { return this.signUpForm.get('password'); }
-  get confirmPassword() { return this.signUpForm.get('confirmPassword'); }
-  get country() { return this.signUpForm.get('country'); }
-  get gender() { return this.signUpForm.get('gender'); }
-  get date() { return this.signUpForm.get('date'); }
-
+  get firstName() {
+    return this.signUpForm.get('firstName');
+  }
+  get lastName() {
+    return this.signUpForm.get('lastName');
+  }
+  get userName() {
+    return this.signUpForm.get('userName');
+  }
+  get email() {
+    return this.signUpForm.get('email');
+  }
+  get password() {
+    return this.signUpForm.get('password');
+  }
+  get confirmPassword() {
+    return this.signUpForm.get('confirmPassword');
+  }
+  get country() {
+    return this.signUpForm.get('country');
+  }
+  get gender() {
+    return this.signUpForm.get('gender');
+  }
+  get date() {
+    return this.signUpForm.get('date');
+  }
 
   onSubmit() {
     // TODO: Use EventEmitter with form value
     console.warn(this.signUpForm.value);
   }
-
 }

@@ -53,8 +53,8 @@
     @include respond-to(medium) {
       $width-of-cloud: 50vw;
       width: $width-of-cloud;
-      padding-top: 4vw;
-    padding-left: 5vw;
+      padding-top: 3vw;
+      padding-left: 5vw;
     }
 
     h1 {

@@ -14,7 +14,7 @@
 
   &:after {
     content: url("../../../assets/icons/arrow.svg");
-    pointer-events: inherit;
+    pointer-events: none;
     position: absolute;
     top: 1.2em;
     right: 1em;
