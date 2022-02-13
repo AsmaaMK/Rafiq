@@ -35,7 +35,7 @@
     <form
       class="login-manual-section__form"
       [formGroup]="loginForm"
-      (ngSubmit)="onSubmit()"
+      (ngSubmit)="login()"
     >
       <h2 class="login-manual-section__form__title">
         <span class="or-manual">Or<br /></span>Log in
@@ -50,7 +50,8 @@
             formControlName="userName"
             [ngClass]="{
               'input-touched': userName?.dirty || userName?.touched,
-              'invalid':  userName?.invalid && (userName?.dirty || userName?.touched)
+              invalid:
+                userName?.invalid && (userName?.dirty || userName?.touched)
             }"
           />
           <label
@@ -58,12 +59,16 @@
             for="username"
             [ngClass]="{
               'label-touched': userName?.dirty || userName?.touched,
-              'invalid':  userName?.invalid && (userName?.dirty || userName?.touched)
+              invalid:
+                userName?.invalid && (userName?.dirty || userName?.touched)
             }"
             >Username or Email</label
           >
-          <span class="invalid-message" *ngIf="userName?.invalid && (userName?.dirty || userName?.touched)">
-            Your username or email is not correct!
+          <span
+            class="invalid-message"
+            *ngIf="userName?.invalid && (userName?.dirty || userName?.touched)"
+          >
+            Invalid username or email.
           </span>
         </div>
 
@@ -75,20 +80,30 @@
               [type]="fieldTextType ? 'text' : 'password'"
               formControlName="password"
               [ngClass]="{
-                'input-touched': password?.dirty || password?.touched
+                'input-touched': password?.dirty || password?.touched,
+                invalid:
+                  password?.invalid && (password?.dirty || password?.touched)
               }"
             />
             <label
               class="floating-label"
               for="password"
               [ngClass]="{
-                'label-touched': password?.dirty || password?.touched
+                'label-touched': password?.dirty || password?.touched,
+                invalid:
+                  password?.invalid && (password?.dirty || password?.touched)
               }"
               >Password</label
             >
+            <span
+            class="invalid-message"
+            *ngIf="password?.invalid && (password?.dirty || password?.touched)"
+          >
+            Invalid password.
+          </span>
           </div>
 
-          <button class="seen" (click)="togglePasswordType()">
+          <button class="seen">
             <img [src]="seenIconPath" alt="" />
           </button>
 
@@ -109,7 +124,7 @@
           </div>
         </div>
 
-        <button type="submit" [disabled]="!loginForm.valid">Log in</button>
+        <button type="submit" [disabled]="!loginForm.valid" (submit)="login()">Log in</button>
       </div>
 
       <div class="switch">
