@@ -23,24 +23,23 @@ input {
   }
 }
 
-
 /* custom select style */
 
 ::selection {
   color: #fff;
-  background-color: #8D90B3;
+  background-color: #8d90b3;
 }
 ::-moz-selection {
   color: #fff;
-  background-color: #8D90B3;
+  background-color: #8d90b3;
 }
-
 
 /* custom scrollbar */
 
 ::-webkit-scrollbar {
   background-color: transparent;
-  width: 8px;
+  width: 7px;
+  height: 7px;
 }
 
 ::-webkit-scrollbar-track {
@@ -54,18 +53,36 @@ input {
   border-radius: 10px;
 }
 
+::-webkit-scrollbar-thumb:horizontal {
+  background-color: $gradient-light;
+  border-radius: 10px;
+}
+
 /* body scrollbar */
 body::-webkit-scrollbar {
-  width: 12px;
+  width: 14px;
+  height: 14px;
 }
 
 body::-webkit-scrollbar-thumb {
   background-color: #e3cce9;
   background-image: linear-gradient(
     $gradient-darker 0%,
-    $gradient-dark 26%,
-    $gradient-light 45%,
-    $gradient-dark 70%,
+    $gradient-dark 50%,
     $gradient-darker 100%
   );
+}
+
+body::-webkit-scrollbar-thumb:horizontal {
+  background-color: #e3cce9;
+  background-image: linear-gradient(
+    to left,
+    $gradient-darker 0%,
+    $gradient-dark 50%,
+    $gradient-darker 100%
+  );
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: $gradient-darker;
 }
