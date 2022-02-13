@@ -15,13 +15,10 @@
     background-position-x: 60vw;
     background-position-y: 25vh;
 
-     width: 50vw;
-        height: auto;
-        min-height: 100vh;
-  
-        margin-top: 0;
-        // background-color: red;
-        // align-self: flex-end;
+    width: 50vw;
+    height: auto;
+    min-height: 100vh;
+    margin-top: 0;
   }
 
   .login-manual-section__form,
@@ -34,14 +31,17 @@
       text-align: center;
       color: $primary;
       margin-bottom: 1.3em;
+
       @include respond-to(medium) {
         margin-top: 4rem;
       }
     }
   }
+
   .login-manual-section__form {
     @include respond-to(medium) {
       height: 100vh;
+
       @include flex(column, stretch, center);
       @include margin(y, 0);
     }
@@ -50,10 +50,10 @@
   .sign-up-manual-section__form {
     @include respond-to(medium) {
       margin-top: 1.5rem;
-    }}
+    }
+  }
 
-  input,
-  select {
+  [class$="-input-field"] {
     margin-bottom: 3em;
   }
 
@@ -112,6 +112,7 @@
 }
 
 
+/* show and hide "Or" */
 .or-social {
   display: none;
 

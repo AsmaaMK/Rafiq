@@ -13,15 +13,10 @@
     width: 50vw;
     height: 100vh;
     @include flex(column, flex-start, space-between);
-    // position: static;
 
     &::before {
       display: none;
     }
-
-    // [class$="-social-section__desc"] {
-    //   // width: 100%;
-    // }
   }
 
   /* white background */
@@ -71,7 +66,6 @@
 
       @include respond-to(medium) {
         font-size: 1.6rem;
-        // padding-right: 8em;
       }
     }
   }

@@ -1,6 +1,6 @@
 @use "../../helpers/helpers-dir" as *;
 
-$label-position-top: -1.5em;
+$label-position-top: -0.8em;
 $label-position-left: 0;
 
 [class$="-input-field"] {
@@ -67,11 +67,11 @@ $label-position-left: 0;
   .floating-label {
     pointer-events: none;
     position: absolute;
-    top: 0.85em;
+    top: 50%;
+    transform: translateY(-50%);
     left: 1.3em;
 
     @include respond-to(medium) {
-      top: 0.75em;
       left: 1.5em;
     }
 
@@ -104,8 +104,8 @@ $label-position-left: 0;
 
 .invalid-message {
   position: absolute;
-  font-weight: 500;
   color: $invalid;
+  font-weight: 500;
   bottom: -25px;
   left: 0;
   padding: 0 10px;

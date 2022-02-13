@@ -23,14 +23,18 @@ input {
   }
 }
 
+
+/* custom select style */
+
 ::selection {
-  color: $primary;
-  background-color: $gradient-dark;
+  color: #fff;
+  background-color: #8D90B3;
 }
 ::-moz-selection {
-  color: $primary;
-  background-color: $gradient-dark;
+  color: #fff;
+  background-color: #8D90B3;
 }
+
 
 /* custom scrollbar */
 
