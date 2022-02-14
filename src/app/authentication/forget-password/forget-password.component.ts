@@ -4,14 +4,12 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-forget-password',
   templateUrl: './forget-password.component.html',
-  styleUrls: ['./forget-password.component.scss']
+  styleUrls: ['./forget-password.component.scss'],
 })
 export class ForgetPasswordComponent implements OnInit {
-
   forgetPassForm!: FormGroup;
 
-  constructor() {
-  }
+  constructor() {}
 
   ngOnInit(): void {
     this.forgetPassForm = new FormGroup({
@@ -19,12 +17,13 @@ export class ForgetPasswordComponent implements OnInit {
     });
   }
 
-  get userName() { return this.forgetPassForm.get('userName'); }
-
+  get userName() {
+    return this.forgetPassForm.get('userName');
+  }
 
   onSubmit() {
     console.warn(this.forgetPassForm.value);
   }
 
-
+  unShowMessage = false;
 }

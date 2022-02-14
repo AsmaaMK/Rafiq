@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { matchPasswords } from 'src/app/shared/validators/match-passwords.directive';
 
 @Component({
   selector: 'app-reset-password',
@@ -17,11 +18,17 @@ export class ResetPasswordComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    this.resetPasswordForm = new FormGroup({
-      password: new FormControl('', Validators.required),
-      confirmPassword: new FormControl('', Validators.required),
-    });
-
+    this.resetPasswordForm = new FormGroup(
+      {
+        password: new FormControl('', [
+          Validators.required,
+          Validators.minLength(8),
+          Validators.maxLength(64),
+        ]),
+        confirmPassword: new FormControl('', Validators.required),
+      },
+      [matchPasswords('password', 'confirmPassword')]
+    );
   }
 
   get password() {
@@ -51,4 +58,7 @@ export class ResetPasswordComponent implements OnInit {
       ? '../../../assets/icons/Seen.svg'
       : '../../../assets/icons/visibility.svg';
   }
+
+  passwordShowMessage = false;
+  confirmPasswordShowMessage = false;
 }

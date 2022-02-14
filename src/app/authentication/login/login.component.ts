@@ -48,4 +48,7 @@ export class LoginComponent implements OnInit {
       ? '../../../assets/icons/Seen.svg'
       : '../../../assets/icons/visibility.svg';
   }
+
+  unShowMessage = false;
+  passwordShowMessage = false;
 }

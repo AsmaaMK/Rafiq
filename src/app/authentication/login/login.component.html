@@ -48,6 +48,8 @@
             id="username"
             type="text"
             formControlName="userName"
+            (focus)="unShowMessage = true"
+            (blur)="unShowMessage = false"
             [ngClass]="{
               'input-touched': userName?.dirty || userName?.touched,
               invalid:
@@ -64,12 +66,16 @@
             }"
             >Username or Email</label
           >
-          <span
+          <div
             class="invalid-message"
-            *ngIf="userName?.invalid && (userName?.dirty || userName?.touched)"
+            *ngIf="
+              userName?.invalid &&
+              (userName?.dirty || userName?.touched) &&
+              unShowMessage
+            "
           >
-            Invalid username or email.
-          </span>
+            <p>Invalid username or email.</p>
+          </div>
         </div>
 
         <div class="password-component">
@@ -79,6 +85,8 @@
               id="password"
               [type]="fieldTextType ? 'text' : 'password'"
               formControlName="password"
+              (focus)="passwordShowMessage = true"
+              (blur)="passwordShowMessage = false"
               [ngClass]="{
                 'input-touched': password?.dirty || password?.touched,
                 invalid:
@@ -95,14 +103,14 @@
               }"
               >Password</label
             >
-            <span
+            <div
               class="invalid-message"
               *ngIf="
-                password?.invalid && (password?.dirty || password?.touched)
+                (password?.invalid && (password?.dirty || password?.touched) && passwordShowMessage)
               "
             >
-              Invalid password.
-            </span>
+              <p>Invalid password.</p>
+            </div>
           </div>
 
           <span class="seen" (click)="togglePasswordType()">
