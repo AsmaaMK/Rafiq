@@ -101,12 +101,11 @@ $label-position-left: 0;
   }
 }
 
-
 .invalid-message {
   position: absolute;
   color: $invalid;
   font-weight: 500;
-  bottom: -25px;
   left: 0;
+  top: 2.8em;
   padding: 0 10px;
 }

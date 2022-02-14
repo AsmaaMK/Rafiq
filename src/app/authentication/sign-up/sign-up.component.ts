@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { beginWithChar } from 'src/app/shared/validators/begin-with-char.directive';
 import { CountriesService } from 'src/app/shared/services/countries.service';
+import { matchPasswords } from 'src/app/shared/validators/match-passwords.directive';
 
 @Component({
   selector: 'app-sign-up',
@@ -11,27 +12,47 @@ import { CountriesService } from 'src/app/shared/services/countries.service';
 export class SignUpComponent implements OnInit {
   signUpForm!: FormGroup;
   allCountries!: string[];
-  
+
   constructor(private countries: CountriesService) {}
-  
+
   ngOnInit(): void {
-    this.signUpForm = new FormGroup({
-      firstName: new FormControl(''),
-      lastName: new FormControl('', Validators.required),
-      userName: new FormControl('', [
-        Validators.required,
-        Validators.maxLength(35),
-        Validators.minLength(3),
-        Validators.pattern('([a-z]|_|[0-9])*'),
-        beginWithChar(),
-      ]),
-      email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', Validators.required),
-      confirmPassword: new FormControl('', Validators.required),
-      country: new FormControl('', Validators.required),
-      gender: new FormControl('', Validators.required),
-      date: new FormControl('', Validators.required),
-    });
+    this.signUpForm = new FormGroup(
+      {
+        firstName: new FormControl('', [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(35),
+          Validators.pattern('[a-zA-Z]+'),
+        ]),
+        lastName: new FormControl('', [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(35),
+          Validators.pattern('[a-zA-Z]+'),
+        ]),
+        userName: new FormControl('', [
+          Validators.required,
+          Validators.maxLength(35),
+          Validators.minLength(3),
+          Validators.pattern('([a-z]|_|[0-9])+'),
+          beginWithChar(),
+        ]),
+        email: new FormControl('', [
+          Validators.required,
+          Validators.email
+        ]),
+        password: new FormControl('', [
+          Validators.required,
+          Validators.minLength(8),
+          Validators.maxLength(64),
+        ]),
+        confirmPassword: new FormControl(''),
+        country: new FormControl('', Validators.required),
+        gender: new FormControl('', Validators.required),
+        date: new FormControl('', Validators.required),
+      },
+      [matchPasswords('password', 'confirmPassword')]
+    );
 
     this.allCountries = this.countries.getAllCountries();
   }
@@ -63,7 +84,7 @@ export class SignUpComponent implements OnInit {
   get date() {
     return this.signUpForm.get('date');
   }
-  
+
   signUp() {
     console.warn(this.signUpForm.value);
   }
@@ -89,5 +110,13 @@ export class SignUpComponent implements OnInit {
       : '../../../assets/icons/visibility.svg';
   }
 
-  showMessage = false;
+  fnShowMessage = false;
+  lnShowMessage = false;
+  unShowMessage = false;
+  emailShowMessage = false;
+  passwordShowMessage = false;
+  confirmPasswordShowMessage = false;
+  countryShowMessage = false;
+  genderShowMessage = false;
+  dateShowMessage = false;
 }

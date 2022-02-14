@@ -58,6 +58,7 @@
   }
 
   .name {
+    position: relative;
     @include flex(row, space-between);
     gap: 1em;
   }
