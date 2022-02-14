@@ -1,1 +1,10 @@
 @use "../../../styles/pages/signup-login";
+
+.name {
+  position: relative;
+
+}
+
+.invalid-message {
+  top: 2.5em;
+}

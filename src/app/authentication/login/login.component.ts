@@ -16,15 +16,25 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.loginForm = new FormGroup({
       userName: new FormControl('', Validators.required),
-      password: new FormControl('', [Validators.required, Validators.maxLength(64), Validators.minLength(8)])
+      password: new FormControl('', [
+        Validators.required,
+        Validators.maxLength(64),
+        Validators.minLength(8),
+      ]),
+      rememberMe: new FormControl(false),
     });
   }
 
   get userName() {
     return this.loginForm.get('userName');
   }
+
   get password() {
     return this.loginForm.get('password');
+  }
+
+  get rememberMe() {
+    return this.loginForm.get('rememberMe');
   }
 
   login() {

@@ -96,16 +96,18 @@
               >Password</label
             >
             <span
-            class="invalid-message"
-            *ngIf="password?.invalid && (password?.dirty || password?.touched)"
-          >
-            Invalid password.
-          </span>
+              class="invalid-message"
+              *ngIf="
+                password?.invalid && (password?.dirty || password?.touched)
+              "
+            >
+              Invalid password.
+            </span>
           </div>
 
-          <button class="seen">
+          <span class="seen" (click)="togglePasswordType()">
             <img [src]="seenIconPath" alt="" />
-          </button>
+          </span>
 
           <div class="password-options custom-checkbox">
             <div class="remember-me">
@@ -113,6 +115,7 @@
                 type="checkbox"
                 name="remember-me"
                 id="remember-me__checkbox"
+                formControlName="rememberMe"
               />
               <label for="remember-me__checkbox" class="remember-me__label"
                 >Remember me</label
@@ -124,7 +127,7 @@
           </div>
         </div>
 
-        <button type="submit" [disabled]="!loginForm.valid" (submit)="login()">Log in</button>
+        <button type="submit" [disabled]="!loginForm.valid">Log in</button>
       </div>
 
       <div class="switch">

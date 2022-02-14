@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { beginWithChar } from 'src/app/shared/validators/begin-with-char.directive';
 import { CountriesService } from 'src/app/shared/services/countries.service';
 
 @Component({
@@ -10,18 +11,20 @@ import { CountriesService } from 'src/app/shared/services/countries.service';
 export class SignUpComponent implements OnInit {
   signUpForm!: FormGroup;
   allCountries!: string[];
-  passwordType = false;
-  confirmPasswordType = false;
-  passwordIconPath = '../../../assets/icons/visibility.svg';
-  confirmpasswordIconPath = '../../../assets/icons/visibility.svg';
-
+  
   constructor(private countries: CountriesService) {}
-
+  
   ngOnInit(): void {
     this.signUpForm = new FormGroup({
-      firstName: new FormControl('', Validators.required),
+      firstName: new FormControl(''),
       lastName: new FormControl('', Validators.required),
-      userName: new FormControl('', Validators.required),
+      userName: new FormControl('', [
+        Validators.required,
+        Validators.maxLength(35),
+        Validators.minLength(3),
+        Validators.pattern('([a-z]|_|[0-9])*'),
+        beginWithChar(),
+      ]),
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', Validators.required),
       confirmPassword: new FormControl('', Validators.required),
@@ -60,11 +63,15 @@ export class SignUpComponent implements OnInit {
   get date() {
     return this.signUpForm.get('date');
   }
-
-  onSubmit() {
-    // TODO: Use EventEmitter with form value
+  
+  signUp() {
     console.warn(this.signUpForm.value);
   }
+
+  passwordType = false;
+  confirmPasswordType = false;
+  passwordIconPath = '../../../assets/icons/visibility.svg';
+  confirmpasswordIconPath = '../../../assets/icons/visibility.svg';
 
   togglePasswordType() {
     this.passwordType = !this.passwordType;
@@ -81,4 +88,6 @@ export class SignUpComponent implements OnInit {
       ? '../../../assets/icons/Seen.svg'
       : '../../../assets/icons/visibility.svg';
   }
+
+  showMessage = false;
 }
