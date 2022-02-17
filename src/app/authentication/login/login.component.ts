@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { emailOrUsername } from 'src/app/shared/validators/email-or-username.directive';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,10 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
-      userName: new FormControl('', Validators.required),
+      userName: new FormControl('', [
+        Validators.required, 
+        emailOrUsername()
+      ]),
       password: new FormControl('', [
         Validators.required,
         Validators.maxLength(64),
