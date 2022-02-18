@@ -1,10 +1,14 @@
-stages:
-  - deploy
-
+image: node:12.19.0
 pages:
-  stage: deploy
+  cache:
+    paths:
+      - node_modules/
   script:
-    - ng build
+    - npm install -g @angular/cli
+    - npm install
+    - npm run buildProd
   artifacts:
     paths:
-      - dist
+      - public
+  only:
+    - main
