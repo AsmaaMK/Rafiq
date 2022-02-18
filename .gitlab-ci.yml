@@ -1,10 +1,11 @@
-stages:
-  - deploy
+image: trion/ng-cli-karma
 
-pages:
+deploy_stage:
   stage: deploy
+  environment: Stage
+  only:
+    - main
   script:
-    - ng build
-  artifacts:
-    paths:
-      - dist
+    - rm ./package-lock.json
+    - npm install
+    - ./node_modules/@angular/cli/bin/ng build --progress false --prod
