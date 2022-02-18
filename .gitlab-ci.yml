@@ -9,6 +9,6 @@ pages:
     - npm run buildProd
   artifacts:
     paths:
-      - public
+      - dist/rafiq
   only:
     - main
