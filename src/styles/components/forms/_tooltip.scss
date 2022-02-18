@@ -11,6 +11,7 @@
   .message {
     visibility: hidden;
     position: absolute;
+    z-index: 50;
     right: 2.5em;
     top: -3.5em;
     padding: 0.25em 0.5em;
