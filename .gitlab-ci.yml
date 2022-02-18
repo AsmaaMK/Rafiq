@@ -1,0 +1,10 @@
+stages:
+  - deploy
+
+pages:
+  stage: deploy
+  script:
+    - ng build
+  artifacts:
+    paths:
+      - dist
