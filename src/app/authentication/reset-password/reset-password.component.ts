@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { matchPasswords } from 'src/app/shared/validators/match-passwords.directive';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-reset-password',
@@ -15,7 +17,7 @@ export class ResetPasswordComponent implements OnInit {
   passwordIconPath = '../../../assets/icons/visibility.svg';
   confirmpasswordIconPath = '../../../assets/icons/visibility.svg';
 
-  constructor() {}
+  constructor(private route: ActivatedRoute, private auth: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     this.resetPasswordForm = new FormGroup(
@@ -38,10 +40,6 @@ export class ResetPasswordComponent implements OnInit {
     return this.resetPasswordForm.get('confirmPassword');
   }
 
-  onSubmit() {
-    // TODO: Use EventEmitter with form value
-    console.warn(this.resetPasswordForm.value);
-  }
 
   togglePasswordType() {
     this.passwordType = !this.passwordType;
@@ -61,4 +59,21 @@ export class ResetPasswordComponent implements OnInit {
 
   passwordShowMessage = false;
   confirmPasswordShowMessage = false;
+
+  resetPassword() {
+    const resetToken = this.route.snapshot.paramMap.get('id');
+    const password = this.resetPasswordForm.value.password;
+    const confirmPassword = this.resetPasswordForm.value.confirmPassword;
+
+    this.auth.resetPassword({ resetToken, password, confirmPassword })
+      .subscribe(
+        res => {
+          console.log(res);
+          this.router.navigate(['/login']);
+        },
+        err => {
+          console.error(err);
+        }
+      )
+  }
 }

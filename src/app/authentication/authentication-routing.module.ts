@@ -17,7 +17,7 @@ const routes: Routes = [
       { path: 'login', component: LoginComponent },
       { path: 'sign-up', component: SignUpComponent },
       { path: 'forget-password', component: ForgetPasswordComponent },
-      { path: 'reset-password', component: ResetPasswordComponent },
+      { path: 'reset-password/:id', component: ResetPasswordComponent },
       { path: 'resend-link', component: ResendLinkComponent },
       { path: '', redirectTo: 'login', pathMatch: 'full' },
       { path: '**', component: NotFoundComponent }

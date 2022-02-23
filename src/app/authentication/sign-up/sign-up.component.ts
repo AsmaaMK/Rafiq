@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { beginWithChar } from 'src/app/shared/validators/begin-with-char.directive';
 import { CountriesService } from 'src/app/shared/services/countries.service';
 import { matchPasswords } from 'src/app/shared/validators/match-passwords.directive';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -13,7 +14,7 @@ export class SignUpComponent implements OnInit {
   signUpForm!: FormGroup;
   allCountries!: string[];
 
-  constructor(private countries: CountriesService) {}
+  constructor(private countries: CountriesService, private auth: AuthService) {}
 
   ngOnInit(): void {
     this.signUpForm = new FormGroup(
@@ -49,7 +50,7 @@ export class SignUpComponent implements OnInit {
         confirmPassword: new FormControl('', Validators.required),
         country: new FormControl('', Validators.required),
         gender: new FormControl('', Validators.required),
-        date: new FormControl('', Validators.required),
+        dateOfBirth: new FormControl('', Validators.required),
       },
       [matchPasswords('password', 'confirmPassword')]
     );
@@ -81,14 +82,11 @@ export class SignUpComponent implements OnInit {
   get gender() {
     return this.signUpForm.get('gender');
   }
-  get date() {
-    return this.signUpForm.get('date');
+  get dateOfBirth() {
+    return this.signUpForm.get('dateOfBirth');
   }
 
-  signUp() {
-    console.warn(this.signUpForm.value);
-  }
-
+  
   passwordType = false;
   confirmPasswordType = false;
   passwordIconPath = '../../../assets/icons/visibility.svg';
@@ -106,10 +104,10 @@ export class SignUpComponent implements OnInit {
     this.confirmPasswordType = !this.confirmPasswordType;
 
     this.confirmpasswordIconPath = this.confirmPasswordType
-      ? '../../../assets/icons/Seen.svg'
+    ? '../../../assets/icons/Seen.svg'
       : '../../../assets/icons/visibility.svg';
   }
-
+  
   fnShowMessage = false;
   lnShowMessage = false;
   unShowMessage = false;
@@ -119,4 +117,13 @@ export class SignUpComponent implements OnInit {
   countryShowMessage = false;
   genderShowMessage = false;
   dateShowMessage = false;
+
+
+  signUp() {
+    this.auth.registerUser(this.signUpForm.value)
+      .subscribe(
+        res => console.log(res),
+        err => console.error(err)
+      )
+  }
 }

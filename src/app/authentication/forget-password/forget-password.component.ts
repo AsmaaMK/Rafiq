@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/shared/services/auth.service';
 import { emailOrUsername } from 'src/app/shared/validators/email-or-username.directive';
 
 @Component({
@@ -10,21 +11,26 @@ import { emailOrUsername } from 'src/app/shared/validators/email-or-username.dir
 export class ForgetPasswordComponent implements OnInit {
   forgetPassForm!: FormGroup;
 
-  constructor() { }
+  constructor(private auth: AuthService) { }
 
   ngOnInit(): void {
     this.forgetPassForm = new FormGroup({
-      userName: new FormControl('', [Validators.required, emailOrUsername()]),
+      emailOrUserName: new FormControl('', [Validators.required, emailOrUsername()]),
     });
   }
 
-  get userName() {
-    return this.forgetPassForm.get('userName');
-  }
-
-  onSubmit() {
-    console.warn(this.forgetPassForm.value);
+  get emailOrUserName() {
+    return this.forgetPassForm.get('emailOrUserName');
   }
 
   unShowMessage = false;
+
+  send() {
+    // console.warn(this.forgetPassForm.value);
+    this.auth.forgetPassword(this.forgetPassForm.value)
+      .subscribe(
+        res => console.log(res),
+        err => console.error(err)
+      )
+  }
 }

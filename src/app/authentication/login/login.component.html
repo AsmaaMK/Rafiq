@@ -47,30 +47,30 @@
             class="email-input"
             id="username"
             type="text"
-            formControlName="userName"
+            formControlName="emailOrUserName"
             (focus)="unShowMessage = true"
             (blur)="unShowMessage = false"
             [ngClass]="{
-              'input-touched': userName?.dirty || userName?.touched,
+              'input-touched': emailOrUserName?.dirty || emailOrUserName?.touched,
               invalid:
-                userName?.invalid && (userName?.dirty || userName?.touched)
+                emailOrUserName?.invalid && (emailOrUserName?.dirty || emailOrUserName?.touched)
             }"
           />
           <label
             class="floating-label"
             for="username"
             [ngClass]="{
-              'label-touched': userName?.dirty || userName?.touched,
+              'label-touched': emailOrUserName?.dirty || emailOrUserName?.touched,
               invalid:
-                userName?.invalid && (userName?.dirty || userName?.touched)
+                emailOrUserName?.invalid && (emailOrUserName?.dirty || emailOrUserName?.touched)
             }"
             >Username or Email</label
           >
           <div
             class="invalid-message"
             *ngIf="
-              userName?.invalid &&
-              (userName?.dirty || userName?.touched) &&
+              emailOrUserName?.invalid &&
+              (emailOrUserName?.dirty || emailOrUserName?.touched) &&
               unShowMessage
             "
           >
@@ -123,7 +123,8 @@
                 type="checkbox"
                 name="remember-me"
                 id="remember-me__checkbox"
-                formControlName="rememberMe"
+                (click)="checked()"
+                [checked]="rememberMe"
               />
               <label for="remember-me__checkbox" class="remember-me__label"
                 >Remember me</label

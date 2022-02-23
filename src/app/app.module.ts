@@ -5,6 +5,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NotFoundComponent } from './shared/components/not-found/not-found.component';
 
+import { HttpClientModule } from '@angular/common/http';
+import { AuthService } from './shared/services/auth.service';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -12,9 +16,12 @@ import { NotFoundComponent } from './shared/components/not-found/not-found.compo
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    AuthService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

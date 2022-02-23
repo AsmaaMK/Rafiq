@@ -497,26 +497,26 @@
             type="date"
             min="1900-01-01"
             max="2010-12-31"
-            formControlName="date"
+            formControlName="dateOfBirth"
             (focus)="dateShowMessage = true"
             (blur)="dateShowMessage = false"
             [ngClass]="{
-              'input-touched': date?.dirty || date?.touched,
-              invalid: date?.invalid && (date?.dirty || date?.touched)
+              'input-touched': dateOfBirth?.dirty || dateOfBirth?.touched,
+              invalid: dateOfBirth?.invalid && (dateOfBirth?.dirty || dateOfBirth?.touched)
             }"
           />
           <label
             class="floating-label"
             for="date"
             [ngClass]="{
-              'label-touched': date?.dirty || date?.touched,
-              invalid: date?.invalid && (date?.dirty || date?.touched)
+              'label-touched': dateOfBirth?.dirty || dateOfBirth?.touched,
+              invalid: dateOfBirth?.invalid && (dateOfBirth?.dirty || dateOfBirth?.touched)
             }"
             >Date of Birth</label
           >
-          <div class="invalid-message" *ngIf="dateShowMessage && date?.dirty">
-            <ng-container *ngIf="signUpForm.get('date')?.hasError('required')">
-              <p>Date of birth is required.</p>
+          <div class="invalid-message" *ngIf="dateShowMessage && dateOfBirth?.dirty">
+            <ng-container *ngIf="signUpForm.get('dateOfBirth')?.hasError('required')">
+              <p>date of birth is required.</p>
             </ng-container>
           </div>
         </div>

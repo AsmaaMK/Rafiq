@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/shared/services/auth.service';
 import { emailOrUsername } from 'src/app/shared/validators/email-or-username.directive';
 
 @Component({
@@ -12,37 +13,28 @@ export class LoginComponent implements OnInit {
   fieldTextType = false;
   seenIconPath = '../../../assets/icons/visibility.svg';
 
-  constructor() {}
+  constructor(private auth: AuthService) { }
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
-      userName: new FormControl('', [
-        Validators.required, 
+      emailOrUserName: new FormControl('', [
+        Validators.required,
         emailOrUsername()
       ]),
       password: new FormControl('', [
         Validators.required,
         Validators.maxLength(64),
         Validators.minLength(8),
-      ]),
-      rememberMe: new FormControl(false),
+      ])
     });
   }
 
-  get userName() {
-    return this.loginForm.get('userName');
+  get emailOrUserName() {
+    return this.loginForm.get('emailOrUserName');
   }
 
   get password() {
     return this.loginForm.get('password');
-  }
-
-  get rememberMe() {
-    return this.loginForm.get('rememberMe');
-  }
-
-  login() {
-    console.warn(this.loginForm.value);
   }
 
   togglePasswordType() {
@@ -55,4 +47,26 @@ export class LoginComponent implements OnInit {
 
   unShowMessage = false;
   passwordShowMessage = false;
+  rememberMe = true;
+
+  checked() {
+    this.rememberMe = !this.rememberMe;
+  }
+
+
+
+  login(): void {
+    this.auth.loginUser(this.loginForm.value)
+      .subscribe(
+        res => {
+          console.log();
+          const refreshToken: string = (res.results?.refreshToken) || '';
+          localStorage.setItem('refreshToken', refreshToken);
+          console.log(localStorage.getItem('refreshToken'))
+        },
+        err => {
+          console.error(err);
+        }
+      )
+  }
 }
