@@ -53,8 +53,6 @@ export class LoginComponent implements OnInit {
     this.rememberMe = !this.rememberMe;
   }
 
-
-
   login(): void {
     this.auth.loginUser(this.loginForm.value)
       .subscribe(

@@ -20,7 +20,6 @@ const routes: Routes = [
       { path: 'reset-password/:id', component: ResetPasswordComponent },
       { path: 'resend-link', component: ResendLinkComponent },
       { path: '', redirectTo: 'login', pathMatch: 'full' },
-      { path: '**', component: NotFoundComponent }
     ],
   },
 ];

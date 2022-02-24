@@ -7,6 +7,7 @@ import { NotFoundComponent } from './shared/components/not-found/not-found.compo
 
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from './shared/services/auth.service';
+import { AuthGuard } from './shared/guards/auth.guard';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { AuthService } from './shared/services/auth.service';
     HttpClientModule
   ],
   providers: [
-    AuthService
+    AuthService,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })

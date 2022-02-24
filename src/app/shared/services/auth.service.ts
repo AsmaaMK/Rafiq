@@ -36,8 +36,12 @@ export class AuthService {
 
   getAccessToken() {
     return this.http.post(`${this.url}/accessToken`, {
-      'refreshToken': localStorage.getItem('refreshToken')
+      'refreshToken': localStorage.getItem('refreshToken') 
     }, httpOptions);
+  }
+
+  isLogedIn() {
+    return !!localStorage.getItem('refreshToken');
   }
 }
 
