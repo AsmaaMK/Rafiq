@@ -21,13 +21,13 @@ export class SignUpComponent implements OnInit {
       {
         firstName: new FormControl('', [
           Validators.required,
-          Validators.minLength(3),
+          Validators.minLength(2),
           Validators.maxLength(35),
           Validators.pattern('[a-zA-Z]+'),
         ]),
         lastName: new FormControl('', [
           Validators.required,
-          Validators.minLength(3),
+          Validators.minLength(2),
           Validators.maxLength(35),
           Validators.pattern('[a-zA-Z]+'),
         ]),
@@ -35,7 +35,7 @@ export class SignUpComponent implements OnInit {
           Validators.required,
           Validators.maxLength(35),
           Validators.minLength(3),
-          Validators.pattern('([a-z]|_|[0-9])+'),
+          Validators.pattern('([a-zA-Z]|_|[0-9])+'),
           beginWithChar(),
         ]),
         email: new FormControl('', [
@@ -121,9 +121,5 @@ export class SignUpComponent implements OnInit {
 
   signUp() {
     this.auth.registerUser(this.signUpForm.value)
-      .subscribe(
-        res => console.log(res),
-        err => console.error(err)
-      )
   }
 }

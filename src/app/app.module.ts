@@ -6,14 +6,18 @@ import { AppComponent } from './app.component';
 import { NotFoundComponent } from './shared/components/not-found/not-found.component';
 
 import { HttpClientModule } from '@angular/common/http';
-import { AuthService } from './shared/services/auth.service';
-import { AuthGuard } from './shared/guards/auth.guard';
+import { LoggingInterceptorServiceProvider } from './shared/http-interceptors/logging-interceptor.service';
+import { UnauthorizedComponent } from './shared/components/unauthorized/unauthorized.component';
+import { AsyncObservablePipeComponent } from './pipe.component';
+import { SetHeadersInterceptorServiceProvider } from './shared/http-interceptors/set-headers-intercepro.service';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    UnauthorizedComponent,
+    AsyncObservablePipeComponent
   ],
   imports: [
     BrowserModule,
@@ -21,8 +25,8 @@ import { AuthGuard } from './shared/guards/auth.guard';
     HttpClientModule
   ],
   providers: [
-    AuthService,
-    AuthGuard
+    SetHeadersInterceptorServiceProvider,
+    LoggingInterceptorServiceProvider
   ],
   bootstrap: [AppComponent]
 })

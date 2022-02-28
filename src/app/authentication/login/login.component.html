@@ -123,8 +123,9 @@
                 type="checkbox"
                 name="remember-me"
                 id="remember-me__checkbox"
-                (click)="checked()"
-                [checked]="rememberMe"
+                #rememberMeCheckBox
+                [checked]="rememberMe$.value"
+                (click)="rememberMe$.next(rememberMeCheckBox.checked)"
               />
               <label for="remember-me__checkbox" class="remember-me__label"
                 >Remember me</label

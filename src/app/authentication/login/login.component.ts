@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
 import { emailOrUsername } from 'src/app/shared/validators/email-or-username.directive';
 
 @Component({
@@ -12,8 +13,10 @@ export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   fieldTextType = false;
   seenIconPath = '../../../assets/icons/visibility.svg';
+  unShowMessage = false;
+  passwordShowMessage = false;
 
-  constructor(private auth: AuthService) { }
+  constructor(private auth: AuthService, private tokenStorage: TokenStorageService) { }
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
@@ -37,6 +40,10 @@ export class LoginComponent implements OnInit {
     return this.loginForm.get('password');
   }
 
+  get rememberMe$() {
+    return this.tokenStorage.rememberMe$;
+  }
+
   togglePasswordType() {
     this.fieldTextType = !this.fieldTextType;
 
@@ -45,26 +52,23 @@ export class LoginComponent implements OnInit {
       : '../../../assets/icons/visibility.svg';
   }
 
-  unShowMessage = false;
-  passwordShowMessage = false;
-  rememberMe = true;
-
-  checked() {
-    this.rememberMe = !this.rememberMe;
-  }
-
-  login(): void {
+  login() {
     this.auth.loginUser(this.loginForm.value)
       .subscribe(
         res => {
-          console.log();
-          const refreshToken: string = (res.results?.refreshToken) || '';
-          localStorage.setItem('refreshToken', refreshToken);
-          console.log(localStorage.getItem('refreshToken'))
+          const refreshToken = res.results?.refreshToken;
+          const accessToken = res.results?.accessToken;
+
+          if (refreshToken && accessToken) {
+            this.tokenStorage.setRefreshToken(refreshToken);
+            this.tokenStorage.setAccessToken(accessToken);
+            this.auth.isLoggedIn$.next(true);
+          }
         },
         err => {
-          console.error(err);
+          console.warn(err.error?.error.message);
         }
       )
   }
 }
+ 
