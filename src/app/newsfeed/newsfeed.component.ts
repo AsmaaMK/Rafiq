@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../shared/services/auth.service';
 import { TestingApiService } from '../shared/services/testing-api.service';
 
 @Component({
@@ -10,12 +11,17 @@ export class NewsfeedComponent implements OnInit {
 
   data = '';
   error = '';
-  constructor(private test: TestingApiService) { }
+  constructor(private test: TestingApiService, private auth: AuthService) { }
 
   ngOnInit(): void {
-    this.test.getPosts().subscribe(
+    // this.test.getPosts().subscribe(
+    //   res => this.data = res.toString(),
+    //   err => this.error = err.toString()
+    // )
+
+    this.auth.refreshAccessToken().subscribe(
       res => this.data = res.toString(),
-      err => this.error = err.toString()
+      err => this.error = err
     )
   }
 }

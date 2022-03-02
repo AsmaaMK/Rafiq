@@ -9,7 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoggingInterceptorServiceProvider } from './shared/http-interceptors/logging-interceptor.service';
 import { UnauthorizedComponent } from './shared/components/unauthorized/unauthorized.component';
 import { AsyncObservablePipeComponent } from './pipe.component';
-import { SetHeadersInterceptorServiceProvider } from './shared/http-interceptors/set-headers-intercepro.service';
+import { SetHeadersInterceptorServiceProvider } from './shared/http-interceptors/set-headers-interceptor.service';
 
 
 @NgModule({

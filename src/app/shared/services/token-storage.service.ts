@@ -8,7 +8,7 @@ import { BehaviorSubject, retry } from 'rxjs';
 })
 export class TokenStorageService {
   REFRESH_TOKEN_KEY = 'refreshToken';
-  ACCESS_TOKEN_KEY = 'accessToken';
+  ACCESS_TOKEN_KEY = 'access-token';
   
   rememberMe$ = new BehaviorSubject<boolean>(true);
 

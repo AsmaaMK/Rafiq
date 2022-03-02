@@ -64,8 +64,7 @@
               invalid:
                 emailOrUserName?.invalid && (emailOrUserName?.dirty || emailOrUserName?.touched)
             }"
-            >Username or Email</label
-          >
+          >Username or Email</label>
           <div
             class="invalid-message"
             *ngIf="
@@ -101,8 +100,7 @@
                 invalid:
                   password?.invalid && (password?.dirty || password?.touched)
               }"
-              >Password</label
-            >
+            >Password</label>
             <div
               class="invalid-message"
               *ngIf="
@@ -113,8 +111,14 @@
             </div>
           </div>
 
-          <span class="seen" (click)="togglePasswordType()">
-            <img [src]="seenIconPath" alt="" />
+          <span
+            class="seen"
+            (click)="togglePasswordType()"
+          >
+            <img
+              [src]="seenIconPath"
+              alt=""
+            />
           </span>
 
           <div class="password-options custom-checkbox">
@@ -127,17 +131,22 @@
                 [checked]="rememberMe$.value"
                 (click)="rememberMe$.next(rememberMeCheckBox.checked)"
               />
-              <label for="remember-me__checkbox" class="remember-me__label"
-                >Remember me</label
-              >
+              <label
+                for="remember-me__checkbox"
+                class="remember-me__label"
+              >Remember me</label>
             </div>
-            <a routerLink="/forget-password" class="forget-password"
-              >Forget password?</a
-            >
+            <a
+              routerLink="/forget-password"
+              class="forget-password"
+            >Forget password?</a>
           </div>
         </div>
 
-        <button type="submit" [disabled]="!loginForm.valid">Log in</button>
+        <button
+          type="submit"
+          [disabled]="!loginForm.valid"
+        >Log in</button>
       </div>
 
       <div class="switch">

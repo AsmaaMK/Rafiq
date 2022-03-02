@@ -1,4 +1,4 @@
-export * from './get-access-token-response';
+export * from './refresh-access-token-response';
 export * from './reset-password-response';
 export * from './reset-password-request';
 export * from './forgot-password-request';

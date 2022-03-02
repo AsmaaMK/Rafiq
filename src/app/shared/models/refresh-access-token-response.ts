@@ -1,4 +1,4 @@
-export type GetAccessTokenResponse = {
+export type RefreshAccessTokenResponse = {
   success: boolean;
   results?: {
     message: string;

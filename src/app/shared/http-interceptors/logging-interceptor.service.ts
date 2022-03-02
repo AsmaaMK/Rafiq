@@ -6,9 +6,9 @@ import { Observable, tap } from 'rxjs';
 export class LoggingInterceptorService implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log('request headers: ', req.headers);
+    console.log('Request headers: ', req.headers);
     // logs the request body before sending it to the backend
-    console.log('Request body:', req.body);
+    console.log('Request body: ', req.body);
 
     return next.handle(req).pipe(
       tap( event => {

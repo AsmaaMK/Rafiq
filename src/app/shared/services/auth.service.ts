@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { ForgotPasswordRequest, GetAccessTokenResponse, LoginRequest, LoginResponse, RegisterRequest, RegisterResponse, ResetPasswordRequest, ResetPasswordResponse } from '../models';
+import { ForgotPasswordRequest, RefreshAccessTokenResponse, LoginRequest, LoginResponse, RegisterRequest, RegisterResponse, ResetPasswordRequest, ResetPasswordResponse } from '../models';
 import { TokenStorageService } from './token-storage.service';
 
 const remotehost = 'https://62113b5701ccdac0741f933a.mockapi.io';
@@ -33,8 +33,8 @@ export class AuthService {
     return this.http.put<ResetPasswordResponse>(`${this.url}/resetPassword`, body);
   }
 
-  getAccessToken() {
-    return this.http.post<GetAccessTokenResponse>(`${this.url}/accessToken`, {
+  refreshAccessToken() {
+    return this.http.post<RefreshAccessTokenResponse>(`${this.url}/accessToken`, {
       'refreshToken': this.tokenStorage.getRefreshToken()
     });
   }
