@@ -9,19 +9,22 @@ import { TestingApiService } from '../shared/services/testing-api.service';
 })
 export class NewsfeedComponent implements OnInit {
 
-  data = '';
-  error = '';
+  data: any;
+  error: any;
   constructor(private test: TestingApiService, private auth: AuthService) { }
 
   ngOnInit(): void {
-    // this.test.getPosts().subscribe(
-    //   res => this.data = res.toString(),
-    //   err => this.error = err.toString()
-    // )
-
-    this.auth.refreshAccessToken().subscribe(
-      res => this.data = res.toString(),
-      err => this.error = err
+    this.test.getPosts().subscribe(
+      res => {
+        console.log('res of get post: ', res)
+        this.data = res.toString();
+      },
+      err => {
+        console.warn('error in get post: ', err)
+        this.error = err.toString();
+      }
     )
+
+    // this.auth.refreshAccessToken()
   }
 }
