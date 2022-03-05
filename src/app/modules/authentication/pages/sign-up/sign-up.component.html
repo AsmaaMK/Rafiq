@@ -1,0 +1,533 @@
+<div class="sign-up-page">
+  <section class="sign-up-social-section">
+    <div class="sign-up-social-section__desc">
+      <h1>
+        Create an <br />
+        &nbsp; account
+      </h1>
+      <p>Let's Create Your account to take tour to Rafiq and have some fun.</p>
+    </div>
+
+    <form class="sign-up-social-section__form">
+      <h2 class="sign-up-social-section__form__title">
+        <span class="or-social">Or </span>Sign up with
+      </h2>
+      <div class="logos">
+        <a href="#">
+          <img
+            class="google-logo"
+            src="../../../../../assets/logos/google.svg"
+            alt="google"
+          />
+        </a>
+        <a href="#">
+          <img
+            class="facebook-logo"
+            src="../../../../../assets/logos/facebook.svg"
+            alt="facebook"
+          />
+        </a>
+      </div>
+    </form>
+  </section>
+
+  <section class="sign-up-manual-section">
+    <form
+      class="sign-up-manual-section__form"
+      [formGroup]="signUpForm"
+      (ngSubmit)="signUp()"
+    >
+      <h2 class="sign-up-manual-section__form__title">
+        <span class="or-manual">Or<br /></span>Sign up
+      </h2>
+
+      <div class="sign-up-manual-section__form__fields">
+        <div class="name">
+          <div class="fn-input-field">
+            <input
+              class="fn-input"
+              id="first-name"
+              type="text"
+              formControlName="firstName"
+              (focus)="fnShowMessage = true"
+              (blur)="fnShowMessage = false"
+              [ngClass]="{
+                'input-touched': firstName?.dirty || firstName?.touched,
+                invalid:
+                  firstName?.invalid && (firstName?.dirty || firstName?.touched)
+              }"
+            />
+            <label
+              class="floating-label"
+              for="first-name"
+              [ngClass]="{
+                'label-touched': firstName?.dirty || firstName?.touched,
+                invalid:
+                  firstName?.invalid && (firstName?.dirty || firstName?.touched)
+              }"
+              >First Name</label
+            >
+          </div>
+
+          <div
+            class="invalid-message"
+            *ngIf="fnShowMessage && firstName?.dirty"
+          >
+            <ng-container
+              *ngIf="
+                signUpForm.get('firstName')?.hasError('required');
+                else elseif1
+              "
+            >
+              <p>First Name is required.</p>
+            </ng-container>
+            <ng-template #elseif1>
+              <ng-container
+                *ngIf="
+                  signUpForm.get('firstName')?.hasError('pattern');
+                  else elseif2
+                "
+              >
+                <p>First Name can contain only latin letters.</p>
+              </ng-container>
+            </ng-template>
+            <ng-template #elseif2>
+              <ng-container
+                *ngIf="
+                  signUpForm.get('firstName')?.hasError('minlength');
+                  else elseif3
+                "
+              >
+                <p>First Name must be at least 3 chars long.</p>
+              </ng-container>
+            </ng-template>
+            <ng-template #elseif3>
+              <ng-container
+                *ngIf="signUpForm.get('firstName')?.hasError('maxlength')"
+              >
+                <p>First Name can't be more than 35 char.</p>
+              </ng-container>
+            </ng-template>
+          </div>
+
+          <div class="ln-input-field">
+            <input
+              class="ln-input"
+              id="last-name"
+              type="text"
+              formControlName="lastName"
+              (focus)="lnShowMessage = true"
+              (blur)="lnShowMessage = false"
+              [ngClass]="{
+                'input-touched': lastName?.dirty || lastName?.touched,
+                invalid:
+                  lastName?.invalid && (lastName?.dirty || lastName?.touched)
+              }"
+            />
+            <label
+              class="floating-label"
+              for="last-name"
+              [ngClass]="{
+                'label-touched': lastName?.dirty || lastName?.touched,
+                invalid:
+                  lastName?.invalid && (lastName?.dirty || lastName?.touched)
+              }"
+              >Last Name</label
+            >
+          </div>
+
+          <div class="invalid-message" *ngIf="lnShowMessage && lastName?.dirty">
+            <ng-container
+              *ngIf="
+                signUpForm.get('lastName')?.hasError('required');
+                else elseif1
+              "
+            >
+              <p>Last Name is required.</p>
+            </ng-container>
+            <ng-template #elseif1>
+              <ng-container
+                *ngIf="
+                  signUpForm.get('lastName')?.hasError('pattern');
+                  else elseif2
+                "
+              >
+                <p>Last Name can contain only latin letters.</p>
+              </ng-container>
+            </ng-template>
+            <ng-template #elseif2>
+              <ng-container
+                *ngIf="
+                  signUpForm.get('lastName')?.hasError('minlength');
+                  else elseif3
+                "
+              >
+                <p>Last Name must be at least 3 chars long.</p>
+              </ng-container>
+            </ng-template>
+            <ng-template #elseif3>
+              <ng-container
+                *ngIf="signUpForm.get('lastName')?.hasError('maxlength')"
+              >
+                <p>Last Name can't be more than 35 chars.</p>
+              </ng-container>
+            </ng-template>
+          </div>
+        </div>
+
+        <div class="username-input-field">
+          <div class="tooltip">
+            <img src="../../../../../assets/icons/info.svg" alt="" />
+            <p class="message">Username can contain lower case letters, numbers and underscores, begin with lower case letter. And its length should be between 3 and 35.</p>
+          </div>
+          <input
+            class="username-input"
+            id="username"
+            type="text"
+            formControlName="userName"
+            (focus)="unShowMessage = true"
+            (blur)="unShowMessage = false"
+            [ngClass]="{
+              'input-touched': userName?.dirty || userName?.touched,
+              invalid:
+                userName?.invalid && (userName?.dirty || userName?.touched)
+            }"
+          />
+          <label
+            class="floating-label"
+            for="username"
+            [ngClass]="{
+              'label-touched': userName?.dirty || userName?.touched,
+              invalid:
+                userName?.invalid && (userName?.dirty || userName?.touched)
+            }"
+            >Username</label
+          >
+
+          <div class="invalid-message" *ngIf="unShowMessage && userName?.dirty">
+            <ng-container
+              *ngIf="
+                signUpForm.get('userName')?.hasError('required');
+                else elseif1
+              "
+            >
+              <p>First Name is required.</p>
+            </ng-container>
+            <ng-template #elseif1>
+              <ng-container
+                *ngIf="
+                  signUpForm.get('userName')?.hasError('beginWithChar');
+                  else elseif2
+                "
+              >
+                <p>Username must begin with a small latin letter.</p>
+              </ng-container>
+            </ng-template>
+            <ng-template #elseif2>
+              <ng-container
+                *ngIf="
+                  signUpForm.get('userName')?.hasError('pattern');
+                  else elseif3
+                "
+              >
+                <p>
+                  Username can contain small latin letters, numbers, and
+                  underscores.
+                </p>
+              </ng-container>
+            </ng-template>
+            <ng-template #elseif3>
+              <ng-container
+                *ngIf="
+                  signUpForm.get('userName')?.hasError('minlength');
+                  else elseif4
+                "
+              >
+                <p>Username must be at least 3 chars long.</p>
+              </ng-container>
+            </ng-template>
+            <ng-template #elseif4>
+              <ng-container
+                *ngIf="signUpForm.get('userName')?.hasError('maxlength')"
+              >
+                <p>Username can't be more than 35 chars.</p>
+              </ng-container>
+            </ng-template>
+          </div>
+        </div>
+
+        <div class="email-input-field">
+          <input
+            class="email-input"
+            id="email"
+            type="email"
+            formControlName="email"
+            (focus)="emailShowMessage = true"
+            (blur)="emailShowMessage = false"
+            [ngClass]="{
+              'input-touched': email?.dirty || email?.touched,
+              invalid: email?.invalid && (email?.dirty || email?.touched)
+            }"
+          />
+          <label
+            class="floating-label"
+            for="email"
+            [ngClass]="{
+              'label-touched': email?.dirty || email?.touched,
+              invalid: email?.invalid && (email?.dirty || email?.touched)
+            }"
+            >Email</label
+          >
+
+          <div class="invalid-message" *ngIf="emailShowMessage && email?.dirty">
+            <ng-container
+              *ngIf="
+                signUpForm.get('email')?.hasError('required');
+                else elseif1
+              "
+            >
+              <p>Email is required.</p>
+            </ng-container>
+            <ng-template #elseif1>
+              <ng-container *ngIf="signUpForm.get('email')?.hasError('email')">
+                <p>Invalid email address.</p>
+              </ng-container>
+            </ng-template>
+          </div>
+        </div>
+
+        <div class="password-component">
+          <div class="tooltip">
+            <img src="../../../../../assets/icons/info.svg" alt="" />
+            <p class="message">Must have at least 8 characters</p>
+          </div>
+
+          <div class="password-input-field">
+            <input
+              class="password-input"
+              id="password"
+              [type]="passwordType ? 'text' : 'password'"
+              formControlName="password"
+              (focus)="passwordShowMessage = true"
+              (blur)="passwordShowMessage = false"
+              [ngClass]="{
+                'input-touched': password?.dirty || password?.touched,
+                invalid:
+                  password?.invalid && (password?.dirty || password?.touched)
+              }"
+            />
+            <label
+              class="floating-label"
+              for="password"
+              [ngClass]="{
+                'label-touched': password?.dirty || password?.touched,
+                invalid:
+                  password?.invalid && (password?.dirty || password?.touched)
+              }"
+              >Password</label
+            >
+
+            <div
+              class="invalid-message"
+              *ngIf="passwordShowMessage && password?.dirty"
+            >
+              <ng-container
+                *ngIf="
+                  signUpForm.get('password')?.hasError('required');
+                  else elseif1
+                "
+              >
+                <p>Password is required.</p>
+              </ng-container>
+              <ng-template #elseif1>
+                <ng-container
+                  *ngIf="
+                    signUpForm.get('password')?.hasError('minlength');
+                    else elseif2
+                  "
+                >
+                  <p>Password must be at least 8 chars.</p>
+                </ng-container>
+              </ng-template>
+              <ng-template #elseif2>
+                <ng-container
+                  *ngIf="signUpForm.get('password')?.hasError('maxlength')"
+                >
+                  <p>Password can't be more than 64 char.</p>
+                </ng-container>
+              </ng-template>
+            </div>
+          </div>
+
+          <span class="seen" (click)="togglePasswordType()">
+            <img [src]="passwordIconPath" alt="" />
+          </span>
+        </div>
+
+        <div class="password-component">
+          <div class="tooltip">
+            <img src="../../../../../assets/icons/info.svg" alt="" />
+            <p class="message">Must have at least 8 characters</p>
+          </div>
+
+          <div class="password-input-field">
+            <input
+              class="password-input"
+              id="confirm-password"
+              [type]="confirmPasswordType ? 'text' : 'password'"
+              formControlName="confirmPassword"
+              (focus)="confirmPasswordShowMessage = true"
+              (blur)="confirmPasswordShowMessage = false"
+              [ngClass]="{
+                'input-touched':
+                  confirmPassword?.dirty || confirmPassword?.touched,
+                invalid:
+                  signUpForm.hasError('matchPasswords') &&
+                  (confirmPassword?.dirty || confirmPassword?.touched)
+              }"
+            />
+
+            <label
+              class="floating-label"
+              for="confirm-password"
+              [ngClass]="{
+                'label-touched':
+                  confirmPassword?.dirty || confirmPassword?.touched,
+                invalid:
+                  signUpForm.hasError('matchPasswords') &&
+                  (confirmPassword?.dirty || confirmPassword?.touched)
+              }"
+              >Confirm Password</label
+            >
+
+            <div
+              class="invalid-message"
+              *ngIf="
+                signUpForm.hasError('matchPasswords') &&
+                (confirmPassword?.dirty || confirmPassword?.touched) &&
+                confirmPasswordShowMessage
+              "
+            >
+              <p>Password doesn't match.</p>
+            </div>
+          </div>
+
+          <span class="seen" (click)="toggleConfirmPasswordType()">
+            <img [src]="confirmpasswordIconPath" alt="" />
+          </span>
+        </div>
+
+        <div class="country-input-field">
+          <select
+            id="country"
+            name="country"
+            formControlName="country"
+            (focus)="countryShowMessage = true"
+            (blur)="countryShowMessage = false"
+            [ngClass]="{
+              'input-touched': country?.dirty || country?.touched,
+              invalid: country?.invalid && (country?.dirty || country?.touched)
+            }"
+          >
+            <option *ngFor="let country of allCountries" value="{{ country }}">
+              {{ country }}
+            </option>
+          </select>
+          <label
+            class="floating-label"
+            for="country"
+            [ngClass]="{
+              'label-touched': country?.dirty || country?.touched,
+              invalid: country?.invalid && (country?.dirty || country?.touched)
+            }"
+            >Country</label
+          >
+          <div
+            class="invalid-message"
+            *ngIf="countryShowMessage && country?.dirty"
+          >
+            <ng-container
+              *ngIf="signUpForm.get('country')?.hasError('required')"
+            >
+              <p>Country is required.</p>
+            </ng-container>
+          </div>
+        </div>
+
+        <div class="gender-input-field">
+          <select
+            id="gender"
+            name="gender"
+            formControlName="gender"
+            (focus)="genderShowMessage = true"
+            (blur)="genderShowMessage = false"
+            [ngClass]="{
+              'input-touched': gender?.dirty || gender?.touched,
+              invalid: gender?.invalid && (gender?.dirty || gender?.touched)
+            }"
+          >
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+          </select>
+          <label
+            class="floating-label"
+            for="gender"
+            [ngClass]="{
+              'label-touched': gender?.dirty || gender?.touched,
+              invalid: gender?.invalid && (gender?.dirty || gender?.touched)
+            }"
+            >Gender</label
+          >
+          <div
+            class="invalid-message"
+            *ngIf="genderShowMessage && gender?.dirty"
+          >
+            <ng-container
+              *ngIf="signUpForm.get('gender')?.hasError('required')"
+            >
+              <p>Gender is required.</p>
+            </ng-container>
+          </div>
+        </div>
+
+        <div class="dob-input-field">
+          <input
+            id="date"
+            type="date"
+            min="1900-01-01"
+            max="2010-12-31"
+            formControlName="dateOfBirth"
+            (focus)="dateShowMessage = true"
+            (blur)="dateShowMessage = false"
+            [ngClass]="{
+              'input-touched': dateOfBirth?.dirty || dateOfBirth?.touched,
+              invalid: dateOfBirth?.invalid && (dateOfBirth?.dirty || dateOfBirth?.touched)
+            }"
+          />
+          <label
+            class="floating-label"
+            for="date"
+            [ngClass]="{
+              'label-touched': dateOfBirth?.dirty || dateOfBirth?.touched,
+              invalid: dateOfBirth?.invalid && (dateOfBirth?.dirty || dateOfBirth?.touched)
+            }"
+            >Date of Birth</label
+          >
+          <div class="invalid-message" *ngIf="dateShowMessage && dateOfBirth?.dirty">
+            <ng-container *ngIf="signUpForm.get('dateOfBirth')?.hasError('required')">
+              <p>date of birth is required.</p>
+            </ng-container>
+          </div>
+        </div>
+
+        <button type="submit" [disabled]="!signUpForm.valid">Sign up</button>
+      </div>
+
+      <div class="switch">
+        <span>Have an account? </span>
+        <a routerLink="/login">Log in</a>
+      </div>
+    </form>
+  </section>
+</div>

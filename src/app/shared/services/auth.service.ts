@@ -39,6 +39,16 @@ export class AuthService {
     return this.http.put<ResetPasswordResponse>(`${this.url}/resetPassword`, body);
   }
 
+
+  refreshToken(token: string) {
+    let headers = new HttpHeaders()
+    headers = headers.append(this.tokenStorage.REFRESH_TOKEN_KEY, token);
+
+    return this.http.post<RefreshAccessTokenResponse>(`${this.url}/accessToken`, null, {
+      headers: headers
+    })
+  }
+
   refreshAccessToken(): void {
     let headers = new HttpHeaders();
     const refreshToken = this.tokenStorage.getRefreshToken();

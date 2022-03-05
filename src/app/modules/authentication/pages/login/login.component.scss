@@ -1,0 +1,28 @@
+@use "../../../../../styles/pages/signup-login";
+@use "../../../../../styles/helpers/helpers-dir" as *;
+
+.password-options {
+  width: 100%;
+  position: absolute;
+  bottom: -3.5em;
+  color: $primary;
+
+  @include padding(x);
+  @include flex(row, space-between);
+
+  /* checkbox */
+  .remember-me {
+    input {
+      margin: 0;
+    }
+  }
+
+  a {
+    color: $primary;
+    font-size: 1.2rem;
+  }
+}
+
+button[type="submit"] {
+  margin-top: 4.5em;
+}
