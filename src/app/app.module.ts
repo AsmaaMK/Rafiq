@@ -8,7 +8,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LoggingInterceptorServiceProvider } from './shared/http-interceptors/logging-interceptor.service';
 import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
-import { AsyncObservablePipeComponent } from './test.component';
+import { TestComponent } from './test.component';
 import { SetHeadersInterceptorServiceProvider } from './shared/http-interceptors/set-headers-interceptor.service';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { LoadingComponent } from './components/loading/loading.component';
@@ -19,7 +19,7 @@ import { LoadingComponent } from './components/loading/loading.component';
     AppComponent,
     NotFoundComponent,
     UnauthorizedComponent,
-    AsyncObservablePipeComponent,
+    TestComponent,
     AboutUsComponent,
     LoadingComponent
   ],

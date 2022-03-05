@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AsyncObservablePipeComponent } from './test.component';
+import { TestComponent } from './test.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
 import { AuthGuard } from './shared/guards/auth.guard';
@@ -16,7 +16,7 @@ const routes: Routes = [
   },
   {
     path: 'test',
-    component:  AsyncObservablePipeComponent
+    component:  TestComponent
   },
   { path: 'app', loadChildren: () => import('./modules/main/main.module').then(m => m.MainModule) },
   {
