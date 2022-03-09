@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TestingApiService } from 'src/app/shared/services/testing-api.service';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private testapi: TestingApiService) { }
 
   ngOnInit(): void {
+    // this.testapi.getPosts().subscribe(
+    //   res => {
+    //     console.log('hi');
+    //   },
+    //   err => {
+    //     console.error('bye', err);
+    //   }
+    // )
+
   }
 
 }

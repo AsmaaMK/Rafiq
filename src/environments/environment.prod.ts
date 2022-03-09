@@ -1,3 +1,6 @@
+import { hosts } from "./hosts";
+
 export const environment = {
-  production: true
+  production: true,
+  apiUrl: hosts.remotehost
 };

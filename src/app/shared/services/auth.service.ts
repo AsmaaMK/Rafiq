@@ -4,14 +4,13 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, throwError } from 'rxjs';
 import { ForgotPasswordRequest, RefreshAccessTokenResponse, LoginRequest, LoginResponse, RegisterRequest, RegisterResponse, ResetPasswordRequest, ResetPasswordResponse } from '../models';
 import { TokenStorageService } from './token-storage.service';
-
-const localhost = 'http://localhost:3000';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private url = `${localhost}/api/v1/auth`;
+  private url = `${environment.apiUrl}/api/v1/auth`;
 
   isLoggedIn$ = new BehaviorSubject<boolean>(!!this.tokenStorage.getRefreshToken());
 

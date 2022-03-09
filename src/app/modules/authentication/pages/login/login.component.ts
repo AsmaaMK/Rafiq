@@ -69,7 +69,7 @@ export class LoginComponent implements OnInit {
             this.auth.isLoggedIn$.next(true);
           }
 
-          this.router.navigate(['/newsfeed']);
+          this.router.navigate(['/app/home']);
         },
         err => {
           console.warn(err.error?.error.message);

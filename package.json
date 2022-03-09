@@ -8,7 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "buildProd": "ng build --base-href=/frontend/",
-    "doc": "compodoc -p tsconfig.doc.json -s"
+    "doc": "compodoc -p tsconfig.doc.json -s --watch"
   },
   "private": true,
   "dependencies": {
