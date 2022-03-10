@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/shared/services/auth.service';
 import { TestingApiService } from 'src/app/shared/services/testing-api.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { TestingApiService } from 'src/app/shared/services/testing-api.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private testapi: TestingApiService) { }
+  constructor(private testapi: TestingApiService, private auth: AuthService) { }
 
   ngOnInit(): void {
     // this.testapi.getPosts().subscribe(
@@ -20,6 +21,10 @@ export class HomeComponent implements OnInit {
     //   }
     // )
 
+  }
+
+  logout() {
+    this.auth.logoutUser();
   }
 
 }

@@ -6,6 +6,7 @@ import { matchPasswords } from 'src/app/shared/validators/match-passwords.direct
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { Router } from '@angular/router';
 import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-sign-up',
@@ -15,6 +16,7 @@ import { TokenStorageService } from 'src/app/shared/services/token-storage.servi
 export class SignUpComponent implements OnInit {
   signUpForm!: FormGroup;
   allCountries!: string[];
+  sendingRequest$ = new BehaviorSubject(false);
 
   constructor(private countries: CountriesService, private auth: AuthService, private router: Router, private tokenStorage: TokenStorageService) {}
 
@@ -122,6 +124,8 @@ export class SignUpComponent implements OnInit {
 
 
   signUp() {
+    this.sendingRequest$.next(true);
+
     this.auth.registerUser(this.signUpForm.value).subscribe(
       res => {
         const refreshToken = res.results?.refreshToken;
@@ -137,6 +141,10 @@ export class SignUpComponent implements OnInit {
       },
       err => {
         console.warn(err.error?.error.message);
+        this.sendingRequest$.next(false);
+      },
+      () => {
+        this.sendingRequest$.next(false);
       }
     )
   }

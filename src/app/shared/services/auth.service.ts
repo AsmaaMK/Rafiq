@@ -27,7 +27,7 @@ export class AuthService {
   logoutUser(): void {
     this.tokenStorage.removeAccessToken();
     this.tokenStorage.removeRefreshToken();
-    this.router.navigate(['/unauthorized']);
+    this.router.navigate(['/auth/login']);
   }
 
   forgetPassword(body: ForgotPasswordRequest) {
