@@ -3,7 +3,7 @@
 
 [class$="-manual-section"] {
   min-height: calc(100vh - 50vw); /* view height - height of social section */
-  background-image: url("../../../assets/images/World.svg");
+  background-image: url("../../../assets/auth-module/images/World.svg");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: 125vw;
@@ -71,26 +71,26 @@
   .fn-input,
   .ln-input,
   .username-input {
-    background-image: url("../../../assets/icons/User\ icon.svg");
+    background-image: url("../../../assets/auth-module/icons/User\ icon.svg");
   }
 
   .email-input {
-    background-image: url("../../../assets/icons/email.svg");
+    background-image: url("../../../assets/auth-module/icons/email.svg");
   }
 
   .password-input {
-    background-image: url("../../../assets/icons/password.svg");
+    background-image: url("../../../assets/auth-module/icons/password.svg");
   }
 
   .country-input-field {
     select {
-      background-image: url("../../../assets/icons/country.svg");
+      background-image: url("../../../assets/auth-module/icons/country.svg");
     }
   }
 
   .gender-input-field {
     select {
-      background-image: url("../../../assets/icons/gender.svg");
+      background-image: url("../../../assets/auth-module/icons/gender.svg");
     }
   }
 

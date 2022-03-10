@@ -10,6 +10,7 @@ import { ForgetPasswordComponent } from './pages/forget-password/forget-password
 import { ReactiveFormsModule } from '@angular/forms';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 import { ResendLinkComponent } from './pages/resend-link/resend-link.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { ResendLinkComponent } from './pages/resend-link/resend-link.component';
   imports: [
     CommonModule,
     AuthenticationRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ]
 })
 export class AuthenticationModule { }

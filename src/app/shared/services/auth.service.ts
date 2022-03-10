@@ -17,7 +17,7 @@ export class AuthService {
   constructor(private http: HttpClient, private tokenStorage: TokenStorageService, private router: Router) { }
 
   registerUser(body: RegisterRequest) {
-    this.http.post<RegisterResponse>(`${this.url}/register`, body);
+    return this.http.post<RegisterResponse>(`${this.url}/register`, body);
   }
 
   loginUser(body: LoginRequest) {

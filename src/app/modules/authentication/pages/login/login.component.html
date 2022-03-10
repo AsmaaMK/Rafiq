@@ -1,4 +1,5 @@
 <div class="login-page">
+  <app-loading-spinner *ngIf="sendingRequest.value"></app-loading-spinner>
   <section class="login-social-section">
     <div class="login-social-section__desc">
       <h1>
@@ -16,14 +17,14 @@
         <a href="#">
           <img
             class="google-logo"
-            src="../../../../../assets/logos/google.svg"
+            src="../../../../../assets/auth-module/logos/google.svg"
             alt="google"
           />
         </a>
         <a href="#">
           <img
             class="facebook-logo"
-            src="../../../../../assets/logos/facebook.svg"
+            src="../../../../../assets/auth-module/logos/facebook.svg"
             alt="facebook"
           />
         </a>
@@ -137,7 +138,7 @@
               >Remember me</label>
             </div>
             <a
-              routerLink="/forget-password"
+              routerLink="/auth/forget-password"
               class="forget-password"
             >Forget password?</a>
           </div>
@@ -151,7 +152,7 @@
 
       <div class="switch">
         <span>Don't have an account? </span>
-        <a routerLink="/sign-up">Sign up</a>
+        <a routerLink="/auth/sign-up">Sign up</a>
       </div>
     </form>
   </section>

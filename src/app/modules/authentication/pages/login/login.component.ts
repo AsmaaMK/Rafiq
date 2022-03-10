@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
 import { emailOrUsername } from 'src/app/shared/validators/email-or-username.directive';
@@ -13,10 +14,11 @@ import { emailOrUsername } from 'src/app/shared/validators/email-or-username.dir
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   fieldTextType = false;
-  seenIconPath = '../../../../../assets/icons/visibility.svg';
+  seenIconPath = '../../../../../assets/auth-module/icons/visibility.svg';
   unShowMessage = false;
   passwordShowMessage = false;
   rememberMe = true;
+  sendingRequest = new BehaviorSubject(false);
 
   constructor(private auth: AuthService, private tokenStorage: TokenStorageService, private router: Router) { }
 
@@ -52,11 +54,13 @@ export class LoginComponent implements OnInit {
     this.fieldTextType = !this.fieldTextType;
 
     this.seenIconPath = this.fieldTextType
-      ? '../../../../../assets/icons/Seen.svg'
-      : '../../../../../assets/icons/visibility.svg';
+      ? '../../../../../assets/auth-module/icons/Seen.svg'
+      : '../../../../../assets/auth-module/icons/visibility.svg';
   }
 
   login() {
+    this.sendingRequest.next(true);
+    
     this.auth.loginUser(this.loginForm.value)
       .subscribe(
         res => {
@@ -73,6 +77,10 @@ export class LoginComponent implements OnInit {
         },
         err => {
           console.warn(err.error?.error.message);
+          this.sendingRequest.next(false);
+        },
+        () => {
+          this.sendingRequest.next(false);
         }
       )
   }

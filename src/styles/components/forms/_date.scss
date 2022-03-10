@@ -5,7 +5,7 @@
   position: relative;
 
   input {
-    background-image: url("../../../assets/icons/calander.svg");
+    background-image: url("../../../assets/auth-module/icons/calander.svg");
     padding-left: 3em;
     color: transparent !important;
     background-color: $neutral-lighter;
@@ -25,7 +25,7 @@
     &::-webkit-calendar-picker-indicator {
       opacity: 0;
       display: block;
-      background: url("../../../assets/icons/calander.svg") no-repeat !important;
+      background: url("../../../assets/auth-module/icons/calander.svg") no-repeat !important;
       width: 20px;
       height: 20px;
       -moz-appearance: unset;

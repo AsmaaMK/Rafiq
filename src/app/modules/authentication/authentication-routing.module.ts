@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { NotFoundComponent } from '../../components/not-found/not-found.component';
+import { NotFoundComponent } from '../../shared/pages/not-found/not-found.component';
 
 import { AuthenticationComponent } from './authentication.component';
 import { ForgetPasswordComponent } from './pages/forget-password/forget-password.component';

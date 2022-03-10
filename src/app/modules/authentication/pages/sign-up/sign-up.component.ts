@@ -4,6 +4,8 @@ import { beginWithChar } from 'src/app/shared/validators/begin-with-char.directi
 import { CountriesService } from 'src/app/shared/services/countries.service';
 import { matchPasswords } from 'src/app/shared/validators/match-passwords.directive';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { Router } from '@angular/router';
+import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -14,7 +16,7 @@ export class SignUpComponent implements OnInit {
   signUpForm!: FormGroup;
   allCountries!: string[];
 
-  constructor(private countries: CountriesService, private auth: AuthService) {}
+  constructor(private countries: CountriesService, private auth: AuthService, private router: Router, private tokenStorage: TokenStorageService) {}
 
   ngOnInit(): void {
     this.signUpForm = new FormGroup(
@@ -89,23 +91,23 @@ export class SignUpComponent implements OnInit {
   
   passwordType = false;
   confirmPasswordType = false;
-  passwordIconPath = '../../../../../assets/icons/visibility.svg';
-  confirmpasswordIconPath = '../../../../../assets/icons/visibility.svg';
+  passwordIconPath = '../../../../../assets/auth-module/icons/visibility.svg';
+  confirmpasswordIconPath = '../../../../../assets/auth-module/icons/visibility.svg';
 
   togglePasswordType() {
     this.passwordType = !this.passwordType;
 
     this.passwordIconPath = this.passwordType
-      ? '../../../../../assets/icons/Seen.svg'
-      : '../../../../../assets/icons/visibility.svg';
+      ? '../../../../../assets/auth-module/icons/Seen.svg'
+      : '../../../../../assets/auth-module/icons/visibility.svg';
   }
 
   toggleConfirmPasswordType() {
     this.confirmPasswordType = !this.confirmPasswordType;
 
     this.confirmpasswordIconPath = this.confirmPasswordType
-    ? '../../../../../assets/icons/Seen.svg'
-      : '../../../../../assets/icons/visibility.svg';
+    ? '../../../../../assets/auth-module/icons/Seen.svg'
+      : '../../../../../assets/auth-module/icons/visibility.svg';
   }
   
   fnShowMessage = false;
@@ -120,6 +122,22 @@ export class SignUpComponent implements OnInit {
 
 
   signUp() {
-    this.auth.registerUser(this.signUpForm.value)
+    this.auth.registerUser(this.signUpForm.value).subscribe(
+      res => {
+        const refreshToken = res.results?.refreshToken;
+        const accessToken = res.results?.accessToken;
+
+        if (refreshToken && accessToken) {
+          this.tokenStorage.setRefreshToken(refreshToken);
+          this.tokenStorage.setAccessToken(accessToken);
+          this.auth.isLoggedIn$.next(true);
+        }
+
+        this.router.navigate(['/app/home']);
+      },
+      err => {
+        console.warn(err.error?.error.message);
+      }
+    )
   }
 }

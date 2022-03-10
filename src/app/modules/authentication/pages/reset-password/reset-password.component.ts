@@ -14,8 +14,8 @@ export class ResetPasswordComponent implements OnInit {
 
   passwordType = false;
   confirmPasswordType = false;
-  passwordIconPath = '../../../../../assets/icons/visibility.svg';
-  confirmpasswordIconPath = '../../../../../assets/icons/visibility.svg';
+  passwordIconPath = '../../../../../assets/auth-module/icons/visibility.svg';
+  confirmpasswordIconPath = '../../../../../assets/auth-module/icons/visibility.svg';
 
   constructor(private route: ActivatedRoute, private auth: AuthService, private router: Router) { }
 
@@ -45,16 +45,16 @@ export class ResetPasswordComponent implements OnInit {
     this.passwordType = !this.passwordType;
 
     this.passwordIconPath = this.passwordType
-      ? '../../../../../assets/icons/Seen.svg'
-      : '../../../../../assets/icons/visibility.svg';
+      ? '../../../../../assets/auth-module/icons/Seen.svg'
+      : '../../../../../assets/auth-module/icons/visibility.svg';
   }
 
   toggleConfirmPasswordType() {
     this.confirmPasswordType = !this.confirmPasswordType;
 
     this.confirmpasswordIconPath = this.confirmPasswordType
-      ? '../../../../../assets/icons/Seen.svg'
-      : '../../../../../assets/icons/visibility.svg';
+      ? '../../../../../assets/auth-module/icons/Seen.svg'
+      : '../../../../../assets/auth-module/icons/visibility.svg';
   }
 
   passwordShowMessage = false;
