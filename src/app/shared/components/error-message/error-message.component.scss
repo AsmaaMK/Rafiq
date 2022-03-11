@@ -2,7 +2,6 @@
 @use "~../../../../../../styles/helpers/mixins" as *;
 
 .overlay {
-  // display: none;
   @include flex;
   position: fixed;
   z-index: 10000;
@@ -10,13 +9,29 @@
   height: 100vh;
   top: 0;
   left: 0;
-  background-color: rgba($secondary, 0.5);
-  border-radius: 500px;
   transform: scale(0);
   @include animation;
 
   &.show {
-    transform: scale(1.5);
+    transform: scale(1);
+
+    @include respond-to(medium) {
+      transform: scale(1.2);
+    }
+  }
+
+  &::before {
+    content: "";
+    width: 150vw;
+    height: 150vh;
+    position: fixed;
+    z-index: -500;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    border-radius: 500px;
+    background-color: rgba($secondary, 0.5);
   }
 
   .message-box {
@@ -61,7 +76,7 @@
 
       &:focus,
       &:hover {
-        background-color: rgba(white, 0.5       );
+        background-color: rgba(white, 0.5);
       }
 
       img {
