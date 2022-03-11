@@ -1,23 +1,31 @@
-
-  <div class="overlay" [ngClass]="{'show': show.value}">
-    <div class="message-box">
-      <div class="status">
-        <img 
-          src="../../../../assets/shared/error.svg" 
-          alt="error"
-          *ngIf="!status"
-        >
-        <img 
-          src="../../../../assets/shared/correct.svg" 
-          alt="success"
-          *ngIf="status"
-        >
-      </div>
-    
-      <p class="message">{{message | capitalize}}</p>
-    
-      <button class="close" (click)="close()">
-        <img src="../../../../assets/shared/close.svg" alt="close">
-      </button>
+<div
+  class="overlay"
+  [ngClass]="{'show': show.value}"
+>
+  <div class="message-box">
+    <div class="status">
+      <img
+        src="../../../../assets/shared/error.svg"
+        alt="error"
+        *ngIf="!status"
+      >
+      <img
+        src="../../../../assets/shared/correct.svg"
+        alt="success"
+        *ngIf="status"
+      >
     </div>
+
+    <p class="message">{{message | capitalize}}</p>
+
+    <button
+      class="close"
+      (click)="close()"
+    >
+      <img
+        src="../../../../assets/shared/close.svg"
+        alt="close"
+      >
+    </button>
   </div>
+</div>

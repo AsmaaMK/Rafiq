@@ -19,8 +19,8 @@ export class LoginComponent implements OnInit {
   passwordShowMessage = false;
   rememberMe = true;
   sendingRequest = new BehaviorSubject(false);
-  showError = new BehaviorSubject(true);
-  errorMessage = 'email, username or password is not correct';
+  showError = new BehaviorSubject(false);
+  errorMessage = '';
   
 
   constructor(private auth: AuthService, private tokenStorage: TokenStorageService, private router: Router) { }

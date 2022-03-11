@@ -4,15 +4,17 @@
 .overlay {
   @include flex;
   position: fixed;
-  z-index: 10000;
+  z-index: 1000;
   width: 100vw;
   height: 100vh;
-  top: 0;
-  left: 0;
+  right: 0;
+  bottom: 0;
   transform: scale(0);
+  opacity: 0;
   @include animation;
 
   &.show {
+    opacity: 1;
     transform: scale(1);
 
     @include respond-to(medium) {
@@ -20,20 +22,27 @@
     }
   }
 
-  &::before {
-    content: "";
-    $width: max(150vw, 150vh);
-    width: $width;
-    height: $width;
-    position: fixed;
-    z-index: -500;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-
-    border-radius: 500%;
-    background-color: rgba($secondary, 0.5);
+  @include respond-to(medium) {
+    width: auto;
+    height: auto;
+    right: 10vw;
+    bottom: 10vh;
   }
+
+  // &::before {
+  //   content: "";
+  //   $width: max(150vw, 150vh);
+  //   width: $width;
+  //   height: $width;
+  //   position: fixed;
+  //   z-index: -500;
+  //   left: 50%;
+  //   top: 50%;
+  //   transform: translate(-50%, -50%);
+
+  //   border-radius: 500%;
+  //   background-color: rgba($secondary, 0.5);
+  // }
 
   .message-box {
     width: 80%;
@@ -47,6 +56,7 @@
     .status {
       width: 25px;
       height: 25px;
+      aspect-ratio: 1;
       margin: 1em;
       justify-self: flex-start;
 
@@ -65,6 +75,7 @@
     button.close {
       width: 35px;
       height: 35px;
+      aspect-ratio: 1;
       margin: 0.5em;
       margin-left: auto;
 
