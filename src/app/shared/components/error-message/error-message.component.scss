@@ -22,15 +22,16 @@
 
   &::before {
     content: "";
-    width: 150vw;
-    height: 150vh;
+    $width: max(150vw, 150vh);
+    width: $width;
+    height: $width;
     position: fixed;
     z-index: -500;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
 
-    border-radius: 500px;
+    border-radius: 500%;
     background-color: rgba($secondary, 0.5);
   }
 
