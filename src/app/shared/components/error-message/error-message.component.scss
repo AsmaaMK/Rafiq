@@ -2,17 +2,21 @@
 @use "~../../../../../../styles/helpers/mixins" as *;
 
 .overlay {
-  display: none;
+  // display: none;
+  @include flex;
   position: fixed;
   z-index: 10000;
   width: 100vw;
   height: 100vh;
   top: 0;
   left: 0;
-  background-color: rgba($primary, 0.5);
+  background-color: rgba($secondary, 0.5);
+  border-radius: 500px;
+  transform: scale(0);
+  @include animation;
 
   &.show {
-    @include flex;
+    transform: scale(1.5);
   }
 
   .message-box {
