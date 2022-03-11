@@ -1,7 +1,6 @@
 @use "../../../../styles/helpers/mixins" as *;
 
 .overlay {
-  display: none;
   background-color: #e8deebaa;
   position: fixed;
   z-index: 10000;
@@ -10,15 +9,7 @@
   top: 0;
   left: 0;
 
-    @include flex;
-
-  &.show {
-    @include flex;
-  }
-
-  // &.hide {
-  //   display: none;
-  // }
+  @include flex;
 }
 
 .spinner {

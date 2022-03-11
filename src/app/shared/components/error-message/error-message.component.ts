@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-error-message',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ErrorMessageComponent implements OnInit {
 
-  constructor() { }
+  @Input() show = new BehaviorSubject(false);
+  @Input() status = false;
+  @Input() message = '';
 
-  ngOnInit(): void {
+  constructor(public elementRef: ElementRef) { }
+
+  ngOnInit(): void {}
+
+  close() {
+    this.show.next(false);
   }
 
 }

@@ -11,6 +11,7 @@ import { TestComponent } from './test.component';
 
 import { LoggingInterceptorServiceProvider } from './shared/http-interceptors/logging-interceptor.service';
 import { SetHeadersInterceptorServiceProvider } from './shared/http-interceptors/set-headers-interceptor.service';
+import { SharedModule } from './shared/shared.module';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { SetHeadersInterceptorServiceProvider } from './shared/http-interceptors
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    SharedModule
   ],
   providers: [
     SetHeadersInterceptorServiceProvider,

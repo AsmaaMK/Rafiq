@@ -19,6 +19,9 @@ export class LoginComponent implements OnInit {
   passwordShowMessage = false;
   rememberMe = true;
   sendingRequest = new BehaviorSubject(false);
+  showError = new BehaviorSubject(false);
+  errorMessage = '';
+  
 
   constructor(private auth: AuthService, private tokenStorage: TokenStorageService, private router: Router) { }
 
@@ -76,6 +79,8 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/app/home']);
         },
         err => {
+          this.errorMessage = err.error?.error.message;
+          this.showError.next(true);
           console.warn(err.error?.error.message);
           this.sendingRequest.next(false);
         },

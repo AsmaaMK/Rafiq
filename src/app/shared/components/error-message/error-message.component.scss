@@ -1,0 +1,68 @@
+@use "~../../../../../../styles/helpers/colors" as *;
+@use "~../../../../../../styles/helpers/mixins" as *;
+
+.overlay {
+  display: none;
+  position: fixed;
+  z-index: 10000;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background-color: rgba($primary, 0.5);
+
+  &.show {
+    @include flex;
+  }
+
+  .message-box {
+    width: 80%;
+    max-width: 400px;
+    display: flex;
+
+    background-color: $secondary;
+    box-shadow: 3px 2px 6px $primary, 0 -0.05px 6px $primary;
+    border-radius: 10px;
+
+    .status {
+      width: 25px;
+      height: 25px;
+      margin: 1em;
+      justify-self: flex-start;
+
+      img {
+        width: 100%;
+      }
+    }
+
+    .message {
+      color: $primary;
+      font-weight: 500;
+      font-size: large;
+      align-self: center;
+    }
+
+    button.close {
+      width: 35px;
+      height: 35px;
+      margin: 0.5em;
+      margin-left: auto;
+
+      border-radius: 50px;
+      background-color: transparent;
+      outline: none;
+      border: none;
+      cursor: pointer;
+      @include animation;
+
+      &:focus,
+      &:hover {
+        background-color: rgba(white, 0.5       );
+      }
+
+      img {
+        width: 100%;
+      }
+    }
+  }
+}

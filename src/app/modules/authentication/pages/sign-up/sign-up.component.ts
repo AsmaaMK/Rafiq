@@ -16,7 +16,7 @@ import { BehaviorSubject } from 'rxjs';
 export class SignUpComponent implements OnInit {
   signUpForm!: FormGroup;
   allCountries!: string[];
-  sendingRequest$ = new BehaviorSubject(false);
+  sendingRequest = new BehaviorSubject(false);
 
   constructor(private countries: CountriesService, private auth: AuthService, private router: Router, private tokenStorage: TokenStorageService) {}
 
@@ -124,7 +124,7 @@ export class SignUpComponent implements OnInit {
 
 
   signUp() {
-    this.sendingRequest$.next(true);
+    this.sendingRequest.next(true);
 
     this.auth.registerUser(this.signUpForm.value).subscribe(
       res => {
@@ -141,10 +141,10 @@ export class SignUpComponent implements OnInit {
       },
       err => {
         console.warn(err.error?.error.message);
-        this.sendingRequest$.next(false);
+        this.sendingRequest.next(false);
       },
       () => {
-        this.sendingRequest$.next(false);
+        this.sendingRequest.next(false);
       }
     )
   }

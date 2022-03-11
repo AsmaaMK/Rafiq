@@ -1,5 +1,6 @@
 <div class="login-page">
   <app-loading-spinner *ngIf="sendingRequest.value"></app-loading-spinner>
+  <app-error-message [show]="showError" [message]="errorMessage"></app-error-message>
   <section class="login-social-section">
     <div class="login-social-section__desc">
       <h1>
