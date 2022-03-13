@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
@@ -12,7 +12,7 @@ export class ErrorMessageComponent implements OnInit {
   @Input() status = false;
   @Input() message = '';
 
-  constructor(public elementRef: ElementRef) { }
+  constructor() { }
 
   ngOnInit(): void {}
 
