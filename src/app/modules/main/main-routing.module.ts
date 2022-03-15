@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MainComponent } from './main.component';
 import { HomeComponent } from './pages/home/home.component';
+import { SettingComponent } from './pages/setting/setting.component';
 
 const routes: Routes = [
   {
@@ -13,7 +14,11 @@ const routes: Routes = [
         component: HomeComponent
       },
       {
-        path: 'profile',
+        path: 'settings',
+        component: SettingComponent
+      },
+      {
+        path: 'profile/:username',
         loadChildren: () => import('./modules/profile/profile.module').then(m => m.ProfileModule)
       },
       {

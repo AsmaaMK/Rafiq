@@ -5,7 +5,6 @@
   transition: $anim 0.3s ease-in-out;
 }
 
-
 /// Mixin makes a gradient background with specific degree
 /// @param {integer (deg)} $degree - degree of gradient
 @mixin gradient($degree: 0deg) {
@@ -20,6 +19,17 @@
   );
 }
 
+@mixin main-gradient {
+  background-attachment: fixed;
+  background-image: linear-gradient(
+    180deg,
+    #e8deeb 0%,
+    #e3cce9 0%,
+    #6e75a06e 0%,
+    #e3cce9b5 83%,
+    #e8deeb 100%
+  );
+}
 
 /// Mixin displays an element as flex and specifies alignment in x and y directions.
 ///
@@ -60,17 +70,14 @@
     flex-direction: row;
     justify-content: $align-x; // main axis
     align-items: $align-y; // cross axis
-
   } @else if $direction == column {
     flex-direction: column;
     justify-content: $align-y; // main axis
     align-items: $align-x; // cross axis
-
   } @else {
     @error "Unknown flex direction #{$direction}.";
   }
 }
-
 
 /// Responsive breakpoint manager
 /// @param {String} $breakpoint - Breakpoint
@@ -81,7 +88,7 @@
 
   @if $raw-query {
     $query: if(
-      type-of($raw-query) == 'string',
+      type-of($raw-query) == "string",
       unquote($raw-query),
       inspect($raw-query)
     );
@@ -111,7 +118,6 @@
     @error "Invalid padding direction it must be: (x or y).";
   }
 }
-
 
 /// Mixin let you make margin in x or y directions
 /// @param {string} $dirc - direction (x or y)

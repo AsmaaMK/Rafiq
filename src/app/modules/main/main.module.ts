@@ -7,9 +7,11 @@ import { HomeComponent } from './pages/home/home.component';
 import { HotelComponent } from './pages/hotel/hotel.component';
 import { CityComponent } from './pages/city/city.component';
 import { SettingComponent } from './pages/setting/setting.component';
-import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { NotificationComponent } from './components/notification/notification.component';
 import { SearchComponent } from './components/search/search.component';
+import { DesktopNavbarComponent } from './components/desktop-navbar/desktop-navbar.component';
+import { MobileNavbarComponent } from './components/mobile-navbar/mobile-navbar.component';
+import { MobileHeaderComponent } from './components/mobile-header/mobile-header.component';
 
 
 @NgModule({
@@ -19,9 +21,11 @@ import { SearchComponent } from './components/search/search.component';
     HotelComponent,
     CityComponent,
     SettingComponent,
-    SidebarComponent,
     NotificationComponent,
-    SearchComponent
+    SearchComponent,
+    DesktopNavbarComponent,
+    MobileNavbarComponent,
+    MobileHeaderComponent
   ],
   imports: [
     CommonModule,

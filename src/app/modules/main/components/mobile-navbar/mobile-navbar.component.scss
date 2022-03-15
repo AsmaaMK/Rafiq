@@ -1,0 +1,38 @@
+@use "~../../../../../../../styles/helpers/helpers-dir" as *;
+
+// global variables
+$icon-size: 2em;
+$icon-shadow: drop-shadow(0 1px 4px rgba($primary, 0.5));
+
+ul {
+  list-style: none;
+  height: 100%;
+  padding: 1em 0;
+  margin: 0;
+
+  @include flex(row, space-around, center);
+
+  li {
+    @include padding(y);
+
+    svg {
+      cursor: pointer;
+      width: $icon-size;
+      height: $icon-size;
+      color: transparent;
+
+      @include animation;
+    }
+
+    // active class applied when routerlink activated
+    a {
+      &.active {
+        svg {
+          color: $primary;
+          -webkit-filter: $icon-shadow;
+          filter: $icon-shadow;
+        }
+      }
+    }
+  }
+}

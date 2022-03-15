@@ -1,0 +1,65 @@
+@use "~../../../../../../../styles/helpers/helpers-dir" as *;
+
+// global variables
+$icon-size: 2em;
+$icon-shadow: drop-shadow(0 1px 4px rgba($primary, 0.5));
+
+ul {
+  list-style: none;
+  height: 100%;
+  padding: 0 1em;
+  margin: 0;
+
+  @include flex(row, space-between, center);
+  gap: 2em;
+
+  .search-btn {
+    flex: 1;
+    max-width: 300px;
+  }
+
+
+  li {
+    svg {
+      cursor: pointer;
+      width: $icon-size;
+      height: $icon-size;
+      color: transparent;
+
+      @include animation;
+    }
+
+    button {
+      padding: 0;
+      border: 0;
+      background-color: transparent;
+    }
+
+    form {
+      position: relative;
+      width: 100%;
+
+      input {
+        border: 1px solid $primary;
+        border-radius: 0.2em;
+        padding: 0.4em;
+        padding-left: 2em;
+        color: $primary;
+        width: 100%;
+      }
+
+      button {
+        position: absolute;
+        $icon-size: 1.5em;
+        left: 0.4em;
+        top: 50%;
+        transform: translateY(-50%);
+
+        svg {
+          width: $icon-size;
+          height: $icon-size;
+        }
+      }
+    }
+  }
+}

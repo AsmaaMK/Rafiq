@@ -1,0 +1,63 @@
+<ul>
+  <li>
+    <button>
+      <svg>
+        <use href="../../../../../assets/main-module/navbar/search.svg/#search-icon"></use>
+      </svg>
+    </button>
+  </li>
+  <li>
+    <button>
+      <svg>
+        <use href="../../../../../assets/main-module/navbar/notification.svg/#notification-icon"></use>
+      </svg>
+    </button>
+  </li>
+  <li>
+    <a
+      [routerLink]="['./profile', username]"
+      routerLinkActive="active"
+    >
+      <svg>
+        <use href="../../../../../assets/main-module/navbar/profile.svg/#profile-icon"></use>
+      </svg>
+    </a>
+  </li>
+  <li>
+    <a
+      routerLink="./home"
+      routerLinkActive="active"
+    >
+      <svg>
+        <use href="../../../../../assets/main-module/navbar/home.svg/#home-icon"></use>
+      </svg>
+    </a>
+  </li>
+  <li>
+    <a
+      routerLink="./trip"
+      routerLinkActive="active"
+    >
+      <svg>
+        <use href="../../../../../assets/main-module/navbar/trip.svg/#trip-icon"></use>
+      </svg>
+    </a>
+  </li>
+  <li>
+    <a
+      routerLink="./settings"
+      routerLinkActive="active"
+    >
+      <svg>
+        <use href="../../../../../assets/main-module/navbar/settings.svg/#settings-icon"></use>
+      </svg>
+    </a>
+  </li>
+  <li class="logout">
+    <button (click)="logout()">
+      <svg>
+        <use href="../../../../../assets/main-module/navbar/logout.svg/#logout-icon"></use>
+      </svg>
+    </button>
+  </li>
+</ul>

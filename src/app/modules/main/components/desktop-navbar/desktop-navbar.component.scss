@@ -1,0 +1,87 @@
+@use "~../../../../../../../styles/helpers/helpers-dir" as *;
+
+// global variables
+$icon-size: 2.5em;
+$icon-shadow: drop-shadow(0 1px 4px rgba($primary, 0.5));
+$outline: 2px solid $primary;
+
+ul {
+  list-style: none;
+  height: 100%;
+  padding: 1em 0;
+  margin: 0;
+
+  @include flex(column, center, flex-start);
+
+  li {
+    @include padding(y);
+
+    svg {
+      cursor: pointer;
+      width: $icon-size;
+      height: $icon-size;
+      color: transparent;
+
+      @include animation(fill);
+
+      &:hover {
+        color: rgba($primary, 0.6);
+      }
+    }
+
+    // active class applied when routerlink activated
+    a {
+      &.active {
+        svg {
+          color: $primary;
+          -webkit-filter: $icon-shadow;
+          filter: $icon-shadow;
+        }
+      }
+
+      &:focus {
+        outline: none;
+
+        svg {
+          border: $outline;
+          border-radius: 0.5em;
+        }
+      }
+
+      // Undo focus style when focusing without keyboard
+      &:focus:not(:focus-visible) {
+        svg {
+          border: none;
+          border-radius: none;
+        }
+      }
+    }
+  }
+
+  li button {
+    padding: 0;
+    border: 0;
+    background-color: transparent;
+
+    &:focus {
+      outline: none;
+
+      svg {
+        border: $outline;
+        border-radius: 0.5em;
+      }
+    }
+
+    // Undo focus style when focusing without keyboard
+    &:focus:not(:focus-visible) {
+      svg {
+        border: none;
+        border-radius: none;
+      }
+    }
+  }
+
+  li.logout {
+    margin-top: auto;
+  }
+}

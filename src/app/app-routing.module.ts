@@ -13,7 +13,8 @@ let matchera = null;
 const routes: Routes = [
   {
     path: 'auth',
-    loadChildren: () => import('./modules/authentication/authentication.module').then(m => m.AuthenticationModule)
+    loadChildren: () => import('./modules/authentication/authentication.module').then(m => m.AuthenticationModule),
+    canActivate: [UnauthGuard]
   },
   {
     path: 'unauthorized',
@@ -21,7 +22,7 @@ const routes: Routes = [
   },
   {
     path: 'test',
-    component:  TestComponent
+    component: TestComponent
   },
   {
     path: 'app',
