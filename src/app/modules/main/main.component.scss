@@ -45,6 +45,7 @@ $mobile-navbar-height: 3.5rem;
     height: $mobile-navbar-height;
 
     border-top: 1.5px solid $primary;
+    background-color: $secondary;
     @include main-gradient;
   }
 }

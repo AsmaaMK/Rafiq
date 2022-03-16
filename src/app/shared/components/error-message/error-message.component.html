@@ -1,6 +1,9 @@
+<!-- TODO: keep only line 5 or 6, I think 6 make the component lazy loaded -->
+
 <div
   class="overlay"
   [ngClass]="{'show': show.value}"
+  *ngIf="show.value"
 >
   <div class="message-box">
     <div class="status">
