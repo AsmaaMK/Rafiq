@@ -1,7 +1,7 @@
 @use "~../../../../../../../styles/helpers/helpers-dir" as *;
 
 // global variables
-$icon-size: 2.5em;
+$icon-size: 2.5rem;
 $icon-shadow: drop-shadow(0 1px 4px rgba($primary, 0.5));
 $outline: 2px solid $primary;
 
@@ -22,7 +22,7 @@ ul {
       height: $icon-size;
       color: transparent;
 
-      @include animation(fill);
+      @include animation;
 
       &:hover {
         color: rgba($primary, 0.6);
@@ -62,6 +62,11 @@ ul {
     padding: 0;
     border: 0;
     background-color: transparent;
+
+    svg {
+      width: $icon-size;
+      height: $icon-size;
+    }
 
     &:focus {
       outline: none;

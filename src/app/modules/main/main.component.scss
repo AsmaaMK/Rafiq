@@ -1,9 +1,9 @@
 @use "~../../../../../styles/helpers/helpers-dir" as *;
 
 // global variables
-$desktop-navbar-width: 50px;
-$mobile-header-height: 40px;
-$mobile-navbar-height: 50px;
+$desktop-navbar-width: 3.5rem;
+$mobile-header-height: 3rem;
+$mobile-navbar-height: 3.5rem;
 
 .desktop-container {
   .desktop-navbar {
