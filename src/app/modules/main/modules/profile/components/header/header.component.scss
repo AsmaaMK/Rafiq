@@ -1,0 +1,218 @@
+@use "../../../../../../../styles/helpers/helpers-dir" as *;
+
+.profile-header {
+  position: relative;
+
+  .profile-cover {
+    aspect-ratio: 11/5;
+    filter: drop-shadow(0px 3px 6px $primary);
+
+    .clip-path {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+      clip-path: ellipse(60% 70% at 50% 30%);
+      border-radius: 100%/0 0 70% 70%;
+
+      // cover image possition
+      img.cover-image {
+        position: absolute;
+        top: 30%; // TODO:
+        width: 100%;
+        transform: translateY(-50%);
+      }
+
+      .change-cover-btn {
+        position: absolute;
+        bottom: 18%;
+        right: -2%;
+        aspect-ratio: 5/6;
+        width: 8.5%;
+        background-color: rgba($primary, 0.7);
+        border-radius: 63% 100% 0% 54% / 41% 25% 0% 100%;
+
+        @include animation;
+
+        @include respond-to("less-than-medium") {
+          display: none;
+        }
+
+        img {
+          width: 40%;
+          position: absolute;
+          top: 15%;
+          left: 15%;
+        }
+
+        &:hover,
+        &:focus {
+          background-color: $primary;
+        }
+      }
+    }
+  }
+
+  .profile-info-card {
+    position: absolute;
+    top: 64%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 15px;
+    background-color: $neutral-lighter;
+    box-shadow: 5px 3px 6px $primary;
+    
+    width: 58%;
+    
+    @include respond-to("less-than-medium") {
+      width: 90%;
+      max-width: 500px;
+    }
+
+    .personal-image {
+      aspect-ratio: 1;
+      width: 30%;
+      min-width: 110px;
+      border-radius: 2.5em;
+      position: absolute;
+      top: -15%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 2px solid $secondary;
+      background-color: $secondary;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+      }
+    }
+
+    .name-field {
+      margin-top: max(22%, 70px);
+      text-align: center;
+      color: $primary;
+
+      .name {
+        font-weight: 500;
+        font-size: $base-font-size * 1.2;
+        margin: 0;
+      }
+
+      .username {
+        font-size: $base-font-size;
+        margin: 0;
+      }
+    }
+
+    ul.personal-info {
+      list-style: none;
+      padding: 0;
+      margin: 0.8em 1.5em;
+      color: $primary;
+      font-weight: 500;
+
+      @include flex(row, space-between);
+      flex-wrap: wrap;
+      gap: 1em;
+
+      li {
+        width: fit-content;
+        min-width: 40%;
+
+        @include flex(row, flex-start);
+        gap: 0.5em;
+
+        p {
+          margin: 0;
+          font-size: $base-font-size;
+
+          span {
+            color: #e0b7eb;
+          }
+        }
+
+        img {
+          width: 1.2em;
+        }
+      }
+    }
+
+    ul.social-media-links {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 0.5em;
+
+      @include flex(row);
+      gap: 1em;
+
+      li a {
+        display: block;
+        border: 2px solid transparent;
+        border-radius: 0.55em;
+        aspect-ratio: 1;
+        width: 2.5rem;
+        @include animation;
+
+        &:hover,
+        &:focus {
+          transform: translateY(-1.5px);
+          opacity: 0.9;
+        }
+
+        &:focus {
+          border-color: $primary;
+        }
+
+        @include undow-focus {
+          border-color: transparent;
+        }
+
+        img {
+          width: 100%;
+        }
+      }
+    }
+
+    .edit-btn,
+    .follow-btn {
+      font-size: $base-font-size;
+      position: absolute;
+      right: 1.5rem;
+      top: 1.5rem;
+      padding: 0.5em 0.25em;
+      background-color: $secondary;
+      border: 2px solid transparent;
+      border-radius: 0.5rem;
+      box-shadow: 0px 3px 6px $primary;
+      
+      @include animation;
+      @include respond-to("less-than-medium") {
+        font-size: 13px;
+      }
+      
+      &:hover,
+      &:focus {
+        transform: translateY(-1.5px);
+        opacity: 0.9;
+      }
+
+      &:focus {
+        border-color: $primary;
+      }
+
+      @include undow-focus {
+        border-color: transparent;
+      }
+
+      img {
+        width: 1.3em;
+      }
+    }
+
+    .follow-btn {
+      color: $primary;
+      font-size: $base-font-size;
+      padding: 0.5em 1em;
+    }
+  }
+}

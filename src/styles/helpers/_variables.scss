@@ -6,6 +6,7 @@ $base-font-size: 1.2rem;
 
 $breakpoints: (
   "small": (max-width: 500px),
+  "less-than-medium": (max-width: 800px),
   "medium": (min-width: 800px),
   "large": (min-width: 1200px),
   "huge": (min-width: 1500px),

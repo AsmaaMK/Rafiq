@@ -1,1 +1,98 @@
-<p>header works!</p>
+<header class="profile-header">
+  <div class="profile-cover">
+    <div class="clip-path">
+      <img
+        [src]="user.coverImageURL"
+        alt="cover"
+        class="cover-image"
+      >
+      <button class="change-cover-btn" *ngIf="isMyProfile">
+        <img
+          src="../../../../../../../assets/main-module/profile/change-cover.svg"
+          alt="change cover"
+        >
+      </button>
+    </div>
+  </div>
+
+  <div class="profile-info-card">
+    <div class="personal-image">
+      <img
+        [src]="user.personalImageURL"
+        alt="personal-image"
+      >
+    </div>
+
+    <div
+      class="edit-info"
+      *ngIf="isMyProfile; else follow"
+    >
+      <button class="edit-btn">
+        <img
+          src="../../../../../../../assets/main-module/profile/edit.svg"
+          alt="edit info"
+        >
+      </button>
+    </div>
+    <ng-template #follow>
+      <button
+        class="follow-btn"
+        (click)="followOrUnfollow()"
+      >{{(following.value)? "Following": "Follow"}}</button>
+    </ng-template>
+
+    <div class="name-field">
+      <p class="name">{{user.name}}</p>
+      <p class="username">{{user.username}}</p>
+    </div>
+
+    <ul class="personal-info">
+      <li>
+        <img
+          src="../../../../../../../assets/main-module/profile/posts.svg"
+          alt=""
+        >
+        <p><span>{{user.numberOfPosts}}</span> Posts</p>
+      </li>
+      <li>
+        <img
+          src="../../../../../../../assets/main-module/profile/followers.svg"
+          alt=""
+        >
+        <p><span>{{user.numberOfFollowers}}</span> Followers</p>
+      </li>
+      <li>
+        <img
+          src="../../../../../../../assets/main-module/profile/location.svg"
+          alt=""
+        >
+        <p>From {{user.from}}</p>
+      </li>
+      <li *ngIf="user.livesIn">
+        <img
+          src="../../../../../../../assets/main-module/profile/lives-in.svg"
+          alt=""
+        >
+        <p>Lives in {{user.livesIn}}</p>
+      </li>
+    </ul>
+
+    <ul
+      class="social-media-links"
+      *ngIf="user.socialLinks"
+    >
+      <li *ngFor="let socialLink of user.socialLinks">
+
+        <a
+          [href]="socialLink.link"
+          target="_blank"
+        >
+          <img
+            [src]="socialLink.icon"
+            alt=""
+          >
+        </a>
+      </li>
+    </ul>
+  </div>
+</header>

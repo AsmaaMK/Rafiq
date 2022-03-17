@@ -31,6 +31,13 @@
   );
 }
 
+/// Undo focus styles to hide it when focusing without keyboard
+@mixin undow-focus {
+  &:focus:not(:focus-visible) {
+    @content;
+  }
+}
+
 /// Mixin displays an element as flex and specifies alignment in x and y directions.
 ///
 /// @param {string} $direction - flex direction column or row

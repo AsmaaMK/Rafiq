@@ -6,6 +6,9 @@ $mobile-header-height: 3rem;
 $mobile-navbar-height: 3.5rem;
 
 .desktop-container {
+  background-color: $bg-color;
+  min-height: 100vh;
+
   .desktop-navbar {
     position: fixed;
     width: $desktop-navbar-width;
@@ -16,24 +19,31 @@ $mobile-navbar-height: 3.5rem;
   }
 
   .desktop-main {
-    margin-left: $desktop-navbar-width;
+    $main-width: min(1100px, 80vw);
+    width: $main-width;
+    margin-left: calc(($desktop-navbar-width + 100vw - $main-width) / 2);
   }
 }
 
 .mobile-container {
+  background-color: $bg-color;
+  min-height: 100vh;
+
   .mobile-header {
     position: fixed;
+    z-index: 100;
     top: 0;
     left: 0;
     right: 0;
     height: $mobile-header-height;
 
-    background-color: #c6c5d9;
-    box-shadow: 0px 4px 4px #fafafa;
+    background-color: #c6c5d999;
+    // box-shadow: 0px 4px 4px #fafafa;
     backdrop-filter: blur(38px);
   }
 
   .mobile-main {
+    margin: auto;
     margin-top: $mobile-header-height;
   }
 

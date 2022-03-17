@@ -17,10 +17,17 @@
 
 /* resets */
 
-input {
+a,
+input,
+button {
   &:focus {
     outline: none;
   }
+}
+
+button {
+  cursor: pointer;
+  border: none;
 }
 
 /* custom select style */

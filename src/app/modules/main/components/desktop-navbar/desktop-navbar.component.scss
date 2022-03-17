@@ -48,8 +48,7 @@ ul {
         }
       }
 
-      // Undo focus style when focusing without keyboard
-      &:focus:not(:focus-visible) {
+      @include undow-focus {
         svg {
           border: none;
           border-radius: none;
@@ -77,8 +76,7 @@ ul {
       }
     }
 
-    // Undo focus style when focusing without keyboard
-    &:focus:not(:focus-visible) {
+    @include undow-focus {
       svg {
         border: none;
         border-radius: none;
