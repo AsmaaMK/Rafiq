@@ -56,7 +56,22 @@
     .status {
       width: 25px;
       height: 25px;
-      aspect-ratio: 1;
+      aspect-ratio: 1 / 1;
+
+      @supports not (aspect-ratio: 1 / 1) {
+        .element::before {
+          float: left;
+          padding-top: 100%;
+          content: "";
+        }
+
+        .element::after {
+          display: block;
+          content: "";
+          clear: both;
+        }
+      }
+
       margin: 1em;
       justify-self: flex-start;
 
@@ -75,7 +90,21 @@
     button.close {
       width: 35px;
       height: 35px;
-      aspect-ratio: 1;
+      aspect-ratio: 1 / 1;
+      @supports not (aspect-ratio: 1 / 1) {
+        .element::before {
+          float: left;
+          padding-top: 100%;
+          content: "";
+        }
+
+        .element::after {
+          display: block;
+          content: "";
+          clear: both;
+        }
+      }
+
       margin: 0.5em;
       margin-left: auto;
 

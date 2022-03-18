@@ -13,14 +13,12 @@
       position: relative;
       overflow: hidden;
       clip-path: ellipse(60% 70% at 50% 30%);
+      background-color: $secondary;
       border-radius: 100%/0 0 70% 70%;
 
       // cover image possition
       img.cover-image {
-        position: absolute;
-        top: 30%; // TODO:
         width: 100%;
-        transform: translateY(-50%);
       }
 
       .change-cover-btn {
@@ -61,9 +59,9 @@
     border-radius: 15px;
     background-color: $neutral-lighter;
     box-shadow: 5px 3px 6px $primary;
-    
+
     width: 58%;
-    
+
     @include respond-to("less-than-medium") {
       width: 90%;
       max-width: 500px;
@@ -184,12 +182,12 @@
       border: 2px solid transparent;
       border-radius: 0.5rem;
       box-shadow: 0px 3px 6px $primary;
-      
+
       @include animation;
       @include respond-to("less-than-medium") {
         font-size: 13px;
       }
-      
+
       &:hover,
       &:focus {
         transform: translateY(-1.5px);

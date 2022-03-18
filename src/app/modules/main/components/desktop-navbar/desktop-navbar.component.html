@@ -1,26 +1,26 @@
-<ul>
+<ul aria-label="navigation links">
   <li>
     <button aria-label="search">
       <svg>
-        <use href="#search-icon"></use>
+        <use xlink:href="#search-icon"></use>
       </svg>
     </button>
   </li>
   <li>
     <button aria-label="notifications">
       <svg>
-        <use href="#notification-icon"></use>
+        <use xlink:href="#notification-icon"></use>
       </svg>
     </button>
   </li>
   <li>
     <a
-      [routerLink]="['./profile', username]"
-      routerLinkActive="active"
-      aria-label="profile"
+    [routerLink]="['./profile', username]"
+    routerLinkActive="active"
+    aria-label="profile"
     >
-      <svg>
-        <use href="#profile-icon"></use>
+    <svg>
+        <use xlink:href="#profile-icon"></use>
       </svg>
     </a>
   </li>
@@ -31,7 +31,7 @@
       aria-label="home"
     >
       <svg>
-        <use href="#home-icon"></use>
+        <use xlink:href="#home-icon"></use>
       </svg>
     </a>
   </li>
@@ -42,7 +42,7 @@
       aria-label="trip"
     >
       <svg>
-        <use href="#trip-icon"></use>
+        <use xlink:href="#trip-icon"></use>
       </svg>
     </a>
   </li>
@@ -53,7 +53,7 @@
       aria-label="settings"
     >
       <svg>
-        <use href="#settings-icon"></use>
+        <use xlink:href="#settings-icon"></use>
       </svg>
     </a>
   </li>
@@ -63,7 +63,7 @@
       (click)="logout()"
     >
       <svg>
-        <use href="#logout-icon"></use>
+        <use xlink:href="#logout-icon"></use>
       </svg>
     </button>
   </li>
@@ -73,6 +73,7 @@
 <svg
   xmlns="http://www.w3.org/2000/svg"
   style="display: none;"
+  aria-hidden="true"
 >
   <!-- search icon start -->
   <symbol

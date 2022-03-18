@@ -17,5 +17,6 @@ export interface UserProfileInfo {
   socialLinks: {
     link: string;
     icon: string;
+    label: string;
   }[];
 }

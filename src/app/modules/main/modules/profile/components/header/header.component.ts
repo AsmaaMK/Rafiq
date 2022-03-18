@@ -3,7 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import { UserProfileInfo } from '../../models/user-profile-info';
 
 @Component({
-  selector: 'app-header',
+  selector: 'profile-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
@@ -14,8 +14,8 @@ export class HeaderComponent implements OnInit {
   user: UserProfileInfo = {
     following: this.following,
 
-    personalImageURL: 'https://images.unsplash.com/photo-1583760919595-270997d7726a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTJ8fG1hbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60',
-    coverImageURL: '../../../../../../../assets/main-module/profile/cover.jpg',
+    personalImageURL: '../../../../../../../assets/main-module/profile/default-personal-image.svg',
+    coverImageURL: '../../../../../../../assets/main-module/profile/default-cover.svg',
 
     name: 'Henry Roberts',
     username: 'Henry17',
@@ -28,10 +28,12 @@ export class HeaderComponent implements OnInit {
     socialLinks: [
       {
         link: '#',
-        icon: '../../../../../../../assets/main-module/profile/insta.svg'
+        icon: '../../../../../../../assets/main-module/profile/insta.svg',
+        label: 'instagram'
       }, {
         link: '#',
-        icon: '../../../../../../../assets/main-module/profile/facebook.svg'
+        icon: '../../../../../../../assets/main-module/profile/facebook.svg',
+        label: 'facebook'
       }
     ]
   };

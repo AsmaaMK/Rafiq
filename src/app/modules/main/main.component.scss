@@ -19,7 +19,7 @@ $mobile-navbar-height: 3.5rem;
   }
 
   .desktop-main {
-    $main-width: min(1100px, 80vw);
+    $main-width: min(1000px, 80vw);
     width: $main-width;
     margin-left: calc(($desktop-navbar-width + 100vw - $main-width) / 2);
   }
@@ -38,7 +38,6 @@ $mobile-navbar-height: 3.5rem;
     height: $mobile-header-height;
 
     background-color: #c6c5d999;
-    // box-shadow: 0px 4px 4px #fafafa;
     backdrop-filter: blur(38px);
   }
 

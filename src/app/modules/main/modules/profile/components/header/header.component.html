@@ -6,7 +6,10 @@
         alt="cover"
         class="cover-image"
       >
-      <button class="change-cover-btn" *ngIf="isMyProfile">
+      <button
+        class="change-cover-btn"
+        *ngIf="isMyProfile"
+      >
         <img
           src="../../../../../../../assets/main-module/profile/change-cover.svg"
           alt="change cover"
@@ -14,7 +17,7 @@
       </button>
     </div>
   </div>
-
+  
   <div class="profile-info-card">
     <div class="personal-image">
       <img
@@ -22,7 +25,7 @@
         alt="personal-image"
       >
     </div>
-
+  
     <div
       class="edit-info"
       *ngIf="isMyProfile; else follow"
@@ -40,35 +43,47 @@
         (click)="followOrUnfollow()"
       >{{(following.value)? "Following": "Follow"}}</button>
     </ng-template>
-
+  
     <div class="name-field">
-      <p class="name">{{user.name}}</p>
-      <p class="username">{{user.username}}</p>
+      <p
+        class="name"
+        aria-label="name"
+      >{{user.name}}</p>
+      <p
+        class="username"
+        aria-label="username"
+      >{{user.username}}</p>
     </div>
-
-    <ul class="personal-info">
-      <li>
+  
+    <ul
+      aria-label="user info"
+      class="personal-info"
+    >
+      <li aria-label="number of posts">
         <img
           src="../../../../../../../assets/main-module/profile/posts.svg"
           alt=""
         >
         <p><span>{{user.numberOfPosts}}</span> Posts</p>
       </li>
-      <li>
+      <li aria-label="number of followers">
         <img
           src="../../../../../../../assets/main-module/profile/followers.svg"
           alt=""
         >
         <p><span>{{user.numberOfFollowers}}</span> Followers</p>
       </li>
-      <li>
+      <li aria-label="user from">
         <img
           src="../../../../../../../assets/main-module/profile/location.svg"
           alt=""
         >
         <p>From {{user.from}}</p>
       </li>
-      <li *ngIf="user.livesIn">
+      <li
+        aria-label="user lives in"
+        *ngIf="user.livesIn"
+      >
         <img
           src="../../../../../../../assets/main-module/profile/lives-in.svg"
           alt=""
@@ -76,20 +91,20 @@
         <p>Lives in {{user.livesIn}}</p>
       </li>
     </ul>
-
+  
     <ul
+      aria-label="user social media links"
       class="social-media-links"
       *ngIf="user.socialLinks"
     >
       <li *ngFor="let socialLink of user.socialLinks">
-
         <a
           [href]="socialLink.link"
           target="_blank"
         >
           <img
             [src]="socialLink.icon"
-            alt=""
+            [alt]="socialLink.label"
           >
         </a>
       </li>
