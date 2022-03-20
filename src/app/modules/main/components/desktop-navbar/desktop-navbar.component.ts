@@ -9,12 +9,11 @@ import { TokenStorageService } from 'src/app/shared/services/token-storage.servi
 })
 export class DesktopNavbarComponent implements OnInit {
 
-  username = '';
+  username = this.tokenStorageService.getUsername();
 
   constructor(private tokenStorageService: TokenStorageService, private authService: AuthService) { }
 
   ngOnInit(): void {
-    this.username = this.tokenStorageService.getRefreshToken();
   }
 
   logout(): void {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-profile',
@@ -12,4 +12,41 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    this.possitionNavbar();
+  }
+
+  ngAfterViewInit() {
+    this.possitionNavbar();
+  }
+  
+  /**
+   * calculate the button offset of the card info and cover to possition the navbar dynamically
+   * the calculation must be after the view init because the card height is not specified in css
+   */
+  possitionNavbar(): void {
+    let profileCard = document.getElementById("profile-info-card");
+    let profileCover = document.getElementById("profile-cover");
+    let profileNav = document.getElementById("profile-navbar");
+
+    let profileCardBottom = 0;
+    let profileCoverBottom = 0;
+    let profileNavMarginTop = 0;
+
+    if (profileCard && profileCover) {
+      // profileCardBottom = profileCard.offsetHeight + profileCard.offsetTop;
+      // profileCoverBottom = profileCover.offsetHeight + profileCover.offsetTop;
+      profileCardBottom = profileCard.getBoundingClientRect().bottom;
+      profileCoverBottom = profileCover.getBoundingClientRect().bottom;
+    }
+
+    if (profileCardBottom && profileCoverBottom) {
+      profileNavMarginTop = profileCardBottom - profileCoverBottom;
+    }
+
+    if (profileNavMarginTop && profileNav) {
+      profileNav.style.marginTop = (profileNavMarginTop + 20).toString() + 'px';
+    }
+  }
 }

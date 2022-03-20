@@ -1,9 +1,39 @@
-<nav class="profile-navbar">
+<nav class="profile-navbar" id="profile-navbar">
   <ul>
-    <li><a routerLink="./posts">Posts</a></li>
-    <li><a routerLink="./Images">Images</a></li>
-    <li><a routerLink="./Videos">Videos</a></li>
-    <li><a routerLink="./Map">Map</a></li>
+    <li class="posts-item">
+      <a
+        [routerLink]="['/app/profile', username, 'posts']"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: false }"
+        >Posts</a
+      >
+    </li>
+    <li class="images-item">
+      <a
+        [routerLink]="['/app/profile', username, 'images']"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: false }"
+        >Images</a
+      >
+    </li>
+    <li class="videos-item">
+      <a
+        [routerLink]="['/app/profile', username, 'videos']"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: false }"
+        >Videos</a
+      >
+    </li>
+    <li class="map-item">
+      <a
+        [routerLink]="['/app/profile', username, 'map']"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: false }"
+        >Map</a
+      >
+    </li>
   </ul>
 </nav>
-<div style="height: 120vh;">For testing sticky possition</div>
+<div id="indicator-wrapper">
+  <span id="active-link-indicator"></span>
+</div>

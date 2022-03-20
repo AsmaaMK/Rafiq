@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
 
 @Component({
   selector: 'app-mobile-navbar',
@@ -7,8 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MobileNavbarComponent implements OnInit {
 
-  username = 'asmaa';
-  constructor() { }
+  username = this.tokenStorageService.getUsername();
+  constructor(private tokenStorageService: TokenStorageService) { }
 
   ngOnInit(): void {
   }
