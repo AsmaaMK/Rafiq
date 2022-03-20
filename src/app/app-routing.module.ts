@@ -6,9 +6,6 @@ import { UnauthorizedComponent } from './shared/pages/unauthorized/unauthorized.
 import { AuthGuard } from './shared/guards/auth.guard';
 import { AboutUsComponent } from './shared/pages/about-us/about-us.component';
 import { UnauthGuard } from './shared/guards/unauth.guard';
-import { AuthService } from './shared/services/auth.service';
-
-let matchera = null;
 
 const routes: Routes = [
   {

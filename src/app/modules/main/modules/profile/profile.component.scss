@@ -1,5 +1,25 @@
+@use "~../../../../../../../styles/helpers/helpers-dir" as *;
+
 .profile-nav {
   position: sticky;
   top: 3rem;
   margin-top: 500px;
+}
+
+#profile-body {
+  background-color: $secondary-lavender;
+  border-radius: 1em;
+  overflow: hidden;
+  margin: auto;
+  margin-top: 1em;
+  box-shadow: 0px 3px 6px #666666;
+  background-attachment: unset !important;
+  height: auto;
+
+  @include respond-to(less-than-medium) {
+    width: 95%;
+    top: 8em;
+  }
+
+  // @include main-gradient;
 }

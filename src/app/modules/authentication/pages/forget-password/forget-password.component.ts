@@ -26,7 +26,6 @@ export class ForgetPasswordComponent implements OnInit {
   unShowMessage = false;
 
   send() {
-    // console.warn(this.forgetPassForm.value);
     this.auth.forgetPassword(this.forgetPassForm.value)
       .subscribe(
         res => console.log(res),

@@ -1,0 +1,17 @@
+@use "~../../../../../../../../../styles/helpers/helpers-dir" as *;
+
+.map-section {
+  padding: 2em;
+
+  iframe {
+    box-shadow: 0.5em 0.5em $primary;
+    border: 0;
+    height: 320px;
+    width: 95%;
+    margin: auto;
+    
+    @include respond-to(medium) {
+      width: 80%;
+    }
+  }
+}

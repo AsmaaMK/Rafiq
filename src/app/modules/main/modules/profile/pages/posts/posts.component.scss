@@ -1,0 +1,28 @@
+@use "~../../../../../../../../../styles/helpers/helpers-dir" as *;
+
+.no-posts-section {
+  padding: 1em;
+  color: $primary;
+  background-repeat: no-repeat;
+  background-image: url("../../../../../../../assets/main-module/profile/man-add-post.svg"),
+    url("../../../../../../../assets/main-module/profile/left-gears.svg"),
+    url("../../../../../../../assets/main-module/profile/right-gears.svg");
+
+  background-position: bottom 2em right 4em, bottom 2em left, top 2em right;
+
+  h2 {
+    margin: 1em auto;
+    text-align: center;
+    font-size: 2.2rem;
+  }
+
+  p {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 12em;
+
+    @include respond-to(medium) {
+      margin-bottom: 5em;
+    }
+  }
+}

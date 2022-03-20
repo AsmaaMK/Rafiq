@@ -1,0 +1,21 @@
+@use "~../../../../../../../../../styles/helpers/helpers-dir" as *;
+
+.no-images-section {
+  padding: 1em;
+  color: $primary;
+
+  h2 {
+    margin: 1em auto;
+    text-align: center;
+    font-size: 2.2rem;
+  }
+
+  img {
+    margin: 1em auto 2em;
+    width: 90%;
+    
+    @include respond-to(medium) {
+      width: 30%;
+    }
+  }
+}

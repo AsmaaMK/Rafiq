@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PostsComponent implements OnInit {
 
+  posts = [];
+
   constructor() { }
 
   ngOnInit(): void {

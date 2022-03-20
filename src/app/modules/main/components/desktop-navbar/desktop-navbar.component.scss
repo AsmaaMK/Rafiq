@@ -4,20 +4,7 @@
 $icon-size: 2.5rem;
 $icon-shadow: drop-shadow(0 1px 4px rgba($primary, 0.5));
 $outline: 2px solid $primary;
-$desktop-navbar-width: 3.5rem;
 
-
-
-  .desktop-navbar {
-    position: fixed;
-    width: $desktop-navbar-width;
-    top: 0;
-    bottom: 0;
-    background-color: $secondary;
-    @include main-gradient;
-  }
-
-  
 ul {
   list-style: none;
   height: 100%;

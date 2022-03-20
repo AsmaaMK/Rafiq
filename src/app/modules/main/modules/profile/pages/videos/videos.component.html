@@ -1,1 +1,12 @@
-<p>videos works!</p>
+<section class="videos-section">
+  <div class="no-videos-section" *ngIf="videos.length === 0; else videosSeciton">
+    <h2>No videos yet</h2>
+    <img src="../../../../../../../assets/main-module/profile/woman.svg" alt="">
+  </div>
+  <ng-template #videosSeciton>
+    <div class="post" *ngFor="let video of videos">
+      <p>{{ video }}</p>
+    </div>
+  </ng-template>
+</section>
+

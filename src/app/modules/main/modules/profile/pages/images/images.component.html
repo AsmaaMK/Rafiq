@@ -1,1 +1,11 @@
-<p>images works!</p>
+<section class="images-section">
+  <div class="no-images-section" *ngIf="images.length === 0; else imagesSeciton">
+    <h2>No images yet</h2>
+    <img src="../../../../../../../assets/main-module/profile/man-no-images.svg" alt="">
+  </div>
+  <ng-template #imagesSeciton>
+    <div class="post" *ngFor="let image of images">
+      <p>{{ image }}</p>
+    </div>
+  </ng-template>
+</section>
