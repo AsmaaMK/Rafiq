@@ -17,6 +17,10 @@ export class ProfileComponent implements OnInit {
     this.possitionNavbar();
   }
 
+  onScroll() {
+    this.possitionNavbar();
+  }
+
   ngAfterViewInit() {
     this.possitionNavbar();
   }
@@ -33,6 +37,7 @@ export class ProfileComponent implements OnInit {
     let profileCardBottom = 0;
     let profileCoverBottom = 0;
     let profileNavMarginTop = 0;
+    let navbarMarginTop = 0;
 
     if (profileCard && profileCover) {
       // profileCardBottom = profileCard.offsetHeight + profileCard.offsetTop;
@@ -46,7 +51,19 @@ export class ProfileComponent implements OnInit {
     }
 
     if (profileNavMarginTop && profileNav) {
-      profileNav.style.marginTop = (profileNavMarginTop + 20).toString() + 'px';
+      navbarMarginTop = (profileNavMarginTop + 20);
+      profileNav.style.marginTop = navbarMarginTop.toString() + 'px';
     }
+
+    // const navbar = document.getElementById('profile-navbar');
+    // const indicator = document.getElementById('indicator-wrapper');
+    
+    // if (indicator && navbar) {
+    //   indicator.style.top = (navbar.getBoundingClientRect().bottom).toString() + 'px';
+    
+    //   // navbar.style.backgroundColor = 'blue';
+    // }
+
+
   }
 }

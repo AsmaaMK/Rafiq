@@ -25,65 +25,62 @@
 
     li {
       position: relative;
-      padding-left: 1.2em;
       font-size: $base-font-size;
-
+      
       @include respond-to(medium) {
         font-size: $base-font-size * 1.5;
       }
-
-      &::before {
-        content: "";
-        position: absolute;
-        left: 0;
-        width: 0.8em;
-        height: 0.8em;
-        background-repeat: no-repeat;
-        background-size: contain;
-        background-position: center;
-      }
-
-      &.posts-item::before {
-        background-image: url("../../../../../../../assets/main-module/profile/posts.svg");
-      }
-
-      &.images-item::before {
-        background-image: url("../../../../../../../assets/main-module/profile/images.svg");
-      }
-
-      &.videos-item::before {
-        background-image: url("../../../../../../../assets/main-module/profile/videos.svg");
-      }
-
-      &.map-item::before {
-        background-image: url("../../../../../../../assets/main-module/profile/map.svg");
-      }
-
+      
       a {
         text-decoration: none;
         color: $primary;
         font-weight: 500;
+        padding-left: 1.2em;
+
+        &::before {
+          content: "";
+          position: absolute;
+          left: 0;
+          width: 0.8em;
+          height: 0.8em;
+          background-repeat: no-repeat;
+          background-size: contain;
+          background-position: center;
+        }
+  
+        &.posts-link::before {
+          background-image: url("../../../../../../../assets/main-module/profile/posts.svg");
+        }
+  
+        &.images-link::before {
+          background-image: url("../../../../../../../assets/main-module/profile/images.svg");
+        }
+  
+        &.videos-link::before {
+          background-image: url("../../../../../../../assets/main-module/profile/videos.svg");
+        }
+  
+        &.map-link::before {
+          background-image: url("../../../../../../../assets/main-module/profile/map.svg");
+        }
       }
     }
   }
 }
 
+
 #indicator-wrapper {
   position: absolute;
-  // background-color: red;
   left: 0;
-  // top: 0;
-  padding: 0;
-  margin: 0;
-  width: auto;
-
+  width: 100%;
+  
   #active-link-indicator {
-    width: 100px;
     height: 0.25rem;
-    background-color: $primary;
     position: absolute;
     left: 0;
     bottom: 0;
+    background-color: $primary;
+    border-radius: 50px;
   
     @include animation;
   }

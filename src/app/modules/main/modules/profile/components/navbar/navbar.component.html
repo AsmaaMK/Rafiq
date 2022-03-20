@@ -1,39 +1,47 @@
 <nav class="profile-navbar" id="profile-navbar">
   <ul>
-    <li class="posts-item">
+    <li>
       <a
+        class="posts-link"
         [routerLink]="['/app/profile', username, 'posts']"
         routerLinkActive="active-link"
-        [routerLinkActiveOptions]="{ exact: false }"
+        #postsLink
+        (click)="possitionIndicator(postsLink)"
         >Posts</a
       >
     </li>
-    <li class="images-item">
+    <li>
       <a
+        class="images-link"
         [routerLink]="['/app/profile', username, 'images']"
         routerLinkActive="active-link"
-        [routerLinkActiveOptions]="{ exact: false }"
+        #imagesLink
+        (click)="possitionIndicator(imagesLink)"
         >Images</a
       >
     </li>
-    <li class="videos-item">
+    <li>
       <a
+        class="videos-link"
         [routerLink]="['/app/profile', username, 'videos']"
         routerLinkActive="active-link"
-        [routerLinkActiveOptions]="{ exact: false }"
+        #videosLink
+        (click)="possitionIndicator(videosLink)"
         >Videos</a
       >
     </li>
-    <li class="map-item">
+    <li>
       <a
+        class="map-link"
         [routerLink]="['/app/profile', username, 'map']"
         routerLinkActive="active-link"
-        [routerLinkActiveOptions]="{ exact: false }"
+        #mapLink
+        (click)="possitionIndicator(mapLink)"
         >Map</a
       >
     </li>
   </ul>
+  <div id="indicator-wrapper">
+    <span id="active-link-indicator"></span>
+  </div>
 </nav>
-<div id="indicator-wrapper">
-  <span id="active-link-indicator"></span>
-</div>
