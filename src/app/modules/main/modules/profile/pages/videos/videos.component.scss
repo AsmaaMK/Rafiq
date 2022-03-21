@@ -1,6 +1,12 @@
 @use "~../../../../../../../../../styles/helpers/helpers-dir" as *;
 
+.videos-section {
+  height: 100%;
+  overflow: auto;
+}
+
 .no-videos-section {
+  height: 100%;
   padding: 1em;
   color: $primary;
 
@@ -13,7 +19,7 @@
   img {
     margin: 1em auto 2em;
     width: 90%;
-    
+
     @include respond-to(medium) {
       width: 30%;
     }

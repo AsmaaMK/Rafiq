@@ -1,6 +1,12 @@
 @use "~../../../../../../../../../styles/helpers/helpers-dir" as *;
 
+.posts-section {
+  height: 100%;
+  overflow: auto;
+}
+
 .no-posts-section {
+  height: 100%;
   padding: 1em;
   color: $primary;
   background-repeat: no-repeat;
@@ -18,11 +24,6 @@
 
   p {
     text-align: center;
-    font-size: 1.5rem;
-    margin-bottom: 12em;
-
-    @include respond-to(medium) {
-      margin-bottom: 5em;
-    }
+    font-size: 1.5rem;    
   }
 }

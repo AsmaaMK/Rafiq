@@ -1,8 +1,7 @@
 @use "~../../../../../../../../../styles/helpers/helpers-dir" as *;
 
 .profile-navbar {
-  position: sticky;
-  top: 1em;
+  position: relative;
   background-color: $secondary-lavender;
   margin: auto;
   margin-bottom: 0;
@@ -11,7 +10,6 @@
 
   @include respond-to(less-than-medium) {
     width: 95%;
-    top: 4em;
   }
 
   ul {

@@ -1,6 +1,12 @@
 @use "~../../../../../../../../../styles/helpers/helpers-dir" as *;
 
+.images-section {
+  height: 100%;
+  overflow: auto;
+}
+
 .no-images-section {
+  height: 100%;
   padding: 1em;
   color: $primary;
 

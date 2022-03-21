@@ -7,11 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ImagesComponent implements OnInit {
 
-  images = [];
+  images: string[] = [];
 
   constructor() { }
 
   ngOnInit(): void {
+    for (let i = 0; i <= 100; i++) {
+      this.images.push(`image ${i}`);
+    }
   }
 
 }
