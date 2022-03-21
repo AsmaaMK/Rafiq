@@ -19,7 +19,7 @@ $mobile-navbar-height: 3.5rem;
   }
 
   .desktop-main {
-    $main-width: min(1000px, 80vw);
+    $main-width: min(1200px, 80vw);
     width: $main-width;
     margin-left: calc(($desktop-navbar-width + 100vw - $main-width) / 2);
     padding-bottom: 2em;
