@@ -1,1 +1,40 @@
-<div id="google-map"></div>
+<div class="map-wrapper">
+  <div id="google-map"></div>
+  <div class="map-buttons">
+    <button
+      class="map-btn"
+      aria-label="add visited marker"
+      title="Add visited marker"
+      #visitedMarker
+      (click)="enableAddVisitedMarker(visitedMarker)"
+    >
+      <img
+        src="../../../../../../../assets/main-module/profile/add-visited-marker.svg"
+        alt=""
+      />
+    </button>
+    <button
+      class="map-btn"
+      aria-label="add want to visit marker"
+      title="Add want to visit marker"
+      #wishMarker
+      (click)="enableAddWishMarker(wishMarker)"
+    >
+      <img
+        src="../../../../../../../assets/main-module/profile/add-wish-marker.svg"
+        alt=""
+      />
+    </button>
+    <button
+      class="map-btn"
+      aria-label="delete marker"
+      title="Delete all marker"
+      (click)="deleteAllMarkers()"
+    >
+      <img
+        src="../../../../../../../assets/main-module/profile/delete-marker.svg"
+        alt=""
+      />
+    </button>
+  </div>
+</div>
