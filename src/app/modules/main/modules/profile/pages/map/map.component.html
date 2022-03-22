@@ -29,7 +29,8 @@
       class="map-btn"
       aria-label="delete marker"
       title="Delete all marker"
-      (click)="deleteAllMarkers()"
+      #deleteMarker
+      (click)="enableDeleteMarker(deleteMarker)"
     >
       <img
         src="../../../../../../../assets/main-module/profile/delete-marker.svg"
@@ -37,4 +38,8 @@
       />
     </button>
   </div>
+
+  <p class="error-message">
+    There is a problem in map loading!
+  </p>
 </div>
