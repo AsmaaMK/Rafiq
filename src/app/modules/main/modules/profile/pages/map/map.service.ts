@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Marker, MarkerData } from './marker';
 
 let fakeId = '';
@@ -23,11 +24,14 @@ export class MapService {
   // TODO: subscribe to that request in mapInit to call create marker only if the request success
   addMarker(markerData: MarkerData): string {
     // TODO: send post request to the backend and get the marker id from the response
+    // TODO: return the observable to subuscribe in the component
     fakeId = fakeId + 'a';
     return fakeId;
   }
 
-  deleteMarker(markerId: string): void {
+  deleteMarker(markerId: string): boolean {
     // TODO: send delete request
+    // TODO: return the observable to subuscribe in the component
+    return true;
   }
 }
