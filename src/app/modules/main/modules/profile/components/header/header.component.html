@@ -1,7 +1,7 @@
-<header class="profile-header">
+<header class="profile-header" *ngIf="userInfoLoaded.value">
   <div class="profile-cover" id="profile-cover">
     <div class="clip-path">
-      <img [src]="user.coverImageURL" alt="cover" class="cover-image" />
+      <img [src]="user.coverImage" alt="cover" class="cover-image" />
       <button class="change-cover-btn" *ngIf="isMyProfile">
         <img
           src="../../../../../../../assets/main-module/profile/change-cover.svg"
@@ -13,7 +13,7 @@
 
   <div class="profile-info-card" id="profile-info-card">
     <div class="personal-image">
-      <img [src]="user.personalImageURL" alt="personal-image" />
+      <img [src]="user.personalImage" alt="personal-image" />
     </div>
 
     <div class="edit-info" *ngIf="isMyProfile; else follow">
@@ -31,8 +31,8 @@
     </ng-template>
 
     <div class="name-field">
-      <p class="name" aria-label="name">{{ user.name }}</p>
-      <p class="username" aria-label="username">{{ user.username }}</p>
+      <p class="name" aria-label="name">{{ user.userInfo.firstName + " " + user.userInfo.lastName }}</p>
+      <p class="username" aria-label="username">{{ userName }}</p>
     </div>
 
     <ul aria-label="user info" class="personal-info">
@@ -42,7 +42,7 @@
           alt=""
         />
         <p>
-          <span>{{ user.numberOfPosts }}</span> Posts
+          <span>{{ user.userInfo.numberOfPosts }}</span> Posts
         </p>
       </li>
       <li aria-label="number of followers">
@@ -51,7 +51,7 @@
           alt=""
         />
         <p>
-          <span>{{ user.numberOfFollowers }}</span> Followers
+          <span>{{ 0 }}</span> Followers 
         </p>
       </li>
       <li aria-label="user from">
@@ -59,27 +59,27 @@
           src="../../../../../../../assets/main-module/profile/location.svg"
           alt=""
         />
-        <p>From {{ user.from }}</p>
+        <p>From {{ user.userInfo.country }}</p>
       </li>
-      <li aria-label="user lives in" *ngIf="user.livesIn">
+      <li aria-label="user lives in" *ngIf="user.userInfo.livesIn">
         <img
           src="../../../../../../../assets/main-module/profile/lives-in.svg"
           alt=""
         />
-        <p>Lives in {{ user.livesIn }}</p>
+        <p>Lives in {{ user.userInfo.livesIn }}</p>
       </li>
     </ul>
 
-    <ul
+    <!-- <ul
       aria-label="user social media links"
       class="social-media-links"
-      *ngIf="user.socialLinks"
+      *ngIf="user.userInfo.socialLinks"
     >
-      <li *ngFor="let socialLink of user.socialLinks">
+      <li *ngFor="let socialLink of user.userInfo.socialLinks">
         <a [href]="socialLink.link" target="_blank">
           <img [src]="socialLink.icon" [alt]="socialLink.label" />
         </a>
       </li>
-    </ul>
+    </ul> -->
   </div>
 </header>

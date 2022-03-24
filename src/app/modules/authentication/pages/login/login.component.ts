@@ -21,21 +21,24 @@ export class LoginComponent implements OnInit {
   sendingRequest = new BehaviorSubject(false);
   showError = new BehaviorSubject(false);
   errorMessage = '';
-  
 
-  constructor(private auth: AuthService, private tokenStorage: TokenStorageService, private router: Router) { }
+  constructor(
+    private auth: AuthService,
+    private tokenStorage: TokenStorageService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
       emailOrUserName: new FormControl('', [
         Validators.required,
-        emailOrUsername()
+        emailOrUsername(),
       ]),
       password: new FormControl('', [
         Validators.required,
         Validators.maxLength(64),
         Validators.minLength(8),
-      ])
+      ]),
     });
 
     this.setRememberMe(this.rememberMe);
@@ -63,31 +66,29 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.sendingRequest.next(true);
-    
-    this.auth.loginUser(this.loginForm.value)
-      .subscribe(
-        res => {
-          const refreshToken = res.results?.refreshToken;
-          const accessToken = res.results?.accessToken;
 
-          if (refreshToken && accessToken) {
-            this.tokenStorage.setRefreshToken(refreshToken);
-            this.tokenStorage.setAccessToken(accessToken);
-            this.auth.isLoggedIn$.next(true);
-          }
+    this.auth.loginUser(this.loginForm.value).subscribe(
+      (res) => {
+        const refreshToken = res.results?.refreshToken;
+        const accessToken = res.results?.accessToken;
 
-          this.router.navigate(['/app/home']);
-        },
-        err => {
-          this.errorMessage = err.error?.error.message;
-          this.showError.next(true);
-          console.warn(err.error?.error.message);
-          this.sendingRequest.next(false);
-        },
-        () => {
-          this.sendingRequest.next(false);
+        if (refreshToken && accessToken) {
+          this.tokenStorage.setRefreshToken(refreshToken);
+          this.tokenStorage.setAccessToken(accessToken);
+          this.auth.isLoggedIn$.next(true);
         }
-      )
+
+        this.router.navigate(['/app/home']);
+      },
+      (err) => {
+        this.errorMessage = err.error?.error.message;
+        this.showError.next(true);
+        console.warn(err.error?.error.message);
+        this.sendingRequest.next(false);
+      },
+      () => {
+        this.sendingRequest.next(false);
+      }
+    );
   }
 }
- 

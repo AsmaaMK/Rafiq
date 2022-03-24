@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Loader } from '@googlemaps/js-api-loader';
-import { MapService } from './map.service';
+import { MapService } from '../../services/map.service';
 import { Marker, MarkerData, MarkerType } from './marker';
 
 enum markerIcons {
@@ -80,9 +80,9 @@ export class MapComponent implements OnInit {
       map: this.map,
       icon: {
         url: markerIcons[marker.type],
-        size: new google.maps.Size(50, 50),
-        scaledSize: new google.maps.Size(50, 50),
-        anchor: new google.maps.Point(10, 20),
+        size: new google.maps.Size(40, 40),
+        scaledSize: new google.maps.Size(40, 40),
+        anchor: new google.maps.Point(0, 0),
       },
       cursor: markerIcons.default,
       animation: google.maps.Animation.DROP,

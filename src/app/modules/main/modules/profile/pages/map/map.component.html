@@ -1,45 +1,52 @@
 <div class="map-wrapper">
   <div id="google-map"></div>
-  <div class="map-buttons">
-    <button
-      class="map-btn"
-      aria-label="add visited marker"
-      title="Add visited marker"
-      #visitedMarker
-      (click)="enableAddVisitedMarker(visitedMarker)"
-    >
-      <img
-        src="../../../../../../../assets/main-module/profile/visited-cursor.svg"
-        alt=""
-      />
-    </button>
-    <button
-      class="map-btn"
-      aria-label="add want to visit marker"
-      title="Add want to visit marker"
-      #wishMarker
-      (click)="enableAddWishMarker(wishMarker)"
-    >
-      <img
-        src="../../../../../../../assets/main-module/profile/wish-cursor.svg"
-        alt=""
-      />
-    </button>
-    <button
-      class="map-btn"
-      aria-label="delete marker"
-      title="Delete all marker"
-      #deleteMarker
-      (click)="enableDeleteMarker(deleteMarker)"
-    >
-      <img
-        src="../../../../../../../assets/main-module/profile/delete-marker.svg"
-        alt=""
-      />
-    </button>
+  <div class="map-buttons" *ngIf="map">
+    <div class="map-button-group">
+      <button
+        class="map-btn"
+        aria-label="add visited marker"
+        #visitedMarker
+        id="visitedMarker"
+        (click)="enableAddVisitedMarker(visitedMarker)"
+      >
+        <img
+          src="../../../../../../../assets/main-module/profile/visited-cursor.svg"
+          alt=""
+        />
+      </button>
+      <span>Add visited location</span>
+    </div>
+
+    <div class="map-button-group">
+      <button
+        class="map-btn"
+        aria-label="add want to visit marker"
+        #wishMarker
+        (click)="enableAddWishMarker(wishMarker)"
+      >
+        <img
+          src="../../../../../../../assets/main-module/profile/wish-cursor.svg"
+          alt=""
+        />
+      </button>
+      <span>Add location you want to visit</span>
+    </div>
+
+    <div class="map-button-group">
+      <button
+        class="map-btn"
+        aria-label="delete marker"
+        #deleteMarker
+        (click)="enableDeleteMarker(deleteMarker)"
+      >
+        <img
+          src="../../../../../../../assets/main-module/profile/delete-marker.svg"
+          alt=""
+        />
+      </button>
+      <span>Delete a specific location</span>
+    </div>
   </div>
 
-  <p class="error-message" *ngIf="!map">
-    There is a problem in map loading!
-  </p>
+  <p class="error-message" *ngIf="!map">There is a problem in map loading!</p>
 </div>
