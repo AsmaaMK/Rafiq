@@ -128,6 +128,7 @@ export class MapComponent implements OnInit {
   }
 
   enableAddMarker(markerType: MarkerType): void {
+    this.canDelete = false;
     this.canAddMarker = true;
     this.markerType = markerType;
     this.changeMapCursor(markerIcons[markerType]);
@@ -135,6 +136,7 @@ export class MapComponent implements OnInit {
   }
 
   enableDeleteMarker(btn: HTMLElement): void {
+    this.canAddMarker = false;
     this.canDelete = true;
     this.changeMapCursor(markerIcons.delete);
     this.unfocusFocusedButton();
@@ -201,6 +203,12 @@ export class MapComponent implements OnInit {
     this.map.setOptions({
       draggableCursor: `url(${cursorIconURL}), default`,
     });
+
+    const mapWrapper = <HTMLElement>document.getElementsByClassName('map-wrapper')[0];
+    if (cursorIconURL === 'https://maps.gstatic.com/mapfiles/openhand_8_8.cur')
+      mapWrapper.style.cursor = 'default';
+    else
+      mapWrapper.style.cursor = `url(${cursorIconURL}), default`;
   }
 
   changeMarkerCursor(
