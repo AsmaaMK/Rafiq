@@ -6,7 +6,7 @@ export interface UserInfoResponse {
     numberOfPosts?: number; // TODO: make it required
     country: string;
     livesIn?: string;
-    
+
     socialLinks?: {
       link: string;
       icon: string;
@@ -14,8 +14,8 @@ export interface UserInfoResponse {
     }[];
 
     gender: string; // unused
-    dob: string; // unused
-  }
+    dateOfBirth: string; // unused
+  };
 }
 
 export type UserInfo = {
@@ -30,4 +30,4 @@ export type UserInfo = {
     icon: string;
     label: string;
   }[];
-}
+};

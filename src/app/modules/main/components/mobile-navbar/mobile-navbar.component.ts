@@ -9,9 +9,9 @@ import { TokenStorageService } from 'src/app/shared/services/token-storage.servi
 export class MobileNavbarComponent implements OnInit {
 
   username = this.tokenStorageService.getUsername();
+
   constructor(private tokenStorageService: TokenStorageService) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
 }

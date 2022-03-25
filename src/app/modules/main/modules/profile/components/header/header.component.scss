@@ -13,7 +13,8 @@
       position: relative;
       overflow: hidden;
       clip-path: ellipse(60% 70% at 50% 30%);
-      background-color: $secondary-lavender;
+      // background-color: $secondary-lavender;
+      background-color: #fff;
       border-radius: 100%/0 0 70% 70%;
 
       // cover image possition
@@ -22,6 +23,7 @@
       }
 
       .change-cover-btn {
+        cursor: pointer;
         position: absolute;
         bottom: 18%;
         right: -2%;
@@ -77,11 +79,13 @@
       left: 50%;
       transform: translateX(-50%);
       border: 2px solid $secondary;
-      background-color: $secondary;
+      // background-color: $secondary;
+      background-color: fff;
       overflow: hidden;
 
       img {
-        width: 100%;
+        height: 100%;
+        margin: auto;
       }
     }
 
@@ -211,6 +215,10 @@
       color: $primary;
       font-size: $base-font-size;
       padding: 0.5em 1em;
+
+      @include respond-to(small) {
+        padding: 0.25em 0.5em;
+      }
     }
   }
 }

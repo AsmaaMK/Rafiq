@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { MainComponent } from './main.component';
 import { HomeComponent } from './pages/home/home.component';
 import { SettingComponent } from './pages/setting/setting.component';
+import { UserInfoResolver } from './resolvers/user-info.resolver';
 
 const routes: Routes = [
   {
@@ -11,31 +12,36 @@ const routes: Routes = [
     children: [
       {
         path: 'home',
-        component: HomeComponent
+        component: HomeComponent,
       },
       {
         path: 'settings',
-        component: SettingComponent
+        component: SettingComponent,
       },
       {
         path: 'profile/:username',
-        loadChildren: () => import('./modules/profile/profile.module').then(m => m.ProfileModule)
+        loadChildren: () =>
+          import('./modules/profile/profile.module').then(
+            (m) => m.ProfileModule
+          ),
+        resolve: { userInfo: UserInfoResolver },
       },
       {
         path: 'trip',
-        loadChildren: () => import('./modules/trip/trip.module').then(m => m.TripModule)
+        loadChildren: () =>
+          import('./modules/trip/trip.module').then((m) => m.TripModule),
       },
       {
         path: '',
         redirectTo: 'home',
-        pathMatch: 'full'
+        pathMatch: 'full',
       },
-    ]
+    ],
   },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class MainRoutingModule { }
+export class MainRoutingModule {}

@@ -21,11 +21,11 @@ export class SetHeadersInterceptorService implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // deafult header added to all requests
-    const newReq = req.clone({
-      headers: req.headers.append('content-type', 'application/json'),
-    });
+    // const newReq = req.clone({
+    //   headers: req.headers.append('content-type', 'application/json'),
+    // });
 
-    const authReq = this.addAccessTokenHeader(newReq);
+    const authReq = this.addAccessTokenHeader(req);
 
     return next.handle(authReq).pipe(
       catchError(error => {

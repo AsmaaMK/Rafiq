@@ -15,9 +15,8 @@ export class ProfileComponent implements OnInit {
     this.possitionNavbar();
   }
 
-  ngAfterViewChecked() {
+  ngAfterViewInit() {
     this.possitionNavbar();
-    console.log('hey there is a change')
   }
 
   /**
