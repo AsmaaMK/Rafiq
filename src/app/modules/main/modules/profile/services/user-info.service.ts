@@ -6,15 +6,21 @@ import { TokenStorageService } from 'src/app/shared/services/token-storage.servi
 import { environment } from 'src/environments/environment';
 import { UserInfo, UserInfoResponse } from '../models/user-info';
 
+const headers = new HttpHeaders();
+headers
+  .append('content-type', 'application/json')
+  .append('Access-Control-Allow-Origin', '*')
+  .append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
+
 @Injectable({
   providedIn: 'root',
 })
 export class UserInfoService {
   private url = `${environment.apiUrl}/api/v1/users`;
 
-  myProfileInfo!: UserInfo;
-  myAvatar = new BehaviorSubject('');
-  myCover = new BehaviorSubject('');
+  // myProfileInfo!: UserInfo;
+  // myAvatar = new BehaviorSubject('');
+  // myCover = new BehaviorSubject('');
   myUserName = this.tokenStorageService.getUsername();
 
   constructor(
@@ -26,18 +32,12 @@ export class UserInfoService {
   getUserInfo(userName: string): Observable<UserInfo> {
     return this.http
       .get<UserInfoResponse>(`${this.url}/${userName}/info`, {
-        headers: { 'content-type': 'application/json' },
+        headers: headers,
       })
       .pipe(map((userInfoResponse) => userInfoResponse.results));
   }
 
-  getCover(userName: string) {
-    let headers = new HttpHeaders();
-    headers
-      .append('Accept', 'application/json')
-      .append('content-type', 'application/json')
-      .append('Access-Control-Allow-Origin', '*');
-
+  getCover(userName: string): Observable<{ cover?: string }> {
     return this.http
       .get<any>(`${this.url}/${userName}/cover`, {
         headers: headers,
@@ -52,24 +52,12 @@ export class UserInfoService {
   }
 
   deleteCover() {
-    let headers = new HttpHeaders();
-    headers
-      .append('Accept', 'application/json')
-      .append('content-type', 'application/json')
-      .append('Access-Control-Allow-Origin', '*');
-
     return this.http.delete<any>(`${this.url}/${this.myUserName}/cover`, {
       headers: headers,
     });
   }
 
-  getAvatar(userName: string) {
-    let headers = new HttpHeaders();
-    headers
-      .append('Accept', 'application/json')
-      .append('content-type', 'application/json')
-      .append('Access-Control-Allow-Origin', '*');
-
+  getAvatar(userName: string): Observable<{ avatar?: string }> {
     return this.http
       .get<any>(`${this.url}/${userName}/avatar`, {
         headers: headers,
@@ -84,14 +72,26 @@ export class UserInfoService {
   }
 
   deleteAvatar() {
-    let headers = new HttpHeaders();
-    headers
-      .append('Accept', 'application/json')
-      .append('content-type', 'application/json')
-      .append('Access-Control-Allow-Origin', '*');
-
-    return this.http.delete<any>(`${this.url}/${this.myUserName}/avatar`, {
+    return this.http.delete(`${this.url}/${this.myUserName}/avatar`, {
       headers: headers,
     });
+  }
+
+  getNumberOfFollowers(
+    userName: string
+  ): Observable<{ numberOfFollowers: number }> {
+    return this.http
+      .get<any>(`${this.url}/${userName}/numberOfFollowers`, {
+        headers: headers,
+      })
+      .pipe(map((res) => res.results));
+  }
+
+  getIsFollowed(userName: string): Observable<{ isFollowing: boolean }> {
+    return this.http
+      .get<any>(`${this.url}/${userName}/isFollowed`, {
+        headers: headers,
+      })
+      .pipe(map((res) => res.results));
   }
 }

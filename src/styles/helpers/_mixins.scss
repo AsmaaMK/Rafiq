@@ -19,10 +19,10 @@
   );
 }
 
-@mixin main-gradient {
+@mixin main-gradient($degree: 180deg) {
   background-attachment: fixed;
   background-image: linear-gradient(
-    180deg,
+    $degree,
     #e8deeb 0%,
     #e3cce9 0%,
     #6e75a06e 0%,

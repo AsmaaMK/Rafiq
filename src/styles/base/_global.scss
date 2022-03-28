@@ -15,6 +15,13 @@
   font-family: $font-family !important;
 }
 
+body {
+  &.popup-open {
+    height: 100vh;
+    overflow: hidden;
+  }
+}
+
 /* resets */
 
 a,

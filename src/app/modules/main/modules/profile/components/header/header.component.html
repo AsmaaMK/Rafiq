@@ -1,27 +1,40 @@
 <header class="profile-header">
   <div class="profile-cover" id="profile-cover">
     <div class="clip-path">
-      <img [src]="cover.value" alt="cover" class="cover-image" />
-      <label
-        for="change-cover-input"
-        class="change-cover-btn"
-        *ngIf="isMyProfile"
-      >
-        <img
-          src="../../../../../../../assets/main-module/profile/change-cover.svg"
-          alt="change cover"
-        />
-      </label>
-      <input *ngIf="isMyProfile" type="file" id="change-cover-input" hidden (change)="changeCover($event)" />
+      <img
+        [src]="cover.value"
+        alt="cover"
+        class="cover-image"
+        (click)="openPopup(coverOptions)"
+      />
+      <input
+        *ngIf="isMyProfile.value"
+        type="file"
+        id="change-cover-input"
+        hidden
+        (change)="changeCover($event, coverOptions)"
+      />
     </div>
   </div>
 
   <div class="profile-info-card" id="profile-info-card">
     <div class="personal-image">
-      <img [src]="avatar.value" alt="personal-image" />
+      <img
+        [src]="avatar.value"
+        alt="personal-image"
+        #avatarImg
+        (click)="openPopup(avatarOptions)"
+      />
+      <input
+        *ngIf="isMyProfile.value"
+        type="file"
+        id="change-avatar-input"
+        hidden
+        (change)="changeAvatar($event, avatarOptions)"
+      />
     </div>
 
-    <div class="edit-info" *ngIf="isMyProfile; else follow">
+    <div class="edit-info" *ngIf="isMyProfile.value; else follow">
       <button class="edit-btn">
         <img
           src="../../../../../../../assets/main-module/profile/edit.svg"
@@ -75,15 +88,15 @@
         />
         <p>Lives in {{ userInfo.livesIn }}</p>
       </li>
-      <li>
+      <!-- <li *ngIf="isMyProfile.value">
         <button (click)="deleteCover()">delete cover</button>
       </li>
-      <li>
-        <input type="file" (change)="changeAvatar($event)">
+      <li *ngIf="isMyProfile.value">
+        <input type="file" (change)="changeAvatar($event)" />
       </li>
-      <li>
+      <li *ngIf="isMyProfile.value">
         <button (click)="deleteAvatar()">delete avatar</button>
-      </li>
+      </li> -->
     </ul>
 
     <!-- <ul
@@ -99,3 +112,79 @@
     </ul> -->
   </div>
 </header>
+
+<div id="cover-options-popup" class="overlay-wrapper" #coverOptions>
+  <section class="pop-up cover-options">
+    <button (click)="closePopup(coverOptions)" class="close-btn">
+      <img src="../../../assets/main-module/Close.svg" alt="" />
+    </button>
+    <div class="options">
+      <label class="options__btn" for="change-cover-input"
+        >Change profile cover</label
+      >
+      <button
+        class="options__btn"
+        (click)="viewPicture(coverPreview, coverOptions)"
+        [disabled]="cover.value === defaultCoverImage"
+      >
+        View profile cover
+      </button>
+      <button
+        class="options__btn"
+        (click)="deleteCover(coverOptions)"
+        [disabled]="cover.value === defaultCoverImage"
+      >
+        Delete profile cover
+      </button>
+    </div>
+  </section>
+</div>
+
+<div id="avatar-options-popup" class="overlay-wrapper" #avatarOptions>
+  <section class="pop-up avatar-options">
+    <button (click)="closePopup(avatarOptions)" class="close-btn">
+      <img src="../../../assets/main-module/Close.svg" alt="" />
+    </button>
+    <div class="options">
+      <label class="options__btn" for="change-avatar-input"
+        >Change profile picture</label
+      >
+      <button
+        class="options__btn"
+        (click)="viewPicture(avatarPreview, avatarOptions)"
+        [disabled]="avatar.value === defaultPersonalImage"
+      >
+        View profile picture
+      </button>
+      <button
+        class="options__btn"
+        (click)="deleteAvatar(avatarOptions)"
+        [disabled]="avatar.value === defaultPersonalImage"
+      >
+        Delete profile picture
+      </button>
+    </div>
+  </section>
+</div>
+
+<div class="overlay-wrapper" #coverPreview>
+  <div class="img-popup">
+    <button (click)="closePopup(coverPreview)" class="close-btn">
+      <img src="../../../assets/main-module/Close.svg" alt="" />
+    </button>
+    <div class="img-preview">
+      <img [src]="cover.value" alt="cover" />
+    </div>
+  </div>
+</div>
+
+<div class="overlay-wrapper" #avatarPreview>
+  <div class="img-popup">
+    <button (click)="closePopup(avatarPreview)" class="close-btn">
+      <img src="../../../assets/main-module/Close.svg" alt="" />
+    </button>
+    <div class="img-preview">
+      <img [src]="avatar.value" alt="avatar" />
+    </div>
+  </div>
+</div>

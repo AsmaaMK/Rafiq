@@ -2,15 +2,86 @@
 <ng-container *ngIf="screenWidth >= 800; else mobileLayout">
   <div class="desktop-container">
     <nav class="desktop-navbar"><app-desktop-navbar></app-desktop-navbar></nav>
-    <main class="desktop-main"><router-outlet></router-outlet></main>
+    <main class="desktop-main">
+      <router-outlet></router-outlet>
+      <button
+        (click)="openPopup(addPostPopup)"
+        class="add-post-btn"
+        aria-label="add post"
+      >
+        <svg>
+          <use xlink:href="#add-post-icon"></use>
+        </svg>
+      </button>
+    </main>
   </div>
 </ng-container>
 
 <!-- app layout in mobile version -->
 <ng-template #mobileLayout>
   <div class="mobile-container">
-    <header class="mobile-header"><app-mobile-header></app-mobile-header></header>
-    <main class="mobile-main"><router-outlet></router-outlet></main>
+    <header class="mobile-header">
+      <app-mobile-header></app-mobile-header>
+    </header>
+    <main class="mobile-main">
+      <router-outlet></router-outlet>
+      <button
+        (click)="openPopup(addPostPopup)"
+        class="add-post-btn"
+        aria-label="add post"
+      >
+        <svg>
+          <use xlink:href="#add-post-icon"></use>
+        </svg>
+      </button>
+    </main>
     <nav class="mobile-navbar"><app-mobile-navbar></app-mobile-navbar></nav>
   </div>
 </ng-template>
+
+<div id="add-post-popup" class="overlay-wrapper" #addPostPopup>
+  <section class="pop-up add-post">
+    <button (click)="closePopup(addPostPopup)" class="close-btn">
+      <img src="../../../assets/main-module/Close.svg" alt="" />
+    </button>
+    <div class="user-info">
+      <img
+        src="../../../assets/main-module/profile/default-personal-image.svg"
+        alt=""
+      />
+      <p>Asmaa Mahmoud</p>
+    </div>
+    <textarea id="post-text" placeholder="add text..."></textarea>
+    <div class="media-images" *ngIf="images">
+      <img *ngFor="let image of images" [src]="image" alt="">
+    </div>
+    <div class="add-media">
+      <button (click)="addMention()">
+        <img
+          src="../../../assets/main-module/add-mention.svg"
+          alt="add mention"
+        />
+      </button>
+
+      <label for="add-video-input">
+        <img src="../../../assets/main-module/add-video.svg" alt="add video" />
+      </label>
+      <input type="file" name="" id="add-video-input" hidden (change)="addVideos($event)">
+
+      <label for="add-image-input">
+        <img src="../../../assets/main-module/add-image.svg" alt="add image" />
+      </label>
+      <input type="file" name="" id="add-image-input" hidden multiple (change)="addImages($event)">
+    </div>
+    <button (click)="post()" class="post-btn">Post</button>
+  </section>
+</div>
+
+<!-- svg icon -->
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none">
+  <symbol id="add-post-icon" viewBox="0 0 24 24">
+    <path d="M0 0h24v24H0z" fill="none" />
+    <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" fill="currentColor" />
+  </symbol>
+</svg>

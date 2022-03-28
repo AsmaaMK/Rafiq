@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Component, OnInit, Output } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
@@ -18,7 +18,7 @@ export class HeaderComponent implements OnInit {
   urlUserName = this.route.url.split('/')[3];
   myUserName = this.tokenStorageService.getUsername();
 
-  isMyProfile = this.urlUserName === this.myUserName;
+  isMyProfile = new BehaviorSubject(this.urlUserName === this.myUserName);
 
   defaultPersonalImage =
     'assets/main-module/profile/default-personal-image.svg';
@@ -39,92 +39,108 @@ export class HeaderComponent implements OnInit {
   avatar = new BehaviorSubject(this.defaultPersonalImage);
 
   ngOnInit(): void {
-    // allow different usernames in route to have different routes
-    this.route.routeReuseStrategy.shouldReuseRoute = function () {
-      return false;
-    };
-
     // get user info
     this.activatedRoute.data.subscribe((res) => {
       this.userInfo = res['userInfo'];
-      if (this.isMyProfile) this.userInfoService.myProfileInfo = this.userInfo;
-      console.log(this.userInfoService.myProfileInfo);
+      // if (this.isMyProfile.value) this.userInfoService.myProfileInfo = this.userInfo;
+      // console.log(this.userInfoService.myProfileInfo);
     });
 
-    // get cover and avatar
-    
-    if (this.isMyProfile && this.userInfoService.myAvatar.value !== '') {
-      console.log('my profile and avatar found');
-      this.avatar.next(this.userInfoService.myAvatar.value);
-      this.cover.next(this.userInfoService.myCover.value);
-      console.log('AVATAR', this.userInfoService.myAvatar);
-    } else if (this.isMyProfile) {
-      console.log('my profile but avatar not found');
-      this.userInfoService.myAvatar.next(this.getAvatar());
-      this.userInfoService.myCover.next(this.getCover());
-      console.log('AVATAR', this.userInfoService.myAvatar.value);
-    } else {
-      console.log('not my profile');
-      this.getAvatar();
-      this.getCover();
+    this.getAvatar();
+    this.getCover();
+
+    this.userInfoService
+      .getNumberOfFollowers(this.urlUserName)
+      .subscribe((res) => console.log(res));
+
+    if (!this.isMyProfile.value) {
+      this.userInfoService
+        .getIsFollowed(this.urlUserName)
+        .subscribe((res) => console.log(res));
     }
   }
 
-  changeCover(event: any) {
+  changeCover(event: any, popup: HTMLElement) {
+    this.closePopup(popup);
+
     const newCover = event.target.files[0];
     const formData = new FormData();
     formData.append('cover', newCover, newCover.name);
     this.userInfoService.changeCover(formData).subscribe((res) => {
       this.cover.next(res.cover);
-      this.userInfoService.myCover = res.cover;
+      // this.userInfoService.myCover = res.cover;
     });
   }
 
   getCover(): string {
     let cover = '';
     this.userInfoService.getCover(this.myUserName).subscribe((res) => {
-      this.cover.next(res.cover);
-      cover = res.vover;
+      if (res.cover) {
+        this.cover.next(res.cover);
+        cover = res.cover;
+      }
     });
 
     return cover;
   }
 
-  deleteCover() {
+  deleteCover(popup: HTMLElement) {
+    this.closePopup(popup);
     this.userInfoService.deleteCover().subscribe(() => {
       this.cover.next(this.defaultCoverImage);
-      this.userInfoService.myCover.next('');
+      // this.userInfoService.myCover.next('');
     });
   }
 
-  changeAvatar(event: any) {
+  changeAvatar(event: any, popup: HTMLElement) {
+    this.closePopup(popup);
+
     const newAvatar = event.target.files[0];
     const formData = new FormData();
     formData.append('avatar', newAvatar, newAvatar.name);
     this.userInfoService.changeAvatar(formData).subscribe((res) => {
       this.avatar.next(res.avatar);
-      this.userInfoService.myAvatar = res.avatar;
+      // this.userInfoService.myAvatar = res.avatar;
     });
   }
 
   getAvatar(): string {
     let avatar = '';
     this.userInfoService.getAvatar(this.myUserName).subscribe((res) => {
-      this.avatar.next(res.avatar);
-      avatar = res.avatar;
+      if (res.avatar) {
+        this.avatar.next(res.avatar);
+        avatar = res.avatar;
+      }
     });
 
     return avatar;
   }
 
-  deleteAvatar() {
+  deleteAvatar(popup: HTMLElement) {
+    this.closePopup(popup);
     this.userInfoService.deleteAvatar().subscribe(() => {
       this.avatar.next(this.defaultPersonalImage);
-      this.userInfoService.myAvatar.next('');
+      // this.userInfoService.myAvatar.next('');
     });
   }
 
   followOrUnfollow() {
     this.following.next(!this.following.value);
+  }
+
+  openPopup(popup: HTMLElement) {
+    document.body.classList.add('popup-open');
+    popup.classList.add('open');
+  }
+
+  closePopup(popup: HTMLElement) {
+    document.body.classList.remove('popup-open');
+    popup.classList.remove('open');
+  }
+
+  viewPicture(imgPopup: HTMLElement, optionsPopup: HTMLElement) {
+    document.body.classList.add('popup-open');
+    imgPopup.classList.add('open');
+    optionsPopup.classList.remove('open');
   }
 }

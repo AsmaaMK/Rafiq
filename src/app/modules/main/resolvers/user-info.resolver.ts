@@ -19,9 +19,13 @@ export class UserInfoResolver implements Resolve<UserInfo> {
     const urlUserName = route.params['username'];
     const myUserName = this.tokenStorageService.getUsername();
 
-    if (urlUserName === myUserName && this.userInfoService.myProfileInfo) {
-      return this.userInfoService.myProfileInfo;
-    } 
+    console.warn('RESOLVER CALLED: ');
+    console.warn('is my profile??', urlUserName === myUserName);
+    
+
+    // if (urlUserName === myUserName && this.userInfoService.myProfileInfo) {
+    //   return this.userInfoService.myProfileInfo;
+    // } 
 
     return this.userInfoService.getUserInfo(urlUserName);
   }
