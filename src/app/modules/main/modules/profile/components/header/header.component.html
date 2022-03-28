@@ -88,15 +88,6 @@
         />
         <p>Lives in {{ userInfo.livesIn }}</p>
       </li>
-      <!-- <li *ngIf="isMyProfile.value">
-        <button (click)="deleteCover()">delete cover</button>
-      </li>
-      <li *ngIf="isMyProfile.value">
-        <input type="file" (change)="changeAvatar($event)" />
-      </li>
-      <li *ngIf="isMyProfile.value">
-        <button (click)="deleteAvatar()">delete avatar</button>
-      </li> -->
     </ul>
 
     <!-- <ul
@@ -113,6 +104,8 @@
   </div>
 </header>
 
+
+<!-- pop-ups -->
 <div id="cover-options-popup" class="overlay-wrapper" #coverOptions>
   <section class="pop-up cover-options">
     <button (click)="closePopup(coverOptions)" class="close-btn">
