@@ -3,7 +3,7 @@
     <li>
       <a
         class="posts-link"
-        [routerLink]="['/app/profile', username, 'posts']"
+        routerLink="./posts"
         routerLinkActive="active-link"
         #postsLink
         (click)="possitionIndicator(postsLink)"
@@ -13,7 +13,7 @@
     <li>
       <a
         class="images-link"
-        [routerLink]="['/app/profile', username, 'images']"
+        routerLink="./images"
         routerLinkActive="active-link"
         #imagesLink
         (click)="possitionIndicator(imagesLink)"
@@ -23,7 +23,7 @@
     <li>
       <a
         class="videos-link"
-        [routerLink]="['/app/profile', username, 'videos']"
+        routerLink="./videos"
         routerLinkActive="active-link"
         #videosLink
         (click)="possitionIndicator(videosLink)"
@@ -33,7 +33,7 @@
     <li>
       <a
         class="map-link"
-        [routerLink]="['/app/profile', username, 'map']"
+        routerLink="./map"
         routerLinkActive="active-link"
         #mapLink
         (click)="possitionIndicator(mapLink)"
