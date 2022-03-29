@@ -2,7 +2,7 @@
   <div class="profile-cover" id="profile-cover">
     <div class="clip-path">
       <img
-        [src]="cover.value"
+        [src]="userInfo.cover"
         alt="cover"
         class="cover-image"
         (click)="onCoverClick(coverOptions, coverPreview)"
@@ -20,7 +20,7 @@
   <div class="profile-info-card" id="profile-info-card">
     <div class="personal-image">
       <img
-        [src]="avatar.value"
+        [src]="userInfo.avatar"
         alt="personal-image"
         #avatarImg
         (click)="onAvatarClick(avatarOptions, avatarPreview)"
@@ -118,14 +118,14 @@
       <button
         class="options__btn"
         (click)="viewPicture(coverPreview, coverOptions)"
-        [disabled]="cover.value === defaultCoverImage"
+        [disabled]="userInfo.cover === defaultCoverImage"
       >
         View profile cover
       </button>
       <button
         class="options__btn"
         (click)="deleteCover(coverOptions)"
-        [disabled]="cover.value === defaultCoverImage"
+        [disabled]="userInfo.cover === defaultCoverImage"
       >
         Delete profile cover
       </button>
@@ -145,14 +145,14 @@
       <button
         class="options__btn"
         (click)="viewPicture(avatarPreview, avatarOptions)"
-        [disabled]="avatar.value === defaultPersonalImage"
+        [disabled]="userInfo.avatar === defaultPersonalImage"
       >
         View profile picture
       </button>
       <button
         class="options__btn"
         (click)="deleteAvatar(avatarOptions)"
-        [disabled]="avatar.value === defaultPersonalImage"
+        [disabled]="userInfo.avatar === defaultPersonalImage"
       >
         Delete profile picture
       </button>
@@ -166,7 +166,7 @@
       <img src="../../../assets/main-module/Close.svg" alt="" />
     </button>
     <div class="img-preview">
-      <img [src]="cover.value" alt="cover" />
+      <img [src]="userInfo.cover" alt="cover" />
     </div>
   </div>
 </div>
@@ -177,7 +177,7 @@
       <img src="../../../assets/main-module/Close.svg" alt="" />
     </button>
     <div class="img-preview">
-      <img [src]="avatar.value" alt="avatar" />
+      <img [src]="userInfo.avatar" alt="avatar" />
     </div>
   </div>
 </div>

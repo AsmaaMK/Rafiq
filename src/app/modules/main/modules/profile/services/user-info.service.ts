@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, map, Observable, retry } from 'rxjs';
 import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
 import { environment } from 'src/environments/environment';
-import { UserInfo, UserInfoResponse } from '../models/user-info';
+import { UserInfo, UserInfoResponse, UserProfile } from '../models/user-info';
 
 const headers = new HttpHeaders();
 headers
@@ -27,7 +27,15 @@ export class UserInfoService {
     private http: HttpClient,
     private router: Router,
     private tokenStorageService: TokenStorageService
-  ) {}
+  ) { }
+  
+  getUserProfile(userName: string): Observable<UserProfile> {
+    return this.http
+      .get<any>(`${this.url}/${userName}`, {
+        headers: headers,
+      })
+      .pipe(map((userProfileResponse) => userProfileResponse.results));
+  }
 
   getUserInfo(userName: string): Observable<UserInfo> {
     return this.http

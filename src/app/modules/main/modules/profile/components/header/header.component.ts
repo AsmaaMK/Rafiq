@@ -4,7 +4,7 @@ import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
-import { UserInfo } from '../../models/user-info';
+import { UserInfo, UserProfile } from '../../models/user-info';
 import { UserInfoService } from '../../services/user-info.service';
 
 @Component({
@@ -24,7 +24,7 @@ export class HeaderComponent implements OnInit {
     'assets/main-module/profile/default-personal-image.svg';
   defaultCoverImage = 'assets/main-module/profile/default-cover.svg';
 
-  userInfo!: UserInfo;
+  userInfo!: UserProfile;
 
   constructor(
     private userInfoService: UserInfoService,
@@ -42,16 +42,21 @@ export class HeaderComponent implements OnInit {
     this.route.routeReuseStrategy.shouldReuseRoute = function () {
       return false;
     };
-    
+
     // get user info
     this.activatedRoute.data.subscribe((res) => {
       this.userInfo = res['userInfo'];
+      if (this.userInfo.cover === null)
+        this.userInfo.cover = this.defaultCoverImage;
+      
+      if (this.userInfo.avatar === null)
+        this.userInfo.avatar = this.defaultPersonalImage;
       // if (this.isMyProfile.value) this.userInfoService.myProfileInfo = this.userInfo;
       // console.log(this.userInfoService.myProfileInfo);
     });
 
-    this.getAvatar();
-    this.getCover();
+    // this.getAvatar();
+    // this.getCover();
 
     this.userInfoService
       .getNumberOfFollowers(this.urlUserName)
