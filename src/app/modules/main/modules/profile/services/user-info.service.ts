@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, map, Observable, retry } from 'rxjs';
 import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
 import { environment } from 'src/environments/environment';
-import { UserInfo, UserInfoResponse, UserProfile } from '../models/user-info';
+import { UserInfo } from '../models/user-info';
 
 const headers = new HttpHeaders();
 headers
@@ -18,9 +18,6 @@ headers
 export class UserInfoService {
   private url = `${environment.apiUrl}/api/v1/users`;
 
-  // myProfileInfo!: UserInfo;
-  // myAvatar = new BehaviorSubject('');
-  // myCover = new BehaviorSubject('');
   myUserName = this.tokenStorageService.getUsername();
 
   constructor(
@@ -29,28 +26,12 @@ export class UserInfoService {
     private tokenStorageService: TokenStorageService
   ) { }
   
-  getUserProfile(userName: string): Observable<UserProfile> {
+  getUserInfo(userName: string): Observable<UserInfo> {
     return this.http
       .get<any>(`${this.url}/${userName}`, {
         headers: headers,
       })
-      .pipe(map((userProfileResponse) => userProfileResponse.results));
-  }
-
-  getUserInfo(userName: string): Observable<UserInfo> {
-    return this.http
-      .get<UserInfoResponse>(`${this.url}/${userName}/info`, {
-        headers: headers,
-      })
       .pipe(map((userInfoResponse) => userInfoResponse.results));
-  }
-
-  getCover(userName: string): Observable<{ cover?: string }> {
-    return this.http
-      .get<any>(`${this.url}/${userName}/cover`, {
-        headers: headers,
-      })
-      .pipe(map((res) => res.results));
   }
 
   changeCover(newCover: FormData) {
@@ -63,14 +44,6 @@ export class UserInfoService {
     return this.http.delete<any>(`${this.url}/${this.myUserName}/cover`, {
       headers: headers,
     });
-  }
-
-  getAvatar(userName: string): Observable<{ avatar?: string }> {
-    return this.http
-      .get<any>(`${this.url}/${userName}/avatar`, {
-        headers: headers,
-      })
-      .pipe(map((res) => res.results));
   }
 
   changeAvatar(newCover: FormData) {
