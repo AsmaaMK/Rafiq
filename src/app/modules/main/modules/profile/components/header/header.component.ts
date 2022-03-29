@@ -39,6 +39,10 @@ export class HeaderComponent implements OnInit {
   avatar = new BehaviorSubject(this.defaultPersonalImage);
 
   ngOnInit(): void {
+    this.route.routeReuseStrategy.shouldReuseRoute = function () {
+      return false;
+    };
+    
     // get user info
     this.activatedRoute.data.subscribe((res) => {
       this.userInfo = res['userInfo'];
@@ -74,7 +78,7 @@ export class HeaderComponent implements OnInit {
 
   getCover(): string {
     let cover = '';
-    this.userInfoService.getCover(this.myUserName).subscribe((res) => {
+    this.userInfoService.getCover(this.urlUserName).subscribe((res) => {
       if (res.cover) {
         this.cover.next(res.cover);
         cover = res.cover;
@@ -106,7 +110,7 @@ export class HeaderComponent implements OnInit {
 
   getAvatar(): string {
     let avatar = '';
-    this.userInfoService.getAvatar(this.myUserName).subscribe((res) => {
+    this.userInfoService.getAvatar(this.urlUserName).subscribe((res) => {
       if (res.avatar) {
         this.avatar.next(res.avatar);
         avatar = res.avatar;
@@ -142,5 +146,19 @@ export class HeaderComponent implements OnInit {
     document.body.classList.add('popup-open');
     imgPopup.classList.add('open');
     optionsPopup.classList.remove('open');
+  }
+
+  onCoverClick(coverOptions: HTMLElement, coverPreview: HTMLElement) {
+    if (this.isMyProfile.value)
+      this.openPopup(coverOptions);
+    else if (this.cover.value !== this.defaultCoverImage)
+      this.viewPicture(coverPreview, coverOptions);
+  }
+
+  onAvatarClick(avatarOptions: HTMLElement, avatarPreview: HTMLElement) {
+    if (this.isMyProfile.value)
+      this.openPopup(avatarOptions);
+    else if (this.avatar.value !== this.defaultPersonalImage)
+      this.viewPicture(avatarPreview, avatarOptions);
   }
 }

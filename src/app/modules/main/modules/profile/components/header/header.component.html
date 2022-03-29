@@ -5,7 +5,7 @@
         [src]="cover.value"
         alt="cover"
         class="cover-image"
-        (click)="openPopup(coverOptions)"
+        (click)="onCoverClick(coverOptions, coverPreview)"
       />
       <input
         *ngIf="isMyProfile.value"
@@ -23,7 +23,7 @@
         [src]="avatar.value"
         alt="personal-image"
         #avatarImg
-        (click)="openPopup(avatarOptions)"
+        (click)="onAvatarClick(avatarOptions, avatarPreview)"
       />
       <input
         *ngIf="isMyProfile.value"
