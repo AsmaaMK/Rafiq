@@ -1,7 +1,8 @@
 @use "~../../../../../../../../../styles/helpers/helpers-dir" as *;
+
 .edit-info-container {
   position: absolute;
-  z-index: $index-4;
+  z-index: $index4;
   width: 100%;
   height: auto;
   min-height: 101%;
