@@ -1,20 +1,26 @@
-<svg id="Insta" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="31" height="31" viewBox="0 0 31 31">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="32" height="32" viewBox="0 0 32 32">
   <defs>
-    <radialGradient id="radial-gradient" cx="0.066" cy="0.964" r="1.219" gradientUnits="objectBoundingBox">
-      <stop offset="0" stop-color="#ffd35a"/>
-      <stop offset="0.255" stop-color="#f7964c"/>
-      <stop offset="0.6" stop-color="#f05b70"/>
-      <stop offset="0.717" stop-color="#bd6186"/>
-      <stop offset="0.853" stop-color="#85659b"/>
-      <stop offset="0.951" stop-color="#5c66a9"/>
-      <stop offset="1" stop-color="#4766b0"/>
-    </radialGradient>
-    <linearGradient id="linear-gradient" x1="-0.021" y1="0.257" x2="1.021" y2="0.743" gradientUnits="objectBoundingBox">
-      <stop offset="0" stop-color="#fff" stop-opacity="0.2"/>
-      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_556" data-name="Rectangle 556" width="32" height="32" transform="translate(898 1034)" fill="#fff" stroke="#707070" stroke-width="1"/>
+    </clipPath>
+    <linearGradient id="linear-gradient" x1="0.5" y1="-0.007" x2="0.5" y2="1.017" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#5b618a"/>
+      <stop offset="0.49" stop-color="#bcb5cd"/>
+      <stop offset="0.734" stop-color="#be8cd5"/>
+      <stop offset="1" stop-color="#c415ec"/>
     </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="0.5" y1="-0.032" x2="0.5" y2="1.026" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#5b618a"/>
+      <stop offset="0.674" stop-color="#bd7ecf"/>
+      <stop offset="1" stop-color="#ba15e6"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-3" y1="-0.375" y2="1.342" xlink:href="#linear-gradient-2"/>
   </defs>
-  <path id="Path_2920" data-name="Path 2920" d="M23.136,30.182H9.045A7.045,7.045,0,0,1,2,23.136V9.045A7.045,7.045,0,0,1,9.045,2H23.136a7.045,7.045,0,0,1,7.045,7.045V23.136A7.045,7.045,0,0,1,23.136,30.182Z" transform="translate(-0.591 -0.591)" fill="#fff"/>
-  <path id="Path_2921" data-name="Path 2921" d="M23.576,1H9.424A8.433,8.433,0,0,0,1,9.424V23.576A8.433,8.433,0,0,0,9.424,32H23.576A8.433,8.433,0,0,0,32,23.576V9.424A8.433,8.433,0,0,0,23.576,1Zm5.605,22.576a5.612,5.612,0,0,1-5.605,5.605H9.424a5.612,5.612,0,0,1-5.605-5.605V9.424A5.612,5.612,0,0,1,9.424,3.818H23.576a5.612,5.612,0,0,1,5.605,5.605ZM16.5,8.045A8.455,8.455,0,1,0,24.955,16.5,8.464,8.464,0,0,0,16.5,8.045Zm0,14.091A5.636,5.636,0,1,1,22.136,16.5,5.643,5.643,0,0,1,16.5,22.136Zm8.455-15.5a1.409,1.409,0,1,0,1.409,1.409A1.411,1.411,0,0,0,24.955,6.636Z" transform="translate(-1 -1)" fill="url(#radial-gradient)"/>
-  <path id="Path_2922" data-name="Path 2922" d="M23.576,1H9.424A8.433,8.433,0,0,0,1,9.424V23.576A8.433,8.433,0,0,0,9.424,32H23.576A8.433,8.433,0,0,0,32,23.576V9.424A8.433,8.433,0,0,0,23.576,1Z" transform="translate(-1 -1)" fill="url(#linear-gradient)"/>
+  <g id="insta" transform="translate(-898 -1034)" clip-path="url(#clip-path)">
+    <g id="instagram" transform="translate(898 1034)">
+      <path id="Path_5881" data-name="Path 5881" d="M28.71,36.977H13.447A8.277,8.277,0,0,1,5.18,28.71V13.447A8.277,8.277,0,0,1,13.447,5.18H28.71a8.277,8.277,0,0,1,8.267,8.267V28.71A8.277,8.277,0,0,1,28.71,36.977ZM13.447,6.9A6.264,6.264,0,0,0,6.9,13.447V28.71a6.264,6.264,0,0,0,6.549,6.548H28.71a6.264,6.264,0,0,0,6.548-6.548V13.447A6.264,6.264,0,0,0,28.71,6.9Z" transform="translate(-5.18 -5.18)" fill="url(#linear-gradient)"/>
+      <path id="Path_5882" data-name="Path 5882" d="M22.327,30.594a8.267,8.267,0,1,1,8.267-8.267A8.277,8.277,0,0,1,22.327,30.594Zm0-13.991a5.723,5.723,0,1,0,5.723,5.723A5.73,5.73,0,0,0,22.327,16.6Z" transform="translate(-6.429 -6.429)" fill="url(#linear-gradient-2)"/>
+      <path id="Path_5883" data-name="Path 5883" d="M33.728,11.1a1.908,1.908,0,1,0,1.908,1.908A1.908,1.908,0,0,0,33.728,11.1Z" transform="translate(-8.926 -6.013)" fill="url(#linear-gradient-3)"/>
+    </g>
+  </g>
 </svg>
