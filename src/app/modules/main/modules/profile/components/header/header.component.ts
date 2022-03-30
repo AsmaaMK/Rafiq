@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
 import { UserInfo } from '../../models/user-info';
+import { EditInfoService } from '../../services/edit-info.service';
 import { UserInfoService } from '../../services/user-info.service';
 
 @Component({
@@ -31,8 +32,7 @@ export class HeaderComponent implements OnInit {
     private route: Router,
     private activatedRoute: ActivatedRoute,
     private tokenStorageService: TokenStorageService,
-    public formBuilder: FormBuilder,
-    private http: HttpClient
+    private editInfoService: EditInfoService
   ) {}
 
   ngOnInit(): void {
@@ -45,7 +45,7 @@ export class HeaderComponent implements OnInit {
       this.userInfo = res['userInfo'];
       if (this.userInfo.cover === null)
         this.userInfo.cover = this.defaultCoverImage;
-      
+
       if (this.userInfo.avatar === null)
         this.userInfo.avatar = this.defaultPersonalImage;
     });
@@ -118,16 +118,18 @@ export class HeaderComponent implements OnInit {
   }
 
   onCoverClick(coverOptions: HTMLElement, coverPreview: HTMLElement) {
-    if (this.isMyProfile.value)
-      this.openPopup(coverOptions);
+    if (this.isMyProfile.value) this.openPopup(coverOptions);
     else if (this.userInfo.cover !== this.defaultCoverImage)
       this.viewPicture(coverPreview, coverOptions);
   }
 
   onAvatarClick(avatarOptions: HTMLElement, avatarPreview: HTMLElement) {
-    if (this.isMyProfile.value)
-      this.openPopup(avatarOptions);
+    if (this.isMyProfile.value) this.openPopup(avatarOptions);
     else if (this.userInfo.avatar !== this.defaultPersonalImage)
       this.viewPicture(avatarPreview, avatarOptions);
+  }
+
+  showEditInfo() {
+    this.editInfoService.showEditInfo.next(true);
   }
 }

@@ -1,4 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { EditInfoService } from './services/edit-info.service';
 
 @Component({
   selector: 'app-profile',
@@ -6,7 +7,10 @@ import { Component, HostListener, OnInit } from '@angular/core';
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
-  constructor() {}
+
+  showEditInfo = this.editInfoService.showEditInfo;
+
+  constructor(private editInfoService: EditInfoService) {}
 
   ngOnInit(): void {}
 

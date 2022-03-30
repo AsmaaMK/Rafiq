@@ -1,5 +1,9 @@
 @use "~../../../../../../../styles/helpers/helpers-dir" as *;
 
+.profile-container {
+  position: relative;
+}
+
 .profile-nav {
   position: sticky;
   top: 3rem;

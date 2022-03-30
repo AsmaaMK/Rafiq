@@ -9,6 +9,7 @@ import { PostsComponent } from './pages/posts/posts.component';
 import { ImagesComponent } from './pages/images/images.component';
 import { VideosComponent } from './pages/videos/videos.component';
 import { MapComponent } from './pages/map/map.component';
+import { EditInfoComponent } from './components/edit-info/edit-info.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { MapComponent } from './pages/map/map.component';
     PostsComponent,
     ImagesComponent,
     VideosComponent,
-    MapComponent
+    MapComponent,
+    EditInfoComponent
   ],
   imports: [
     CommonModule,

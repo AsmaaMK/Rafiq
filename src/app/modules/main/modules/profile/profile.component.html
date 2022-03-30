@@ -1,5 +1,8 @@
-<profile-header></profile-header>
-<profile-navbar></profile-navbar>
-<div id="profile-body">
-  <router-outlet></router-outlet>
+<div class="profile-container">
+  <profile-header></profile-header>
+  <profile-navbar></profile-navbar>
+  <div id="profile-body">
+    <router-outlet></router-outlet>
+  </div>
+  <profile-edit-info [show]="showEditInfo.value"></profile-edit-info>
 </div>

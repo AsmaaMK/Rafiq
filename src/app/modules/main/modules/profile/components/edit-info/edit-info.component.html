@@ -1,0 +1,213 @@
+<div class="edit-info-container" *ngIf="show">
+  <button (click)="closeEditInfo()" class="back-btn">
+    <img
+      src="../../../../../../../assets/main-module/profile/back.svg"
+      alt=""
+    />
+  </button>
+  <h2>Edit your profile</h2>
+  <div class="form">
+    <div class="name-field">
+      <div class="input-field">
+        <label for="fn">First Name</label>
+        <div>
+          <input id="fn" type="text" />
+          <button (click)="editInfo()">
+            <img
+              src="../../../../../../../assets/main-module/profile/done.svg"
+              alt="edit first name"
+            />
+          </button>
+        </div>
+      </div>
+      <div class="input-field">
+        <label for="ln">Last Name</label>
+        <div>
+          <input id="ln" type="text" />
+          <button (click)="editInfo()">
+            <img
+              src="../../../../../../../assets/main-module/profile/done.svg"
+              alt="edit first name"
+            />
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="input-field">
+      <label for="from">From</label>
+      <div>
+        <div class="input-field__input">
+          <select id="from">
+            <option *ngFor="let county of countries" [value]="county" >{{county}}</option>
+          </select>
+        </div>
+        <button (click)="editInfo()">
+          <img
+            src="../../../../../../../assets/main-module/profile/done.svg"
+            alt="edit first name"
+          />
+        </button>
+      </div>
+    </div>
+    <div class="input-field">
+      <label for="lives">Lives In</label>
+      <div>
+        <div class="input-field__input">
+          <select id="lives">
+            <option *ngFor="let county of countries" [value]="county" >{{county}}</option>
+          </select>
+        </div>
+        <button (click)="editInfo()">
+          <img
+            src="../../../../../../../assets/main-module/profile/done.svg"
+            alt="edit first name"
+          />
+        </button>
+      </div>
+    </div>
+    <div class="input-field">
+      <label for="gender">Gender</label>
+      <div>
+        <div class="input-field__input">
+          <select id="gender">
+            <option value="Male" >Male</option>
+            <option value="Female" >Female</option>
+          </select>
+        </div>
+        <button (click)="editInfo()">
+          <img
+            src="../../../../../../../assets/main-module/profile/done.svg"
+            alt="edit first name"
+          />
+        </button>
+      </div>
+    </div>
+    <div class="input-field">
+      <label for="dob">Date of Birth</label>
+      <div>
+        <div class="input-field__input">
+          <input id="dob" type="date" />
+        </div>
+        <button (click)="editInfo()">
+          <img
+            src="../../../../../../../assets/main-module/profile/done.svg"
+            alt="edit first name"
+          />
+        </button>
+      </div>
+    </div>
+    <div class="input-field">
+      <label for="password">Password</label>
+      <div>
+        <div class="input-field__input">
+          <input id="password" type="password" #passwordField/>
+          <button class="seen-password-btn" (click)="toggleSeenPassword(passwordField)">
+            <img
+              [src]="seenPasswordImage.value"
+              alt=""
+            />
+          </button>
+        </div>
+        <button (click)="editInfo()">
+          <img
+            src="../../../../../../../assets/main-module/profile/done.svg"
+            alt="edit first name"
+          />
+        </button>
+      </div>
+    </div>
+    <div class="input-field">
+      <label for="facebook">Facebook</label>
+      <div>
+        <div class="input-field__input">
+          <input
+            id="facebook"
+            type="text"
+            placeholder="Enter your Facebook username"
+          />
+          <img
+            class="social-logo"
+            src="../../../../../../../assets/main-module/profile/facebook.svg"
+            alt=""
+          />
+        </div>
+        <button (click)="editInfo()">
+          <img
+            src="../../../../../../../assets/main-module/profile/done.svg"
+            alt="edit first name"
+          />
+        </button>
+      </div>
+    </div>
+    <div class="input-field">
+      <label for="instagram">Instagram</label>
+      <div>
+        <div class="input-field__input">
+          <input
+            id="instagram"
+            type="text"
+            placeholder="Enter your Instagram username"
+          />
+          <img
+            class="social-logo"
+            src="../../../../../../../assets/main-module/profile/insta.svg"
+            alt=""
+          />
+        </div>
+        <button (click)="editInfo()">
+          <img
+            src="../../../../../../../assets/main-module/profile/done.svg"
+            alt="edit first name"
+          />
+        </button>
+      </div>
+    </div>
+    <div class="input-field">
+      <label for="youtube">Youtube</label>
+      <div>
+        <div class="input-field__input">
+          <input
+            id="youtube"
+            type="text"
+            placeholder="Enter your Youtube username"
+          />
+          <img
+            class="social-logo"
+            src="../../../../../../../assets/main-module/profile/youtube.svg"
+            alt=""
+          />
+        </div>
+        <button (click)="editInfo()">
+          <img
+            class="social-logo"
+            src="../../../../../../../assets/main-module/profile/done.svg"
+            alt="edit first name"
+          />
+        </button>
+      </div>
+    </div>
+    <div class="input-field">
+      <label for="tiktok">TikTok</label>
+      <div>
+        <div class="input-field__input">
+          <input
+            id="tiktok"
+            type="text"
+            placeholder="Enter your Tiktok username"
+          />
+          <img
+            class="social-logo"
+            src="../../../../../../../assets/main-module/profile/tiktok.svg"
+            alt=""
+          />
+        </div>
+        <button (click)="editInfo()">
+          <img
+            src="../../../../../../../assets/main-module/profile/done.svg"
+            alt="edit first name"
+          />
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

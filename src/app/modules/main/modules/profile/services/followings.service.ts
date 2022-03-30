@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { map, Observable } from 'rxjs';
 import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
 import { environment } from 'src/environments/environment';
-import { UserInfo } from '../models/user-info';
 
 const headers = new HttpHeaders();
 headers
@@ -15,7 +14,7 @@ headers
 @Injectable({
   providedIn: 'root',
 })
-export class UserInfoService {
+export class FollowingsService {
   private url = `${environment.apiUrl}/api/v1/users`;
 
   myUserName = this.tokenStorageService.getUsername();
@@ -24,41 +23,23 @@ export class UserInfoService {
     private http: HttpClient,
     private router: Router,
     private tokenStorageService: TokenStorageService
-  ) { }
-  
-  getUserInfo(userName: string): Observable<UserInfo> {
+  ) {}
+
+  getNumberOfFollowers(
+    userName: string
+  ): Observable<{ numberOfFollowers: number }> {
     return this.http
-      .get<any>(`${this.url}/${userName}`, {
+      .get<any>(`${this.url}/${userName}/numberOfFollowers`, {
         headers: headers,
       })
-      .pipe(map((userInfoResponse) => userInfoResponse.results));
-  }
-
-  editUserInfo() {
-    
-  }
-
-  changeCover(newCover: FormData) {
-    return this.http
-      .put<any>(`${this.url}/${this.myUserName}/cover`, newCover)
       .pipe(map((res) => res.results));
   }
 
-  deleteCover() {
-    return this.http.delete<any>(`${this.url}/${this.myUserName}/cover`, {
-      headers: headers,
-    });
-  }
-
-  changeAvatar(newCover: FormData) {
+  getIsFollowed(userName: string): Observable<{ isFollowing: boolean }> {
     return this.http
-      .put<any>(`${this.url}/${this.myUserName}/avatar`, newCover)
+      .get<any>(`${this.url}/${userName}/isFollowed`, {
+        headers: headers,
+      })
       .pipe(map((res) => res.results));
-  }
-
-  deleteAvatar() {
-    return this.http.delete(`${this.url}/${this.myUserName}/avatar`, {
-      headers: headers,
-    });
   }
 }
