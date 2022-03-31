@@ -26,6 +26,7 @@ export type EditInfo = {
 
 type SocialWithLinks = {
   link: string;
+  userName?: string;
   label: 'facebook' | 'instagram' | 'youtube' | 'tiktok';
 }[];
 

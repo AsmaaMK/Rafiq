@@ -33,6 +33,8 @@ export class EditInfoComponent implements OnInit {
   passwordSuccess = false;
   passwordMessage = '';
 
+  updated = false;
+
   constructor(
     private editInfoService: EditInfoService,
     private countriesService: CountriesService,
@@ -51,7 +53,7 @@ export class EditInfoComponent implements OnInit {
     const socialLinks = this.myInfo.socialMedia;
     if (socialLinks)
       for (let link of socialLinks) {
-        this.socialLinks[link.label] = link.link.split('/')[3];
+        this.socialLinks[link.label] = link.userName;
       }
   }
 
@@ -104,24 +106,26 @@ export class EditInfoComponent implements OnInit {
 
   editInfo(key: keyof EditInfo, value: any) {
     this.updatedInfo[key] = value;
+    this.updated = true;
   }
 
   editLink(key: keyof SocialLinks, value: string) {
     this.socialLinks[key] = value;
+    this.updated = true;
   }
 
   getUpdatedLinks() {
-    const editedLinks: { userName: string; label: string }[] = [];
+    const updatedLinks: { userName: string; label: string }[] = [];
 
     Object.entries(this.socialLinks).forEach(([key, value]) => {
       if (value)
-        editedLinks.push({
+        updatedLinks.push({
           userName: value,
           label: key,
         });
     });
 
-    return editedLinks;
+    return updatedLinks;
   }
 
   editPassword(newPassword: string) {
@@ -129,39 +133,38 @@ export class EditInfoComponent implements OnInit {
   }
 
   editAllInfo() {
-    this.updatedInfo.socialMedia = this.getUpdatedLinks();
-    if (this.updatedInfo !== {}) {
+    const updatedLinks = this.getUpdatedLinks();
+    this.updatedInfo.socialMedia = updatedLinks;
+
+    if (this.updated) {
+      this.updated = false;
       this.editInfoService.editInfo(this.updatedInfo).subscribe(
         (res) => {
           this.infoSuccess = true;
           this.infoMessage = res.results.message;
           this.editInfoShowToast.next(true);
           this.updatedInfo = {};
-          console.log(res.results.message);
         },
         (err) => {
           this.infoSuccess = false;
           this.infoMessage = err.error.error.message;
           this.editInfoShowToast.next(true);
-          console.log(err.error.error.message);
         }
       );
     }
 
-    if (this.newPassword) {
+    if (this.newPassword !== '') {
       this.editInfoService.editPassword(this.newPassword).subscribe(
         (res) => {
           this.passwordSuccess = true;
           this.passwordMessage = res.results.message;
           this.editPasswordShowToast.next(true);
           this.newPassword = '';
-          console.log(res.results.message);
         },
         (err) => {
           this.passwordSuccess = false;
           this.passwordMessage = err.error.error.message;
           this.editPasswordShowToast.next(true);
-          console.log(err.error.error.message);
         }
       );
     }

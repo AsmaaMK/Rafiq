@@ -6,6 +6,7 @@ import { BehaviorSubject } from 'rxjs';
 import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
 import { UserInfo } from '../../models/user-info';
 import { EditInfoService } from '../../services/edit-info.service';
+import { FollowingsService } from '../../services/followings.service';
 import { UserInfoService } from '../../services/user-info.service';
 
 @Component({
@@ -14,7 +15,7 @@ import { UserInfoService } from '../../services/user-info.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  following = new BehaviorSubject(false);
+  isFollowing = new BehaviorSubject(false);
 
   urlUserName = this.route.url.split('/')[3];
   myUserName = this.tokenStorageService.getUsername();
@@ -31,15 +32,20 @@ export class HeaderComponent implements OnInit {
     facebook: '../../../../../../../assets/main-module/profile/facebook.svg',
     instagram: '../../../../../../../assets/main-module/profile/insta.svg',
     youtube: '../../../../../../../assets/main-module/profile/youtube.svg',
-    tiktok: '../../../../../../../assets/main-module/profile/tiktok.svg'
+    tiktok: '../../../../../../../assets/main-module/profile/tiktok.svg',
   };
+
+  showToast = new BehaviorSubject(false);
+  toastStatus = false;
+  toastMessage = '';
 
   constructor(
     private userInfoService: UserInfoService,
     private route: Router,
     private activatedRoute: ActivatedRoute,
     private tokenStorageService: TokenStorageService,
-    private editInfoService: EditInfoService
+    private editInfoService: EditInfoService,
+    private followingService: FollowingsService
   ) {}
 
   ngOnInit(): void {
@@ -50,6 +56,15 @@ export class HeaderComponent implements OnInit {
     // get user info
     this.activatedRoute.data.subscribe((res) => {
       this.userInfo = res['userInfo'];
+      
+      if (!this.isMyProfile.value) {
+        this.followingService
+          .getIsFollowed(this.urlUserName)
+          .subscribe((res) => {
+            this.isFollowing.next(res.results.isFollowing);
+            console.log(this.isFollowing.value);
+          });
+      }
 
       if (this.isMyProfile.value) {
         this.userInfoService.myInfo = this.userInfo;
@@ -60,17 +75,8 @@ export class HeaderComponent implements OnInit {
 
       if (this.userInfo.avatar === null)
         this.userInfo.avatar = this.defaultPersonalImage;
+
     });
-
-    // this.userInfoService
-    //   .getNumberOfFollowers(this.urlUserName)
-    //   .subscribe((res) => console.log(res));
-
-    // if (!this.isMyProfile.value) {
-    //   this.userInfoService
-    //     .getIsFollowed(this.urlUserName)
-    //     .subscribe((res) => console.log(res));
-    // }
   }
 
   changeCover(event: any, popup: HTMLElement) {
@@ -110,7 +116,39 @@ export class HeaderComponent implements OnInit {
   }
 
   followOrUnfollow() {
-    this.following.next(!this.following.value);
+    this.isFollowing.value ? this.unfollow() : this.follow();
+  }
+
+  follow() {
+    this.followingService.follow(this.urlUserName).subscribe(
+      (res) => {
+        this.toastMessage = res.results.message;
+        this.toastStatus = true;
+        this.showToast.next(true);
+        this.isFollowing.next(true);
+      },
+      (err) => {
+        this.toastMessage = err.error.error.message;
+        this.toastStatus = false;
+        this.showToast.next(true);
+      }
+    );
+  }
+
+  unfollow() {
+    this.followingService.unfollow(this.urlUserName).subscribe(
+      (res) => {
+        this.toastMessage = res.results.message;
+        this.toastStatus = true;
+        this.showToast.next(true);
+        this.isFollowing.next(false);
+      },
+      (err) => {
+        this.toastMessage = err.error.error.message;
+        this.toastStatus = false;
+        this.showToast.next(true);
+      }
+    );
   }
 
   openPopup(popup: HTMLElement) {

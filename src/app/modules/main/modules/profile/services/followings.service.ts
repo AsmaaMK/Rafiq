@@ -25,21 +25,21 @@ export class FollowingsService {
     private tokenStorageService: TokenStorageService
   ) {}
 
-  getNumberOfFollowers(
-    userName: string
-  ): Observable<{ numberOfFollowers: number }> {
-    return this.http
-      .get<any>(`${this.url}/${userName}/numberOfFollowers`, {
-        headers: headers,
-      })
-      .pipe(map((res) => res.results));
+  getIsFollowed(userName: string) {
+    return this.http.get<any>(`${this.url}/${userName}/isFollowed`, {
+      headers: headers,
+    });
   }
 
-  getIsFollowed(userName: string): Observable<{ isFollowing: boolean }> {
-    return this.http
-      .get<any>(`${this.url}/${userName}/isFollowed`, {
-        headers: headers,
-      })
-      .pipe(map((res) => res.results));
+  follow(userName: string) {
+    return this.http.post<any>(`${this.url}/${userName}/follow`, null, {
+      headers: headers,
+    });
+  }
+
+  unfollow(userName: string) {
+    return this.http.post<any>(`${this.url}/${userName}/unFollow`, null, {
+      headers: headers,
+    });
   }
 }

@@ -1,34 +1,20 @@
-<!-- TODO: keep only line 5 or 6, I think 6 make the component lazy loaded -->
-
-<div
-  class="overlay"
-  [ngClass]="{'show': show.value}"
-  *ngIf="show.value"
->
-  <div class="message-box">
-    <div class="status">
-      <img
-        src="../../../../assets/shared/error.svg"
-        alt="error"
-        *ngIf="!status"
-      >
-      <img
-        src="../../../../assets/shared/correct.svg"
-        alt="success"
-        *ngIf="status"
-      >
-    </div>
-
-    <p class="message">{{message | capitalize}}</p>
-
-    <button
-      class="close"
-      (click)="close()"
-    >
-      <img
-        src="../../../../assets/shared/close.svg"
-        alt="close"
-      >
-    </button>
+<div class="message-box" *ngIf="show.value">
+  <div class="status">
+    <img
+      src="../../../../assets/shared/error.svg"
+      alt="error"
+      *ngIf="!status"
+    />
+    <img
+      src="../../../../assets/shared/correct.svg"
+      alt="success"
+      *ngIf="status"
+    />
   </div>
+
+  <p class="message">{{ message | capitalize }}</p>
+
+  <button class="close" (click)="close()">
+    <img src="../../../../assets/shared/close.svg" alt="close" />
+  </button>
 </div>

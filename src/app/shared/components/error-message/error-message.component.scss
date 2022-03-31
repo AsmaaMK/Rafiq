@@ -1,128 +1,66 @@
-@use "~../../../../../../styles/helpers/colors" as *;
-@use "~../../../../../../styles/helpers/mixins" as *;
+@use "~../../../../../../styles/helpers/helpers-dir" as *;
 
-.overlay {
-  @include flex;
+.message-box {
+  display: flex;
+  width: 80%;
+  max-width: 400px;
   position: fixed;
-  z-index: 1000;
-  width: 100vw;
-  height: 100vh;
-  right: 0;
-  bottom: 0;
-  transform: scale(0);
-  opacity: 0;
-  @include animation;
+  z-index: $index-5;
+  bottom: 10vh;
+  left: 50%;
+  transform: translateX(-50%);
 
-  &.show {
-    opacity: 1;
-    transform: scale(1);
-
-    @include respond-to(medium) {
-      transform: scale(1.2);
-    }
-  }
+  background-color: $secondary;
+  box-shadow: 3px 2px 6px $primary, 0 -0.05px 6px $primary;
+  border-radius: 10px;
 
   @include respond-to(medium) {
-    width: auto;
-    height: auto;
     right: 10vw;
-    bottom: 10vh;
+    transform: translateX(0);
   }
 
-  // &::before {
-  //   content: "";
-  //   $width: max(150vw, 150vh);
-  //   width: $width;
-  //   height: $width;
-  //   position: fixed;
-  //   z-index: -500;
-  //   left: 50%;
-  //   top: 50%;
-  //   transform: translate(-50%, -50%);
+  .status {
+    width: 25px;
+    height: 25px;
+    aspect-ratio: 1;
 
-  //   border-radius: 500%;
-  //   background-color: rgba($secondary, 0.5);
-  // }
+    margin: 1em;
+    justify-self: flex-start;
 
-  .message-box {
-    width: 80%;
-    max-width: 400px;
-    display: flex;
+    img {
+      width: 100%;
+    }
+  }
 
-    background-color: $secondary;
-    box-shadow: 3px 2px 6px $primary, 0 -0.05px 6px $primary;
-    border-radius: 10px;
+  .message {
+    color: $primary;
+    font-weight: 500;
+    font-size: large;
+    align-self: center;
+  }
 
-    .status {
-      width: 25px;
-      height: 25px;
-      aspect-ratio: 1 / 1;
+  button.close {
+    width: 35px;
+    height: 35px;
+    aspect-ratio: 1;
 
-      @supports not (aspect-ratio: 1 / 1) {
-        .element::before {
-          float: left;
-          padding-top: 100%;
-          content: "";
-        }
+    margin: 0.5em;
+    margin-left: auto;
 
-        .element::after {
-          display: block;
-          content: "";
-          clear: both;
-        }
-      }
+    border-radius: 50px;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    @include animation;
 
-      margin: 1em;
-      justify-self: flex-start;
-
-      img {
-        width: 100%;
-      }
+    &:focus,
+    &:hover {
+      background-color: rgba(white, 0.5);
     }
 
-    .message {
-      color: $primary;
-      font-weight: 500;
-      font-size: large;
-      align-self: center;
-    }
-
-    button.close {
-      width: 35px;
-      height: 35px;
-      aspect-ratio: 1 / 1;
-      @supports not (aspect-ratio: 1 / 1) {
-        .element::before {
-          float: left;
-          padding-top: 100%;
-          content: "";
-        }
-
-        .element::after {
-          display: block;
-          content: "";
-          clear: both;
-        }
-      }
-
-      margin: 0.5em;
-      margin-left: auto;
-
-      border-radius: 50px;
-      background-color: transparent;
-      outline: none;
-      border: none;
-      cursor: pointer;
-      @include animation;
-
-      &:focus,
-      &:hover {
-        background-color: rgba(white, 0.5);
-      }
-
-      img {
-        width: 100%;
-      }
+    img {
+      width: 100%;
     }
   }
 }

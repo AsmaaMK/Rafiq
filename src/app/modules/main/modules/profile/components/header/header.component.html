@@ -1,3 +1,5 @@
+<app-error-message [show]="showToast" [status]="toastStatus" [message]="toastMessage"></app-error-message>
+
 <header class="profile-header">
   <div class="profile-cover" id="profile-cover">
     <div class="clip-path">
@@ -44,7 +46,7 @@
     </div>
     <ng-template #follow>
       <button class="follow-btn" (click)="followOrUnfollow()">
-        {{ following.value ? "Following" : "Follow" }}
+        {{ isFollowing.value ? "Following" : "Follow" }}
       </button>
     </ng-template>
 
