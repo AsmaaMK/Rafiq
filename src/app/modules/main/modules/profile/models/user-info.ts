@@ -1,19 +1,42 @@
 export type UserInfo = {
-  numberOfFollowers: number;
-  numberOfFollowings: number;
-  firstName: string;
-  lastName: string;
+  numberOfFollowers?: number;
+  numberOfFollowings?: number;
+  numberOfPosts?: number;
+  firstName?: string;
+  lastName?: string;
+  userName?: string;
+  country?: string;
+  liveIn?: string;
+  dateOfBirth?: string;
+  gender?: string;
+  cover?: string;
+  avatar?: string;
+  socialMedia?: SocialWithLinks;
+};
+
+export type EditInfo = {
+  firstName?: string;
+  lastName?: string;
+  country?: string;
+  liveIn?: string;
+  dateOfBirth?: string;
+  gender?: string;
+  socialMedia?: SocialWithLabels;
+};
+
+type SocialWithLinks = {
+  link: string;
+  label: 'facebook' | 'instagram' | 'youtube' | 'tiktok';
+}[];
+
+type SocialWithLabels = {
   userName: string;
-  country: string;
-  dateOfBirth: string;
-  gender: string;
-  cover: string;
-  avatar: string;
-  numberOfPosts?: number; // TODO: make it required
-  livesIn?: string;
-  socialLinks?: {
-    link: string;
-    icon: string;
-    label: string;
-  }[];
+  label: string;
+}[];
+
+export type SocialLinks = {
+  facebook?: string;
+  instagram?: string;
+  youtube?: string;
+  tiktok?: string;
 };

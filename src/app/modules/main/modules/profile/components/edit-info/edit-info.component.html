@@ -1,3 +1,6 @@
+<app-error-message [show]="editInfoShowToast" [status]="infoSuccess" [message]="infoMessage"></app-error-message>
+<app-error-message [show]="editPasswordShowToast" [status]="passwordSuccess" [message]="passwordMessage"></app-error-message>
+
 <div class="edit-info-container" *ngIf="show">
   <button (click)="closeEditInfo()" class="back-btn">
     <img
@@ -6,30 +9,30 @@
     />
   </button>
   <h2>Edit your profile</h2>
-  <div class="form">
+  <form class="form" [formGroup]="editInfoForm">
     <div class="name-field">
       <div class="input-field">
         <label for="fn">First Name</label>
         <div>
-          <input id="fn" type="text" />
-          <button (click)="editInfo()">
-            <img
-              src="../../../../../../../assets/main-module/profile/done.svg"
-              alt="edit first name"
-            />
-          </button>
+          <input
+            (change)="editInfo('firstName', fnInput.value)"
+            id="fn"
+            type="text"
+            formControlName="firstName"
+            #fnInput
+          />
         </div>
       </div>
       <div class="input-field">
         <label for="ln">Last Name</label>
         <div>
-          <input id="ln" type="text" />
-          <button (click)="editInfo()">
-            <img
-              src="../../../../../../../assets/main-module/profile/done.svg"
-              alt="edit last name"
-            />
-          </button>
+          <input
+            id="ln"
+            type="text"
+            formControlName="lastName"
+            #lnInput
+            (change)="editInfo('lastName', lnInput.value)"
+          />
         </div>
       </div>
     </div>
@@ -37,83 +40,89 @@
       <label for="from">From</label>
       <div>
         <div class="input-field__input">
-          <select id="from">
-            <option *ngFor="let county of countries" [value]="county" >{{county}}</option>
+          <select
+            id="from"
+            #countryInput
+            formControlName="country"
+            (change)="editInfo('country', countryInput.value)"
+          >
+            <option
+              *ngFor="let country of countries"
+              [selected]="country === myInfo.country"
+            >
+              {{ country }}
+            </option>
           </select>
         </div>
-        <button (click)="editInfo()">
-          <img
-            src="../../../../../../../assets/main-module/profile/done.svg"
-            alt="edit from"
-          />
-        </button>
       </div>
     </div>
     <div class="input-field">
       <label for="lives">Lives In</label>
       <div>
         <div class="input-field__input">
-          <select id="lives">
-            <option *ngFor="let county of countries" [value]="county" >{{county}}</option>
+          <select
+            id="lives"
+            #livesinInput
+            formControlName="liveIn"
+            (change)="editInfo('liveIn', livesinInput.value)"
+          >
+            <option value=""></option>
+            <option
+              *ngFor="let country of countries"
+              [selected]="country === myInfo.liveIn"
+            >
+              {{ country }}
+            </option>
           </select>
         </div>
-        <button (click)="editInfo()">
-          <img
-            src="../../../../../../../assets/main-module/profile/done.svg"
-            alt="edit lives in"
-          />
-        </button>
       </div>
     </div>
     <div class="input-field">
       <label for="gender">Gender</label>
       <div>
         <div class="input-field__input">
-          <select id="gender">
-            <option value="Male" >Male</option>
-            <option value="Female" >Female</option>
+          <select
+            id="gender"
+            #genderInput
+            formControlName="gender"
+            (change)="editInfo('gender', genderInput.value)"
+          >
+            <option value="Male" [selected]="myInfo.gender === 'male'">
+              Male
+            </option>
+            <option value="Female" [selected]="myInfo.gender === 'female'">
+              Female
+            </option>
           </select>
         </div>
-        <button (click)="editInfo()">
-          <img
-            src="../../../../../../../assets/main-module/profile/done.svg"
-            alt="edit gender"
-          />
-        </button>
       </div>
     </div>
     <div class="input-field">
       <label for="dob">Date of Birth</label>
       <div>
         <div class="input-field__input">
-          <input id="dob" type="date" />
-        </div>
-        <button (click)="editInfo()">
-          <img
-            src="../../../../../../../assets/main-module/profile/done.svg"
-            alt="edit date of birth"
+          <input
+            id="dob"
+            type="date"
+            formControlName="dateOfBirth"
+            #dobInput
+            (change)="editInfo('dateOfBirth', dobInput.value)"
           />
-        </button>
+        </div>
       </div>
     </div>
     <div class="input-field">
       <label for="password">Password</label>
       <div>
         <div class="input-field__input">
-          <input id="password" type="password" #passwordField/>
-          <button class="seen-password-btn" (click)="toggleSeenPassword(passwordField)">
-            <img
-              [src]="seenPasswordImage.value"
-              alt=""
-            />
+          <input id="password" type="password" #passwordInput (change)="editPassword(passwordInput.value)" />
+          <button
+            class="seen-password-btn"
+            (click)="toggleSeenPassword(passwordInput)"
+          >
+            <img [src]="seenPasswordImage.value" alt="" />
           </button>
         </div>
-        <button (click)="editInfo()">
-          <img
-            src="../../../../../../../assets/main-module/profile/done.svg"
-            alt="edit password"
-          />
-        </button>
       </div>
     </div>
     <div class="input-field">
@@ -124,6 +133,9 @@
             id="facebook"
             type="text"
             placeholder="Enter your Facebook username"
+            formControlName="facebook"
+            (change)="editLink('facebook', facebookInput.value)"
+            #facebookInput
           />
           <img
             class="social-logo"
@@ -131,12 +143,6 @@
             alt=""
           />
         </div>
-        <button (click)="editInfo()">
-          <img
-            src="../../../../../../../assets/main-module/profile/done.svg"
-            alt="edit facebook link"
-          />
-        </button>
       </div>
     </div>
     <div class="input-field">
@@ -147,6 +153,9 @@
             id="instagram"
             type="text"
             placeholder="Enter your Instagram username"
+            formControlName="instagram"
+            (change)="editLink('instagram', instaInput.value)"
+            #instaInput
           />
           <img
             class="social-logo"
@@ -154,12 +163,6 @@
             alt=""
           />
         </div>
-        <button (click)="editInfo()">
-          <img
-            src="../../../../../../../assets/main-module/profile/done.svg"
-            alt="edit instagram link"
-          />
-        </button>
       </div>
     </div>
     <div class="input-field">
@@ -170,6 +173,9 @@
             id="youtube"
             type="text"
             placeholder="Enter your Youtube username"
+            formControlName="youtube"
+            (change)="editLink('youtube', youtubeInput.value)"
+            #youtubeInput
           />
           <img
             class="social-logo"
@@ -177,13 +183,6 @@
             alt=""
           />
         </div>
-        <button (click)="editInfo()">
-          <img
-            class="social-logo"
-            src="../../../../../../../assets/main-module/profile/done.svg"
-            alt="edit youtube link"
-          />
-        </button>
       </div>
     </div>
     <div class="input-field">
@@ -194,6 +193,9 @@
             id="tiktok"
             type="text"
             placeholder="Enter your Tiktok username"
+            formControlName="tiktok"
+            (change)="editLink('tiktok', tiktokInput.value)"
+            #tiktokInput
           />
           <img
             class="social-logo"
@@ -201,13 +203,8 @@
             alt=""
           />
         </div>
-        <button (click)="editInfo()">
-          <img
-            src="../../../../../../../assets/main-module/profile/done.svg"
-            alt="edit tiktok link"
-          />
-        </button>
       </div>
     </div>
-  </div>
+    <button type="submit" (click)="editAllInfo()">Save</button>
+  </form>
 </div>

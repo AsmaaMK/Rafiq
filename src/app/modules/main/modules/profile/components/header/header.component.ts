@@ -27,6 +27,13 @@ export class HeaderComponent implements OnInit {
 
   userInfo!: UserInfo;
 
+  socialIcons = {
+    facebook: '../../../../../../../assets/main-module/profile/facebook.svg',
+    instagram: '../../../../../../../assets/main-module/profile/insta.svg',
+    youtube: '../../../../../../../assets/main-module/profile/youtube.svg',
+    tiktok: '../../../../../../../assets/main-module/profile/tiktok.svg'
+  };
+
   constructor(
     private userInfoService: UserInfoService,
     private route: Router,
@@ -43,6 +50,11 @@ export class HeaderComponent implements OnInit {
     // get user info
     this.activatedRoute.data.subscribe((res) => {
       this.userInfo = res['userInfo'];
+
+      if (this.isMyProfile.value) {
+        this.userInfoService.myInfo = this.userInfo;
+      }
+
       if (this.userInfo.cover === null)
         this.userInfo.cover = this.defaultCoverImage;
 

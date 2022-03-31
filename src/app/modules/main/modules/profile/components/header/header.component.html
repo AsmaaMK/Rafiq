@@ -71,7 +71,7 @@
           alt=""
         />
         <p>
-          <span>{{ 0 }}</span> Followers
+          <span>{{ userInfo.numberOfFollowers }}</span> Followers
         </p>
       </li>
       <li aria-label="user from">
@@ -81,26 +81,26 @@
         />
         <p>From {{ userInfo.country }}</p>
       </li>
-      <li aria-label="user lives in" *ngIf="userInfo.livesIn">
+      <li aria-label="user lives in" *ngIf="userInfo.liveIn">
         <img
           src="../../../../../../../assets/main-module/profile/lives-in.svg"
           alt=""
         />
-        <p>Lives in {{ userInfo.livesIn }}</p>
+        <p>Lives in {{ userInfo.liveIn }}</p>
       </li>
     </ul>
 
-    <!-- <ul
+    <ul
       aria-label="user social media links"
       class="social-media-links"
-      *ngIf="user.userInfo.socialLinks"
+      *ngIf="userInfo.socialMedia"
     >
-      <li *ngFor="let socialLink of user.userInfo.socialLinks">
+      <li *ngFor="let socialLink of userInfo.socialMedia">
         <a [href]="socialLink.link" target="_blank">
-          <img [src]="socialLink.icon" [alt]="socialLink.label" />
+          <img [src]="socialIcons[socialLink.label]" [alt]="socialLink.label + 'link'" />
         </a>
       </li>
-    </ul> -->
+    </ul>
   </div>
 </header>
 

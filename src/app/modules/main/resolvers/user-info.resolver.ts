@@ -15,9 +15,13 @@ export class UserInfoResolver implements Resolve<UserInfo> {
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): Observable<UserInfo> {
+  ): Observable<UserInfo> | UserInfo{
     const urlUserName = route.params['username'];
+    const myUserName = this.tokenStorageService.getUsername();
+
+    if (urlUserName === myUserName && this.userInfoService.myInfo)
+      return this.userInfoService.myInfo;
+    
     return this.userInfoService.getUserInfo(urlUserName);
-    // return this.userInfoService.getUserInfo(urlUserName);
   }
 }

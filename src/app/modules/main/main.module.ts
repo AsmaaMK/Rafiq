@@ -12,7 +12,6 @@ import { SearchComponent } from './components/search/search.component';
 import { DesktopNavbarComponent } from './components/desktop-navbar/desktop-navbar.component';
 import { MobileNavbarComponent } from './components/mobile-navbar/mobile-navbar.component';
 import { MobileHeaderComponent } from './components/mobile-header/mobile-header.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -31,8 +30,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     MainRoutingModule,
-    ReactiveFormsModule,
-    FormsModule
   ]
 })
 export class MainModule { }

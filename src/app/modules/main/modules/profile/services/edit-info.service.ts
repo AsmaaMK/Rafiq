@@ -1,6 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
 import { environment } from 'src/environments/environment';
@@ -19,12 +18,29 @@ export class EditInfoService {
 
   myUserName = this.tokenStorageService.getUsername();
 
-  showEditInfo = new BehaviorSubject(true);
+  showEditInfo = new BehaviorSubject(false);
 
   constructor(
     private http: HttpClient,
     private tokenStorageService: TokenStorageService
   ) {}
 
- 
+  editInfo(body: any) {
+    return this.http.put<any>(`${this.url}/${this.myUserName}/info`, body, {
+      headers: headers,
+    });
+  }
+
+  editPassword(password: string) {
+    return this.http.put<any>(
+      `${this.url}/${this.myUserName}/password`,
+      {
+        password: password,
+        confirmPassword: password,
+      },
+      {
+        headers: headers,
+      }
+    );
+  }
 }

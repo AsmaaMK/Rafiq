@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { map, Observable } from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
 import { environment } from 'src/environments/environment';
 import { UserInfo } from '../models/user-info';
@@ -19,7 +19,8 @@ export class UserInfoService {
   private url = `${environment.apiUrl}/api/v1/users`;
 
   myUserName = this.tokenStorageService.getUsername();
-
+  myInfo!: UserInfo;
+  
   constructor(
     private http: HttpClient,
     private router: Router,

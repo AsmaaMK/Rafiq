@@ -1,5 +1,8 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
 import { EditInfoService } from './services/edit-info.service';
+import { UserInfoService } from './services/user-info.service';
 
 @Component({
   selector: 'app-profile',
@@ -7,12 +10,24 @@ import { EditInfoService } from './services/edit-info.service';
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
+  
+  urlUserName = this.route.url.split('/')[3];
+  myUserName = this.tokenStorageService.getUsername();
+  isMyProfile = this.urlUserName === this.myUserName;
 
   showEditInfo = this.editInfoService.showEditInfo;
 
-  constructor(private editInfoService: EditInfoService) {}
+  constructor(
+    private userInfoService: UserInfoService,
+    private route: Router,
+    private activatedRoute: ActivatedRoute,
+    private tokenStorageService: TokenStorageService,
+    private editInfoService: EditInfoService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (!this.isMyProfile) this.showEditInfo.next(false);
+  }
 
   @HostListener('window:resize', ['$event'])
   onResize() {

@@ -10,6 +10,8 @@ import { ImagesComponent } from './pages/images/images.component';
 import { VideosComponent } from './pages/videos/videos.component';
 import { MapComponent } from './pages/map/map.component';
 import { EditInfoComponent } from './components/edit-info/edit-info.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -25,7 +27,10 @@ import { EditInfoComponent } from './components/edit-info/edit-info.component';
   ],
   imports: [
     CommonModule,
-    ProfileRoutingModule
+    ProfileRoutingModule,
+    ReactiveFormsModule,
+    FormsModule,
+    SharedModule
   ]
 })
 export class ProfileModule { }
