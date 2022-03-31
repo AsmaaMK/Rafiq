@@ -17,47 +17,64 @@
     margin: 0;
     padding: 1em;
 
-    @include flex(row, space-around);
+    @include flex(row, space-around, center);
     flex-wrap: wrap;
     gap: 1em;
+
+    @include respond-to(small) {
+      padding: 0.75em;
+      gap: 0.5em;
+    }
 
     li {
       position: relative;
       font-size: $base-font-size;
-      
+
       @include respond-to(medium) {
         font-size: $base-font-size * 1.5;
       }
-      
+
       a {
         text-decoration: none;
         color: $primary;
         font-weight: 500;
         padding-left: 1.2em;
 
+        @include respond-to(small) {
+          font-size: $base-font-size * 0.9;
+          padding-left: 1em;
+        }
+
         &::before {
           content: "";
           position: absolute;
           left: 0;
+          top: 50%;
+          transform: translateY(-50%);
           width: 0.8em;
           height: 0.8em;
           background-repeat: no-repeat;
           background-size: contain;
           background-position: center;
+
+          @include respond-to(small) {
+            width: 0.7em;
+            height: 0.7em;
+          }
         }
-  
+
         &.posts-link::before {
           background-image: url("../../../../../../../assets/main-module/profile/posts.svg");
         }
-  
+
         &.images-link::before {
           background-image: url("../../../../../../../assets/main-module/profile/images.svg");
         }
-  
+
         &.videos-link::before {
           background-image: url("../../../../../../../assets/main-module/profile/videos.svg");
         }
-  
+
         &.map-link::before {
           background-image: url("../../../../../../../assets/main-module/profile/map.svg");
         }
@@ -66,12 +83,11 @@
   }
 }
 
-
 #indicator-wrapper {
   position: absolute;
   left: 0;
   width: 100%;
-  
+
   #active-link-indicator {
     height: 0.25rem;
     position: absolute;
@@ -79,7 +95,7 @@
     bottom: 0;
     background-color: $primary;
     border-radius: 50px;
-  
+
     @include animation;
   }
 }
