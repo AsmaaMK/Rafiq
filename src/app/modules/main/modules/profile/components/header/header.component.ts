@@ -56,7 +56,7 @@ export class HeaderComponent implements OnInit {
     // get user info
     this.activatedRoute.data.subscribe((res) => {
       this.userInfo = res['userInfo'];
-      
+
       if (!this.isMyProfile.value) {
         this.followingService
           .getIsFollowed(this.urlUserName)
@@ -75,8 +75,9 @@ export class HeaderComponent implements OnInit {
 
       if (this.userInfo.avatar === null)
         this.userInfo.avatar = this.defaultPersonalImage;
-
     });
+
+    this.closePopupOnClick();
   }
 
   changeCover(event: any, popup: HTMLElement) {
@@ -181,5 +182,23 @@ export class HeaderComponent implements OnInit {
 
   showEditInfo() {
     this.editInfoService.showEditInfo.next(true);
+  }
+
+  closePopupOnClick() {
+    const coverPopup = document.getElementById('cover-options-popup');
+    const avatarPopup = document.getElementById('avatar-options-popup');
+
+    coverPopup?.addEventListener('click', (event) => {
+      if (event.target === coverPopup) {
+        document.body.classList.remove('popup-open');
+        coverPopup.classList.remove('open');
+      }
+    });
+    avatarPopup?.addEventListener('click', (event) => {
+      if (event.target === avatarPopup) {
+        document.body.classList.remove('popup-open');
+        avatarPopup.classList.remove('open');
+      }
+    });
   }
 }

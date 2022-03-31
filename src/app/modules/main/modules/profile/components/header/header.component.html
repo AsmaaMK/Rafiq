@@ -1,4 +1,8 @@
-<app-error-message [show]="showToast" [status]="toastStatus" [message]="toastMessage"></app-error-message>
+<app-error-message
+  [show]="showToast"
+  [status]="toastStatus"
+  [message]="toastMessage"
+></app-error-message>
 
 <header class="profile-header">
   <div class="profile-cover" id="profile-cover">
@@ -99,13 +103,15 @@
     >
       <li *ngFor="let socialLink of userInfo.socialMedia">
         <a [href]="socialLink.link" target="_blank">
-          <img [src]="socialIcons[socialLink.label]" [alt]="socialLink.label + 'link'" />
+          <img
+            [src]="socialIcons[socialLink.label]"
+            [alt]="socialLink.label + 'link'"
+          />
         </a>
       </li>
     </ul>
   </div>
 </header>
-
 
 <!-- pop-ups -->
 <div id="cover-options-popup" class="overlay-wrapper" #coverOptions>

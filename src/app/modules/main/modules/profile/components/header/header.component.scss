@@ -226,14 +226,27 @@
 /* cover and avatar options popup */
 #cover-options-popup,
 #avatar-options-popup {
+  position: fixed;
+
   .pop-up {
-    width: auto;
+    width: 400px;
+    pointer-events: visible;
+
+    @include respond-to(less-than-medium) {
+      border-radius: 1em 1em 0 0;
+      width: 100%;
+      top: unset;
+      left: unset;
+      bottom: 0;
+      transform: translate(0) scale(1);
+    }
 
     .options {
       @include flex;
       padding: 2rem;
 
       &__btn {
+        width: 100%;
         cursor: pointer;
         min-width: 250px;
         text-align: left;
@@ -263,6 +276,12 @@
       }
     }
   }
+
+  .close-btn {
+    @include respond-to(less-than-medium) {
+      display: none;
+    }
+  }
 }
 
 /* cover and avatar preview */
@@ -273,7 +292,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  
+
   .img-preview {
     overflow: auto;
     width: 100%;
