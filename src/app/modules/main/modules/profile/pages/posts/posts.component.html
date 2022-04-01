@@ -1,7 +1,17 @@
 <section class="posts-section">
-  <div class="no-posts-section" *ngIf="posts.length === 0; else postsSeciton">
+  <div
+    class="no-posts-section"
+    [ngClass]="{
+      'my-profile-no-posts': isMyProfile,
+      'not-my-profile-no-posts': !isMyProfile
+    }"
+    *ngIf="posts.length === 0; else postsSeciton"
+  >
     <h2>No posts yet</h2>
-    <p>Press on plus <br> to add a new post</p>
+    <p *ngIf="isMyProfile">
+      Press on plus <br />
+      to add a new post
+    </p>
   </div>
   <ng-template #postsSeciton>
     <div class="post" *ngFor="let post of posts">

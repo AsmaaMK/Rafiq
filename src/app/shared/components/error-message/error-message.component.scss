@@ -5,7 +5,7 @@
   width: 80%;
   max-width: 400px;
   position: fixed;
-  z-index: $index-5;
+  z-index: $index-6;
   bottom: 10vh;
   left: 50%;
   transform: translateX(-50%);
@@ -15,6 +15,7 @@
   border-radius: 10px;
 
   @include respond-to(medium) {
+    left: unset;
     right: 10vw;
     transform: translateX(0);
   }

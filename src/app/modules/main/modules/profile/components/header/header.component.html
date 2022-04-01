@@ -68,7 +68,7 @@
           alt=""
         />
         <p>
-          <span>{{ userInfo.numberOfPosts }}</span> Posts
+          <span>{{ userInfo.numberOfPosts? userInfo.numberOfPosts: 0 }}</span> Posts
         </p>
       </li>
       <li aria-label="number of followers">
