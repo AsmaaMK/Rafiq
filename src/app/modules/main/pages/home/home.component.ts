@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { TestingApiService } from 'src/app/shared/services/testing-api.service';
+import { PostService } from '../../components/post/post.service';
 
 @Component({
   selector: 'app-home',
@@ -8,16 +9,19 @@ import { TestingApiService } from 'src/app/shared/services/testing-api.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  constructor(private testapi: TestingApiService, private auth: AuthService) {}
+  constructor(
+    private testapi: TestingApiService,
+    private auth: AuthService,
+    private postService: PostService
+  ) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   logout() {
     this.auth.logoutUser();
   }
 
-  gitAccessToken() {
+  getAccessToken() {
     this.auth.refreshAccessToken();
   }
 }

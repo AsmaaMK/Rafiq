@@ -12,6 +12,8 @@ import { SearchComponent } from './components/search/search.component';
 import { DesktopNavbarComponent } from './components/desktop-navbar/desktop-navbar.component';
 import { MobileNavbarComponent } from './components/mobile-navbar/mobile-navbar.component';
 import { MobileHeaderComponent } from './components/mobile-header/mobile-header.component';
+import { PostComponent } from './components/post/post.component';
+import { PostPageComponent } from './pages/post-page/post-page.component';
 
 
 @NgModule({
@@ -26,6 +28,8 @@ import { MobileHeaderComponent } from './components/mobile-header/mobile-header.
     DesktopNavbarComponent,
     MobileNavbarComponent,
     MobileHeaderComponent,
+    PostComponent,
+    PostPageComponent,
   ],
   imports: [
     CommonModule,

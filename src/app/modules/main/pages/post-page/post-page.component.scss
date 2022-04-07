@@ -1,0 +1,22 @@
+@use "~../../../../../../../styles/helpers/helpers-dir" as *;
+
+.post-page {
+  position: relative;
+  min-height: 100vh;
+  margin: 0;
+  border-radius: 2rem;
+  background-color: $secondary;
+  @include main-gradient;
+  
+  .back-btn {
+    position: absolute;
+    background-color: transparent;
+    padding: 0;
+    width: 3rem;
+    margin: 1rem 0.5rem;
+
+    img {
+      width: 100%;
+    }
+  }
+}

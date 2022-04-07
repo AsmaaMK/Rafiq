@@ -35,10 +35,6 @@ export class UserInfoService {
       .pipe(map((userInfoResponse) => userInfoResponse.results));
   }
 
-  editUserInfo() {
-    
-  }
-
   changeCover(newCover: FormData) {
     return this.http
       .put<any>(`${this.url}/${this.myUserName}/cover`, newCover)

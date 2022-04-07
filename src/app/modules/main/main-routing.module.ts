@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MainComponent } from './main.component';
 import { HomeComponent } from './pages/home/home.component';
+import { PostPageComponent } from './pages/post-page/post-page.component';
 import { SettingComponent } from './pages/setting/setting.component';
 import { UserInfoResolver } from './resolvers/user-info.resolver';
 
@@ -25,6 +26,11 @@ const routes: Routes = [
             (m) => m.ProfileModule
           ),
         resolve: { userInfo: UserInfoResolver },
+      },
+      {
+        path: 'post/:postId',
+        component: PostPageComponent,
+        // resolve: { userInfo: UserInfoResolver },
       },
       {
         path: 'trip',

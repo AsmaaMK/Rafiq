@@ -23,7 +23,7 @@ $mobile-navbar-height: 3.5rem;
     $main-width: min(1200px, 80vw);
     width: $main-width;
     margin-left: calc(($desktop-navbar-width + 100vw - $main-width) / 2);
-    padding-bottom: 2em;
+    // padding-bottom: 2em;
   }
 }
 
@@ -84,8 +84,8 @@ main {
 
     @include respond-to(medium) {
       bottom: 4rem;
-      width: 4rem;
-      height: 4rem;
+      width: 3.5rem;
+      height: 3.5rem;
     }
 
     svg {
