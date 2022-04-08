@@ -14,6 +14,7 @@ import { MobileNavbarComponent } from './components/mobile-navbar/mobile-navbar.
 import { MobileHeaderComponent } from './components/mobile-header/mobile-header.component';
 import { PostComponent } from './components/post/post.component';
 import { PostPageComponent } from './pages/post-page/post-page.component';
+import { SliderComponent } from './components/slider/slider.component';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { PostPageComponent } from './pages/post-page/post-page.component';
     MobileHeaderComponent,
     PostComponent,
     PostPageComponent,
+    SliderComponent,
   ],
   imports: [
     CommonModule,

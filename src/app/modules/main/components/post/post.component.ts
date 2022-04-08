@@ -14,11 +14,8 @@ export class PostComponent implements OnInit {
 
   postData: PostData = this.postService.initialPostData;
   postDataAssigned = new BehaviorSubject(true);
-  numberOfMedia: number = 0;
-  indexOfCurrentMedia = 0;
 
-  slider = document.getElementById('slider');
-  sliderWidth = 0;
+  postImages!: string[];
 
   constructor(
     private postService: PostService,
@@ -28,59 +25,8 @@ export class PostComponent implements OnInit {
   ngOnInit() {
     this.preparePostData(this.postId);
     this.postDataAssigned.subscribe(() => {
-      const numberOfImages = this.postData.content.media.images.length;
-      const numberOfVideos = this.postData.content.media.video === '' ? 0 : 1;
-      // this.numberOfMedia = numberOfImages + numberOfVideos;
-      this.numberOfMedia = 4;
-
-      this.slider = document.getElementById('slider');
-
-      const widthOfParent =
-        this.slider?.parentElement?.getBoundingClientRect().width;
-
-      if (widthOfParent && this.slider) {
-        this.sliderWidth = widthOfParent * this.numberOfMedia;
-        this.slider.style.width = this.sliderWidth.toString() + 'px';
-
-        const listOfPostMedia = document.querySelectorAll<HTMLElement>(
-          '.slider__post-media'
-        );
-
-        listOfPostMedia.forEach((postMedia) => {
-          postMedia.style.width =
-            (this.sliderWidth / this.numberOfMedia - 144).toString() + 'px';
-        });
-      }
+      this.postImages = this.postData.content.media.images;
     });
-  }
-
-  moveToPreviousMedia(): void {
-    // console.log('media: ', this.numberOfMedia);
-    if (this.indexOfCurrentMedia > 0) {
-      this.indexOfCurrentMedia--;
-      console.log(this.indexOfCurrentMedia);
-      const translate =
-        (this.sliderWidth / this.numberOfMedia) * this.indexOfCurrentMedia;
-      console.log('trans: ', translate);
-      console.log(this.slider);
-      if (this.slider)
-        this.slider.style.transform = `translate(${-translate}px)`;
-    }
-  }
-
-  moveToNextMedia(): void {
-    // console.log('media: ', this.numberOfMedia);
-    if (this.indexOfCurrentMedia < this.numberOfMedia - 1) {
-      this.indexOfCurrentMedia++;
-      console.log(this.indexOfCurrentMedia);
-      const translate =
-        (this.sliderWidth / this.numberOfMedia) * this.indexOfCurrentMedia;
-      console.log('trans: ', translate);
-
-      console.log(this.slider);
-      if (this.slider)
-        this.slider.style.transform = `translate(${-translate}px)`;
-    }
   }
 
   preparePostData(postId: string) {
@@ -96,11 +42,11 @@ export class PostComponent implements OnInit {
 
       this.postDataAssigned.next(true);
 
-      FIXME:
-      this.userInfoService.getUserInfo(res.author).subscribe((res) => {
-        this.postData.auther.name = `${res.firstName} ${res.lastName}`;
-        this.postData.auther.avatar = res.avatar;
-      });
+      // FIXME:
+      // this.userInfoService.getUserInfo(res.author).subscribe((res) => {
+      //   this.postData.auther.name = `${res.firstName} ${res.lastName}`;
+      //   this.postData.auther.avatar = res.avatar;
+      // });
     });
   }
 }

@@ -54,10 +54,8 @@ export class PostService {
 
     for (let file of postFiles) {
       if (file.startsWith(imageUrl)) {
-        console.log('Image', file);
         media.images?.push(file);
       } else if (file.startsWith(videoUrl)) {
-        console.log('video', file);
         media.video = file;
       }
     }
