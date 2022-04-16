@@ -3,5 +3,97 @@
 .post {
   width: 80%;
   margin: auto;
+  background-color: $neutral-lighter;
+  border-radius: 1em;
+
+  .post-header {
+    margin: 1em;
+    padding-top: 1em;
+    @include flex(row, space-between);
+  }
+
+  .post-options {
+    button {
+      background-color: transparent;
+      padding: 0;
+      height: 2rem;
+
+      img {
+        height: inherit;
+      }
+    }
+  }
+
+  .post-author {
+    @include flex(row, start);
+    gap: 1em;
+
+    &__avatar {
+      width: 3rem;
+      height: 3rem;
+      border-radius: 1em;
+      border: 2px solid $primary;
+      // background-color: $primary;
+    }
+
+    &__info {
+      color: $primary;
+
+      .name {
+        font-weight: 500;
+        font-size: $base-font-size * 1.2;
+        margin: 0;
+      }
+
+      .username {
+        color: $primary;
+        text-decoration: none;
+      }
+    }
+  }
+
+  video {
+    width: 100%;
+  }
+
+  .post-text {
+    margin: 1em;
+    color: $primary;
+    font-size: $base-font-size * 1.2;
+    line-height: 1.5;
+  }
+
+  .post-reactions {
+    margin: 1em;
+    padding-bottom: 1em;
+    @include flex(row, space-between, start);
+
+    div {
+      button {
+        padding: 0;
+        width: 2.5rem;
+        height: 2.5rem;
+        background-color: transparent;
+        color: transparent;
+
+        svg, img {
+          height: inherit;
+          width: inherit;
+        }
+
+        &:hover {
+          color: rgba($primary, 0.5);
+        }
+      }
+
+      p {
+        color: $primary;
+        font-size: $base-font-size;
+        font-weight: 500;
+        margin: 0;
+        text-align: center;
+      }
+    }
+  }
 }
 

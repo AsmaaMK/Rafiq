@@ -1,16 +1,26 @@
 <div class="slider-wrapper">
   <div class="slider-controlers">
-    <button class="prev-btn" (click)="moveToPreviousMedia()">
+    <button
+      class="prev-btn"
+      [ngClass]="{ disabled: indexOfCurrentMedia == 0 }"
+      (click)="moveToPreviousMedia()"
+    >
       <svg>
         <use xlink:href="#prev-arrow-icon" href="#prev-arrow-icon"></use>
       </svg>
     </button>
+
     <div id="slider" #slider class="slider">
       <div class="slider__post-media" *ngFor="let image of postMedia">
         <img [src]="image" alt="" />
       </div>
     </div>
-    <button class="next-btn" (click)="moveToNextMedia()">
+
+    <button
+      class="next-btn"
+      [ngClass]="{ disabled: indexOfCurrentMedia == numberOfMedia - 1 }"
+      (click)="moveToNextMedia()"
+    >
       <svg>
         <use xlink:href="#next-arrow-icon" href="#next-arrow-icon"></use>
       </svg>
