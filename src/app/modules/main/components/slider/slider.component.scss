@@ -2,7 +2,7 @@
 
 .slider-wrapper {
   overflow: hidden;
-  background-color: $secondary;
+  background-color: $bg-color;
 }
 
 .slider-controlers {
@@ -57,7 +57,10 @@
     &__post-media {
       height: 100%;
       display: inline-block;
-      margin: 0 $controlers-size;
+      
+      @include respond-to(medium) {
+        margin: 0 $controlers-size;
+      }
 
       img {
         width: 100%;

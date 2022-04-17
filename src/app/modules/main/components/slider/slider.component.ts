@@ -37,8 +37,11 @@ export class SliderComponent implements OnInit {
       );
 
       listOfPostMedia.forEach((postMedia) => {
+        let margin: any = getComputedStyle(postMedia).marginLeft;
+        margin = margin.slice(0, margin.indexOf('px'));
+        
         postMedia.style.width =
-          (this.sliderWidth / this.numberOfMedia - 144).toString() + 'px'; /// 144 = 2 * controlerSize = 2 * 72
+          (this.sliderWidth / this.numberOfMedia - (margin * 2)).toString() + 'px';
       });
     }
   }

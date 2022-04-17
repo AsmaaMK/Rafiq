@@ -32,8 +32,8 @@ type PostData = {
   };
   shared: boolean;
   sharedFrom?: string;
-  numberOfLikes?: number;
-  numberOfComments?: number;
+  numberOfLikes: number;
+  numberOfComments: number;
 };
 
 type PostMedia = {
@@ -41,4 +41,23 @@ type PostMedia = {
   video: string;
 };
 
-export { Post, GetPostResponse, PostData, PostMedia };
+type GetPostAuthorResponse = {
+  success: boolean;
+  results: PostAuthor;
+};
+
+type PostAuthor = {
+  firstName: string;
+  lastName: string;
+  userName: string;
+  avatar: string;
+};
+
+export {
+  Post,
+  GetPostResponse,
+  PostData,
+  PostMedia,
+  PostAuthor,
+  GetPostAuthorResponse,
+};

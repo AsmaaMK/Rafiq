@@ -5,6 +5,12 @@
   margin: auto;
   background-color: $neutral-lighter;
   border-radius: 1em;
+  box-shadow: 0 1px 10px $secondary-lavender;
+
+  @include respond-to(less-than-medium) {
+    width: 100%;
+    margin: 4rem auto;
+  }
 
   .post-header {
     margin: 1em;
@@ -25,7 +31,7 @@
   }
 
   .post-author {
-    @include flex(row, start);
+    @include flex(row, flex-start);
     gap: 1em;
 
     &__avatar {
@@ -61,12 +67,18 @@
     color: $primary;
     font-size: $base-font-size * 1.2;
     line-height: 1.5;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 5; /* number of lines to show */
+    line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   .post-reactions {
     margin: 1em;
     padding-bottom: 1em;
-    @include flex(row, space-between, start);
+    @include flex(row, space-between, flex-start);
 
     div {
       button {
@@ -75,8 +87,10 @@
         height: 2.5rem;
         background-color: transparent;
         color: transparent;
+        @include animation;
 
-        svg, img {
+        svg,
+        img {
           height: inherit;
           width: inherit;
         }
@@ -84,9 +98,14 @@
         &:hover {
           color: rgba($primary, 0.5);
         }
+
+        &.liked {
+          color: $primary;
+        }
       }
 
       p {
+        user-select: none;
         color: $primary;
         font-size: $base-font-size;
         font-weight: 500;
@@ -96,4 +115,3 @@
     }
   }
 }
-

@@ -4,16 +4,25 @@
   position: relative;
   min-height: 100vh;
   margin: 0;
-  padding: 2em;
   border-radius: 2rem;
-  background-color: $secondary;
-  @include main-gradient;
-  
+  background-color: transparent;
+  padding: 1em 0.5em;
+
+  @include respond-to(medium) {
+    background-color: $secondary;
+    padding: 2em;
+    @include main-gradient;
+  }
+
   .back-btn {
     position: absolute;
     background-color: transparent;
     padding: 0;
-    width: 3rem;
+    width: 2.5rem;
+
+    @include respond-to(medium) {
+      width: 3rem;
+    }
 
     img {
       width: 100%;

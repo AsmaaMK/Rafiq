@@ -1,14 +1,12 @@
 <div class="post" *ngIf="postDataAssigned.value">
   <div class="post-header">
     <div class="post-author">
-      <img
-        class="post-author__avatar"
-        src="../../../../../assets/main-module/post-images/photo_2022-03-19_23-07-37.jpg"
-        alt=""
-      />
+      <img class="post-author__avatar" [src]="postAuthor.avatar" alt="" />
       <div class="post-author__info">
-        <p class="name">Asmaa Mahmoud</p>
-        <a class="username" routerLink="">@AsmaaMK</a>
+        <p class="name">{{ postAuthor.firstName }} {{ postAuthor.lastName }}</p>
+        <a class="username" [routerLink]="['/app/profile', postAuthor.userName]"
+          >@{{ postAuthor.userName }}</a
+        >
       </div>
     </div>
     <div class="post-options">
@@ -31,12 +29,12 @@
 
   <div class="post-reactions">
     <div>
-      <button>
+      <button [ngClass]="{ liked: isLiked }" (click)="likeOrUnlike()">
         <svg>
           <use href="#like-icon"></use>
         </svg>
       </button>
-      <p>15</p>
+      <p>{{ postData.numberOfLikes }}</p>
     </div>
     <div>
       <button>
@@ -65,3 +63,4 @@
     />
   </symbol>
 </svg>
+

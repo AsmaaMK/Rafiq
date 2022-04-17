@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { UserInfoService } from '../../modules/profile/services/user-info.service';
-import { PostData } from './post';
+import { PostAuthor, PostData } from './post';
 import { PostService } from './post.service';
 
 @Component({
@@ -16,6 +16,14 @@ export class PostComponent implements OnInit {
   postDataAssigned = new BehaviorSubject(true);
 
   postImages!: string[];
+  postAuthor: PostAuthor = {
+    firstName: '',
+    lastName: '',
+    userName: '',
+    avatar: '',
+  };
+
+  isLiked = false;
 
   constructor(
     private postService: PostService,
@@ -27,6 +35,10 @@ export class PostComponent implements OnInit {
     this.postDataAssigned.subscribe(() => {
       this.postImages = this.postData.content.media.images;
     });
+
+    this.postService
+      .getIsLiked(this.postId)
+      .subscribe((res) => (this.isLiked = res.isLiked));
   }
 
   preparePostData(postId: string) {
@@ -42,11 +54,24 @@ export class PostComponent implements OnInit {
 
       this.postDataAssigned.next(true);
 
-      // FIXME:
-      // this.userInfoService.getUserInfo(res.author).subscribe((res) => {
-      //   this.postData.auther.name = `${res.firstName} ${res.lastName}`;
-      //   this.postData.auther.avatar = res.avatar;
-      // });
+      this.postService.getPostAuthor(res.author).subscribe((res) => {
+        this.postAuthor.avatar = res.avatar;
+        this.postAuthor.firstName = res.firstName;
+        this.postAuthor.lastName = res.lastName;
+        this.postAuthor.userName = res.userName;
+      });
     });
+  }
+
+  likeOrUnlike() {
+    if (this.isLiked) {
+      this.postService.unLike(this.postId);
+      this.isLiked = false;
+      this.postData.numberOfLikes--;
+    } else {
+      this.postService.like(this.postId);
+      this.isLiked = true;
+      this.postData.numberOfLikes++;
+    }
   }
 }
