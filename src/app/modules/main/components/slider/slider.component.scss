@@ -8,7 +8,7 @@
 .slider-controlers {
   position: relative;
 
-  $controlers-size: 72px; ///
+  $controlers-size: 3rem; ///
 
   .prev-btn,
   .next-btn {
@@ -17,8 +17,9 @@
     z-index: $index-5;
     top: 50%;
     transform: translateY(-50%);
-
-    background-color: transparent;
+    border-radius: 50%;
+    margin: 0 1rem;
+    background-color: $secondary-lavender;
     width: $controlers-size;
     height: $controlers-size;
 
@@ -35,6 +36,7 @@
 
     &.disabled {
       cursor: default;
+      background-color: transparent;
 
       svg {
         display: none;
@@ -59,7 +61,7 @@
       display: inline-block;
       
       @include respond-to(medium) {
-        margin: 0 $controlers-size;
+        margin: 0 $controlers-size + 2rem;
       }
 
       img {
