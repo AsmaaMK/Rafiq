@@ -20,10 +20,12 @@
 
   <app-slider *ngIf="postImages.length" [postMedia]="postImages" [postId]="postId"></app-slider>
 
-  <video controls *ngIf="postData.content.media.video">
+  <div class="video">
+    <video controls *ngIf="postData.content.media.video">
     <source [src]="postData.content.media.video" type="video/mp4" />
     No video support.
   </video>
+  </div>
 
   <p class="post-text" *ngIf="postData.content.text">
     {{ postData.content.text }}
