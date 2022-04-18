@@ -2,7 +2,10 @@
 
 .profile-container {
   position: relative;
-  padding-bottom: 2em;
+
+  @include respond-to(medium) {
+    padding-bottom: 2em;
+  }
 }
 
 .profile-nav {

@@ -41,23 +41,10 @@ type PostMedia = {
   video: string;
 };
 
-type GetPostAuthorResponse = {
-  success: boolean;
-  results: PostAuthor;
-};
-
-type PostAuthor = {
-  firstName: string;
-  lastName: string;
-  userName: string;
-  avatar: string;
-};
 
 export {
   Post,
   GetPostResponse,
   PostData,
-  PostMedia,
-  PostAuthor,
-  GetPostAuthorResponse,
+  PostMedia
 };

@@ -1,3 +1,5 @@
+<app-error-message [show]="showToaster" [status]="toasterType" [message]="toasterMessage"></app-error-message>
+
 <div class="post" *ngIf="postDataAssigned.value">
   <div class="post-header">
     <div class="post-author">
@@ -16,7 +18,7 @@
     </div>
   </div>
 
-  <app-slider *ngIf="postImages.length" [postMedia]="postImages"></app-slider>
+  <app-slider *ngIf="postImages.length" [postMedia]="postImages" [postId]="postId"></app-slider>
 
   <video controls *ngIf="postData.content.media.video">
     <source [src]="postData.content.media.video" type="video/mp4" />
@@ -29,15 +31,15 @@
 
   <div class="post-reactions">
     <div>
-      <button [ngClass]="{ liked: isLiked }" (click)="likeOrUnlike()">
+      <button class="like-btn" [ngClass]="{ liked: isLiked }" (click)="likeOrUnlike()">
         <svg>
           <use href="#like-icon"></use>
         </svg>
       </button>
-      <p>{{ postData.numberOfLikes }}</p>
+      <button class="number-of-likes-btn">{{ postData.numberOfLikes }}</button>
     </div>
     <div>
-      <button>
+      <button class="share-btn" (click)="sharePost()">
         <img
           src="../../../../../assets/main-module/post/share.svg"
           alt="share"

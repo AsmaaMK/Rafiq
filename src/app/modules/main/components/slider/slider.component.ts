@@ -7,10 +7,12 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class SliderComponent implements OnInit {
   @Input() postMedia: string[] = [];
+  @Input() postId = '';
+  
   indexOfCurrentMedia = 0;
   numberOfMedia!: number;
 
-  slider = document.getElementById('slider');
+  slider = document.getElementById(`slider-${this.postId}`);
   sliderWidth = 0;
 
   constructor() {}
@@ -23,7 +25,7 @@ export class SliderComponent implements OnInit {
 
   setSliderWidth() {
     this.numberOfMedia = this.postMedia.length;
-    this.slider = document.getElementById('slider');
+    this.slider = document.getElementById(`slider-${this.postId}`);
 
     const widthOfParent =
       this.slider?.parentElement?.getBoundingClientRect().width;
@@ -39,9 +41,10 @@ export class SliderComponent implements OnInit {
       listOfPostMedia.forEach((postMedia) => {
         let margin: any = getComputedStyle(postMedia).marginLeft;
         margin = margin.slice(0, margin.indexOf('px'));
-        
+
         postMedia.style.width =
-          (this.sliderWidth / this.numberOfMedia - (margin * 2)).toString() + 'px';
+          (this.sliderWidth / this.numberOfMedia - margin * 2).toString() +
+          'px';
       });
     }
   }
@@ -51,7 +54,7 @@ export class SliderComponent implements OnInit {
       this.indexOfCurrentMedia--;
       const translate =
         (this.sliderWidth / this.numberOfMedia) * this.indexOfCurrentMedia;
-      
+
       if (this.slider)
         this.slider.style.transform = `translate(${-translate}px)`;
     }

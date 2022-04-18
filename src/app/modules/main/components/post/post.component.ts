@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { UserInfo } from '../../modules/profile/models/user-info';
 import { UserInfoService } from '../../modules/profile/services/user-info.service';
-import { PostAuthor, PostData } from './post';
+import { PostData } from './post';
 import { PostService } from './post.service';
 
 @Component({
@@ -16,14 +17,18 @@ export class PostComponent implements OnInit {
   postDataAssigned = new BehaviorSubject(true);
 
   postImages!: string[];
-  postAuthor: PostAuthor = {
+  postAuthor: UserInfo = {
     firstName: '',
     lastName: '',
     userName: '',
-    avatar: '',
+    avatar: 'assets/main-module/profile/default-personal-image.svg',
   };
 
   isLiked = false;
+
+  showToaster = new BehaviorSubject(false);
+  toasterMessage = '';
+  toasterType = false;
 
   constructor(
     private postService: PostService,
@@ -54,8 +59,8 @@ export class PostComponent implements OnInit {
 
       this.postDataAssigned.next(true);
 
-      this.postService.getPostAuthor(res.author).subscribe((res) => {
-        this.postAuthor.avatar = res.avatar;
+      this.userInfoService.getUserInfo(res.author).subscribe((res) => {
+        if (res.avatar) this.postAuthor.avatar = res.avatar;
         this.postAuthor.firstName = res.firstName;
         this.postAuthor.lastName = res.lastName;
         this.postAuthor.userName = res.userName;
@@ -73,5 +78,33 @@ export class PostComponent implements OnInit {
       this.isLiked = true;
       this.postData.numberOfLikes++;
     }
+  }
+
+  // async showLikedUsers() {
+  //   let likedUsers: UserInfo[] = [];
+
+  //    this.postService.getLikes(this.postId).subscribe(
+  //     res => {
+  //       for (let user of res) {
+  //         this.userInfoService.getUserInfo(user).subscribe(
+  //           res => likedUsers.push(res)
+  //         )
+  //       }
+  //     }
+  //     )
+
+  //     console.log(likedUsers);
+  // }
+
+  sharePost() {
+    this.postService.share(this.postId).subscribe(
+      (res) => {
+        // TODO: show success message
+        console.log(res);
+      },
+      (err) => {
+        // TODO: show error message
+      }
+    );
   }
 }

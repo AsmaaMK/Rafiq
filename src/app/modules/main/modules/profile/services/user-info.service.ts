@@ -1,10 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, map, Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
 import { environment } from 'src/environments/environment';
-import { UserInfo } from '../models/user-info';
+import { GetUserInfoResponse, UserProfile } from '../models/user-info';
 
 const headers = new HttpHeaders();
 headers
@@ -19,20 +19,29 @@ export class UserInfoService {
   private url = `${environment.apiUrl}/api/v1/users`;
 
   myUserName = this.tokenStorageService.getUsername();
-  myInfo!: UserInfo;
-  
+  myInfo!: UserProfile;
+
   constructor(
     private http: HttpClient,
     private router: Router,
     private tokenStorageService: TokenStorageService
-  ) { }
-  
-  getUserInfo(userName: string): Observable<UserInfo> {
+  ) {}
+
+  getUserProfile(userName: string): Observable<UserProfile> {
     return this.http
       .get<any>(`${this.url}/${userName}`, {
         headers: headers,
       })
       .pipe(map((userInfoResponse) => userInfoResponse.results));
+  }
+
+  getUserInfo(auther: string) {
+    return this.http
+      .get<GetUserInfoResponse>(
+        `${environment.apiUrl}/api/v1/users/${auther}/info`,
+        { headers: headers }
+      )
+      .pipe(map((res) => res.results));
   }
 
   changeCover(newCover: FormData) {

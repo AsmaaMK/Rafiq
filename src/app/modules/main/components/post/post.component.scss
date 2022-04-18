@@ -81,7 +81,14 @@
     @include flex(row, space-between, flex-start);
 
     div {
-      button {
+      .share-btn {
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
+
+      .like-btn,
+      .share-btn {
         padding: 0;
         width: 2.5rem;
         height: 2.5rem;
@@ -104,12 +111,14 @@
         }
       }
 
-      p {
+      .number-of-likes-btn {
+        background-color: transparent;
+        display: block;
         user-select: none;
         color: $primary;
         font-size: $base-font-size;
         font-weight: 500;
-        margin: 0;
+        margin: 0 auto;
         text-align: center;
       }
     }

@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { CountriesService } from 'src/app/shared/services/countries.service';
-import { EditInfo, SocialLinks, UserInfo } from '../../models/user-info';
+import { EditInfo, SocialLinks, UserProfile } from '../../models/user-info';
 import { EditInfoService } from '../../services/edit-info.service';
 import { UserInfoService } from '../../services/user-info.service';
 
@@ -20,7 +20,7 @@ export class EditInfoComponent implements OnInit {
 
   countries = this.countriesService.getAllCountries();
   editInfoForm!: FormGroup;
-  myInfo!: UserInfo;
+  myInfo!: UserProfile;
   socialLinks: SocialLinks = {};
   updatedInfo: EditInfo = {};
   newPassword: string = '';
@@ -208,7 +208,7 @@ export class EditInfoComponent implements OnInit {
     this.editInfoService.showEditInfo.next(false);
     // window.location.reload();
     this.userInfoService
-      .getUserInfo(this.userInfoService.myUserName)
+      .getUserProfile(this.userInfoService.myUserName)
       .subscribe((res) => {
         this.userInfoService.myInfo = res;
         const myUrl = this.router.url;

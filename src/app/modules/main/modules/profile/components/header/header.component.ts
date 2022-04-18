@@ -4,7 +4,7 @@ import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
-import { UserInfo } from '../../models/user-info';
+import { UserProfile } from '../../models/user-info';
 import { EditInfoService } from '../../services/edit-info.service';
 import { FollowingsService } from '../../services/followings.service';
 import { UserInfoService } from '../../services/user-info.service';
@@ -26,7 +26,7 @@ export class HeaderComponent implements OnInit {
     'assets/main-module/profile/default-personal-image.svg';
   defaultCoverImage = 'assets/main-module/profile/default-cover.svg';
 
-  userInfo!: UserInfo;
+  userInfo!: UserProfile;
 
   socialIcons = {
     facebook: '../../../../../../../assets/main-module/profile/facebook.svg',

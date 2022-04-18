@@ -10,7 +10,7 @@
       </svg>
     </button>
 
-    <div id="slider" #slider class="slider">
+    <div id="slider-{{postId}}" class="slider">
       <div class="slider__post-media" *ngFor="let image of postMedia">
         <img [src]="image" alt="" />
       </div>

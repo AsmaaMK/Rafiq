@@ -3,13 +3,13 @@ import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
 import { environment } from 'src/environments/environment';
+import { GetUserInfoResponse, UserInfo } from '../../modules/profile/models/user-info';
 import { UserInfoService } from '../../modules/profile/services/user-info.service';
 import {
   Post,
   GetPostResponse,
   PostData,
   PostMedia,
-  GetPostAuthorResponse,
 } from './post';
 
 const headers = new HttpHeaders();
@@ -55,15 +55,6 @@ export class PostService {
       .pipe(map((res) => res.post));
   }
 
-  getPostAuthor(auther: string) {
-    return this.http
-      .get<GetPostAuthorResponse>(
-        `${environment.apiUrl}/api/v1/users/${auther}/info`,
-        { headers: headers }
-      )
-      .pipe(map((res) => res.results));
-  }
-
   classifyPostMedia(postFiles: string[]): PostMedia {
     const videoUrl = 'https://res.cloudinary.com/elaraby/video';
     const imageUrl = 'https://res.cloudinary.com/elaraby/image';
@@ -96,5 +87,15 @@ export class PostService {
 
   unLike(postId: string) {
     this.http.delete(`${this.url}/${postId}/like`).subscribe();
+  }
+
+  share(postId: string) {
+    return this.http.post(`${this.url}/${postId}/share`, null, {headers: headers});
+  }
+
+  getLikes(postId: string) {
+    return this.http.get<any>(`${this.url}/${postId}/likes`, {
+      headers: headers,
+    }).pipe(map(res => res.results.likes));
   }
 }

@@ -1,4 +1,4 @@
-export type UserInfo = {
+export type UserProfile = {
   numberOfFollowers?: number;
   numberOfFollowings?: number;
   numberOfPosts?: number;
@@ -40,4 +40,16 @@ export type SocialLinks = {
   instagram?: string;
   youtube?: string;
   tiktok?: string;
+};
+
+export type GetUserInfoResponse = {
+  success: boolean;
+  results: UserInfo;
+};
+
+export type UserInfo = {
+  firstName: string;
+  lastName: string;
+  userName: string;
+  avatar: string;
 };

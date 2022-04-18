@@ -15,6 +15,8 @@ import { MobileHeaderComponent } from './components/mobile-header/mobile-header.
 import { PostComponent } from './components/post/post.component';
 import { PostPageComponent } from './pages/post-page/post-page.component';
 import { SliderComponent } from './components/slider/slider.component';
+import { ErrorMessageComponent } from 'src/app/shared/components/error-message/error-message.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -36,6 +38,7 @@ import { SliderComponent } from './components/slider/slider.component';
   imports: [
     CommonModule,
     MainRoutingModule,
+    SharedModule
   ]
 })
 export class MainModule { }
