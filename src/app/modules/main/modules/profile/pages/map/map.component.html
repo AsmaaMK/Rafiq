@@ -1,6 +1,8 @@
+<app-error-message [show]="showToaster" [status]="toasterType" [message]="toasterMessage"></app-error-message>
+
 <div class="map-wrapper">
   <div id="google-map"></div>
-  <div class="map-buttons" *ngIf="map">
+  <div class="map-buttons" *ngIf="map && urlUserName === myUserName">
     <div class="map-button-group">
       <button
         class="map-btn"

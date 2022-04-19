@@ -5,7 +5,7 @@ import { hosts } from "./hosts";
 
 export const environment = {
   production: false,
-  apiUrl: hosts.localhost
+  apiUrl: hosts.remotehost
 };
 
 /*

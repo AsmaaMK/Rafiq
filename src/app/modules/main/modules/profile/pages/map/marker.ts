@@ -1,4 +1,4 @@
-type MarkerType = 'visited' | 'wish';
+type MarkerType = 'done' | 'wish';
 
 type LatLng = {
   lat: number;
@@ -6,7 +6,7 @@ type LatLng = {
 };
 
 type Marker = {
-  id: string;
+  _id: string;
   type: MarkerType;
   possition: LatLng;
 };

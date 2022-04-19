@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Loader } from '@googlemaps/js-api-loader';
+import { BehaviorSubject } from 'rxjs';
+import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
 import { MapService } from '../../services/map.service';
 import { Marker, MarkerData, MarkerType } from './marker';
 
 enum markerIcons {
   wish = 'assets/main-module/profile/wish-cursor.svg',
-  visited = 'assets/main-module/profile/visited-cursor.svg',
+  done = 'assets/main-module/profile/visited-cursor.svg',
   delete = 'assets/main-module/profile/delete-cursor.svg',
   default = 'https://maps.gstatic.com/mapfiles/openhand_8_8.cur',
 }
@@ -16,6 +19,10 @@ enum markerIcons {
   styleUrls: ['./map.component.scss'],
 })
 export class MapComponent implements OnInit {
+  showToaster = new BehaviorSubject(false);
+  toasterMessage = '';
+  toasterType = false;
+
   canAddMarker: boolean = false;
   canDelete: boolean = false;
 
@@ -25,7 +32,14 @@ export class MapComponent implements OnInit {
 
   map!: google.maps.Map;
 
-  constructor(private mapService: MapService) {}
+  urlUserName = this.route.url.split('/')[3];
+  myUserName = this.tokenStorageService.getUsername();
+
+  constructor(
+    private mapService: MapService,
+    private tokenStorageService: TokenStorageService,
+    private route: Router
+  ) {}
 
   ngOnInit(): void {
     this.initMapLoader();
@@ -65,9 +79,13 @@ export class MapComponent implements OnInit {
       if (this.canAddMarker) {
         let markerData = {
           type: this.markerType,
-          possition: mapsMouseEvent.latLng,
+          possition: {
+            lat: mapsMouseEvent.latLng.lat(),
+            lng: mapsMouseEvent.latLng.lng(),
+          },
         };
 
+        console.log('create', markerData.possition);
         this.createNewMarker(markerData); // send post request
         this.disableAddMarkers(); // to prevent adding more than one marker at a time
       }
@@ -94,7 +112,7 @@ export class MapComponent implements OnInit {
    */
   createMarker(marker: Marker): google.maps.Marker {
     const newMarker = this.dropMarkerOnMap(marker);
-    this.markers.push({ markerId: marker.id, marker: newMarker });
+    this.markers.push({ markerId: marker._id, marker: newMarker });
     this.setMarkerEventListerners(newMarker);
     return newMarker;
   }
@@ -116,7 +134,7 @@ export class MapComponent implements OnInit {
   }
 
   enableAddVisitedMarker(btn: HTMLElement): void {
-    this.markerType = 'visited';
+    this.markerType = 'done';
     this.enableAddMarker(this.markerType);
     this.focusButton(btn);
   }
@@ -157,15 +175,39 @@ export class MapComponent implements OnInit {
   }
 
   createInitialMarkers(): void {
-    const initMarkares = this.mapService.getAllMarkers(); // TODO: get request return all markers
-    for (let marker of initMarkares) {
-      const createdMarker = this.createMarker(marker);
-    }
+    let initMarkares = [];
+    this.mapService.getAllMarkers(this.urlUserName).subscribe((res) => {
+      initMarkares = res.results.travelMap;
+      console.log(initMarkares);
+      for (let marker of initMarkares) {
+        const createdMarker = this.createMarker({
+          type: marker.type,
+          _id: marker._id,
+          possition: {
+            lat: marker.latitude,
+            lng: marker.longitude,
+          },
+        });
+      }
+    }, () => {
+      this.toasterMessage = `Error: can't download initial markers`;
+      this.toasterType = false;
+      this.showToaster.next(true);
+    });
   }
 
   createNewMarker(markerData: MarkerData): void {
-    const markerId = this.mapService.addMarker(markerData); // TODO: subscribe to the post request here
-    this.createMarker({ id: markerId, ...markerData }); // TODO: but me inside the subscribe
+    this.mapService.addMarker(markerData).subscribe(
+      (res) => {
+        const markerId = res.results.marker._id;
+        this.createMarker({ _id: markerId, ...markerData });
+      },
+      () => {
+        this.toasterMessage = `Error: can't create this marker`;
+        this.toasterType = false;
+        this.showToaster.next(true);
+      }
+    );
   }
 
   /**
@@ -176,24 +218,19 @@ export class MapComponent implements OnInit {
   deleteMarker(): void {
     for (let index = 0; index < this.markers.length; index++) {
       if (this.markers[index].marker.getVisible() === false) {
-        // this.mapService.deleteMarker(this.markers[index].markerId).subscribe(
-        //   () => {
-        //     this.markers[index].marker.setMap(null); // delete from the map
-        //     this.markers.splice(index, 1); // delet from the array
-        //   },
-        //   (err) => {
-        //     this.markers[index].marker.setVisible(true); // make it visible again
-        //     console.log(err); // TODO: display the error message to the user
-        //   }
-        // );
+        this.mapService.deleteMarker(this.markers[index].markerId).subscribe(
+          () => {
+            this.markers[index].marker.setMap(null); // delete from the map
+            this.markers.splice(index, 1); // delete from the array
+          },
+          () => {
+            this.markers[index].marker.setVisible(true); // make it visible again
+            this.toasterMessage = `Error: can't delete this marker`;
+            this.toasterType = false;
+            this.showToaster.next(true);
+          }
+        );
 
-        if (this.mapService.deleteMarker(this.markers[index].markerId)) {
-          this.markers[index].marker.setMap(null); // delete from the map
-          this.markers.splice(index, 1); // delete from the array
-        } else {
-          this.markers[index].marker.setVisible(true);
-          console.log("can't delete the marker");
-        }
         break;
       }
     }
@@ -204,11 +241,12 @@ export class MapComponent implements OnInit {
       draggableCursor: `url(${cursorIconURL}), default`,
     });
 
-    const mapWrapper = <HTMLElement>document.getElementsByClassName('map-wrapper')[0];
+    const mapWrapper = <HTMLElement>(
+      document.getElementsByClassName('map-wrapper')[0]
+    );
     if (cursorIconURL === 'https://maps.gstatic.com/mapfiles/openhand_8_8.cur')
       mapWrapper.style.cursor = 'default';
-    else
-      mapWrapper.style.cursor = `url(${cursorIconURL}), default`;
+    else mapWrapper.style.cursor = `url(${cursorIconURL}), default`;
   }
 
   changeMarkerCursor(
