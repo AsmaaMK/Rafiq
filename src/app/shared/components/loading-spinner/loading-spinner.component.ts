@@ -7,6 +7,9 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class LoadingSpinnerComponent implements OnInit {
 
+  @Input() show = false;
+  @Input() overlay: 'page' | 'component' = 'page';
+
   constructor() { }
 
   ngOnInit(): void {

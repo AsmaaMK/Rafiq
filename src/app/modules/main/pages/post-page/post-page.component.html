@@ -1,4 +1,5 @@
 <section class="post-page">
+  <app-loading-spinner [show]="!postDataAssigned.value" [overlay]="'component'"></app-loading-spinner>
   <button [routerLink]="[previousUrl]" class="back-btn">
     <img
       src="../../../../../../../assets/main-module/profile/back.svg"

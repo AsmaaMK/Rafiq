@@ -1,3 +1,10 @@
-<div class="overlay">
+<div
+  class="overlay"
+  [ngClass]="{
+    'overlay-page': overlay === 'page',
+    'overlay-component': overlay === 'component'
+  }"
+  *ngIf="show"
+>
   <div class="spinner"></div>
 </div>
