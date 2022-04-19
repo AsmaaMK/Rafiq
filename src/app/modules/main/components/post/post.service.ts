@@ -3,14 +3,12 @@ import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
 import { environment } from 'src/environments/environment';
-import { GetUserInfoResponse, UserInfo } from '../../modules/profile/models/user-info';
-import { UserInfoService } from '../../modules/profile/services/user-info.service';
 import {
-  Post,
-  GetPostResponse,
-  PostData,
-  PostMedia,
-} from './post';
+  GetUserInfoResponse,
+  UserInfo,
+} from '../../modules/profile/models/user-info';
+import { UserInfoService } from '../../modules/profile/services/user-info.service';
+import { Post, GetPostResponse, PostData, PostMedia } from './post';
 
 const headers = new HttpHeaders();
 headers
@@ -91,12 +89,20 @@ export class PostService {
   }
 
   share(postId: string) {
-    return this.http.post(`${this.url}/${postId}/share`, null, {headers: headers});
+    return this.http.post(`${this.url}/${postId}/share`, null, {
+      headers: headers,
+    });
   }
 
   getLikes(postId: string) {
-    return this.http.get<any>(`${this.url}/${postId}/likes`, {
-      headers: headers,
-    }).pipe(map(res => res.results.likes));
+    return this.http
+      .get<any>(`${this.url}/${postId}/likes`, {
+        headers: headers,
+      })
+      .pipe(map((res) => res.results.likes));
+  }
+
+  deletePost(postId: string) {
+    return this.http.delete(`${this.url}/${postId}`, { headers: headers });
   }
 }

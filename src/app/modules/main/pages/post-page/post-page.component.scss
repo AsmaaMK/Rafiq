@@ -7,6 +7,7 @@
   border-radius: 2rem;
   background-color: transparent;
   padding: 1em 0.5em;
+  overflow: hidden;
 
   @include respond-to(medium) {
     background-color: $secondary;

@@ -1,6 +1,10 @@
-<app-error-message [show]="showToaster" [status]="toasterType" [message]="toasterMessage"></app-error-message>
+<app-error-message
+  [show]="showToaster"
+  [status]="toasterType"
+  [message]="toasterMessage"
+></app-error-message>
 
-<div class="post">
+<div #post class="post">
   <div class="post-header">
     <div class="post-author">
       <img class="post-author__avatar" [src]="postAuthor.avatar" alt="" />
@@ -11,20 +15,32 @@
         >
       </div>
     </div>
-    <div class="post-options">
-      <button>
+    <div class="post-options" *ngIf="isMyProfile">
+      <button class="options-btn" (click)="toggleOptionsList(options)">
         <img src="../../../../../assets/main-module/post/options.svg" alt="" />
       </button>
+      <div class="options" #options>
+        <button
+          class="delete-btn"
+          (click)="openDeletePostPopup(deletePostPopup)"
+        >
+          Delete post
+        </button>
+      </div>
     </div>
   </div>
 
-  <app-slider *ngIf="postImages.length" [postMedia]="postImages" [postId]="postId"></app-slider>
+  <app-slider
+    *ngIf="postImages.length"
+    [postMedia]="postImages"
+    [postId]="postId"
+  ></app-slider>
 
   <div class="video">
     <video controls *ngIf="postData.content.media.video">
-    <source [src]="postData.content.media.video" type="video/mp4" />
-    No video support.
-  </video>
+      <source [src]="postData.content.media.video" type="video/mp4" />
+      No video support.
+    </video>
   </div>
 
   <p class="post-text" *ngIf="postData.content.text">
@@ -33,7 +49,11 @@
 
   <div class="post-reactions">
     <div>
-      <button class="like-btn" [ngClass]="{ liked: this.postData.isLiked}" (click)="likeOrUnlike()">
+      <button
+        class="like-btn"
+        [ngClass]="{ liked: this.postData.isLiked }"
+        (click)="likeOrUnlike()"
+      >
         <svg>
           <use href="#like-icon"></use>
         </svg>
@@ -51,6 +71,27 @@
   </div>
 </div>
 
+<div id="delete-post-popup" class="overlay-wrapper open" #deletePostPopup>
+  <div class="pop-up delete-post">
+    <div>
+      <button (click)="closePopup(deletePostPopup)" class="close-btn">
+        <img src="../../../assets/main-module/Close.svg" alt="" />
+      </button>
+
+      <p class="delete">Delete Post?</p>
+      <p class="description">
+        Are you sure you want to permanently remove this post from Rafiq?
+      </p>
+
+      <button id="delete-btn" (click)="deletePost(deletePostPopup, post)">
+        Delete
+      </button>
+    </div>
+  </div>
+</div>
+
+<app-loading-spinner [show]="deleting"></app-loading-spinner>
+
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
   <symbol
     height="100%"
@@ -67,4 +108,3 @@
     />
   </symbol>
 </svg>
-

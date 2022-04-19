@@ -1,3 +1,4 @@
+@use "~../../../../../../../styles/components/overlay-pop-up";
 @use "~../../../../../../../styles/helpers/helpers-dir" as *;
 
 .post {
@@ -19,13 +20,48 @@
   }
 
   .post-options {
-    button {
+    position: relative;
+
+    .options-btn {
       background-color: transparent;
       padding: 0;
       height: 2rem;
 
       img {
         height: inherit;
+      }
+    }
+
+    .options {
+      display: none;
+      min-width: 200px;
+      position: absolute;
+      z-index: $index-4;
+      right: 0;
+      top: 100%;
+      background-color: $neutral-lighter;
+      box-shadow: 0 1px 10px $secondary-lavender;
+      border-radius: 1em;
+      padding: 1em;
+
+      &.show {
+        display: block;
+      }
+
+      .delete-btn {
+        width: fit-content;
+        background-color: transparent;
+        color: $invalid;
+        font-size: $base-font-size * 1.1;
+        padding-left: 2rem;
+
+        &::before {
+          content: url("../../../../../assets/main-module/post/delete.svg");
+          position: absolute;
+          left: 1em;
+          top: 50%;
+          transform: translateY(-50%);
+        }
       }
     }
   }
@@ -119,6 +155,43 @@
         font-weight: 500;
         margin: 0 auto;
         text-align: center;
+      }
+    }
+  }
+}
+
+#delete-post-popup {
+  .delete-post {
+    max-width: 350px;
+    transform: translate(-50%, -100%) scale(1);
+    padding: 2rem;
+
+    div {
+      overflow: hidden;
+    }
+
+    p.delete {
+      color: $invalid;
+      font-size: $base-font-size * 1.2;
+      margin: 0;
+    }
+
+    p.description {
+      color: $primary;
+      font-size: $base-font-size * 1.1;
+    }
+
+    button#delete-btn {
+      background-color: $primary;
+      color: $secondary;
+      font-size: $base-font-size;
+      padding: 0.5em 1em;
+      border-radius: 0.5em;
+      margin-left: auto;
+      @include animation;
+
+      &:hover {
+        transform: translateY(-2px);
       }
     }
   }
