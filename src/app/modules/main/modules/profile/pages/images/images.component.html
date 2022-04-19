@@ -1,11 +1,25 @@
 <section class="images-section">
-  <div class="no-images-section" *ngIf="images.length === 0; else imagesSeciton">
+  <div
+    class="no-images-section"
+    *ngIf="images.length === 0; else imagesSeciton"
+  >
     <h2>No images yet</h2>
-    <img src="../../../../../../../assets/main-module/profile/man-no-images.svg" alt="">
+    <img
+      src="../../../../../../../assets/main-module/profile/man-no-images.svg"
+      alt=""
+    />
   </div>
   <ng-template #imagesSeciton>
-    <div class="post" *ngFor="let image of images">
-      <p>{{ image }}</p>
+    <div class="images" >
+      <div class="image" *ngFor="let image of images">
+        <img
+          src="assets/main-module/post-images/Albania2.png"
+          alt=""
+        />
+        <a class="post-link" target="_blank" href="https://www.google.com"
+          >See Post</a
+        >
+      </div>
     </div>
   </ng-template>
 </section>

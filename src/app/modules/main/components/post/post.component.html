@@ -1,6 +1,6 @@
 <app-error-message [show]="showToaster" [status]="toasterType" [message]="toasterMessage"></app-error-message>
 
-<div class="post" *ngIf="postDataAssigned.value">
+<div class="post">
   <div class="post-header">
     <div class="post-author">
       <img class="post-author__avatar" [src]="postAuthor.avatar" alt="" />
@@ -33,7 +33,7 @@
 
   <div class="post-reactions">
     <div>
-      <button class="like-btn" [ngClass]="{ liked: isLiked }" (click)="likeOrUnlike()">
+      <button class="like-btn" [ngClass]="{ liked: this.postData.isLiked}" (click)="likeOrUnlike()">
         <svg>
           <use href="#like-icon"></use>
         </svg>

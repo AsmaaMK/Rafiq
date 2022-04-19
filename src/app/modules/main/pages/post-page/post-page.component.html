@@ -5,5 +5,11 @@
       alt=""
     />
   </button>
-  <app-post [postId]="postId"></app-post>
+  <app-post
+    *ngIf="postDataAssigned.value"
+    [postId]="postId"
+    [postData]="postData"
+    [postAuthor]="postAuthor"
+    [postImages]="postImages"
+  ></app-post>
 </section>

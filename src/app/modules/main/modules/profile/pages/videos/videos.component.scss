@@ -1,4 +1,5 @@
 @use "~../../../../../../../../../styles/helpers/helpers-dir" as *;
+@use "~../../../../../../../../../styles/components/profile-sections";
 
 .videos-section {
   height: 100%;
@@ -22,6 +23,26 @@
 
     @include respond-to(medium) {
       width: 30%;
+    }
+  }
+}
+
+.videos {
+  .video {
+    width: 100%;
+    max-width: 400px;
+    aspect-ratio: 3840 / 2160;
+    
+    @include respond-to(medium) {
+      min-width: 270px;
+      width: 45%;
+    }
+    
+    video {
+      background-color: $primary;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
     }
   }
 }

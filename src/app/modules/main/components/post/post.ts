@@ -15,6 +15,7 @@ type Post = {
   };
   numberOfLikes: number;
   numberOfComments: number;
+  isLiked: boolean;
 };
 
 type GetPostResponse = {
@@ -33,7 +34,8 @@ type PostData = {
   shared: boolean;
   sharedFrom?: string;
   numberOfLikes: number;
-  numberOfComments: number;
+  numberOfComments: number; 
+  isLiked: boolean;
 };
 
 type PostMedia = {

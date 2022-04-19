@@ -41,6 +41,7 @@ export class PostService {
     numberOfLikes: 0,
     shared: false,
     sharedFrom: '',
+    isLiked: false,
   };
 
   constructor(

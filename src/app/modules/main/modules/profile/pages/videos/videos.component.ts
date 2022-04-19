@@ -7,11 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VideosComponent implements OnInit {
 
-  videos = [];
+  videos: number[] = [];
 
   constructor() { }
 
   ngOnInit(): void {
+    for (let i = 0; i <= 10; i++) {
+      this.videos.push(1);
+    }
   }
 
 }
