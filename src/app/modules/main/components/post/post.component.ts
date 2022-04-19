@@ -75,10 +75,6 @@ export class PostComponent implements OnInit {
     this.postService.deletePost(this.postId).subscribe(
       () => {
         post.style.display = 'none';
-        this.toasterMessage = `Post deleted successfully`;
-        this.toasterType = true;
-        this.showToaster.next(true);
-        this.deleting = false;
 
         let isPostPage: boolean = this.router.url.split('/')[2] === 'post';
         if (isPostPage) {
