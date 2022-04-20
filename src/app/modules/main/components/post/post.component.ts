@@ -3,9 +3,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { RouterExtService } from 'src/app/shared/services/router-ext.service';
 import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
-import { environment } from 'src/environments/environment.prod';
 import { UserInfo } from '../../modules/profile/models/user-info';
-import { UserInfoService } from '../../modules/profile/services/user-info.service';
 import { PostData } from './post';
 import { PostService } from './post.service';
 

@@ -110,8 +110,8 @@ main {
 }
 
 section.add-post {
-  .pop-up {
-    width: 60vw; ///
+  &.pop-up {
+    width: 50vw; ///
     max-width: 700px; ///
     min-height: 300px; ///
   }
@@ -170,6 +170,7 @@ section.add-post {
     button {
       padding: 0;
     }
+
     button,
     label {
       background-color: transparent;
@@ -177,6 +178,11 @@ section.add-post {
 
       img {
         width: 3rem;
+      }
+
+      &.disabled {
+        opacity: 0.5;
+        pointer-events: none;
       }
     }
   }
@@ -193,7 +199,8 @@ section.add-post {
     box-shadow: 0px 3px 9px #575d85ba;
   }
 
-  .media-images {
+  .media-images,
+  .media-video {
     @include flex(row, flex-start);
     gap: 1em;
     margin: 1rem 1.5rem;
@@ -202,7 +209,8 @@ section.add-post {
       margin: 1rem 3rem;
     }
 
-    img {
+    img,
+    video {
       width: 15%;
     }
   }

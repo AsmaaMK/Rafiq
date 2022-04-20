@@ -48,6 +48,16 @@ export class PostService {
     private userInfoService: UserInfoService
   ) {}
 
+  createPost(postData: any) {
+    return this.http.post(
+      this.url,
+      postData,
+      {
+        headers: headers,
+      }
+    );
+  }
+
   getPostById(postId: string): Observable<Post> {
     return this.http
       .get<GetPostResponse>(`${this.url}/${postId}`)
@@ -103,6 +113,11 @@ export class PostService {
   }
 
   deletePost(postId: string) {
-    return this.http.delete(`${this.url}/${postId}`, { headers: headers });
+    return this.http.delete(`${this.url}/${postId}`, {
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+      },
+    });
   }
 }

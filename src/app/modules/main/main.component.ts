@@ -1,4 +1,9 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
+import { PostService } from './components/post/post.service';
+import { UserInfo } from './modules/profile/models/user-info';
+import { UserInfoService } from './modules/profile/services/user-info.service';
 
 @Component({
   selector: 'app-main',
@@ -8,15 +13,24 @@ import { Component, HostListener, OnInit } from '@angular/core';
 export class MainComponent implements OnInit {
   screenWidth = window.innerWidth;
 
-  images: string[] = [
-    '../../../assets/main-module/profile/man-no-images.svg',
-    '../../../assets/main-module/profile/man-no-images.svg',
-  ];
+  images: any[] = [];
 
-  videos: string[] = [
-    '../../../assets/main-module/profile/man-no-images.svg',
-    '../../../assets/main-module/profile/man-no-images.svg',
-  ];
+  video = '';
+
+  myInfo: UserInfo = {
+    userName: '',
+    firstName: '',
+    lastName: '',
+    avatar: 'assets/main-module/profile/default-personal-image.svg',
+  };
+
+  postData = new FormData();
+
+  showToaster = new BehaviorSubject(false);
+  toasterMessage = '';
+  toasterType = false;
+
+  creatingPost = false;
 
   @HostListener('window:resize', ['$event'])
   onResize() {
@@ -24,9 +38,19 @@ export class MainComponent implements OnInit {
     this.possitionAddPostButton();
   }
 
-  constructor() {}
+  constructor(
+    private userInfoService: UserInfoService,
+    private tokenStorageService: TokenStorageService,
+    private postService: PostService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.userInfoService
+      .getUserInfo(this.tokenStorageService.getUsername())
+      .subscribe((res) => {
+        this.myInfo = res;
+      });
+  }
 
   ngAfterViewInit() {
     this.possitionAddPostButton();
@@ -60,11 +84,71 @@ export class MainComponent implements OnInit {
     if (textArea) textArea.innerText = textArea.innerText + '@';
   }
 
-  addVideos($event: any) {}
+  addVideos(event: any) {
+    let video = event.target.files[0];
+    let reader = new FileReader();
 
-  addImages($event: any) {
-    console.log($event.target.files);
+    reader.onload = (event: any) => {
+      this.video = event.target.result;
+      this.postData.append('post', video, video.name);
+    };
+
+    reader.readAsDataURL(video);
   }
 
-  post() {}
+  addImages(event: any) {
+    if (event.target.files && event.target.files[0]) {
+      let filesAmount = event.target.files.length;
+      for (let i = 0; i < filesAmount; i++) {
+        let reader = new FileReader();
+        let image = event.target.files[i];
+
+        reader.onload = (event: any) => {
+          this.images.push(event.target.result);
+          this.postData.append('post', image, image.name);
+        };
+
+        reader.readAsDataURL(image);
+      }
+    }
+  }
+
+  createPost(
+    postTextArea: HTMLTextAreaElement,
+    videoFile: HTMLInputElement,
+    imageFiles: HTMLInputElement,
+    popup: HTMLElement
+  ) {
+    this.creatingPost = true;
+
+    this.postData.append('text', postTextArea.value);
+    this.postService.createPost(this.postData).subscribe(
+      (res) => {
+        this.closePopup(popup);
+
+        videoFile.value = '';
+        this.video = '';
+        imageFiles.value = '';
+        this.images = [];
+
+        this.toasterMessage = 'Post created successfully';
+        this.toasterType = true;
+        this.showToaster.next(true);
+        this.creatingPost = false;
+      },
+      (err) => {
+        this.closePopup(popup);
+
+        videoFile.value = '';
+        this.video = '';
+        imageFiles.value = '';
+        this.images = [];
+
+        this.toasterMessage = 'Failed to create this post';
+        this.toasterType = false;
+        this.showToaster.next(true);
+        this.creatingPost = false;
+      }
+    );
+  }
 }
