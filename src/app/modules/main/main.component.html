@@ -1,8 +1,8 @@
-<app-error-message
+<app-toaster
   [show]="showToaster"
   [status]="toasterType"
   [message]="toasterMessage"
-></app-error-message>
+></app-toaster>
 <app-loading-spinner [show]="creatingPost"></app-loading-spinner>
 
 <!-- app layout in desktop version -->
@@ -47,25 +47,34 @@
 </ng-template>
 
 <!-- TODO: make it a component -->
-<div id="add-post-popup" class="overlay-wrapper open" #addPostPopup>
-  <section class="pop-up add-post">
+<div id="add-post-popup" class="overlay-wrapper" #addPostPopup>
+  <form class="pop-up add-post" [formGroup]="postDataForm">
     <button (click)="closePopup(addPostPopup)" class="close-btn">
       <img src="../../../assets/main-module/Close.svg" alt="" />
     </button>
+
     <div class="user-info">
-      <img
-        [src]="myInfo.avatar"
-        alt=""
-      />
-      <p>{{myInfo.firstName}} {{myInfo.lastName}}</p>
+      <img [src]="myInfo.avatar" alt="" />
+      <p>{{ myInfo.firstName }} {{ myInfo.lastName }}</p>
     </div>
-    <textarea id="post-text" placeholder="add text..." #postText></textarea>
+
+    <textarea
+      id="post-text"
+      placeholder="add text..."
+      formControlName="text"
+      #postText
+    ></textarea>
+
     <div class="media-images" *ngIf="images">
-      <img *ngFor="let image of images" [src]="image" alt="">
+      <img *ngFor="let image of images" [src]="image" alt="" />
     </div>
+
     <div class="media-video" *ngIf="video">
-      <video src="../../../assets/main-module/post-images/silent video no sound nature-MMpRlEiR6IM.mkv"></video>
+      <video
+        src="../../../assets/main-module/post-images/silent video no sound nature-MMpRlEiR6IM.mkv"
+      ></video>
     </div>
+
     <div class="add-media">
       <!-- <button (click)="addMention()">
         <img
@@ -74,18 +83,42 @@
         />
       </button> -->
 
-      <label for="add-video-input" [ngClass]="{'disabled': video || images.length}">
+      <label
+        for="add-video-input"
+        [ngClass]="{ disabled: video || images.length }"
+      >
         <img src="../../../assets/main-module/add-video.svg" alt="add video" />
       </label>
-      <input type="file" #videoFile id="add-video-input" hidden (change)="addVideos($event)">
+      <input
+        type="file"
+        #videoFile
+        id="add-video-input"
+        formControlName="video"
+        hidden
+        (change)="addVideos($event)"
+      />
 
-      <label for="add-image-input" [ngClass]="{'disabled': video}">
+      <label for="add-image-input" [ngClass]="{ disabled: video }">
         <img src="../../../assets/main-module/add-image.svg" alt="add image" />
       </label>
-      <input type="file" #imagesFiles id="add-image-input" hidden multiple (change)="addImages($event)">
+      <input
+        type="file"
+        #imagesFiles
+        id="add-image-input"
+        hidden
+        multiple
+        formControlName="images"
+        (change)="addImages($event)"
+      />
     </div>
-    <button (click)="createPost(postText, videoFile, imagesFiles, addPostPopup)" class="post-btn">Post</button>
-  </section>
+
+    <button
+      (click)="createPost(postText, videoFile, imagesFiles, addPostPopup)"
+      class="post-btn"
+    >
+      Post
+    </button>
+  </form>
 </div>
 
 <!-- svg icon -->

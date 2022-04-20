@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   passwordShowMessage = false;
   rememberMe = true;
   sendingRequest = new BehaviorSubject(false);
-  showError = new BehaviorSubject(false);
+  showError = false;
   errorMessage = '';
 
   constructor(
@@ -82,7 +82,7 @@ export class LoginComponent implements OnInit {
       },
       (err) => {
         this.errorMessage = err.error?.error.message;
-        this.showError.next(true);
+        this.showError = true;
         console.warn(err.error?.error.message);
         this.sendingRequest.next(false);
       },

@@ -14,6 +14,7 @@ import {
 } from '../models';
 import { TokenStorageService } from './token-storage.service';
 import { environment } from 'src/environments/environment';
+import { UserInfoService } from 'src/app/modules/main/modules/profile/services/user-info.service';
 
 @Injectable({
   providedIn: 'root',
@@ -28,7 +29,8 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private tokenStorage: TokenStorageService,
-    private router: Router
+    private router: Router,
+    private userInfoService: UserInfoService
   ) {}
 
   contentTypeHeader = {
@@ -56,6 +58,7 @@ export class AuthService {
   logoutUser(): void {
     this.tokenStorage.removeAccessToken();
     this.tokenStorage.removeRefreshToken();
+    this.userInfoService.myInfo = this.userInfoService.initialUserInfo;
     this.isLoggedIn$.next(false);
     this.router.navigate(['/auth/login']);
   }

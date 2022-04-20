@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
+import { ToasterType } from 'src/app/shared/models/toaster-status';
 import { RouterExtService } from 'src/app/shared/services/router-ext.service';
 import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
 import { UserInfo } from '../../modules/profile/models/user-info';
@@ -25,9 +26,9 @@ export class PostComponent implements OnInit {
 
   isMyProfile = false;
 
-  showToaster = new BehaviorSubject(false);
+  showToaster = false;
   toasterMessage = '';
-  toasterType = false;
+  toasterType: ToasterType = 'error';
 
   deleting = false;
 
@@ -82,8 +83,8 @@ export class PostComponent implements OnInit {
       },
       () => {
         this.toasterMessage = `Error when deleting post`;
-        this.toasterType = false;
-        this.showToaster.next(true);
+        this.toasterType = 'error';
+        this.showToaster = true;
         this.deleting = false;
       }
     )

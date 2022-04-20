@@ -19,9 +19,8 @@ enum markerIcons {
   styleUrls: ['./map.component.scss'],
 })
 export class MapComponent implements OnInit {
-  showToaster = new BehaviorSubject(false);
+  showToaster = false;
   toasterMessage = '';
-  toasterType = false;
 
   canAddMarker: boolean = false;
   canDelete: boolean = false;
@@ -191,8 +190,7 @@ export class MapComponent implements OnInit {
       }
     }, () => {
       this.toasterMessage = `Error: can't download initial markers`;
-      this.toasterType = false;
-      this.showToaster.next(true);
+      this.showToaster = true;
     });
   }
 
@@ -204,8 +202,7 @@ export class MapComponent implements OnInit {
       },
       () => {
         this.toasterMessage = `Error: can't create this marker`;
-        this.toasterType = false;
-        this.showToaster.next(true);
+        this.showToaster = true;
       }
     );
   }
@@ -226,8 +223,7 @@ export class MapComponent implements OnInit {
           () => {
             this.markers[index].marker.setVisible(true); // make it visible again
             this.toasterMessage = `Error: can't delete this marker`;
-            this.toasterType = false;
-            this.showToaster.next(true);
+            this.showToaster = true;
           }
         );
 

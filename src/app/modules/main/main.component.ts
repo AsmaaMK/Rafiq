@@ -1,5 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { FormControl, FormGroup } from '@angular/forms';
+import { ToasterType } from 'src/app/shared/models/toaster-status';
 import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
 import { PostService } from './components/post/post.service';
 import { UserInfo } from './modules/profile/models/user-info';
@@ -26,11 +27,13 @@ export class MainComponent implements OnInit {
 
   postData = new FormData();
 
-  showToaster = new BehaviorSubject(false);
+  showToaster = false;
   toasterMessage = '';
-  toasterType = false;
+  toasterType: ToasterType = 'error';
 
   creatingPost = false;
+
+  postDataForm!: FormGroup;
 
   @HostListener('window:resize', ['$event'])
   onResize() {
@@ -50,6 +53,12 @@ export class MainComponent implements OnInit {
       .subscribe((res) => {
         this.myInfo = res;
       });
+    
+    this.postDataForm = new FormGroup({
+      images: new FormControl(''),
+      video: new FormControl(''),
+      text: new FormControl('')
+    });
   }
 
   ngAfterViewInit() {
@@ -119,7 +128,9 @@ export class MainComponent implements OnInit {
     imageFiles: HTMLInputElement,
     popup: HTMLElement
   ) {
-    this.creatingPost = true;
+    this.toasterType = 'uploading';
+    this.toasterMessage = 'uploading post files';
+    this.showToaster = true;
 
     this.postData.append('text', postTextArea.value);
     this.postService.createPost(this.postData).subscribe(
@@ -132,9 +143,9 @@ export class MainComponent implements OnInit {
         this.images = [];
 
         this.toasterMessage = 'Post created successfully';
-        this.toasterType = true;
-        this.showToaster.next(true);
-        this.creatingPost = false;
+        this.toasterType = 'success';
+
+        // this.creatingPost = false;
       },
       (err) => {
         this.closePopup(popup);
@@ -145,9 +156,7 @@ export class MainComponent implements OnInit {
         this.images = [];
 
         this.toasterMessage = 'Failed to create this post';
-        this.toasterType = false;
-        this.showToaster.next(true);
-        this.creatingPost = false;
+        this.toasterType = 'error';
       }
     );
   }

@@ -3,6 +3,7 @@ import { Component, OnInit, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
+import { ToasterType } from 'src/app/shared/models/toaster-status';
 import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
 import { UserProfile } from '../../models/user-info';
 import { EditInfoService } from '../../services/edit-info.service';
@@ -35,8 +36,8 @@ export class HeaderComponent implements OnInit {
     tiktok: '../../../../../../../assets/main-module/profile/tiktok.svg',
   };
 
-  showToast = new BehaviorSubject(false);
-  toastStatus = false;
+  showToast = false;
+  toastStatus: ToasterType = 'error';
   toastMessage = '';
 
   constructor(
@@ -124,14 +125,14 @@ export class HeaderComponent implements OnInit {
     this.followingService.follow(this.urlUserName).subscribe(
       (res) => {
         this.toastMessage = res.results.message;
-        this.toastStatus = true;
-        this.showToast.next(true);
+        this.toastStatus = 'success';
+        this.showToast = true;
         this.isFollowing.next(true);
       },
       (err) => {
         this.toastMessage = err.error.error.message;
-        this.toastStatus = false;
-        this.showToast.next(true);
+        this.toastStatus = 'error';
+        this.showToast = true;
       }
     );
   }
@@ -140,14 +141,14 @@ export class HeaderComponent implements OnInit {
     this.followingService.unfollow(this.urlUserName).subscribe(
       (res) => {
         this.toastMessage = res.results.message;
-        this.toastStatus = true;
-        this.showToast.next(true);
+        this.toastStatus = 'success';
+        this.showToast = true;
         this.isFollowing.next(false);
       },
       (err) => {
         this.toastMessage = err.error.error.message;
-        this.toastStatus = false;
-        this.showToast.next(true);
+        this.toastStatus = 'error';
+        this.showToast = true;
       }
     );
   }

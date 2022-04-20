@@ -1,5 +1,5 @@
-<app-error-message [show]="editInfoShowToast" [status]="infoSuccess" [message]="infoMessage"></app-error-message>
-<app-error-message [show]="editPasswordShowToast" [status]="passwordSuccess" [message]="passwordMessage"></app-error-message>
+<app-toaster [show]="editInfoShowToast" [status]="infoSuccess" [message]="infoMessage"></app-toaster>
+<app-toaster [show]="editPasswordShowToast" [status]="passwordSuccess" [message]="passwordMessage"></app-toaster>
 
 <div class="edit-info-container" *ngIf="show">
   <button (click)="closeEditInfo()" class="back-btn">

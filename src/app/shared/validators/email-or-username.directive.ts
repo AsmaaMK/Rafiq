@@ -12,8 +12,8 @@ export function emailOrUsername(): ValidatorFn {
 
 function validUsername(input: string) {
   const firstChar = input[0];
-  const beginWithChar = (firstChar >= 'a' && firstChar <= 'z');
-  const isValidUsername = /^([a-z]|_|[0-9])+$/.test(input);
+  const beginWithChar = (firstChar >= 'a' && firstChar <= 'z') || (firstChar >= 'A' && firstChar <= 'Z');
+  const isValidUsername = /^([a-zA-Z]|_|[0-9])+$/.test(input);
   const length = input.length;
 
   return beginWithChar && isValidUsername && (length >= 3 && length <= 35);

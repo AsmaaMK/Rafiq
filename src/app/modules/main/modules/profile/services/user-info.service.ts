@@ -19,8 +19,25 @@ export class UserInfoService {
   private url = `${environment.apiUrl}/api/v1/users`;
 
   myUserName = this.tokenStorageService.getUsername();
-  myInfo!: UserProfile;
-
+  
+  initialUserInfo: UserProfile = {
+    avatar: '',
+    country: '',
+    cover: '',
+    dateOfBirth: '',
+    firstName: '',
+    gender: '',
+    lastName: '',
+    liveIn: '',
+    numberOfFollowers: 0,
+    numberOfFollowings: 0,
+    numberOfPosts: 0,
+    socialMedia: [],
+    userName: '',
+  };
+  
+  myInfo: UserProfile = this.initialUserInfo;
+  
   constructor(
     private http: HttpClient,
     private router: Router,

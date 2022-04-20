@@ -2,6 +2,7 @@ import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
+import { ToasterType } from 'src/app/shared/models/toaster-status';
 import { CountriesService } from 'src/app/shared/services/countries.service';
 import { EditInfo, SocialLinks, UserProfile } from '../../models/user-info';
 import { EditInfoService } from '../../services/edit-info.service';
@@ -25,12 +26,12 @@ export class EditInfoComponent implements OnInit {
   updatedInfo: EditInfo = {};
   newPassword: string = '';
 
-  editInfoShowToast = new BehaviorSubject(false);
-  infoSuccess = false;
+  editInfoShowToast = false;
+  infoSuccess: ToasterType = 'error';
   infoMessage = '';
 
-  editPasswordShowToast = new BehaviorSubject(false);
-  passwordSuccess = false;
+  editPasswordShowToast = false;
+  passwordSuccess: ToasterType = 'error';
   passwordMessage = '';
 
   updated = false;
@@ -140,15 +141,15 @@ export class EditInfoComponent implements OnInit {
       this.updated = false;
       this.editInfoService.editInfo(this.updatedInfo).subscribe(
         (res) => {
-          this.infoSuccess = true;
+          this.infoSuccess = 'success';
           this.infoMessage = res.results.message;
-          this.editInfoShowToast.next(true);
+          this.editInfoShowToast = true;
           this.updatedInfo = {};
         },
         (err) => {
-          this.infoSuccess = false;
+          this.infoSuccess = 'error';
           this.infoMessage = err.error.error.message;
-          this.editInfoShowToast.next(true);
+          this.editInfoShowToast = true;
         }
       );
     }
@@ -156,15 +157,15 @@ export class EditInfoComponent implements OnInit {
     if (this.newPassword !== '') {
       this.editInfoService.editPassword(this.newPassword).subscribe(
         (res) => {
-          this.passwordSuccess = true;
+          this.passwordSuccess = 'success';
           this.passwordMessage = res.results.message;
-          this.editPasswordShowToast.next(true);
+          this.editPasswordShowToast = true;
           this.newPassword = '';
         },
         (err) => {
-          this.passwordSuccess = false;
+          this.passwordSuccess = 'error';
           this.passwordMessage = err.error.error.message;
-          this.editPasswordShowToast.next(true);
+          this.editPasswordShowToast = true;
         }
       );
     }
