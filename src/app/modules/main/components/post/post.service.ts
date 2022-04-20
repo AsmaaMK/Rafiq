@@ -20,8 +20,7 @@ headers
   providedIn: 'root',
 })
 export class PostService {
-  myUserName = this.userInfoService.myUserName;
-  private url = `${environment.apiUrl}/api/v1/users/${this.myUserName}/posts`;
+  private url = `${environment.apiUrl}/api/v1/users/${this.userInfoService.myUserName.value}/posts`;
 
   initialPostData: PostData = {
     auther: {
@@ -49,13 +48,9 @@ export class PostService {
   ) {}
 
   createPost(postData: any) {
-    return this.http.post(
-      this.url,
-      postData,
-      {
-        headers: headers,
-      }
-    );
+    return this.http.post(this.url, postData, {
+      headers: headers,
+    });
   }
 
   getPostById(postId: string): Observable<Post> {

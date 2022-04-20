@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { map, Observable } from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
 import { environment } from 'src/environments/environment';
 import { GetUserInfoResponse, UserProfile } from '../models/user-info';
@@ -18,8 +18,8 @@ headers
 export class UserInfoService {
   private url = `${environment.apiUrl}/api/v1/users`;
 
-  myUserName: string = this.tokenStorageService.getUserName();
-  
+  myUserName = new BehaviorSubject(this.tokenStorageService.getUserName());
+
   initialUserInfo: UserProfile = {
     avatar: '',
     country: '',
@@ -35,9 +35,9 @@ export class UserInfoService {
     socialMedia: [],
     userName: '',
   };
-  
+
   myInfo: UserProfile = this.initialUserInfo;
-  
+
   constructor(
     private http: HttpClient,
     private router: Router,

@@ -8,7 +8,7 @@ import { UserInfoService } from '../../modules/profile/services/user-info.servic
   styleUrls: ['./mobile-navbar.component.scss'],
 })
 export class MobileNavbarComponent implements OnInit {
-  username = this.userInfoService.myUserName;
+  username = this.userInfoService.myUserName.value;
 
   constructor(
     private tokenStorageService: TokenStorageService,

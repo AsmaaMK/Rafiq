@@ -9,7 +9,7 @@ import { UserInfoService } from '../../services/user-info.service';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit, AfterViewInit {
-  username = this.userInfoService.myUserName;
+  username = this.userInfoService.myUserName.value;
 
   constructor(
     private tokenStorageService: TokenStorageService,

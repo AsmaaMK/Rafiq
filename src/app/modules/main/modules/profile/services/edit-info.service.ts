@@ -17,8 +17,6 @@ headers
 export class EditInfoService {
   private url = `${environment.apiUrl}/api/v1/users`;
 
- 
-
   showEditInfo = new BehaviorSubject(false);
 
   constructor(
@@ -28,14 +26,18 @@ export class EditInfoService {
   ) {}
 
   editInfo(body: any) {
-    return this.http.put<any>(`${this.url}/${ this.userInfoService.myUserName}/info`, body, {
-      headers: headers,
-    });
+    return this.http.put<any>(
+      `${this.url}/${this.userInfoService.myUserName.value}/info`,
+      body,
+      {
+        headers: headers,
+      }
+    );
   }
 
   editPassword(password: string) {
     return this.http.put<any>(
-      `${this.url}/${ this.userInfoService.myUserName}/password`,
+      `${this.url}/${this.userInfoService.myUserName.value}/password`,
       {
         password: password,
         confirmPassword: password,

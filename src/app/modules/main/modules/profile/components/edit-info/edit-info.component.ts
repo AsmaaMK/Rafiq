@@ -209,7 +209,7 @@ export class EditInfoComponent implements OnInit {
     this.editInfoService.showEditInfo.next(false);
     // window.location.reload();
     this.userInfoService
-      .getUserProfile(this.userInfoService.myUserName)
+      .getUserProfile(this.userInfoService.myUserName.value)
       .subscribe((res) => {
         this.userInfoService.myInfo = res;
         const myUrl = this.router.url;

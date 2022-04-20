@@ -19,9 +19,10 @@ export class HeaderComponent implements OnInit {
   isFollowing = new BehaviorSubject(false);
 
   urlUserName = this.route.url.split('/')[3];
-  myUserName = this.userInfoService.myUserName;
 
-  isMyProfile = new BehaviorSubject(this.urlUserName === this.myUserName);
+  isMyProfile = new BehaviorSubject(
+    this.urlUserName === this.userInfoService.myUserName.value
+  );
 
   defaultPersonalImage =
     'assets/main-module/profile/default-personal-image.svg';

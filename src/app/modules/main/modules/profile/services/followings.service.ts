@@ -18,7 +18,7 @@ headers
 export class FollowingsService {
   private url = `${environment.apiUrl}/api/v1/users`;
 
-  myUserName = this.userInfoService.myUserName;
+  myUserName = this.userInfoService.myUserName.value;
 
   constructor(
     private http: HttpClient,

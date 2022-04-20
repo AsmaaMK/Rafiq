@@ -9,12 +9,11 @@ import { UserInfoService } from '../../modules/profile/services/user-info.servic
   styleUrls: ['./desktop-navbar.component.scss'],
 })
 export class DesktopNavbarComponent implements OnInit {
-  username = this.userInfoService.myUserName;
 
   constructor(
     private tokenStorageService: TokenStorageService,
     private authService: AuthService,
-    private userInfoService: UserInfoService
+    public userInfoService: UserInfoService
   ) {}
 
   ngOnInit(): void {}

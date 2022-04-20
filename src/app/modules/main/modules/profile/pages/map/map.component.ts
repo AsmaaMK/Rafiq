@@ -33,13 +33,12 @@ export class MapComponent implements OnInit {
   map!: google.maps.Map;
 
   urlUserName = this.route.url.split('/')[3];
-  myUserName = this.userInfoService.myUserName;
 
   constructor(
     private mapService: MapService,
     private tokenStorageService: TokenStorageService,
     private route: Router,
-    private userInfoService: UserInfoService
+    public userInfoService: UserInfoService
   ) {}
 
   ngOnInit(): void {

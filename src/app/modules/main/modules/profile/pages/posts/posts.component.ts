@@ -9,7 +9,7 @@ import { UserInfoService } from '../../services/user-info.service';
   styleUrls: ['./posts.component.scss'],
 })
 export class PostsComponent implements OnInit {
-  myUserName = this.userInfoService.myUserName;
+  myUserName = this.userInfoService.myUserName.value;
   urlUserName =  this.router.url.split('/')[3];
   isMyProfile = this.myUserName === this.urlUserName;
 

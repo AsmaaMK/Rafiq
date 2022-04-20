@@ -79,7 +79,7 @@ export class LoginComponent implements OnInit {
           this.tokenStorage.setRefreshToken(refreshToken);
           this.tokenStorage.setAccessToken(accessToken);
           this.tokenStorage.setUserName(username);
-          this.userInfoService.myUserName = username;
+          this.userInfoService.myUserName.next(username);
           this.auth.isLoggedIn$.next(true);
         }
 

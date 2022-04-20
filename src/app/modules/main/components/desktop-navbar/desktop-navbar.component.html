@@ -15,7 +15,7 @@
   </li>
   <li>
     <a
-      [routerLink]="['./profile', username]"
+      [routerLink]="['./profile', this.userInfoService.myUserName.value]"
       routerLinkActive="active"
       aria-label="profile"
     >

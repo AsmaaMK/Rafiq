@@ -16,8 +16,7 @@ headers
 })
 export class MapService {
   private url = `${environment.apiUrl}/api/v1`;
-  myUserName = this.userInfoService.myUserName;
-
+  
   constructor(
     private http: HttpClient,
     private userInfoService: UserInfoService
@@ -31,7 +30,7 @@ export class MapService {
 
   addMarker(markerData: MarkerData) {
     return this.http.post<any>(
-      `${this.url}/users/${this.myUserName}/lists/travelMap`,
+      `${this.url}/users/${this.userInfoService.myUserName.value}/lists/travelMap`,
       {
         type: markerData.type,
         latitude: markerData.possition.lat,
@@ -43,7 +42,7 @@ export class MapService {
 
   deleteMarker(markerId: string) {
     return this.http.delete(
-      `${this.url}/users/${this.myUserName}/lists/travelMap`,
+      `${this.url}/users/${this.userInfoService.myUserName.value}/lists/travelMap`,
       {
         body: {
           _id: markerId,

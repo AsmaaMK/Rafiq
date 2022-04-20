@@ -2,7 +2,7 @@
 
 <div class="map-wrapper">
   <div id="google-map"></div>
-  <div class="map-buttons" *ngIf="map && urlUserName === myUserName">
+  <div class="map-buttons" *ngIf="map && urlUserName === this.userInfoService.myUserName.value">
     <div class="map-button-group">
       <button
         class="map-btn"
