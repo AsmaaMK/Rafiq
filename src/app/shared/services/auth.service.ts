@@ -58,6 +58,7 @@ export class AuthService {
   logoutUser(): void {
     this.tokenStorage.removeAccessToken();
     this.tokenStorage.removeRefreshToken();
+    this.tokenStorage.removeUserName();
     this.userInfoService.myInfo = this.userInfoService.initialUserInfo;
     this.isLoggedIn$.next(false);
     this.router.navigate(['/auth/login']);

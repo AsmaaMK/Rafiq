@@ -49,7 +49,7 @@ export class MainComponent implements OnInit {
 
   ngOnInit(): void {
     this.userInfoService
-      .getUserInfo(this.tokenStorageService.getUsername())
+      .getUserInfo(this.userInfoService.myUserName)
       .subscribe((res) => {
         this.myInfo = res;
       });

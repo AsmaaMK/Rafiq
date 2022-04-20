@@ -4,6 +4,7 @@ import { Loader } from '@googlemaps/js-api-loader';
 import { BehaviorSubject } from 'rxjs';
 import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
 import { MapService } from '../../services/map.service';
+import { UserInfoService } from '../../services/user-info.service';
 import { Marker, MarkerData, MarkerType } from './marker';
 
 enum markerIcons {
@@ -32,12 +33,13 @@ export class MapComponent implements OnInit {
   map!: google.maps.Map;
 
   urlUserName = this.route.url.split('/')[3];
-  myUserName = this.tokenStorageService.getUsername();
+  myUserName = this.userInfoService.myUserName;
 
   constructor(
     private mapService: MapService,
     private tokenStorageService: TokenStorageService,
-    private route: Router
+    private route: Router,
+    private userInfoService: UserInfoService
   ) {}
 
   ngOnInit(): void {

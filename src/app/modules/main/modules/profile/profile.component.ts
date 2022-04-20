@@ -12,7 +12,7 @@ import { UserInfoService } from './services/user-info.service';
 export class ProfileComponent implements OnInit {
   
   urlUserName = this.route.url.split('/')[3];
-  myUserName = this.tokenStorageService.getUsername();
+  myUserName = this.userInfoService.myUserName;
   isMyProfile = this.urlUserName === this.myUserName;
 
   showEditInfo = this.editInfoService.showEditInfo;

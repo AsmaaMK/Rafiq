@@ -20,7 +20,7 @@ headers
   providedIn: 'root',
 })
 export class PostService {
-  myUserName = this.tokenStorageService.getUsername();
+  myUserName = this.userInfoService.myUserName;
   private url = `${environment.apiUrl}/api/v1/users/${this.myUserName}/posts`;
 
   initialPostData: PostData = {

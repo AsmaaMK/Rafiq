@@ -5,6 +5,7 @@ import { ToasterType } from 'src/app/shared/models/toaster-status';
 import { RouterExtService } from 'src/app/shared/services/router-ext.service';
 import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
 import { UserInfo } from '../../modules/profile/models/user-info';
+import { UserInfoService } from '../../modules/profile/services/user-info.service';
 import { PostData } from './post';
 import { PostService } from './post.service';
 
@@ -36,12 +37,13 @@ export class PostComponent implements OnInit {
     private postService: PostService,
     private tokeStorageService: TokenStorageService,
     private router: Router,
-    private routerExt: RouterExtService
+    private routerExt: RouterExtService,
+    private userInfoService: UserInfoService
   ) {}
 
   ngOnInit() {
     this.isMyProfile =
-      this.tokeStorageService.getUsername() === this.postAuthor.userName;
+      this.userInfoService.myUserName === this.postAuthor.userName;
   }
 
   likeOrUnlike() {

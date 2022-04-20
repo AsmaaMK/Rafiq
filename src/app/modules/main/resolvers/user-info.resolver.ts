@@ -17,7 +17,7 @@ export class UserInfoResolver implements Resolve<UserProfile> {
     state: RouterStateSnapshot
   ): Observable<UserProfile> | UserProfile {
     const urlUserName = route.params['username'];
-    const myUserName = this.tokenStorageService.getUsername();
+    const myUserName = this.userInfoService.myUserName;
 
     if (urlUserName === myUserName && this.userInfoService.myInfo !== this.userInfoService.initialUserInfo)
       return this.userInfoService.myInfo;

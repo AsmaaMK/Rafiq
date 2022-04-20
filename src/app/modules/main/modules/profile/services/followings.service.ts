@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { map, Observable } from 'rxjs';
 import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
 import { environment } from 'src/environments/environment';
+import { UserInfoService } from './user-info.service';
 
 const headers = new HttpHeaders();
 headers
@@ -17,12 +18,13 @@ headers
 export class FollowingsService {
   private url = `${environment.apiUrl}/api/v1/users`;
 
-  myUserName = this.tokenStorageService.getUsername();
+  myUserName = this.userInfoService.myUserName;
 
   constructor(
     private http: HttpClient,
     private router: Router,
-    private tokenStorageService: TokenStorageService
+    private tokenStorageService: TokenStorageService,
+    private userInfoService: UserInfoService
   ) {}
 
   getIsFollowed(userName: string) {

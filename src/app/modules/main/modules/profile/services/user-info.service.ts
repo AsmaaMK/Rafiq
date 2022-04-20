@@ -18,7 +18,7 @@ headers
 export class UserInfoService {
   private url = `${environment.apiUrl}/api/v1/users`;
 
-  myUserName = this.tokenStorageService.getUsername();
+  myUserName: string = this.tokenStorageService.getUserName();
   
   initialUserInfo: UserProfile = {
     avatar: '',

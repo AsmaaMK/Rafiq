@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
+import { UserInfoService } from 'src/app/modules/main/modules/profile/services/user-info.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
 import { emailOrUsername } from 'src/app/shared/validators/email-or-username.directive';
@@ -25,7 +26,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private auth: AuthService,
     private tokenStorage: TokenStorageService,
-    private router: Router
+    private router: Router,
+    private userInfoService: UserInfoService
   ) {}
 
   ngOnInit(): void {
@@ -71,10 +73,13 @@ export class LoginComponent implements OnInit {
       (res) => {
         const refreshToken = res.results?.refreshToken;
         const accessToken = res.results?.accessToken;
+        const username = res.results?.user.userName;
 
-        if (refreshToken && accessToken) {
+        if (refreshToken && accessToken && username) {
           this.tokenStorage.setRefreshToken(refreshToken);
           this.tokenStorage.setAccessToken(accessToken);
+          this.tokenStorage.setUserName(username);
+          this.userInfoService.myUserName = username;
           this.auth.isLoggedIn$.next(true);
         }
 

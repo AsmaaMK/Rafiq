@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { MarkerData } from '../pages/map/marker';
 import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
+import { UserInfoService } from './user-info.service';
 
 const headers = new HttpHeaders();
 headers
@@ -15,11 +16,11 @@ headers
 })
 export class MapService {
   private url = `${environment.apiUrl}/api/v1`;
-  myUserName = this.tokenStorageService.getUsername();
+  myUserName = this.userInfoService.myUserName;
 
   constructor(
     private http: HttpClient,
-    private tokenStorageService: TokenStorageService
+    private userInfoService: UserInfoService
   ) {}
 
   getAllMarkers(username: string) {

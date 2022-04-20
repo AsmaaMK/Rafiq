@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit {
   isFollowing = new BehaviorSubject(false);
 
   urlUserName = this.route.url.split('/')[3];
-  myUserName = this.tokenStorageService.getUsername();
+  myUserName = this.userInfoService.myUserName;
 
   isMyProfile = new BehaviorSubject(this.urlUserName === this.myUserName);
 

@@ -1,23 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
+import { UserInfoService } from '../../modules/profile/services/user-info.service';
 
 @Component({
   selector: 'app-desktop-navbar',
   templateUrl: './desktop-navbar.component.html',
-  styleUrls: ['./desktop-navbar.component.scss']
+  styleUrls: ['./desktop-navbar.component.scss'],
 })
 export class DesktopNavbarComponent implements OnInit {
+  username = this.userInfoService.myUserName;
 
-  username = this.tokenStorageService.getUsername();
+  constructor(
+    private tokenStorageService: TokenStorageService,
+    private authService: AuthService,
+    private userInfoService: UserInfoService
+  ) {}
 
-  constructor(private tokenStorageService: TokenStorageService, private authService: AuthService) { }
-
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   logout(): void {
     this.authService.logoutUser();
   }
-
 }
