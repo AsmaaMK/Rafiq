@@ -33,17 +33,17 @@ export class HomeComponent implements OnInit {
         ],
         video: '',
       },
-      text: 'Hello World'
+      text: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ducimus nisi numquam voluptate labore facere, consequuntur fugit dignissimos quisquam, perferendis dolorum deserunt tenetur consequatur sunt esse sed soluta mollitia nam ipsam.',
     },
     auther: {
       name: 'aaa',
-      avatar: ''
+      avatar: '',
     },
     isLiked: true,
-    numberOfComments: 0,
+    numberOfComments: 2,
     numberOfLikes: 50,
     shared: false,
-    sharedFrom: ''
+    sharedFrom: '',
   };
 
   ngOnInit(): void {}

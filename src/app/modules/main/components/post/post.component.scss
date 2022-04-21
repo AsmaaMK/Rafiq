@@ -112,10 +112,10 @@
 
   .post-reactions {
     margin: 1em;
-    @include flex(row, flex-start, flex-start);
     gap: 1em;
     padding-bottom: 1em;
     margin-bottom: 0;
+    @include flex(row, flex-start, flex-end);
 
     .share-reaction {
       margin-left: auto;
@@ -171,12 +171,138 @@
 
   .comments {
     margin: 1em;
+    padding-bottom: 1em;
     margin-top: 0;
-    border-top: 2px solid $primary;
+    border-top: 1.5px solid $primary;
     display: none;
 
     &.show {
       display: block;
+    }
+
+    .add-comment {
+      overflow: hidden;
+      border-radius: 0.5rem;
+      border: 1px solid $primary;
+      box-shadow: 0px 1px 3px $primary;
+      margin: 1rem 0 1.5rem 0;
+
+      @include flex(row, space-between, stretch);
+
+      input,
+      button {
+        border: none;
+        font-size: $base-font-size;
+        padding: 0.6em 1em;
+        color: $primary;
+      }
+
+      input {
+        flex: 1;
+
+        &::placeholder {
+          color: $primary;
+        }
+      }
+
+      button {
+        border-radius: 0.5rem;
+        border-left: 1px solid $primary;
+        background-color: $secondary-lavender;
+        font-weight: 500;
+        @include animation;
+
+        &:hover {
+          background-color: $secondary;
+        }
+      }
+    }
+
+    .comment-container {
+      @include margin(y);
+
+      .comment {
+        background-color: rgba($primary, 0.1);
+        padding: 1em;
+        border-radius: 1em;
+        @include flex(row, flex-start, flex-start);
+        gap: 1em;
+
+        &__author-avatar {
+          width: 2.5rem;
+          height: 2.5rem;
+          border-radius: 0.8em;
+          border: 2px solid $primary;
+        }
+
+        &__info {
+          color: $primary;
+
+          &__author-name {
+            font-weight: 500;
+            font-size: $base-font-size;
+            margin: 0;
+          }
+
+          &__author-username {
+            color: $primary;
+            text-decoration: none;
+            font-size: $base-font-size * 0.8;
+          }
+
+          &__text {
+            font-size: $base-font-size;
+            margin: 0.8em 0;
+          }
+        }
+      }
+
+      .comment-reaction {
+        @include flex(row, flex-start, flex-end);
+        gap: 0.3em;
+
+        .like-comment-btn {
+          padding: 0;
+          width: 1.5rem;
+          height: 1.5rem;
+          background-color: transparent;
+          color: transparent;
+          @include animation;
+
+          svg,
+          img {
+            height: inherit;
+            width: inherit;
+          }
+
+          &:hover {
+            color: rgba($primary, 0.5);
+          }
+
+          &.liked {
+            color: $primary;
+          }
+        }
+
+        span {
+          color: $primary;
+          font-size: $base-font-size * 1.1;
+        }
+      }
+    }
+
+    .no-comments-yet {
+      p {
+        color: $primary;
+        font-size: $base-font-size * 1.5;
+        text-align: center;
+        margin: 1rem;
+      }
+
+      img {
+        margin: auto;
+        padding-bottom: 2rem;
+      }
     }
   }
 }

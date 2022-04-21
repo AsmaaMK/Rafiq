@@ -110,11 +110,13 @@ export class PostComponent implements OnInit {
 
   showComments(commetsSection: HTMLElement, post: HTMLElement) {
     commetsSection.classList.toggle('show');
-    // post.classList.toggle('increase-height');
-    // if (commetsSection.classList.contains('show')) {
-    //   commetsSection.classList.remove('show');
-    // } else {
-    //   commetsSection.classList.add('show');
-    // }
+  }
+
+  addComment() {
+
+  }
+
+  likeOrUnlikeComment() {
+    
   }
 }

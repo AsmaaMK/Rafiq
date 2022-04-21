@@ -20,6 +20,7 @@
           >
         </div>
       </div>
+
       <div class="post-options" *ngIf="isMyProfile">
         <button class="options-btn" (click)="toggleOptionsList(options)">
           <img
@@ -94,15 +95,57 @@
     </div>
   </div>
 
-    <div class="comments" #commentsSection>
-      <div class="no-comments-yet" *ngIf="postData.numberOfComments === 0">
-        <p>No comments</p>
-        <img
-          src="../../../../../assets/main-module/post/no-comments.svg"
-          alt=""
-        />
-      </div>
+  <div class="comments show" #commentsSection>
+    <div class="add-comment">
+      <input type="text" placeholder="Add comment" />
+      <button (click)="addComment()">Post</button>
     </div>
+
+    <div class="no-comments-yet" *ngIf="postData.numberOfComments === 0">
+      <p>No comments</p>
+      <img
+        src="../../../../../assets/main-module/post/no-comments.svg"
+        alt=""
+      />
+    </div>
+
+    <div class="comment-container" *ngIf="postData.numberOfComments">
+      <div class="comment">
+        <img class="comment__author-avatar" [src]="postAuthor.avatar" alt="" />
+        <div class="comment__info">
+          <p class="comment__info__author-name">
+            {{ postAuthor.firstName }} {{ postAuthor.lastName }}
+          </p>
+          <a
+            class="comment__info__author-username"
+            [routerLink]="['/app/profile', postAuthor.userName]"
+            >@{{ postAuthor.userName }}</a
+          >
+          <p class="comment__info__text">
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ducimus
+            nisi numquam voluptate labore facere, consequuntur fugit dignissimos
+            quisquam, perferendis dolorum deserunt tenetur consequatur sunt esse
+            sed soluta mollitia nam ipsam.
+          </p>
+          <div class="comment-reaction">
+            <button
+              class="like-comment-btn"
+              [ngClass]="{ liked: false }"
+              (click)="likeOrUnlikeComment()"
+            >
+              <svg>
+                <use href="#like-icon"></use>
+              </svg>
+            </button>
+            <span aria-label="number of comment likes">{{ 20 }}</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    
+    
+  </div>
 </div>
 
 <div id="delete-post-popup" class="overlay-wrapper" #deletePostPopup>
