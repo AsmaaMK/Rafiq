@@ -89,7 +89,7 @@ export class PostComponent implements OnInit {
         this.showToaster = true;
         this.deleting = false;
       }
-    )
+    );
   }
 
   toggleOptionsList(list: HTMLElement) {
@@ -106,5 +106,15 @@ export class PostComponent implements OnInit {
 
   openDeletePostPopup(popup: HTMLElement) {
     popup.classList.add('open');
+  }
+
+  showComments(commetsSection: HTMLElement, post: HTMLElement) {
+    commetsSection.classList.toggle('show');
+    // post.classList.toggle('increase-height');
+    // if (commetsSection.classList.contains('show')) {
+    //   commetsSection.classList.remove('show');
+    // } else {
+    //   commetsSection.classList.add('show');
+    // }
   }
 }

@@ -112,8 +112,14 @@
 
   .post-reactions {
     margin: 1em;
+    @include flex(row, flex-start, flex-start);
+    gap: 1em;
     padding-bottom: 1em;
-    @include flex(row, space-between, flex-start);
+    margin-bottom: 0;
+
+    .share-reaction {
+      margin-left: auto;
+    }
 
     div {
       .share-btn {
@@ -123,7 +129,8 @@
       }
 
       .like-btn,
-      .share-btn {
+      .share-btn,
+      .comment-btn {
         padding: 0;
         width: 2.5rem;
         height: 2.5rem;
@@ -137,7 +144,7 @@
           width: inherit;
         }
 
-        &:hover {
+        .like-btn:hover {
           color: rgba($primary, 0.5);
         }
 
@@ -146,8 +153,11 @@
         }
       }
 
-      .number-of-likes-btn {
-        background-color: transparent;
+      .comment-btn {
+        color: $primary;
+      }
+
+      span {
         display: block;
         user-select: none;
         color: $primary;
@@ -156,6 +166,17 @@
         margin: 0 auto;
         text-align: center;
       }
+    }
+  }
+
+  .comments {
+    margin: 1em;
+    margin-top: 0;
+    border-top: 2px solid $primary;
+    display: none;
+
+    &.show {
+      display: block;
     }
   }
 }

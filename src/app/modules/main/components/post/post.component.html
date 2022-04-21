@@ -5,70 +5,104 @@
 ></app-toaster>
 
 <div #post class="post">
-  <div class="post-header">
-    <div class="post-author">
-      <img class="post-author__avatar" [src]="postAuthor.avatar" alt="" />
-      <div class="post-author__info">
-        <p class="name">{{ postAuthor.firstName }} {{ postAuthor.lastName }}</p>
-        <a class="username" [routerLink]="['/app/profile', postAuthor.userName]"
-          >@{{ postAuthor.userName }}</a
-        >
+  <div class="post-content">
+    <div class="post-header">
+      <div class="post-author">
+        <img class="post-author__avatar" [src]="postAuthor.avatar" alt="" />
+        <div class="post-author__info">
+          <p class="name">
+            {{ postAuthor.firstName }} {{ postAuthor.lastName }}
+          </p>
+          <a
+            class="username"
+            [routerLink]="['/app/profile', postAuthor.userName]"
+            >@{{ postAuthor.userName }}</a
+          >
+        </div>
+      </div>
+      <div class="post-options" *ngIf="isMyProfile">
+        <button class="options-btn" (click)="toggleOptionsList(options)">
+          <img
+            src="../../../../../assets/main-module/post/options.svg"
+            alt=""
+          />
+        </button>
+        <div class="options" #options>
+          <button
+            class="delete-btn"
+            (click)="openDeletePostPopup(deletePostPopup)"
+          >
+            Delete post
+          </button>
+        </div>
       </div>
     </div>
-    <div class="post-options" *ngIf="isMyProfile">
-      <button class="options-btn" (click)="toggleOptionsList(options)">
-        <img src="../../../../../assets/main-module/post/options.svg" alt="" />
-      </button>
-      <div class="options" #options>
+
+    <app-slider
+      *ngIf="postImages.length"
+      [postMedia]="postImages"
+      [postId]="postId"
+    ></app-slider>
+
+    <div class="video">
+      <video controls *ngIf="postData.content.media.video">
+        <source [src]="postData.content.media.video" type="video/mp4" />
+        No video support.
+      </video>
+    </div>
+
+    <p class="post-text" *ngIf="postData.content.text">
+      {{ postData.content.text }}
+    </p>
+
+    <div class="post-reactions">
+      <div>
         <button
-          class="delete-btn"
-          (click)="openDeletePostPopup(deletePostPopup)"
+          class="like-btn"
+          [ngClass]="{ liked: this.postData.isLiked }"
+          (click)="likeOrUnlike()"
         >
-          Delete post
+          <svg>
+            <use href="#like-icon"></use>
+          </svg>
+        </button>
+        <span aria-label="number of likes">{{ postData.numberOfLikes }}</span>
+      </div>
+
+      <div>
+        <button
+          class="comment-btn"
+          (click)="showComments(commentsSection, post)"
+        >
+          <svg>
+            <use href="#comment-icon"></use>
+          </svg>
+        </button>
+        <span aria-label="number of comments">{{
+          postData.numberOfComments
+        }}</span>
+      </div>
+
+      <div class="share-reaction">
+        <button class="share-btn" (click)="sharePost()">
+          <img
+            src="../../../../../assets/main-module/post/share.svg"
+            alt="share"
+          />
         </button>
       </div>
     </div>
   </div>
 
-  <app-slider
-    *ngIf="postImages.length"
-    [postMedia]="postImages"
-    [postId]="postId"
-  ></app-slider>
-
-  <div class="video">
-    <video controls *ngIf="postData.content.media.video">
-      <source [src]="postData.content.media.video" type="video/mp4" />
-      No video support.
-    </video>
-  </div>
-
-  <p class="post-text" *ngIf="postData.content.text">
-    {{ postData.content.text }}
-  </p>
-
-  <div class="post-reactions">
-    <div>
-      <button
-        class="like-btn"
-        [ngClass]="{ liked: this.postData.isLiked }"
-        (click)="likeOrUnlike()"
-      >
-        <svg>
-          <use href="#like-icon"></use>
-        </svg>
-      </button>
-      <button class="number-of-likes-btn">{{ postData.numberOfLikes }}</button>
-    </div>
-    <div>
-      <button class="share-btn" (click)="sharePost()">
+    <div class="comments" #commentsSection>
+      <div class="no-comments-yet" *ngIf="postData.numberOfComments === 0">
+        <p>No comments</p>
         <img
-          src="../../../../../assets/main-module/post/share.svg"
-          alt="share"
+          src="../../../../../assets/main-module/post/no-comments.svg"
+          alt=""
         />
-      </button>
+      </div>
     </div>
-  </div>
 </div>
 
 <div id="delete-post-popup" class="overlay-wrapper" #deletePostPopup>
@@ -100,11 +134,22 @@
     fill="currentColor"
     id="like-icon"
   >
-    <path d="M0 0h24v24H0z" fill="none" />
     <path
       d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
       stroke="#5b618a"
       stroke-width="1.538"
+    />
+  </symbol>
+
+  <symbol
+    height="100%"
+    viewBox="0 0 24 24"
+    width="100%"
+    fill="currentColor"
+    id="comment-icon"
+  >
+    <path
+      d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"
     />
   </symbol>
 </svg>

@@ -124,39 +124,30 @@ export class MainComponent implements OnInit {
 
   createPost(
     postTextArea: HTMLTextAreaElement,
-    videoFile: HTMLInputElement,
-    imageFiles: HTMLInputElement,
     popup: HTMLElement
   ) {
     this.toasterType = 'uploading';
     this.toasterMessage = 'uploading post files';
     this.showToaster = true;
+    this.closePopup(popup);
 
     this.postData.append('text', postTextArea.value);
     this.postService.createPost(this.postData).subscribe(
       (res) => {
-        this.closePopup(popup);
-
-        videoFile.value = '';
-        this.video = '';
-        imageFiles.value = '';
-        this.images = [];
-
         this.toasterMessage = 'Post created successfully';
         this.toasterType = 'success';
 
-        // this.creatingPost = false;
+        this.postData.forEach((val, key, parent) => {
+          this.postData.delete(key);
+        });
       },
       (err) => {
-        this.closePopup(popup);
-
-        videoFile.value = '';
-        this.video = '';
-        imageFiles.value = '';
-        this.images = [];
-
         this.toasterMessage = 'Failed to create this post';
         this.toasterType = 'error';
+
+        this.postData.forEach((val, key, parent) => {
+          this.postData.delete(key);
+        });
       }
     );
   }
