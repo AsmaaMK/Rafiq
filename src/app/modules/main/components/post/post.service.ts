@@ -8,7 +8,13 @@ import {
   UserInfo,
 } from '../../modules/profile/models/user-info';
 import { UserInfoService } from '../../modules/profile/services/user-info.service';
-import { Post, GetPostResponse, PostData, PostMedia } from './post';
+import {
+  Post,
+  GetPostResponse,
+  PostData,
+  PostMedia,
+  CommentsResponse,
+} from './post';
 
 const headers = new HttpHeaders();
 headers
@@ -113,6 +119,42 @@ export class PostService {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
       },
+    });
+  }
+
+  addComment(postId: string, comment: string) {
+    return this.http.post<any>(
+      `${this.url}/${postId}/comments`,
+      {
+        text: comment,
+      },
+      { headers: headers }
+    );
+  }
+
+  getComments(postId: string, numberOfComments: number) {
+    return this.http
+      .get<any>(`${this.url}/${postId}/comments?limit=1,${numberOfComments}`, {
+        headers: headers,
+      })
+      .pipe(map((res) => res.comments));
+  }
+
+  likeComment(postId: string, commentId: string) {
+    return this.http.put(`${this.url}/${postId}/comments/${commentId}/like`, null, {
+      headers: headers,
+    });
+  }
+
+  unlikeComment(postId: string, commentId: string) {
+    return this.http.delete(`${this.url}/${postId}/comments/${commentId}/like`, {
+      headers: headers,
+    });
+  }
+
+  deleteComment(postId: string, commentId: string) {
+    return this.http.delete(`${this.url}/${postId}/comments/${commentId}`, {
+      headers: headers,
     });
   }
 }

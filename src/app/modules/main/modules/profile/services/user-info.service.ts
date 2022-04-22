@@ -63,24 +63,24 @@ export class UserInfoService {
 
   changeCover(newCover: FormData) {
     return this.http
-      .put<any>(`${this.url}/${this.myUserName}/cover`, newCover)
+      .put<any>(`${this.url}/${this.myUserName.value}/cover`, newCover)
       .pipe(map((res) => res.results));
   }
 
   deleteCover() {
-    return this.http.delete<any>(`${this.url}/${this.myUserName}/cover`, {
+    return this.http.delete<any>(`${this.url}/${this.myUserName.value}/cover`, {
       headers: headers,
     });
   }
 
   changeAvatar(newCover: FormData) {
     return this.http
-      .put<any>(`${this.url}/${this.myUserName}/avatar`, newCover)
+      .put<any>(`${this.url}/${this.myUserName.value}/avatar`, newCover)
       .pipe(map((res) => res.results));
   }
 
   deleteAvatar() {
-    return this.http.delete(`${this.url}/${this.myUserName}/avatar`, {
+    return this.http.delete(`${this.url}/${this.myUserName.value}/avatar`, {
       headers: headers,
     });
   }

@@ -71,10 +71,7 @@
       </div>
 
       <div>
-        <button
-          class="comment-btn"
-          (click)="showComments(commentsSection, post)"
-        >
+        <button class="comment-btn" (click)="showComments(commentsSection)">
           <svg>
             <use href="#comment-icon"></use>
           </svg>
@@ -95,13 +92,16 @@
     </div>
   </div>
 
-  <div class="comments show" #commentsSection>
+  <div class="comments" #commentsSection>
     <div class="add-comment">
-      <input type="text" placeholder="Add comment" />
-      <button (click)="addComment()">Post</button>
+      <input type="text" placeholder="Add comment" #commentText />
+      <button (click)="addComment(commentText)">Post</button>
     </div>
 
-    <div class="no-comments-yet" *ngIf="postData.numberOfComments === 0">
+    <div
+      class="no-comments-yet"
+      *ngIf="postData.numberOfComments === 0; else commentsTemplate"
+    >
       <p>No comments</p>
       <img
         src="../../../../../assets/main-module/post/no-comments.svg"
@@ -109,42 +109,75 @@
       />
     </div>
 
-    <div class="comment-container" *ngIf="postData.numberOfComments">
-      <div class="comment">
-        <img class="comment__author-avatar" [src]="postAuthor.avatar" alt="" />
-        <div class="comment__info">
-          <p class="comment__info__author-name">
-            {{ postAuthor.firstName }} {{ postAuthor.lastName }}
-          </p>
-          <a
-            class="comment__info__author-username"
-            [routerLink]="['/app/profile', postAuthor.userName]"
-            >@{{ postAuthor.userName }}</a
-          >
-          <p class="comment__info__text">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ducimus
-            nisi numquam voluptate labore facere, consequuntur fugit dignissimos
-            quisquam, perferendis dolorum deserunt tenetur consequatur sunt esse
-            sed soluta mollitia nam ipsam.
-          </p>
-          <div class="comment-reaction">
-            <button
-              class="like-comment-btn"
-              [ngClass]="{ liked: false }"
-              (click)="likeOrUnlikeComment()"
-            >
-              <svg>
-                <use href="#like-icon"></use>
-              </svg>
+    <ng-template #commentsTemplate>
+      <div
+        style="height: 100px; position: relative"
+        *ngIf="comments.length === 0"
+      >
+        <app-loading-spinner
+          [show]="comments.length === 0"
+          [overlay]="'component'"
+          [colored]="false"
+        ></app-loading-spinner>
+      </div>
+
+      <div class="comment-container" *ngFor="let comment of comments">
+        <div class="comment">
+          <div class="comment-options" *ngIf="comment.user.userName === myUserName.value">
+            <button class="options-btn" (click)="toggleOptionsList(options)">
+              <img
+                src="../../../../../assets/main-module/post/options.svg"
+                alt=""
+              />
             </button>
-            <span aria-label="number of comment likes">{{ 20 }}</span>
+            <div class="options" #options>
+              <button
+                class="delete-btn"
+                (click)="deleteComment(comment)"
+              >
+                Delete Comment
+              </button>
+            </div>
+          </div>
+
+          <img
+            class="comment__author-avatar"
+            [src]="comment.user.avatar"
+            alt=""
+          />
+
+          <div class="comment__info">
+            <p class="comment__info__author-name">
+              {{ comment.user.firstName }} {{ comment.user.lastName }}
+            </p>
+            <a
+              class="comment__info__author-username"
+              [routerLink]="['/app/profile', comment.user.userName]"
+              >@{{ comment.user.userName }}</a
+            >
+
+            <p class="comment__info__text">
+              {{ comment.text }}
+            </p>
+
+            <div class="comment-reaction">
+              <button
+                class="like-comment-btn"
+                [ngClass]="{ liked: comment.isLiked }"
+                (click)="likeOrUnlikeComment(comment)"
+              >
+                <svg>
+                  <use href="#like-icon"></use>
+                </svg>
+              </button>
+              <span aria-label="number of comment likes">{{
+                comment.numberOfLikes
+              }}</span>
+            </div>
           </div>
         </div>
       </div>
-
-    </div>
-    
-    
+    </ng-template>
   </div>
 </div>
 

@@ -6,7 +6,7 @@ import { RouterExtService } from 'src/app/shared/services/router-ext.service';
 import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
 import { UserInfo } from '../../modules/profile/models/user-info';
 import { UserInfoService } from '../../modules/profile/services/user-info.service';
-import { PostData } from './post';
+import { PostComment, PostData } from './post';
 import { PostService } from './post.service';
 
 @Component({
@@ -27,9 +27,13 @@ export class PostComponent implements OnInit {
 
   isMyProfile = false;
 
+  myUserName = this.userInfoService.myUserName;
+
   showToaster = false;
   toasterMessage = '';
   toasterType: ToasterType = 'error';
+
+  comments: PostComment[] = [];
 
   deleting = false;
 
@@ -108,15 +112,76 @@ export class PostComponent implements OnInit {
     popup.classList.add('open');
   }
 
-  showComments(commetsSection: HTMLElement, post: HTMLElement) {
+  showComments(commetsSection: HTMLElement) {
     commetsSection.classList.toggle('show');
+    if (this.comments.length === 0) {
+      this.getComments();
+    }
   }
 
-  addComment() {
+  getComments() {
+    this.postService
+      .getComments(this.postId, this.postData.numberOfComments)
+      .subscribe((res) => {
+        for (let comment of res) {
+          this.userInfoService.getUserInfo(comment.author).subscribe((res) => {
+            const com: PostComment = {
+              id: comment._id,
+              user: res,
+              isLiked: comment.isLiked,
+              numberOfLikes: comment.numberOfLikes,
+              text: comment.content.text,
+            };
 
+            this.comments.push(com);
+          });
+        }
+      });
   }
 
-  likeOrUnlikeComment() {
-    
+  addComment(textInput: HTMLInputElement) {
+    let newComment: PostComment;
+    this.postService
+      .addComment(this.postId, textInput.value)
+      .subscribe((res) => {
+        this.userInfoService
+          .getUserInfo(this.userInfoService.myUserName.value)
+          .subscribe((res) => {
+            newComment = {
+              user: res,
+              isLiked: false,
+              numberOfLikes: 0,
+              text: textInput.value,
+            };
+
+            this.postData.numberOfComments++;
+            this.comments.unshift(newComment);
+            textInput.value = '';
+          });
+      });
+  }
+
+  likeOrUnlikeComment(comment: PostComment) {
+    if (comment.isLiked && comment.id) {
+      this.postService.unlikeComment(this.postId, comment.id).subscribe();
+      comment.isLiked = false;
+      comment.numberOfLikes--;
+    } else if (!comment.isLiked && comment.id) {
+      this.postService.likeComment(this.postId, comment.id).subscribe();
+      comment.isLiked = true;
+      comment.numberOfLikes++;
+    }
+  }
+
+  deleteComment(comment: PostComment) {
+    if (comment.id) {
+      this.postService.deleteComment(this.postId, comment.id).subscribe(
+        () => {
+          var commentIndex = this.comments.indexOf(comment);
+          this.comments.splice(commentIndex, 1);
+          this.postData.numberOfComments--;
+        }
+      );
+    }
   }
 }

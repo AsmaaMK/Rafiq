@@ -9,6 +9,7 @@ export class LoadingSpinnerComponent implements OnInit {
 
   @Input() show = false;
   @Input() overlay: 'page' | 'component' = 'page';
+  @Input() colored = true;
 
   constructor() { }
 

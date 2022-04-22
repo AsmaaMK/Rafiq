@@ -173,7 +173,7 @@
     margin: 1em;
     padding-bottom: 1em;
     margin-top: 0;
-    border-top: 1.5px solid $primary;
+    border-top: 2px solid $primary;
     display: none;
 
     &.show {
@@ -222,6 +222,7 @@
       @include margin(y);
 
       .comment {
+        position: relative;
         background-color: rgba($primary, 0.1);
         padding: 1em;
         border-radius: 1em;
@@ -253,6 +254,56 @@
           &__text {
             font-size: $base-font-size;
             margin: 0.8em 0;
+          }
+        }
+
+        .comment-options {
+          position: absolute;
+          right: 0.5em;
+
+          .options-btn {
+            background-color: transparent;
+            padding: 0;
+            height: 1.5rem;
+
+            img {
+              height: inherit;
+            }
+          }
+
+          .options {
+            display: none;
+            min-width: 200px;
+            position: absolute;
+            z-index: $index-4;
+            right: 0;
+            top: 100%;
+            background-color: $neutral-lighter;
+            box-shadow: 0 1px 10px $secondary-lavender;
+            border-radius: 1em;
+            padding: 1em;
+
+            &.show {
+              display: block;
+            }
+
+            .delete-btn {
+              width: fit-content;
+              background-color: transparent;
+              color: $invalid;
+              font-size: $base-font-size * 0.8;
+              padding-left: 2rem;
+
+              &::before {
+                content: url("../../../../../assets/main-module/post/delete.svg");
+                position: absolute;
+                left: 1em;
+                top: 50%;
+                width: 1.5em;
+                height: 1.5em;
+                transform: translateY(-50%);
+              }
+            }
           }
         }
       }

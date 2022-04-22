@@ -23,7 +23,7 @@ type GetPostResponse = {
 };
 
 type PostData = {
-  auther: {
+  auther?: {
     name: string;
     avatar?: string;
   };
@@ -34,7 +34,7 @@ type PostData = {
   shared: boolean;
   sharedFrom?: string;
   numberOfLikes: number;
-  numberOfComments: number; 
+  numberOfComments: number;
   isLiked: boolean;
 };
 
@@ -43,10 +43,36 @@ type PostMedia = {
   video: string;
 };
 
+type PostComment = {
+  id?: string;
+  user: {
+    firstName: string;
+    lastName: string;
+    userName: string;
+    avatar: string;
+  };
+  text: string;
+  isLiked: boolean;
+  numberOfLikes: number;
+};
+
+type CommentsResponse = {
+  _id: string;
+  author: string;
+  content: {
+    text: string;
+    files: [];
+    _id: string;
+  };
+  isLiked: boolean;
+  numberOfLikes: number;
+};
 
 export {
   Post,
   GetPostResponse,
   PostData,
-  PostMedia
+  PostMedia,
+  PostComment,
+  CommentsResponse,
 };

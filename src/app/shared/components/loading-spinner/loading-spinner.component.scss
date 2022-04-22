@@ -1,14 +1,17 @@
 @use "../../../../styles/helpers/mixins" as *;
 
 .overlay {
-  background-color: #e8deebaa;
   z-index: 10000;
   width: 100%;
   height: 100%;
   top: 0;
   left: 0;
-
+  
   @include flex;
+}
+
+.colored {
+  background-color: #e8deebaa;
 }
 
 .overlay-page {
