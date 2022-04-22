@@ -44,7 +44,7 @@ type PostMedia = {
 };
 
 type PostComment = {
-  id?: string;
+  id: string;
   user: {
     firstName: string;
     lastName: string;

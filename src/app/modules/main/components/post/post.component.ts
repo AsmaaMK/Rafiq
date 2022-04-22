@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { ToasterType } from 'src/app/shared/models/toaster-status';
@@ -35,7 +36,12 @@ export class PostComponent implements OnInit {
 
   comments: PostComment[] = [];
 
+  addCommentForm = new FormGroup({
+    commentText: new FormControl(''),
+  });
+
   deleting = false;
+  addingComment = false;
 
   constructor(
     private postService: PostService,
@@ -141,32 +147,38 @@ export class PostComponent implements OnInit {
 
   addComment(textInput: HTMLInputElement) {
     let newComment: PostComment;
+    let postText = textInput.value;
+    textInput.value = '';
+    this.addingComment = true;
+    
     this.postService
-      .addComment(this.postId, textInput.value)
-      .subscribe((res) => {
+      .addComment(this.postId, postText)
+      .subscribe((commentRes) => {
         this.userInfoService
           .getUserInfo(this.userInfoService.myUserName.value)
-          .subscribe((res) => {
+          .subscribe((userRes) => {
             newComment = {
-              user: res,
+              id: commentRes.results.commentId,
+              user: userRes,
               isLiked: false,
               numberOfLikes: 0,
-              text: textInput.value,
+              text: postText,
             };
+            
 
             this.postData.numberOfComments++;
             this.comments.unshift(newComment);
-            textInput.value = '';
+            this.addingComment = false;
           });
       });
   }
 
   likeOrUnlikeComment(comment: PostComment) {
-    if (comment.isLiked && comment.id) {
+    if (comment.isLiked) {
       this.postService.unlikeComment(this.postId, comment.id).subscribe();
       comment.isLiked = false;
       comment.numberOfLikes--;
-    } else if (!comment.isLiked && comment.id) {
+    } else {
       this.postService.likeComment(this.postId, comment.id).subscribe();
       comment.isLiked = true;
       comment.numberOfLikes++;
@@ -175,13 +187,11 @@ export class PostComponent implements OnInit {
 
   deleteComment(comment: PostComment) {
     if (comment.id) {
-      this.postService.deleteComment(this.postId, comment.id).subscribe(
-        () => {
-          var commentIndex = this.comments.indexOf(comment);
-          this.comments.splice(commentIndex, 1);
-          this.postData.numberOfComments--;
-        }
-      );
+      this.postService.deleteComment(this.postId, comment.id).subscribe(() => {
+        var commentIndex = this.comments.indexOf(comment);
+        this.comments.splice(commentIndex, 1);
+        this.postData.numberOfComments--;
+      });
     }
   }
 }

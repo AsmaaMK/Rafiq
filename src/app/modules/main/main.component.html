@@ -54,7 +54,9 @@
     </button>
 
     <div class="user-info">
-      <img [src]="myInfo.avatar" alt="" />
+      <div class="user-avatar">
+        <img [src]="myInfo.avatar" alt="" />
+      </div>
       <p>{{ myInfo.firstName }} {{ myInfo.lastName }}</p>
     </div>
 
@@ -112,10 +114,7 @@
       />
     </div>
 
-    <button
-      (click)="createPost(postText, addPostPopup)"
-      class="post-btn"
-    >
+    <button (click)="createPost(postText, addPostPopup)" class="post-btn">
       Post
     </button>
   </form>

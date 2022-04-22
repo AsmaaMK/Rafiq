@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
 
   postImages: string[] = [];
 
-  postId = '62628d5755c79d12ec299d3a';
+  postId = '6262b6a255c79d12ec29aa20';
 
   postAuthor: UserInfo = {
     userName: 'aaa',

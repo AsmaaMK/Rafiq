@@ -54,12 +54,17 @@
 
   .slider {
     height: 300px;
+
+    @include respond-to(medium) {
+      height: 40vh;
+    }
+
     @include animation;
 
     &__post-media {
       height: 100%;
       display: inline-block;
-      
+
       @include respond-to(medium) {
         margin: 0 $controlers-size + 2rem;
       }

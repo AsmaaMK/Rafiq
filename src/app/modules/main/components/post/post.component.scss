@@ -75,6 +75,13 @@
       height: 3rem;
       border-radius: 1em;
       border: 2px solid $primary;
+      background-color: $secondary;
+      overflow: hidden;
+
+      img {
+        height: 100%;
+        margin: auto;
+      }
     }
 
     &__info {
@@ -234,6 +241,13 @@
           height: 2.5rem;
           border-radius: 0.8em;
           border: 2px solid $primary;
+          background-color: $secondary;
+          overflow: hidden;
+
+          img {
+            height: 100%;
+            margin: auto;
+          }
         }
 
         &__info {
