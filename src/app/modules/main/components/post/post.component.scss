@@ -273,7 +273,7 @@
 
           .options {
             display: none;
-            min-width: 200px;
+            min-width: fit-content;
             position: absolute;
             z-index: $index-4;
             right: 0;
@@ -291,7 +291,7 @@
               width: fit-content;
               background-color: transparent;
               color: $invalid;
-              font-size: $base-font-size * 0.8;
+              font-size: $base-font-size;
               padding-left: 2rem;
 
               &::before {

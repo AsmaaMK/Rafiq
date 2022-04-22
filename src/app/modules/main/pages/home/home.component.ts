@@ -19,13 +19,13 @@ export class HomeComponent implements OnInit {
     private auth: AuthService,
     private postService: PostService,
     private userInfoService: UserInfoService
-  ) { }
-  
+  ) {}
+
   postDataAssigned = new BehaviorSubject(false);
 
   postImages: string[] = [];
 
-  postId = '6249dc2a8c72371ae4e9d67c';
+  postId = '62628d5755c79d12ec299d3a';
 
   postAuthor: UserInfo = {
     userName: 'aaa',
