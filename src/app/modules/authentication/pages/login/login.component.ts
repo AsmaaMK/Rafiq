@@ -83,15 +83,13 @@ export class LoginComponent implements OnInit {
           this.auth.isLoggedIn$.next(true);
         }
 
+        this.sendingRequest.next(false);
         this.router.navigate(['/app/home']);
       },
       (err) => {
         this.errorMessage = err.error?.error.message;
         this.showError = true;
         console.warn(err.error?.error.message);
-        this.sendingRequest.next(false);
-      },
-      () => {
         this.sendingRequest.next(false);
       }
     );

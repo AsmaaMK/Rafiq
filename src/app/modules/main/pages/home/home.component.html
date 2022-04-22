@@ -1,6 +1,4 @@
-<div style="padding: 1em 0">
-  <a routerLink="/app/post/"></a><br><br>
-  <app-loading-spinner [show]="postDataAssigned.value === false"></app-loading-spinner>
+<section class="home-page">
+  <app-loading-spinner [show]="postDataAssigned.value === false" [overlay]="'component'"></app-loading-spinner>
   <app-post *ngIf="postDataAssigned.value" [postAuthor]="postAuthor" [postId]="postId" [postData]="postData" [postImages]="postImages"></app-post>
-  <!-- <app-post [postAuthor]="postAuthor" [postId]="'11'" [postData]="postData"></app-post> -->
-</div>
+</section>
