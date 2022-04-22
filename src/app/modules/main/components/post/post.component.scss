@@ -3,14 +3,16 @@
 
 .post {
   width: 80%;
-  margin: auto;
+  margin: 2em auto;
   background-color: $neutral-lighter;
-  border-radius: 1em;
   box-shadow: 0 1px 10px $secondary-lavender;
+  
+  @include respond-to(medium) {
+    border-radius: 1em;
+  }
 
   @include respond-to(less-than-medium) {
     width: 100%;
-    margin: 4rem auto;
   }
 
   .post-header {
