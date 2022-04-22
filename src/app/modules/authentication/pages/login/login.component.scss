@@ -1,5 +1,6 @@
-@use "../../../../../styles/pages/signup-login";
-@use "../../../../../styles/helpers/helpers-dir" as *;
+@use "~../../../../../../../styles/pages/signup-login";
+@use "~../../../../../../../styles/helpers/helpers-dir" as *;
+@use "~../../../../../../../styles/components/forms";
 
 .password-options {
   width: 100%;
