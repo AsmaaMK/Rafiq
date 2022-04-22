@@ -35,7 +35,7 @@
             class="delete-btn"
             (click)="openDeletePostPopup(deletePostPopup)"
           >
-            Delete post
+            Delete
           </button>
         </div>
       </div>
@@ -96,8 +96,8 @@
 
   <div class="comments" #commentsSection>
     <form class="add-comment" [formGroup]="addCommentForm" (ngSubmit)="addComment(commentText)">
-      <input type="text" placeholder="Add comment" #commentText />
-      <button type="submit">Post</button>
+      <input type="text" placeholder="Add comment" formControlName="commentText" #commentText />
+      <button type="submit" [disabled]="!addCommentForm.valid">Post</button>
     </form>
 
     <div

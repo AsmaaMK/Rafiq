@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { ToasterType } from 'src/app/shared/models/toaster-status';
@@ -37,7 +37,7 @@ export class PostComponent implements OnInit {
   comments: PostComment[] = [];
 
   addCommentForm = new FormGroup({
-    commentText: new FormControl(''),
+    commentText: new FormControl('', [Validators.required]),
   });
 
   deleting = false;
@@ -148,9 +148,9 @@ export class PostComponent implements OnInit {
   addComment(textInput: HTMLInputElement) {
     let newComment: PostComment;
     let postText = textInput.value;
-    textInput.value = '';
+    this.addCommentForm.reset();
     this.addingComment = true;
-    
+
     this.postService
       .addComment(this.postId, postText)
       .subscribe((commentRes) => {
@@ -164,7 +164,6 @@ export class PostComponent implements OnInit {
               numberOfLikes: 0,
               text: postText,
             };
-            
 
             this.postData.numberOfComments++;
             this.comments.unshift(newComment);

@@ -58,9 +58,11 @@
         &::before {
           content: url("../../../../../assets/main-module/post/delete.svg");
           position: absolute;
-          left: 1em;
+          left: 0.7em;
           top: 50%;
-          transform: translateY(-50%);
+          width: 1.3em;
+          height: 1.3em;
+          transform: translateY(-55%);
         }
       }
     }
@@ -222,6 +224,11 @@
         &:hover {
           background-color: $secondary;
         }
+
+        &:disabled {
+          opacity: 0.7;
+          pointer-events: none;
+        }
       }
     }
 
@@ -313,9 +320,9 @@
                 position: absolute;
                 left: 1em;
                 top: 50%;
-                width: 1.5em;
-                height: 1.5em;
-                transform: translateY(-50%);
+                width: 1.2em;
+                height: 1.2em;
+                transform: translateY(-55%);
               }
             }
           }
