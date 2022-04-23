@@ -8,6 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class SliderComponent implements OnInit {
   @Input() postMedia: string[] = [];
   @Input() postId = '';
+  @Input() postType: 'post' | 'shared-post' | 'share-popup-post' = 'post';
   
   indexOfCurrentMedia = 0;
   numberOfMedia!: number;
@@ -17,7 +18,9 @@ export class SliderComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    
+  }
 
   ngAfterViewChecked() {
     this.setSliderWidth();
