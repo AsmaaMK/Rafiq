@@ -99,9 +99,16 @@ export class PostService {
     this.http.delete(`${this.url}/${postId}/like`).subscribe();
   }
 
-  share(postId: string) {
-    return this.http.post(`${this.url}/${postId}/share`, null, {
-      headers: headers,
+  share(postId: string, postText: FormData) {
+    const shareHeaders = new HttpHeaders;
+    shareHeaders
+      .append('Access-Control-Allow-Origin', '*')
+      .append(
+        'Access-Control-Allow-Methods',
+        'GET,PUT,POST,DELETE,PATCH,OPTIONS'
+      );
+    return this.http.post<any>(`${this.url}/${postId}/share`, postText, {
+      headers: shareHeaders
     });
   }
 

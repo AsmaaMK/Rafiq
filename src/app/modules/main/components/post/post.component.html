@@ -84,7 +84,7 @@
       </div>
 
       <div class="share-reaction">
-        <button class="share-btn" (click)="sharePost()">
+        <button class="share-btn" (click)="showSharePostPopup(sharePostPopup)">
           <img
             src="../../../../../assets/main-module/post/share.svg"
             alt="share"
@@ -95,14 +95,26 @@
   </div>
 
   <div class="comments" #commentsSection>
-    <form class="add-comment" [formGroup]="addCommentForm" (ngSubmit)="addComment(commentText)">
-      <input type="text" placeholder="Add comment" formControlName="commentText" #commentText />
+    <form
+      class="add-comment"
+      [formGroup]="addCommentForm"
+      (ngSubmit)="addComment(commentText)"
+    >
+      <input
+        type="text"
+        placeholder="Add comment"
+        formControlName="commentText"
+        #commentText
+      />
       <button type="submit" [disabled]="!addCommentForm.valid">Post</button>
     </form>
 
     <div
       style="height: 100px; position: relative"
-      *ngIf="(comments.length === 0 && postData.numberOfComments != 0)|| addingComment"
+      *ngIf="
+        (comments.length === 0 && postData.numberOfComments != 0) ||
+        addingComment
+      "
     >
       <app-loading-spinner
         [show]="true"
@@ -123,10 +135,12 @@
     </div>
 
     <ng-template #commentsTemplate>
-
       <div class="comment-container" *ngFor="let comment of comments">
         <div class="comment">
-          <div class="comment-options" *ngIf="comment.user.userName === myUserName.value">
+          <div
+            class="comment-options"
+            *ngIf="comment.user.userName === myUserName.value"
+          >
             <button class="options-btn" (click)="toggleOptionsList(options)">
               <img
                 src="../../../../../assets/main-module/post/options.svg"
@@ -134,10 +148,7 @@
               />
             </button>
             <div class="options" #options>
-              <button
-                class="delete-btn"
-                (click)="deleteComment(comment)"
-              >
+              <button class="delete-btn" (click)="deleteComment(comment)">
                 Delete
               </button>
             </div>
@@ -146,7 +157,10 @@
           <div class="comment__author-avatar">
             <img
               class=""
-              [src]="comment.user.avatar || 'assets/main-module/profile/default-personal-image.svg'"
+              [src]="
+                comment.user.avatar ||
+                'assets/main-module/profile/default-personal-image.svg'
+              "
               alt=""
             />
           </div>
@@ -186,6 +200,8 @@
   </div>
 </div>
 
+<!-- popups -->
+
 <div id="delete-post-popup" class="overlay-wrapper" #deletePostPopup>
   <div class="pop-up delete-post">
     <div>
@@ -206,6 +222,81 @@
 </div>
 
 <app-loading-spinner [show]="deleting"></app-loading-spinner>
+
+<div id="share-post-popup" class="overlay-wrapper" #sharePostPopup>
+  <div class="pop-up share-post">
+    <div class="scroll">
+      <button (click)="closePopup(sharePostPopup)" class="close-btn">
+        <img src="../../../assets/main-module/Close.svg" alt="" />
+      </button>
+
+      <div class="user-info">
+        <div class="user-avatar">
+          <img
+            [src]="
+              postAuthor.avatar ||
+              'assets/main-module/profile/default-personal-image.svg'
+            "
+            alt=""
+          />
+        </div>
+        <p>{{ postAuthor.firstName }} {{ postAuthor.lastName }}</p>
+      </div>
+
+      <div class="text-area">
+        <textarea
+          id="post-text"
+          placeholder="add text..."
+          formControlName="text"
+          #postText
+        ></textarea>
+      </div>
+
+      <div class="shared-post-container">
+        <div class="shared-post">
+          <div class="post-header">
+            <div class="post-author">
+              <div class="post-author__avatar">
+                <img [src]="postAuthor.avatar" alt="" />
+              </div>
+              <div class="post-author__info">
+                <p class="name">
+                  {{ postAuthor.firstName }} {{ postAuthor.lastName }}
+                </p>
+                <a
+                  class="username"
+                  [routerLink]="['/app/profile', postAuthor.userName]"
+                  >@{{ postAuthor.userName }}</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <app-slider
+            *ngIf="postImages.length"
+            [postMedia]="postImages"
+            [postId]="postId"
+          ></app-slider>
+
+          <div class="video">
+            <video controls *ngIf="postData.content.media.video">
+              <source [src]="postData.content.media.video" type="video/mp4" />
+              No video support.
+            </video>
+          </div>
+
+          <p class="post-text" *ngIf="postData.content.text">
+            {{ postData.content.text }}
+          </p>
+        </div>
+      </div>
+
+      <button id="share-btn" (click)="sharePost(postText, sharePostPopup)">Share</button>
+    </div>
+  </div>
+</div>
+
+<!-- Icons -->
 
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
   <symbol

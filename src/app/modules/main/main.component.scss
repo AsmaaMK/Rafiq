@@ -1,5 +1,5 @@
 @use "~../../../../../styles/helpers/helpers-dir" as *;
-@use "~../../../../../styles/components/overlay-pop-up" as *;
+@use "~../../../../../styles/components/add-post-popup";
 
 // global variables
 $desktop-navbar-width: 3.5rem;
@@ -33,7 +33,7 @@ $mobile-navbar-height: 3.5rem;
 
   .mobile-header {
     position: fixed;
-    z-index: 100;
+    z-index: $index-5;
     top: 0;
     left: 0;
     right: 0;
@@ -51,7 +51,7 @@ $mobile-navbar-height: 3.5rem;
 
   .mobile-navbar {
     position: fixed;
-    z-index: 10000;
+    z-index: $index-5;
     bottom: 0;
     left: 0;
     right: 0;
@@ -109,117 +109,3 @@ main {
   position: relative;
 }
 
-form.add-post {
-  &.pop-up {
-    width: 50vw; ///
-    max-width: 700px; ///
-    min-height: 300px; ///
-  }
-
-  .user-info {
-    @include flex(row, flex-start);
-    padding: 1rem 1.5rem;
-
-    @include respond-to(medium) {
-      padding: 1rem 3rem;
-    }
-
-    .user-avatar {
-      width: 3rem;
-      height: 3rem;
-      border: 2px solid $primary;
-      border-radius: 1em;
-      background-color: $secondary;
-      overflow: hidden;
-
-      img {
-        height: 100%;
-        margin: auto;
-      }
-    }
-
-    p {
-      color: $primary;
-      font-weight: 500;
-      font-size: $base-font-size * 1.2;
-      margin-left: 1em;
-    }
-  }
-
-  textarea {
-    resize: vertical;
-    width: calc(100% - 2 * 1.5rem);
-    min-height: 100px;
-    max-height: 300px;
-    @include margin(x, 1.5rem);
-    border: none;
-    outline: none;
-    padding: 1em;
-    border-radius: 1em;
-    overflow: hidden;
-    font-size: $base-font-size;
-    color: $primary;
-
-    @include respond-to(medium) {
-      width: calc(100% - 2 * 3rem);
-      @include margin(x, 3rem);
-    }
-  }
-
-  .add-media {
-    @include flex(row, flex-end);
-    gap: 1rem;
-    margin: 1rem 1.5rem;
-
-    @include respond-to(medium) {
-      margin: 1rem 3rem;
-    }
-
-    button {
-      padding: 0;
-    }
-
-    button,
-    label {
-      background-color: transparent;
-      cursor: pointer;
-
-      img {
-        width: 3rem;
-      }
-
-      &.disabled {
-        opacity: 0.5;
-        pointer-events: none;
-      }
-    }
-  }
-
-  .post-btn {
-    background-color: $primary;
-    font-size: $base-font-size * 1.5;
-    color: $secondary;
-    padding: 0.35em 1.5em;
-    border-radius: 0.25em;
-    font-weight: 500;
-    margin: 1.5em auto;
-    display: block;
-    box-shadow: 0px 3px 9px #575d85ba;
-  }
-
-  .media-images,
-  .media-video {
-    @include flex(row, flex-start);
-    gap: 1em;
-    margin: 1rem 1.5rem;
-
-    @include respond-to(medium) {
-      margin: 1rem 3rem;
-    }
-
-    img,
-    video {
-      width: 15%;
-    }
-  }
-}

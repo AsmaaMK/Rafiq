@@ -1,5 +1,5 @@
 @use "../../../../../../../styles/helpers/helpers-dir" as *;
-@use "../../../../../../../styles/components/overlay-pop-up";
+@use "../../../../../../../styles/components/cover-and-avatar-popup-and-preview";
 
 .profile-header {
   position: relative;
@@ -222,83 +222,5 @@
         padding: 0.25em 0.5em;
       }
     }
-  }
-}
-
-/* cover and avatar options popup */
-#cover-options-popup,
-#avatar-options-popup {
-  position: fixed;
-
-  .pop-up {
-    width: 400px;
-    pointer-events: visible;
-
-    @include respond-to(less-than-medium) {
-      border-radius: 1em 1em 0 0;
-      width: 100%;
-      top: unset;
-      left: unset;
-      bottom: 0;
-      transform: translate(0) scale(1);
-    }
-
-    .options {
-      @include flex;
-      padding: 2rem;
-
-      &__btn {
-        width: 100%;
-        cursor: pointer;
-        min-width: 250px;
-        text-align: left;
-        font-weight: 500;
-        font-size: $base-font-size * 1.2;
-        background-color: transparent;
-        padding: 1rem 0.35rem;
-        @include animation;
-
-        &:not(:disabled):hover {
-          background-color: rgba($secondary, 0.3);
-        }
-
-        &:disabled {
-          color: #868689 !important;
-          cursor: default;
-        }
-      }
-
-      &__btn:not(:last-child) {
-        color: $primary;
-        border-bottom: 1px solid $primary;
-      }
-
-      &__btn:last-child {
-        color: $invalid;
-      }
-    }
-  }
-
-  .close-btn {
-    @include respond-to(less-than-medium) {
-      display: none;
-    }
-  }
-}
-
-/* cover and avatar preview */
-.img-popup {
-  position: relative;
-  width: 85%;
-  height: 85%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-
-  .img-preview {
-    overflow: auto;
-    width: 100%;
-    height: 100%;
-    @include flex;
   }
 }

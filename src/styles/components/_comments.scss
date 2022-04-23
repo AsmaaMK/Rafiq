@@ -1,0 +1,239 @@
+@use "../helpers/helpers-dir" as *;
+@use "../components/overlay-pop-up";
+
+.comments {
+  margin: 1em;
+  padding-bottom: 1em;
+  margin-top: 0;
+  border-top: 2px solid $primary;
+  display: none;
+
+  &.show {
+    display: block;
+  }
+
+  .add-comment {
+    overflow: hidden;
+    border-radius: 0.5rem;
+    border: 1px solid $primary;
+    box-shadow: 0px 1px 3px $primary;
+    margin: 1rem 0 1.5rem 0;
+
+    @include flex(row, space-between, stretch);
+
+    input,
+    button {
+      border: none;
+      font-size: $base-font-size;
+      padding: 0.6em 1em;
+      color: $primary;
+    }
+
+    input {
+      flex: 1;
+
+      &::placeholder {
+        color: $primary;
+      }
+    }
+
+    button {
+      border-radius: 0.5rem;
+      border-left: 1px solid $primary;
+      background-color: $secondary-lavender;
+      font-weight: 500;
+      @include animation;
+
+      &:hover {
+        background-color: $secondary;
+      }
+
+      &:disabled {
+        opacity: 0.7;
+        pointer-events: none;
+      }
+    }
+  }
+
+  .comment-container {
+    @include margin(y);
+
+    .comment {
+      position: relative;
+      background-color: rgba($primary, 0.1);
+      padding: 1em;
+      border-radius: 1em;
+      @include flex(row, flex-start, flex-start);
+      gap: 1em;
+
+      &__author-avatar {
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 0.8em;
+        border: 2px solid $primary;
+        background-color: $secondary;
+        overflow: hidden;
+
+        img {
+          height: 100%;
+          margin: auto;
+        }
+      }
+
+      &__info {
+        color: $primary;
+
+        &__author-name {
+          font-weight: 500;
+          font-size: $base-font-size;
+          margin: 0;
+        }
+
+        &__author-username {
+          color: $primary;
+          text-decoration: none;
+          font-size: $base-font-size * 0.8;
+        }
+
+        &__text {
+          font-size: $base-font-size;
+          margin: 0.8em 0;
+        }
+      }
+
+      .comment-options {
+        position: absolute;
+        right: 0.5em;
+
+        .options-btn {
+          background-color: transparent;
+          padding: 0;
+          height: 1.5rem;
+
+          img {
+            height: inherit;
+          }
+        }
+
+        .options {
+          display: none;
+          min-width: fit-content;
+          position: absolute;
+          z-index: $index-4;
+          right: 0;
+          top: 100%;
+          background-color: $neutral-lighter;
+          box-shadow: 0 1px 10px $secondary-lavender;
+          border-radius: 1em;
+          padding: 1em;
+
+          &.show {
+            display: block;
+          }
+
+          .delete-btn {
+            width: fit-content;
+            background-color: transparent;
+            color: $invalid;
+            font-size: $base-font-size;
+            padding-left: 2rem;
+
+            &::before {
+              content: url("../../assets/main-module/post/delete.svg");
+              position: absolute;
+              left: 1em;
+              top: 50%;
+              width: 1.2em;
+              height: 1.2em;
+              transform: translateY(-55%);
+            }
+          }
+        }
+      }
+    }
+
+    .comment-reaction {
+      @include flex(row, flex-start, flex-end);
+      gap: 0.3em;
+
+      .like-comment-btn {
+        padding: 0;
+        width: 1.5rem;
+        height: 1.5rem;
+        background-color: transparent;
+        color: transparent;
+        @include animation;
+
+        svg,
+        img {
+          height: inherit;
+          width: inherit;
+        }
+
+        &:hover {
+          color: rgba($primary, 0.5);
+        }
+
+        &.liked {
+          color: $primary;
+        }
+      }
+
+      span {
+        color: $primary;
+        font-size: $base-font-size * 1.1;
+      }
+    }
+  }
+
+  .no-comments-yet {
+    p {
+      color: $primary;
+      font-size: $base-font-size * 1.5;
+      text-align: center;
+      margin: 1rem;
+    }
+
+    img {
+      margin: auto;
+      padding-bottom: 2rem;
+    }
+  }
+}
+
+#delete-post-popup {
+  .delete-post {
+    max-width: 350px;
+    transform: translate(-50%, -100%) scale(1);
+    padding: 2rem;
+
+    div {
+      overflow: hidden;
+    }
+
+    p.delete {
+      color: $invalid;
+      font-size: $base-font-size * 1.2;
+      margin: 0;
+    }
+
+    p.description {
+      color: $primary;
+      font-size: $base-font-size * 1.1;
+    }
+
+    button#delete-btn {
+      background-color: $primary;
+      color: $secondary;
+      font-size: $base-font-size;
+      padding: 0.5em 1em;
+      border-radius: 0.5em;
+      margin-left: auto;
+      @include animation;
+
+      &:hover {
+        transform: translateY(-2px);
+      }
+    }
+  }
+}

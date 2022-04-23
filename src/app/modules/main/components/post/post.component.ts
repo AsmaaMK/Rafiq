@@ -27,8 +27,8 @@ export class PostComponent implements OnInit {
   };
 
   isMyProfile = false;
-
   myUserName = this.userInfoService.myUserName;
+  myInfo!: UserInfo;
 
   showToaster = false;
   toasterMessage = '';
@@ -54,6 +54,10 @@ export class PostComponent implements OnInit {
   ngOnInit() {
     this.isMyProfile =
       this.userInfoService.myUserName.value === this.postAuthor.userName;
+
+    this.userInfoService
+      .getUserInfo(this.myUserName.value)
+      .subscribe((res) => (this.myInfo = res));
   }
 
   likeOrUnlike() {
@@ -68,14 +72,29 @@ export class PostComponent implements OnInit {
     }
   }
 
-  sharePost() {
-    this.postService.share(this.postId).subscribe(
+  showSharePostPopup(popup: HTMLElement) {
+    popup.classList.add('open');
+  }
+
+  sharePost(postText: HTMLTextAreaElement, popup: HTMLElement) {
+    this.closePopup(popup);
+
+    this.toasterMessage = 'Sharing post';
+    this.toasterType = 'uploading';
+    this.showToaster = true;
+
+    let formData = new FormData();
+    formData.append('text', postText.value);
+    postText.value = '';
+
+    this.postService.share(this.postId, formData).subscribe(
       (res) => {
-        // TODO: show success message
-        console.log(res);
+        this.toasterMessage = res.results.message;
+        this.toasterType = 'success';
       },
       (err) => {
-        // TODO: show error message
+        this.toasterMessage = err.error.message;
+        this.toasterType = 'error';
       }
     );
   }
@@ -153,22 +172,18 @@ export class PostComponent implements OnInit {
 
     this.postService
       .addComment(this.postId, postText)
-      .subscribe((commentRes) => {
-        this.userInfoService
-          .getUserInfo(this.userInfoService.myUserName.value)
-          .subscribe((userRes) => {
-            newComment = {
-              id: commentRes.results.commentId,
-              user: userRes,
-              isLiked: false,
-              numberOfLikes: 0,
-              text: postText,
-            };
+      .subscribe((res) => {
+        newComment = {
+          id: res.results.commentId,
+          user: this.myInfo,
+          isLiked: false,
+          numberOfLikes: 0,
+          text: postText,
+        };
 
-            this.postData.numberOfComments++;
-            this.comments.unshift(newComment);
-            this.addingComment = false;
-          });
+        this.postData.numberOfComments++;
+        this.comments.unshift(newComment);
+        this.addingComment = false;
       });
   }
 

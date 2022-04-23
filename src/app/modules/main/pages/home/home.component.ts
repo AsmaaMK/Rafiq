@@ -23,7 +23,9 @@ export class HomeComponent implements OnInit {
 
   postDataAssigned = new BehaviorSubject(false);
 
-  postImages: string[] = [];
+  postImages: string[] = [
+    'assets/main-module/post-images/WhatsApp Image 2022-03-24 at 11.34.08 AM.jpeg',
+  ];
 
   postId = '6262b6a255c79d12ec29aa20';
 

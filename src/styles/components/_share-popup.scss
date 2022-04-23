@@ -1,0 +1,163 @@
+@use "../components/overlay-pop-up";
+@use "../helpers/helpers-dir" as *;
+
+#share-post-popup {
+  z-index: $index-6;
+}
+
+.share-post {
+  &.pop-up {
+    width: 80vw; ///
+    max-width: 900px; ///
+    max-height: 90vh; ///
+    // overflow: scroll;
+
+    .scroll {
+      overflow: auto;
+      height: 80vh;
+
+      .user-info {
+        @include flex(row, flex-start);
+        padding: 1rem 1.5rem;
+
+        @include respond-to(medium) {
+          padding: 1rem 3rem;
+        }
+
+        .user-avatar {
+          width: 3rem;
+          height: 3rem;
+          border: 2px solid $primary;
+          border-radius: 1em;
+          background-color: $secondary;
+          overflow: hidden;
+
+          img {
+            height: 100%;
+            margin: auto;
+          }
+        }
+
+        p {
+          color: $primary;
+          font-weight: 500;
+          font-size: $base-font-size * 1.2;
+          margin-left: 1em;
+        }
+      }
+
+      #share-btn {
+        display: block;
+        margin: auto;
+        margin-bottom: 2em;
+        padding: 0.5em 1.5em;
+        border-radius: 0.5em;
+        background-color: $primary;
+        color: $secondary;
+        font-size: $base-font-size * 1.5;
+        box-shadow: 0px 3px 9px #575d85ba;
+        @include animation;
+
+        &:hover {
+          transform: translateY(-2px);
+        }
+      }
+
+      .shared-post-container,
+      .text-area {
+        padding: 0 1.5rem;
+      
+        @include respond-to(medium) {
+          padding: 0 3rem;
+        }
+      }
+
+      textarea {
+        max-width: 100%;
+        min-width: 100%;
+        min-height: 100px;
+        max-height: 300px;
+        font-size: $base-font-size;
+        background-color: transparent;
+        border-radius: 0.5em;
+        padding: 1em;
+        outline: none;
+        color: $primary;
+        border: 1px solid rgba($primary, 0.5);
+
+        &::placeholder {
+          color: $primary;
+        }
+      }
+
+    }
+  }
+}
+
+
+.shared-post {
+  width: 100%;
+  background-color: $neutral-lighter;
+  border-radius: 1em;
+
+  .post-header {
+    margin: 1em;
+    padding-top: 1em;
+    @include flex(row, space-between);
+  }
+
+  .post-author {
+    @include flex(row, flex-start);
+    gap: 1em;
+
+    &__avatar {
+      width: 3rem;
+      height: 3rem;
+      border-radius: 1em;
+      border: 2px solid $primary;
+      background-color: $secondary;
+      overflow: hidden;
+
+      img {
+        height: 100%;
+        margin: auto;
+      }
+    }
+
+    &__info {
+      color: $primary;
+
+      .name {
+        font-weight: 500;
+        font-size: $base-font-size * 1.2;
+        margin: 0;
+      }
+
+      .username {
+        color: $primary;
+        text-decoration: none;
+      }
+    }
+  }
+
+  video {
+    width: 100%;
+  }
+
+  .post-text {
+    margin: 1em;
+    color: $primary;
+    font-size: $base-font-size * 1.2;
+    line-height: 1.5;
+    // text-overflow: ellipsis;
+    // display: -webkit-box;
+    // -webkit-line-clamp: 5; /* number of lines to show */
+    // line-clamp: 5;
+    // -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .post-text {
+    padding-bottom: 1em;
+  }
+}
