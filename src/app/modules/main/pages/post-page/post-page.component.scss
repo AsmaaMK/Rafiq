@@ -6,23 +6,23 @@
   margin: 0;
   border-radius: 2rem;
   background-color: transparent;
-  padding: 1em 0.5em;
   overflow: hidden;
-  box-shadow: 0px 3px 6px #666666;
-
+  
   @include respond-to(medium) {
+    padding: 1em 0.5em;
+    box-shadow: 0px 3px 6px #666666;
     background-color: $secondary;
     padding: 2em;
     @include main-gradient;
   }
 
   .back-btn {
-    position: absolute;
     background-color: transparent;
     padding: 0;
     width: 2.5rem;
-
+    
     @include respond-to(medium) {
+      position: absolute;
       width: 3rem;
     }
 

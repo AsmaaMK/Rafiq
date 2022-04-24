@@ -8,7 +8,7 @@
 .share-post {
   &.pop-up {
     width: 80vw; ///
-    max-width: 900px; ///
+    max-width: 800px; ///
     max-height: 90vh; ///
 
     .scroll {
@@ -17,10 +17,8 @@
 
       .user-info {
         @include flex(row, flex-start);
-        padding: 1rem 1.5rem;
-
         @include respond-to(medium) {
-          padding: 1rem 3rem;
+          margin-top: 1rem;
         }
 
         .user-avatar {
@@ -62,10 +60,11 @@
         }
       }
 
-      .shared-post-container,
+      .share-post-container,
+      .user-info,
       .text-area {
-        padding: 0 1.5rem;
-      
+        padding: 0 0.5rem;
+
         @include respond-to(medium) {
           padding: 0 3rem;
         }
@@ -88,11 +87,9 @@
           color: $primary;
         }
       }
-
     }
   }
 }
-
 
 .shared-post {
   width: 100%;

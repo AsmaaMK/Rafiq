@@ -1,4 +1,8 @@
 <section class="home-page">
   <!-- <app-loading-spinner [show]="postDataAssigned.value === false" [overlay]="'component'"></app-loading-spinner> -->
-  <app-post *ngFor="let postId of posts" [postId]="postId"></app-post>
+  <!-- <app-post *ngFor="let postId of posts" [postId]="postId"></app-post> -->
+  <div *ngFor="let postId of posts">
+    <a [routerLink]="['/app/post', postId]">post {{ postId }}</a
+    ><br /><br />
+  </div>
 </section>

@@ -20,14 +20,16 @@ export class HomeComponent implements OnInit {
     private userInfoService: UserInfoService
   ) {}
 
-  posts = ['62648b2a2f1713e895c8f324'];
+  posts = [
+    '62653bd48622e648819139e2',
+    '626565e78622e64881913bda',
+    '6264878bdb7ea6a449ca9698',
+    '62658e988622e648819140e0',
+    '62658f218622e64881914118',
+    '6265903c8622e6488191416d',
+  ];
 
   // postDataAssigned = new BehaviorSubject(true);
 
-  ngOnInit(): void {
-    // this.preparePostData(this.postId);
-    // this.postDataAssigned.subscribe(() => {
-    //   this.postImages = this.postData.content.media.images;
-    // });
-  }
+  ngOnInit(): void {}
 }

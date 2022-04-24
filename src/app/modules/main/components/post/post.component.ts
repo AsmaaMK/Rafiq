@@ -19,7 +19,7 @@ export class PostComponent implements OnInit {
   @Input() postId: string = '';
 
   postData: PostData = this.postService.initialPostData;
-  postDataAssigned = new BehaviorSubject(false);
+  postDataAssigned = false;
 
   isMyProfile = false;
   myUserName = this.userInfoService.myUserName;
@@ -97,10 +97,10 @@ export class PostComponent implements OnInit {
                 files: [],
               };
 
-            this.postDataAssigned.next(true);
+            this.postDataAssigned = true;
           });
       } else {
-        this.postDataAssigned.next(true);
+        this.postDataAssigned = true;
       }
     });
   }

@@ -1,4 +1,4 @@
-<ng-container *ngIf="postDataAssigned.value">
+<ng-container *ngIf="postDataAssigned">
   <app-toaster
     [show]="showToaster"
     [status]="toasterType"
@@ -320,7 +320,7 @@
         </div>
 
         <ng-container *ngIf="!postData.isShared; else sharedPostSharePopup">
-          <div class="shared-post-container">
+          <div class="share-post-container">
             <div class="shared-post">
               <div class="post-header">
                 <div class="post-author">
@@ -369,7 +369,7 @@
         </ng-container>
 
         <ng-template #sharedPostSharePopup>
-          <div class="shared-post-container">
+          <div class="share-post-container">
             <div class="shared-post">
               <div class="post-header">
                 <div class="post-author">
