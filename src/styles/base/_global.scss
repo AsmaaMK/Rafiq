@@ -33,6 +33,10 @@ select {
   }
 }
 
+textarea {
+  resize: none;
+}
+
 select {
   -moz-appearance: none; /* Firefox */
   -webkit-appearance: none; /* Safari and Chrome */

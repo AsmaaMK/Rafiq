@@ -16,7 +16,6 @@
     overflow: hidden;
     border-radius: 0.5rem;
     border: 1px solid $primary;
-    box-shadow: 0px 1px 3px $primary;
     margin: 1rem 0 1.5rem 0;
 
     @include flex(row, space-between, stretch);

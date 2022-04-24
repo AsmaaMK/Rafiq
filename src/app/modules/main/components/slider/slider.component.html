@@ -1,4 +1,4 @@
-<div class="slider-wrapper">
+<div class="slider-wrapper" >
   <div class="slider-controlers">
     <button
       class="prev-btn"
@@ -10,8 +10,8 @@
       </svg>
     </button>
 
-    <div id="slider-{{postType}}-{{postId}}" class="slider">
-      <div class="slider__post-media" *ngFor="let image of postMedia">
+    <div id="{{sliderId}}" class="slider">
+      <div class="{{sliderId}}__post-media" *ngFor="let image of postImages">
         <img [src]="image" alt="" />
       </div>
     </div>

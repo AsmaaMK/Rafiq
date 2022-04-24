@@ -7,7 +7,7 @@ import { RouterExtService } from 'src/app/shared/services/router-ext.service';
 import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
 import { UserInfo } from '../../modules/profile/models/user-info';
 import { UserInfoService } from '../../modules/profile/services/user-info.service';
-import { PostComment, PostData } from './post';
+import { MediaType, Post, PostComment, PostData } from './post';
 import { PostService } from './post.service';
 
 @Component({
@@ -17,22 +17,18 @@ import { PostService } from './post.service';
 })
 export class PostComponent implements OnInit {
   @Input() postId: string = '';
-  @Input() postImages: string[] = [];
-  @Input() postData: PostData = this.postService.initialPostData;
-  @Input() postAuthor: UserInfo = {
-    firstName: '',
-    lastName: '',
-    userName: '',
-    avatar: 'assets/main-module/profile/default-personal-image.svg',
-  };
+
+  postData: PostData = this.postService.initialPostData;
+  postDataAssigned = new BehaviorSubject(false);
 
   isMyProfile = false;
   myUserName = this.userInfoService.myUserName;
-  myInfo!: UserInfo;
-
-  showToaster = false;
-  toasterMessage = '';
-  toasterType: ToasterType = 'error';
+  myInfo: UserInfo = {
+    avatar: '',
+    userName: '',
+    lastName: '',
+    firstName: '',
+  };
 
   comments: PostComment[] = [];
 
@@ -40,8 +36,12 @@ export class PostComponent implements OnInit {
     commentText: new FormControl('', [Validators.required]),
   });
 
-  deleting = false;
+  deletingPost = false;
   addingComment = false;
+
+  showToaster = false;
+  toasterMessage = '';
+  toasterType: ToasterType = 'error';
 
   constructor(
     private postService: PostService,
@@ -52,12 +52,57 @@ export class PostComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.isMyProfile =
-      this.userInfoService.myUserName.value === this.postAuthor.userName;
+    this.preparePostData();
 
     this.userInfoService
       .getUserInfo(this.myUserName.value)
       .subscribe((res) => (this.myInfo = res));
+  }
+
+  preparePostData() {
+    this.postService.getPostById(this.postId).subscribe((res) => {
+      this.isMyProfile =
+        this.userInfoService.myUserName.value === res.authorInfo.userName;
+
+      this.postData.authorInfo = res.authorInfo;
+      this.postData.content.text = res.content.text;
+
+      if (res.content.files.length)
+        this.postData.content.media = this.postService.classifyPostMedia(
+          res.content.files
+        );
+      else this.postData.content.media = { type: 'noFiles', files: [] };
+
+      this.postData.isShared = res.isShared;
+      this.postData.numberOfLikes = res.numberOfLikes;
+      this.postData.numberOfComments = res.numberOfComments;
+      this.postData.isLiked = res.isLiked;
+
+      if (res.isShared) {
+        this.postData.sharedSource.postId = res.sharedSource.postId;
+        this.postData.sharedSource.authorInfo = res.sharedSource.authorInfo;
+
+        this.postService
+          .getPostById(res.sharedSource.postId)
+          .subscribe((sharedPostRes) => {
+            this.postData.sharedSource.content.text =
+              sharedPostRes.content.text;
+
+            if (sharedPostRes.content.files.length)
+              this.postData.sharedSource.content.media =
+                this.postService.classifyPostMedia(sharedPostRes.content.files);
+            else
+              this.postData.sharedSource.content.media = {
+                type: 'noFiles',
+                files: [],
+              };
+
+            this.postDataAssigned.next(true);
+          });
+      } else {
+        this.postDataAssigned.next(true);
+      }
+    });
   }
 
   likeOrUnlike() {
@@ -72,7 +117,7 @@ export class PostComponent implements OnInit {
     }
   }
 
-  showSharePostPopup(popup: HTMLElement) {
+  showSharePostPopup(popup: HTMLElement, textarea: HTMLTextAreaElement) {
     popup.classList.add('open');
   }
 
@@ -101,7 +146,7 @@ export class PostComponent implements OnInit {
 
   deletePost(popup: HTMLElement, post: HTMLElement) {
     this.closePopup(popup);
-    this.deleting = true;
+    this.deletingPost = true;
     this.postService.deletePost(this.postId).subscribe(
       () => {
         post.style.display = 'none';
@@ -116,7 +161,7 @@ export class PostComponent implements OnInit {
         this.toasterMessage = `Error when deleting post`;
         this.toasterType = 'error';
         this.showToaster = true;
-        this.deleting = false;
+        this.deletingPost = false;
       }
     );
   }
@@ -170,21 +215,19 @@ export class PostComponent implements OnInit {
     this.addCommentForm.reset();
     this.addingComment = true;
 
-    this.postService
-      .addComment(this.postId, postText)
-      .subscribe((res) => {
-        newComment = {
-          id: res.results.commentId,
-          user: this.myInfo,
-          isLiked: false,
-          numberOfLikes: 0,
-          text: postText,
-        };
+    this.postService.addComment(this.postId, postText).subscribe((res) => {
+      newComment = {
+        id: res.results.commentId,
+        user: this.myInfo,
+        isLiked: false,
+        numberOfLikes: 0,
+        text: postText,
+      };
 
-        this.postData.numberOfComments++;
-        this.comments.unshift(newComment);
-        this.addingComment = false;
-      });
+      this.postData.numberOfComments++;
+      this.comments.unshift(newComment);
+      this.addingComment = false;
+    });
   }
 
   likeOrUnlikeComment(comment: PostComment) {

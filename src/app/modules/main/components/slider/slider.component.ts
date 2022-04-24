@@ -6,29 +6,37 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./slider.component.scss'],
 })
 export class SliderComponent implements OnInit {
-  @Input() postMedia: string[] = [];
-  @Input() postId = '';
-  @Input() postType: 'post' | 'shared-post' | 'share-popup-post' = 'post';
-  
+  @Input() postImages: string[] = [];
+  @Input() postId!: string;
+  @Input() postType: 'post' | 'shared-post' | 'share-post-popup' = 'post';
+
   indexOfCurrentMedia = 0;
   numberOfMedia!: number;
 
-  slider = document.getElementById(`slider-${this.postId}`);
-  sliderWidth = 0;
+  sliderId = `slider-${this.postType}-${this.postId}`;
+  slider = document.getElementById(this.sliderId);
 
-  constructor() {}
+  sliderWidth = 0;
+  ngOnInitCount = 0;
+  ngCheckedCount = 0;
+
+  constructor() {
+  }
 
   ngOnInit() {
-    
+    console.log(this.sliderId, 'ngOnInit: ', ++this.ngOnInitCount);
+    this.setSliderWidth();
   }
 
   ngAfterViewChecked() {
+    console.log(this.sliderId, 'ngAfterViewChecked: ', ++this.ngCheckedCount);
     this.setSliderWidth();
   }
 
   setSliderWidth() {
-    this.numberOfMedia = this.postMedia.length;
-    this.slider = document.getElementById(`slider-${this.postId}`);
+    this.sliderId = `slider-${this.postType}-${this.postId}`;
+    this.slider = document.getElementById(this.sliderId);
+    this.numberOfMedia = this.postImages.length;
 
     const widthOfParent =
       this.slider?.parentElement?.getBoundingClientRect().width;
@@ -38,7 +46,7 @@ export class SliderComponent implements OnInit {
       this.slider.style.width = this.sliderWidth.toString() + 'px';
 
       const listOfPostMedia = document.querySelectorAll<HTMLElement>(
-        '.slider__post-media'
+        `.${this.sliderId}__post-media`
       );
 
       listOfPostMedia.forEach((postMedia) => {

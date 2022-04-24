@@ -1,46 +1,70 @@
+type PostData = {
+  postId: string;
+  authorInfo: {
+    userName: string;
+    firstName: string;
+    lastName: string;
+    avatar: string;
+  };
+  content: {
+    text: string;
+    media: PostMedia;
+  };
+  isLiked: boolean;
+  numberOfLikes: number;
+  numberOfComments: number;
+  isShared: boolean;
+  sharedSource: {
+    authorInfo: {
+      userName: string;
+      firstName: string;
+      lastName: string;
+      avatar: string;
+    };
+    postId: string;
+    content: {
+      text: string;
+      media: PostMedia;
+    };
+  };
+};
+
 type Post = {
   _id: string;
+  authorInfo: {
+    userName: string;
+    firstName: string;
+    lastName: string;
+    avatar: string;
+  };
   content: {
     text: string;
     files: string[];
   };
-  author: string;
-  likes: string[];
-  comments: string[];
-  shares: [];
-  shared: boolean;
-  sharedSource?: {
-    author: string;
-    postId: string;
-  };
+  isLiked: boolean;
   numberOfLikes: number;
   numberOfComments: number;
-  isLiked: boolean;
+  isShared: boolean;
+  sharedSource: {
+    authorInfo: {
+      userName: string;
+      firstName: string;
+      lastName: string;
+      avatar: string;
+    };
+    postId: string;
+  };
 };
 
 type GetPostResponse = {
   post: Post;
 };
 
-type PostData = {
-  auther?: {
-    name: string;
-    avatar?: string;
-  };
-  content: {
-    text: string;
-    media: PostMedia;
-  };
-  shared: boolean;
-  sharedFrom?: string;
-  numberOfLikes: number;
-  numberOfComments: number;
-  isLiked: boolean;
-};
+type MediaType = 'images' | 'video' | 'noFiles';
 
 type PostMedia = {
-  images: string[];
-  video: string;
+  files: string[];
+  type: MediaType;
 };
 
 type PostComment = {
@@ -71,8 +95,9 @@ type CommentsResponse = {
 export {
   Post,
   GetPostResponse,
-  PostData,
-  PostMedia,
+  MediaType,
   PostComment,
+  PostMedia,
   CommentsResponse,
+  PostData
 };

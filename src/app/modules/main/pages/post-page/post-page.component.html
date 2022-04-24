@@ -1,16 +1,13 @@
 <section class="post-page">
-  <app-loading-spinner [show]="!postDataAssigned.value" [overlay]="'component'"></app-loading-spinner>
+  <!-- <app-loading-spinner
+    [show]="!postDataAssigned.value"
+    [overlay]="'component'"
+  ></app-loading-spinner> -->
   <button [routerLink]="[previousUrl]" class="back-btn">
     <img
       src="../../../../../../../assets/main-module/profile/back.svg"
       alt=""
     />
   </button>
-  <app-post
-    *ngIf="postDataAssigned.value"
-    [postId]="postId"
-    [postData]="postData"
-    [postAuthor]="postAuthor"
-    [postImages]="postImages"
-  ></app-post>
+  <app-post [postId]="postId"></app-post>
 </section>

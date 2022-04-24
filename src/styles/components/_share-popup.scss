@@ -10,11 +10,10 @@
     width: 80vw; ///
     max-width: 900px; ///
     max-height: 90vh; ///
-    // overflow: scroll;
 
     .scroll {
       overflow: auto;
-      height: 80vh;
+      max-height: 80vh;
 
       .user-info {
         @include flex(row, flex-start);
@@ -82,8 +81,8 @@
         border-radius: 0.5em;
         padding: 1em;
         outline: none;
+        border: none;
         color: $primary;
-        border: 1px solid rgba($primary, 0.5);
 
         &::placeholder {
           color: $primary;

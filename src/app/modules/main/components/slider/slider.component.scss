@@ -54,15 +54,14 @@
 
   .slider {
     height: 300px;
+    @include animation;
 
     @include respond-to(medium) {
       height: 40vh;
       max-height: 400px;
     }
 
-    @include animation;
-
-    &__post-media {
+    [class$="__post-media"] {
       height: 100%;
       display: inline-block;
 

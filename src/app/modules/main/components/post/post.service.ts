@@ -3,17 +3,14 @@ import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
 import { environment } from 'src/environments/environment';
-import {
-  GetUserInfoResponse,
-  UserInfo,
-} from '../../modules/profile/models/user-info';
 import { UserInfoService } from '../../modules/profile/services/user-info.service';
 import {
   Post,
   GetPostResponse,
-  PostData,
-  PostMedia,
   CommentsResponse,
+  PostData,
+  MediaType,
+  PostMedia,
 } from './post';
 
 const headers = new HttpHeaders();
@@ -29,21 +26,39 @@ export class PostService {
   private url = `${environment.apiUrl}/api/v1/users/${this.userInfoService.myUserName.value}/posts`;
 
   initialPostData: PostData = {
-    auther: {
-      name: '',
+    postId: '',
+    authorInfo: {
+      userName: '',
+      firstName: '',
+      lastName: '',
       avatar: '',
     },
     content: {
       text: '',
       media: {
-        images: [],
-        video: '',
+        files: [],
+        type: 'images',
       },
     },
     numberOfComments: 0,
     numberOfLikes: 0,
-    shared: false,
-    sharedFrom: '',
+    isShared: false,
+    sharedSource: {
+      authorInfo: {
+        userName: '',
+        firstName: '',
+        lastName: '',
+        avatar: '',
+      },
+      postId: '',
+      content: {
+        text: '',
+        media: {
+          type: 'images',
+          files: [],
+        },
+      },
+    },
     isLiked: false,
   };
 
@@ -66,23 +81,16 @@ export class PostService {
   }
 
   classifyPostMedia(postFiles: string[]): PostMedia {
-    const videoUrl = 'https://res.cloudinary.com/elaraby/video';
-    const imageUrl = 'https://res.cloudinary.com/elaraby/image';
+    const mediaType: MediaType = postFiles[0].startsWith(
+      'https://res.cloudinary.com/elaraby/image'
+    )
+      ? 'images'
+      : 'video';
 
-    let media: PostMedia = {
-      images: [],
-      video: '',
+    return {
+      type: mediaType,
+      files: postFiles,
     };
-
-    for (let file of postFiles) {
-      if (file.startsWith(imageUrl)) {
-        media.images?.push(file);
-      } else if (file.startsWith(videoUrl)) {
-        media.video = file;
-      }
-    }
-
-    return media;
   }
 
   getIsLiked(postId: string) {
@@ -100,7 +108,7 @@ export class PostService {
   }
 
   share(postId: string, postText: FormData) {
-    const shareHeaders = new HttpHeaders;
+    const shareHeaders = new HttpHeaders();
     shareHeaders
       .append('Access-Control-Allow-Origin', '*')
       .append(
@@ -108,7 +116,7 @@ export class PostService {
         'GET,PUT,POST,DELETE,PATCH,OPTIONS'
       );
     return this.http.post<any>(`${this.url}/${postId}/share`, postText, {
-      headers: shareHeaders
+      headers: shareHeaders,
     });
   }
 
@@ -148,15 +156,22 @@ export class PostService {
   }
 
   likeComment(postId: string, commentId: string) {
-    return this.http.put(`${this.url}/${postId}/comments/${commentId}/like`, null, {
-      headers: headers,
-    });
+    return this.http.put(
+      `${this.url}/${postId}/comments/${commentId}/like`,
+      null,
+      {
+        headers: headers,
+      }
+    );
   }
 
   unlikeComment(postId: string, commentId: string) {
-    return this.http.delete(`${this.url}/${postId}/comments/${commentId}/like`, {
-      headers: headers,
-    });
+    return this.http.delete(
+      `${this.url}/${postId}/comments/${commentId}/like`,
+      {
+        headers: headers,
+      }
+    );
   }
 
   deleteComment(postId: string, commentId: string) {

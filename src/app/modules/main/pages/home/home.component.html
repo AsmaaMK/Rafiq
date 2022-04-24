@@ -1,4 +1,4 @@
 <section class="home-page">
-  <app-loading-spinner [show]="postDataAssigned.value === false" [overlay]="'component'"></app-loading-spinner>
-  <app-post *ngIf="postDataAssigned.value" [postAuthor]="postAuthor" [postId]="postId" [postData]="postData" [postImages]="postImages"></app-post>
+  <!-- <app-loading-spinner [show]="postDataAssigned.value === false" [overlay]="'component'"></app-loading-spinner> -->
+  <app-post *ngFor="let postId of posts" [postId]="postId"></app-post>
 </section>

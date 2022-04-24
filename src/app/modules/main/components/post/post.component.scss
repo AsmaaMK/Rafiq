@@ -182,3 +182,12 @@
   }
 }
 
+.shared-post-container {
+  margin: 1em;
+  background-color: rgba($primary, 0.2);
+  border-radius: 0.5rem;
+
+  .post-text {
+    padding-bottom: 1rem;
+  }
+}
