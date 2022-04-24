@@ -24,12 +24,10 @@ export class SliderComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.sliderId, 'ngOnInit: ', ++this.ngOnInitCount);
     this.setSliderWidth();
   }
 
   ngAfterViewChecked() {
-    console.log(this.sliderId, 'ngAfterViewChecked: ', ++this.ngCheckedCount);
     this.setSliderWidth();
   }
 

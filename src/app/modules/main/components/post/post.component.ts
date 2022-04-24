@@ -1,10 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
 import { ToasterType } from 'src/app/shared/models/toaster-status';
 import { RouterExtService } from 'src/app/shared/services/router-ext.service';
-import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
 import { UserInfo } from '../../modules/profile/models/user-info';
 import { UserInfoService } from '../../modules/profile/services/user-info.service';
 import { MediaType, Post, PostComment, PostData } from './post';
@@ -16,9 +14,9 @@ import { PostService } from './post.service';
   styleUrls: ['./post.component.scss'],
 })
 export class PostComponent implements OnInit {
-  @Input() postId: string = '';
-
-  postData: PostData = this.postService.initialPostData;
+  @Input() postId!: string;
+  @Input() postData: PostData = this.postService.initialPostData;
+  @Input() show = false;
   postDataAssigned = false;
 
   isMyProfile = false;
@@ -45,7 +43,6 @@ export class PostComponent implements OnInit {
 
   constructor(
     private postService: PostService,
-    private tokeStorageService: TokenStorageService,
     private router: Router,
     private routerExt: RouterExtService,
     private userInfoService: UserInfoService
@@ -98,10 +95,12 @@ export class PostComponent implements OnInit {
               };
 
             this.postDataAssigned = true;
+
           });
       } else {
         this.postDataAssigned = true;
       }
+      console.log(this.postData)
     });
   }
 
