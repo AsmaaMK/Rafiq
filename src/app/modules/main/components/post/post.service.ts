@@ -25,43 +25,6 @@ headers
 export class PostService {
   private url = `${environment.apiUrl}/api/v1/users/${this.userInfoService.myUserName.value}/posts`;
 
-  initialPostData: PostData = {
-    postId: '',
-    authorInfo: {
-      userName: '',
-      firstName: '',
-      lastName: '',
-      avatar: '',
-    },
-    content: {
-      text: '',
-      media: {
-        files: [],
-        type: 'images',
-      },
-    },
-    numberOfComments: 0,
-    numberOfLikes: 0,
-    isShared: false,
-    sharedSource: {
-      authorInfo: {
-        userName: '',
-        firstName: '',
-        lastName: '',
-        avatar: '',
-      },
-      postId: '',
-      content: {
-        text: '',
-        media: {
-          type: 'images',
-          files: [],
-        },
-      },
-    },
-    isLiked: false,
-  };
-
   constructor(
     private http: HttpClient,
     private tokenStorageService: TokenStorageService,

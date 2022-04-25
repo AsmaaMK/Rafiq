@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { ToasterType } from 'src/app/shared/models/toaster-status';
 import { RouterExtService } from 'src/app/shared/services/router-ext.service';
 import { UserInfo } from '../../modules/profile/models/user-info';
@@ -15,8 +16,43 @@ import { PostService } from './post.service';
 })
 export class PostComponent implements OnInit {
   @Input() postId!: string;
-  @Input() postData: PostData = this.postService.initialPostData;
-  @Input() show = false;
+  postData: PostData = {
+    postId: '',
+    authorInfo: {
+      userName: '',
+      firstName: '',
+      lastName: '',
+      avatar: '',
+    },
+    content: {
+      text: '',
+      media: {
+        files: [],
+        type: 'images',
+      },
+    },
+    numberOfComments: 0,
+    numberOfLikes: 0,
+    isShared: false,
+    sharedSource: {
+      authorInfo: {
+        userName: '',
+        firstName: '',
+        lastName: '',
+        avatar: '',
+      },
+      postId: '',
+      content: {
+        text: '',
+        media: {
+          type: 'images',
+          files: [],
+        },
+      },
+    },
+    isLiked: false,
+  };
+
   postDataAssigned = false;
 
   isMyProfile = false;
@@ -41,6 +77,8 @@ export class PostComponent implements OnInit {
   toasterMessage = '';
   toasterType: ToasterType = 'error';
 
+  subscription!: Subscription;
+
   constructor(
     private postService: PostService,
     private router: Router,
@@ -51,6 +89,7 @@ export class PostComponent implements OnInit {
   ngOnInit() {
     this.preparePostData();
 
+    // TODO: make the subscribtion in user service and get it's valude each time. here and in add post popup
     this.userInfoService
       .getUserInfo(this.myUserName.value)
       .subscribe((res) => (this.myInfo = res));
@@ -95,12 +134,12 @@ export class PostComponent implements OnInit {
               };
 
             this.postDataAssigned = true;
-
           });
       } else {
         this.postDataAssigned = true;
       }
-      console.log(this.postData)
+
+      this.postDataAssigned = true;
     });
   }
 
