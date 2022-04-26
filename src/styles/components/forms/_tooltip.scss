@@ -1,4 +1,4 @@
-@use '../../helpers/colors' as *;
+@use '../../helpers/helpers-dir' as *;
 
 .tooltip {
   position: relative;
@@ -11,7 +11,7 @@
   .message {
     visibility: hidden;
     position: absolute;
-    z-index: 50;
+    z-index: $index-2;
     right: 2.5em;
     top: -3.5em;
     padding: 0.25em 0.5em;

@@ -194,6 +194,7 @@ export class PostComponent implements OnInit {
           let prevUrl = this.routerExt.getPreviousUrl();
           this.router.navigate([prevUrl]);
         }
+        this.deletingPost = false;
       },
       () => {
         this.toasterMessage = `Error when deleting post`;
@@ -288,5 +289,10 @@ export class PostComponent implements OnInit {
         this.postData.numberOfComments--;
       });
     }
+  }
+
+  goToPostPage(event: any) {
+    if (event.target.nodeName === 'DIV')
+      this.router.navigate(['/app/post', this.postData.sharedSource.postId]);
   }
 }

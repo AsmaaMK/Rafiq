@@ -7,7 +7,7 @@
 
 .share-post {
   &.pop-up {
-    width: 80vw; ///
+    width: 60vw; ///
     max-width: 800px; ///
     max-height: 90vh; ///
 
@@ -32,6 +32,7 @@
           img {
             height: 100%;
             margin: auto;
+            object-fit: contain;
           }
         }
 
@@ -95,6 +96,8 @@
   width: 100%;
   background-color: $neutral-lighter;
   border-radius: 1em;
+  margin-bottom: 3rem;
+  overflow: hidden;
 
   .post-header {
     margin: 1em;
@@ -117,6 +120,7 @@
       img {
         height: 100%;
         margin: auto;
+        object-fit: contain;
       }
     }
 

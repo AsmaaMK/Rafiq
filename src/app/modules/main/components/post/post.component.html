@@ -65,7 +65,11 @@
       </ng-container>
 
       <ng-template #sharedPostContent>
-        <div class="shared-post-container">
+        <div
+          #sharedPost
+          class="shared-post-container"
+          (click)="goToPostPage($event)"
+        >
           <div class="post-header">
             <div class="post-author">
               <div class="post-author__avatar">
@@ -407,7 +411,10 @@
               ></app-slider>
 
               <div class="video">
-                <video controls *ngIf="postData.sharedSource.content.media.type === 'video'">
+                <video
+                  controls
+                  *ngIf="postData.sharedSource.content.media.type === 'video'"
+                >
                   <source
                     [src]="postData.sharedSource.content.media.files[0]"
                     type="video/mp4"

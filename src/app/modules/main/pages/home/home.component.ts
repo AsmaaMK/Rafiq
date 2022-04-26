@@ -11,8 +11,7 @@ import { PostService } from '../../components/post/post.service';
 export class HomeComponent implements OnInit {
   constructor(private postService: PostService) {}
 
-  posts: string[] = [
-  ];
+  posts!: string[];
 
   ngOnInit(): void {
     this.posts = [
@@ -22,8 +21,9 @@ export class HomeComponent implements OnInit {
       '62658e988622e648819140e0',
       '62658f218622e64881914118',
       '6265903c8622e6488191416d',
+      '6267f4dbd342fa62ade5b8e4',
+      '6267f8a7d342fa62ade5b9ad',
+      '6267fcadd342fa62ade5c42a',
     ];
   }
-
- 
 }
