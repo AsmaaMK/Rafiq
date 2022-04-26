@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { MainComponent } from './main.component';
 import { HomeComponent } from './pages/home/home.component';
 import { PostPageComponent } from './pages/post-page/post-page.component';
-import { SettingComponent } from './pages/setting/setting.component';
 import { UserInfoResolver } from './resolvers/user-info.resolver';
 
 const routes: Routes = [
@@ -14,10 +13,6 @@ const routes: Routes = [
       {
         path: 'home',
         component: HomeComponent,
-      },
-      {
-        path: 'settings',
-        component: SettingComponent,
       },
       {
         path: 'profile/:username',
