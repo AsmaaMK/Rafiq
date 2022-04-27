@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PostsComponent implements OnInit {
 
+  isAdmin = true;
+  posts = [];
   constructor() { }
 
   ngOnInit(): void {

@@ -1,1 +1,105 @@
-<p>attractions works!</p>
+<section class="attractions-section">
+  <nav class="filters">
+    <ul>
+      <li>
+        <button
+          #filterAll
+          class="filter-btn active"
+          (click)="filterAttractionsArray(filterAll, 'all')"
+        >
+          All
+        </button>
+      </li>
+      <li>
+        <button
+          #filterResturant
+          class="filter-btn"
+          (click)="filterAttractionsArray(filterResturant, 'resturant')"
+        >
+          Resturants
+        </button>
+      </li>
+      <li>
+        <button
+          #filterTouristicPlace
+          class="filter-btn"
+          (click)="filterAttractionsArray(filterTouristicPlace, 'touristic place')"
+        >
+          Touristic places
+        </button>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="cards-container">
+    <div class="card" *ngFor="let attraction of filteredAttractions">
+      <div class="image">
+        <img [src]="attraction.image" alt="" />
+      </div>
+      <div class="content">
+        <div>
+          <p class="name">{{ attraction.name }}</p>
+          <p class="description">{{ attraction.description }}</p>
+        </div>
+
+        <div class="row">
+          <div>
+            <div class="rate">
+              <svg [ngClass]="{ filled: attraction.rate >= 1 }">
+                <use href="#star-icon"></use>
+              </svg>
+              <svg [ngClass]="{ filled: attraction.rate >= 2 }">
+                <use href="#star-icon"></use>
+              </svg>
+              <svg [ngClass]="{ filled: attraction.rate >= 3 }">
+                <use href="#star-icon"></use>
+              </svg>
+              <svg [ngClass]="{ filled: attraction.rate >= 4 }">
+                <use href="#star-icon"></use>
+              </svg>
+              <svg [ngClass]="{ filled: attraction.rate >= 5 }">
+                <use href="#star-icon"></use>
+              </svg>
+            </div>
+
+            <a class="location-link" href="">
+              <span>
+                <img
+                  src="../../../../../../../assets/main-module/city/location.svg"
+                  alt=""
+                />
+              </span>
+              <span>Location</span>
+            </a>
+          </div>
+          <a
+            *ngIf="attraction.type === 'resturant'"
+            href=""
+            class="book-now-link"
+            >Book Now</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none">
+  <symbol
+    id="star-icon"
+    enable-background="new 0 0 24 24"
+    height="24px"
+    viewBox="0 0 24 24"
+    width="24px"
+  >
+    <g>
+      <rect fill="none" height="24" width="24" x="0" />
+      <polygon
+        fill="currentColor"
+        stroke="#F8B400"
+        stroke-width="1.2"
+        points="14.43,10 12,2 9.57,10 2,10 8.18,14.41 5.83,22 12,17.31 18.18,22 15.83,14.41 22,10"
+      />
+    </g>
+  </symbol>
+</svg>

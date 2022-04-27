@@ -1,0 +1,115 @@
+@use "../../../../../../../styles/helpers/helpers-dir" as *;
+
+.attractions-section {
+  height: 100%;
+  overflow: auto;
+  @include padding(y, 2rem);
+
+  .filters ul {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 0;
+    margin-bottom: 2rem;
+    @include flex(row);
+
+    li {
+      button {
+        background-color: transparent;
+        color: $primary;
+        font-size: $base-font-size;
+        @include animation;
+
+        &.active {
+          font-weight: 500;
+          font-size: $base-font-size * 1.2;
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  .cards-container {
+    @include flex(row, center, stretch);
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+
+  .card {
+    background-color: $neutral-lighter;
+    border-radius: 1em;
+    width: 40%;
+    min-width: 300px;
+    max-width: 400px;
+    overflow: hidden;
+    border: 1px solid rgba($primary, 0.5);
+    @include flex;
+
+    .image {
+      width: 100%;
+      height: 180px;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .content {
+      // height: 60%;
+      flex: 1;
+      padding: 1em;
+      @include flex(column, space-between, space-between);
+
+      .name {
+        color: $primary;
+        font-weight: 500;
+        font-size: $base-font-size * 1.2;
+        margin: 0;
+      }
+
+      .description {
+        color: $primary;
+        font-size: $base-font-size;
+        @include margin(y, 0.5rem);
+      }
+
+      .row {
+        @include flex(row, space-between, flex-end);
+      }
+
+      .rate {
+        svg {
+          display: inline;
+          width: 24px;
+          height: 24px;
+          color: transparent;
+
+          &.filled {
+            color: #f8b400;
+          }
+        }
+      }
+
+      .location-link {
+        position: relative;
+        text-decoration: none;
+        color: $primary;
+        font-size: $base-font-size;
+        font-weight: 500;
+        @include margin(y, 0.2rem);
+        @include flex(row, flex-start);
+        gap: 5px;
+      }
+
+      .book-now-link {
+        text-decoration: none;
+        color: $secondary;
+        background-color: $primary;
+        padding: 0.5em 1em;
+        border-radius: 0.5em;
+        font-size: $base-font-size;
+      }
+    }
+  }
+}
