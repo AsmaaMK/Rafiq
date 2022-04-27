@@ -1,0 +1,133 @@
+<app-toaster
+  [show]="showToast"
+  [status]="toastStatus"
+  [message]="toastMessage"
+></app-toaster>
+
+<header class="city-header">
+  <div class="city-cover" id="city-cover">
+    <div class="clip-path">
+      <img
+        src="../../../../../../../assets/main-module/profile/default-cover.svg"
+        alt="cover"
+        class="cover-image"
+        (click)="onCoverClick(coverOptions, coverPreview)"
+      />
+      <input
+        *ngIf="true"
+        type="file"
+        id="change-cover-input"
+        hidden
+        (change)="changeCover($event, coverOptions)"
+      />
+    </div>
+  </div>
+
+  <div class="city-info-card" id="city-info-card">
+    <button class="follow-btn" (click)="followOrUnfollow()">
+      {{ true ? "Following" : "Follow" }}
+    </button>
+
+    <div class="name-field">
+      <p class="city-name" aria-label="name">
+        <span>{{ "Roma" }}</span> ({{ "Italy" }})
+      </p>
+    </div>
+
+    <ul aria-label="city info" class="personal-info">
+      <li aria-label="temperature degree">
+        <img
+          src="../../../../../../../assets/main-module/city/Temp.svg"
+          alt=""
+        />
+        <p>
+          <span>{{ "16°" }}</span>
+          C
+        </p>
+      </li>
+      <li aria-label="time">
+        <img
+          src="../../../../../../../assets/main-module/city/clock.svg"
+          alt=""
+        />
+        <p>
+          <span>{{ "05:12" }}</span>
+        </p>
+      </li>
+      <li aria-label="population">
+        <img
+          src="../../../../../../../assets/main-module/city/people.svg"
+          alt=""
+        />
+        <p>
+          <span>{{ "60M" }}</span> people
+        </p>
+      </li>
+      <li aria-label="fire number">
+        <img
+          src="../../../../../../../assets/main-module/city/Fire.svg"
+          alt=""
+        />
+        <p>
+          <span>{{ "123" }}</span>
+        </p>
+      </li>
+      <li aria-label="police number">
+        <img
+          src="../../../../../../../assets/main-module/city/Police.svg"
+          alt=""
+        />
+        <p>
+          <span>{{ "113" }}</span>
+        </p>
+      </li>
+      <li aria-label="ambulance number">
+        <img
+          src="../../../../../../../assets/main-module/city/First aid.svg"
+          alt=""
+        />
+        <p>
+          <span>{{ "115" }}</span>
+        </p>
+      </li>
+    </ul>
+  </div>
+</header>
+
+<div id="cover-options-popup" class="overlay-wrapper" #coverOptions>
+  <section class="pop-up cover-options">
+    <button (click)="closePopup(coverOptions)" class="close-btn">
+      <img src="../../../assets/main-module/Close.svg" alt="" />
+    </button>
+    <div class="options">
+      <label class="options__btn" for="change-cover-input"
+        >Change city cover</label
+      >
+      <button
+        class="options__btn"
+        (click)="viewPicture(coverPreview, coverOptions)"
+        [disabled]="true"
+      >
+        View city cover
+      </button>
+      <button
+        class="options__btn"
+        (click)="deleteCover(coverOptions)"
+        [disabled]="true"
+      >
+        Delete city cover
+      </button>
+    </div>
+  </section>
+</div>
+
+<div class="overlay-wrapper" #coverPreview>
+  <div class="img-popup">
+    <button (click)="closePopup(coverPreview)" class="close-btn">
+      <img src="assets/main-module/Close.svg" alt="" />
+    </button>
+    <div class="img-preview">
+      <img [src]="" alt="cover" />
+    </div>
+  </div>
+</div>

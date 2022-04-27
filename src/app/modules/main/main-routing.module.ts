@@ -23,9 +23,14 @@ const routes: Routes = [
         resolve: { userInfo: UserInfoResolver },
       },
       {
+        path: 'city/:cityId',
+        loadChildren: () =>
+          import('./modules/city/city.module').then((m) => m.CityModule),
+      },
+      {
         path: 'post/:postId',
         component: PostPageComponent,
-        // resolve: { userInfo: UserInfoResolver },
+        resolve: { userInfo: UserInfoResolver },
       },
       {
         path: 'trip',

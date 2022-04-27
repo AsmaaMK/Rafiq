@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="27" height="27" viewBox="0 0 27 27">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_586" data-name="Rectangle 586" width="27" height="27" fill="#fff" stroke="#707070" stroke-width="1"/>
+    </clipPath>
+  </defs>
+  <g id="clock" clip-path="url(#clip-path)">
+    <g id="schedule_black_24dp">
+      <path id="Path_7553" data-name="Path 7553" d="M0,0H26.775V26.775H0Z" fill="none"/>
+      <path id="Path_7554" data-name="Path 7554" d="M13.812,2.667A11.156,11.156,0,1,0,24.979,13.823,11.151,11.151,0,0,0,13.812,2.667Zm.011,20.082a8.925,8.925,0,1,1,8.925-8.925A8.923,8.923,0,0,1,13.823,22.748Z" transform="translate(-0.435 -0.435)" fill="#5b618a"/>
+      <path id="Path_7555" data-name="Path 7555" d="M16.34,9.333H14.667v6.694l5.857,3.514.837-1.372L16.34,15.19Z" transform="translate(-2.395 -1.524)" fill="#5b618a"/>
+    </g>
+  </g>
+</svg>

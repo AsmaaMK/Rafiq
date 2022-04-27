@@ -1,0 +1,37 @@
+@use "../../../../../../../styles/helpers/helpers-dir" as *;
+@use "../../../../../../../styles/pages/profile-and-city/profile-and-city-header";
+@use "../../../../../../../styles/components/cover-and-avatar-popup-and-preview";
+
+.city-cover {
+  width: 100%;
+  position: absolute;
+  z-index: $index-1;
+  top: 0;
+}
+
+.city-info-card {
+  position: relative;
+  margin: auto;
+  @include padding(y, 0.01em);
+
+  .follow-btn {
+    display: none;
+    top: 40% !important;
+  }
+
+  .city-name {
+    font-size: $base-font-size * 1.2;
+
+    span {
+      font-size: $base-font-size * 1.5;
+      font-weight: 500;
+    }
+  }
+
+  ul.personal-info {
+
+    li {
+      min-width: 30% !important;
+    }
+  }
+}

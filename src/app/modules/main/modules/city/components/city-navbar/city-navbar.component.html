@@ -1,4 +1,4 @@
-<nav class="profile-navbar" id="profile-navbar">
+<nav class="city-navbar" id="city-navbar">
   <ul>
     <li>
       <a
@@ -22,26 +22,28 @@
     </li>
     <li>
       <a
-        class="videos-link"
-        routerLink="./videos"
+        class="attractions-link"
+        routerLink="./attractions"
         routerLinkActive="active-link"
-        #videosLink
-        (click)="possitionIndicator(videosLink)"
-        >Videos</a
+        #attractionsLink
+        (click)="possitionIndicator(attractionsLink)"
+        >Attractions</a
       >
     </li>
     <li>
       <a
-        class="map-link"
-        routerLink="./map"
+        class="hotels-link"
+        routerLink="./hotels"
         routerLinkActive="active-link"
-        #mapLink
-        (click)="possitionIndicator(mapLink)"
-        >Map</a
+        #hotelsLink
+        (click)="possitionIndicator(hotelsLink)"
+        >Hotels</a
       >
     </li>
   </ul>
-  <div id="profile-indicator-wrapper">
-    <span id="profile-active-link-indicator"></span>
+
+  <div id="city-indicator-wrapper">
+    <span id="city-active-link-indicator"></span>
   </div>
 </nav>
+

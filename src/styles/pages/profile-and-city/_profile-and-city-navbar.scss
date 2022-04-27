@@ -1,0 +1,116 @@
+@use "../../helpers/helpers-dir" as *;
+
+.profile-navbar,
+.city-navbar {
+  position: relative;
+  background-color: $secondary-lavender;
+  margin: auto;
+  margin-bottom: 0;
+  border-radius: 0.8em;
+  box-shadow: 0px 3px 6px #666666;
+
+  @include respond-to(less-than-medium) {
+    width: 95%;
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 1em;
+
+    @include flex(row, space-around, center);
+    flex-wrap: wrap;
+    gap: 1em;
+
+    @include respond-to(small) {
+      padding: 1em 0.75em;
+      gap: 0.5em;
+    }
+
+    li {
+      position: relative;
+      font-size: $base-font-size;
+
+      @include respond-to(medium) {
+        font-size: $base-font-size * 1.5;
+      }
+
+      a {
+        text-decoration: none;
+        color: $primary;
+        font-weight: 500;
+        padding-left: 1.2em;
+
+        @include respond-to(small) {
+          font-size: $base-font-size * 0.9;
+          padding-left: 1em;
+        }
+
+        &::before {
+          content: "";
+          position: absolute;
+          left: 0;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 0.8em;
+          height: 0.8em;
+          background-repeat: no-repeat;
+          background-size: contain;
+          background-position: center;
+
+          @include respond-to(small) {
+            width: 0.7em;
+            height: 0.7em;
+          }
+        }
+
+        &.posts-link::before {
+          background-image: url("../../../assets/main-module/profile/posts.svg");
+        }
+
+        &.images-link::before {
+          background-image: url("../../../assets/main-module/profile/images.svg");
+        }
+
+        &.videos-link::before {
+          background-image: url("../../../assets/main-module/profile/videos.svg");
+        }
+
+        &.map-link::before {
+          background-image: url("../../../assets/main-module/profile/map.svg");
+        }
+
+        &.attractions-link::before {
+          background-image: url("../../../assets/main-module/city/Attractions.svg");
+        }
+
+        &.hotels-link::before {
+          background-image: url("../../../assets/main-module/city/Hotels.svg");
+        }
+      }
+    }
+  }
+
+  #city-indicator-wrapper,
+  #profile-indicator-wrapper {
+    position: absolute;
+    left: 0;
+    width: 100%;
+  
+    #city-active-link-indicator,
+    #profile-active-link-indicator {
+      height: 0.25rem;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      background-color: $primary;
+      border-radius: 50px;
+  
+      @include animation;
+    }
+  }
+}
+
+#city-navbar {
+  @include margin(y, 1em);
+}
