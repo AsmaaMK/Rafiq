@@ -18,7 +18,7 @@ export class MainComponent implements OnInit {
 
   video = '';
 
-  myInfo: UserProfile = this.userInfoService.initialUserInfo;
+  myInfo = this.userInfoService.myInfo;
 
   postData = new FormData();
 
@@ -43,10 +43,6 @@ export class MainComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.userInfoService.myInfo.subscribe(res => {
-      this.myInfo = res;
-    });
-    
     this.postDataForm = new FormGroup({
       images: new FormControl(''),
       video: new FormControl(''),

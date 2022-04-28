@@ -111,7 +111,7 @@
   }
 
   .post-text {
-    margin: 1em;
+    margin: 1rem;
     color: $primary;
     font-size: $base-font-size * 1.2;
     line-height: 1.5;
@@ -202,4 +202,15 @@
   .post-text {
     padding-bottom: 1rem;
   }
+}
+
+p.post-not-found {
+  color: $primary;
+  text-align: center;
+  font-size: $base-font-size;
+  font-weight: 500;
+  background-color: rgba($primary, $alpha: 0.1);
+  padding: 1em;
+  margin: 1rem;
+  border-radius: 1rem;
 }

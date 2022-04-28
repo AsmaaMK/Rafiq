@@ -28,6 +28,7 @@ type PostData = {
       text: string;
       media: PostMedia;
     };
+    deleted: boolean;
   };
 };
 
@@ -132,6 +133,7 @@ class POST {
           files: [],
         },
       },
+      deleted: false,
     },
     isLiked: false,
   };
@@ -173,6 +175,8 @@ class POST {
               type: 'noFiles',
               files: [],
             };
+        }, err => {
+          this.postData.sharedSource.deleted = true;
         });
     }
   }

@@ -44,9 +44,11 @@ export class PostService {
       .pipe(map((res) => res.post));
   }
 
-  getInitialPosts(): Observable<Post[]> {
+  getInitialPosts(userName: string): Observable<Post[]> {
     return this.http
-      .get<GetPostsResponse>(this.url)
+      .get<GetPostsResponse>(
+        `${environment.apiUrl}/api/v1/users/${userName}/posts`
+      )
       .pipe(map((res) => res.posts));
   }
 

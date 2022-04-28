@@ -55,9 +55,9 @@
 
     <div class="user-info">
       <div class="user-avatar">
-        <img [src]="myInfo.avatar" alt="" />
+        <img [src]="myInfo.value.avatar" alt="" />
       </div>
-      <p>{{ myInfo.firstName }} {{ myInfo.lastName }}</p>
+      <p>{{ myInfo.value.firstName }} {{ myInfo.value.lastName }}</p>
     </div>
 
     <textarea

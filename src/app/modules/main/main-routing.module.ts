@@ -30,7 +30,6 @@ const routes: Routes = [
       {
         path: 'post/:postId',
         component: PostPageComponent,
-        resolve: { userInfo: UserInfoResolver },
       },
       {
         path: 'trip',

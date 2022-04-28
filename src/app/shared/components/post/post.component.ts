@@ -52,13 +52,14 @@ export class PostComponent implements OnInit {
           files: [],
         },
       },
+      deleted: false,
     },
     isLiked: false,
   };
 
   isMyPost = false;
   myUserName = this.userInfoService.myUserName;
-  myInfo: UserProfile = this.userInfoService.initialUserInfo;
+  myInfo = this.userInfoService.myInfo;
 
   comments: PostComment[] = [];
 
@@ -83,7 +84,6 @@ export class PostComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.userInfoService.myInfo.subscribe((res) => (this.myInfo = res));
     this.isMyPost =
       this.userInfoService.myUserName.value === this.postData.authorInfo.userName;
   }
@@ -205,10 +205,10 @@ export class PostComponent implements OnInit {
         newComment = {
           id: res.results.commentId,
           user: {
-            firstName: this.myInfo.firstName,
-            lastName: this.myInfo.lastName,
+            firstName: this.myInfo.value.firstName,
+            lastName: this.myInfo.value.lastName,
             userName: this.myUserName.value,
-            avatar: this.myInfo.avatar,
+            avatar: this.myInfo.value.avatar,
           },
           isLiked: false,
           numberOfLikes: 0,

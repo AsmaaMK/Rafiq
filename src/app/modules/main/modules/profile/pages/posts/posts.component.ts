@@ -25,7 +25,7 @@ export class PostsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.postService.getInitialPosts().subscribe(
+    this.postService.getInitialPosts(this.urlUserName).subscribe(
       posts => {
         for (let post of posts) {
           const newPost = new POST(post, this.postService);

@@ -1,70 +1,71 @@
 <!-- <ng-container *ngIf="postDataAssigned"> -->
-  <app-toaster
-    [show]="showToaster"
-    [status]="toasterType"
-    [message]="toasterMessage"
-  ></app-toaster>
+<app-toaster
+  [show]="showToaster"
+  [status]="toasterType"
+  [message]="toasterMessage"
+></app-toaster>
 
-  <div #post class="post">
-    <div class="post-content">
-      <div class="post-header">
-        <div class="post-author">
-          <div class="post-author__avatar">
-            <img
-              [src]="
-                postData.authorInfo.avatar ||
-                'assets/main-module/profile/default-personal-image.svg'
-              "
-              alt=""
-            />
-          </div>
-          <div class="post-author__info">
-            <p class="name">
-              {{ postData.authorInfo.firstName }}
-              {{ postData.authorInfo.lastName }}
-            </p>
-            <a
-              class="username"
-              [routerLink]="['/app/profile', postData.authorInfo.userName]"
-              >@{{ postData.authorInfo.userName }}</a
-            >
-          </div>
+<div #post class="post">
+  <div class="post-content">
+    <div class="post-header">
+      <div class="post-author">
+        <div class="post-author__avatar">
+          <img
+            [src]="
+              postData.authorInfo.avatar ||
+              'assets/main-module/profile/default-personal-image.svg'
+            "
+            alt=""
+          />
         </div>
-
-        <div class="post-options" *ngIf="isMyPost">
-          <button class="options-btn" (click)="toggleOptionsList(options)">
-            <img
-              src="../../../../../assets/main-module/post/options.svg"
-              alt=""
-            />
-          </button>
-          <div class="options" #options>
-            <button
-              class="delete-btn"
-              (click)="openDeletePostPopup(deletePostPopup)"
-            >
-              Delete
-            </button>
-          </div>
+        <div class="post-author__info">
+          <p class="name">
+            {{ postData.authorInfo.firstName }}
+            {{ postData.authorInfo.lastName }}
+          </p>
+          <a
+            class="username"
+            [routerLink]="['/app/profile', postData.authorInfo.userName]"
+            >@{{ postData.authorInfo.userName }}</a
+          >
         </div>
       </div>
 
-      <ng-container *ngIf="!postData.isShared; else sharedPostContent">
-        <app-slider
-          *ngIf="postData.content.media.type === 'images'"
-          [postImages]="postData.content.media.files"
-          [postId]="postData.postId"
-        ></app-slider>
-
-        <div class="video">
-          <video controls *ngIf="postData.content.media.type === 'video'">
-            <source [src]="postData.content.media.files[0]" type="video/mp4" />
-            No video support.
-          </video>
+      <div class="post-options" *ngIf="isMyPost">
+        <button class="options-btn" (click)="toggleOptionsList(options)">
+          <img
+            src="../../../../../assets/main-module/post/options.svg"
+            alt=""
+          />
+        </button>
+        <div class="options" #options>
+          <button
+            class="delete-btn"
+            (click)="openDeletePostPopup(deletePostPopup)"
+          >
+            Delete
+          </button>
         </div>
-      </ng-container>
+      </div>
+    </div>
 
-      <ng-template #sharedPostContent>
+    <ng-container *ngIf="!postData.isShared; else sharedPostContent">
+      <app-slider
+        *ngIf="postData.content.media.type === 'images'"
+        [postImages]="postData.content.media.files"
+        [postId]="postData.postId"
+      ></app-slider>
+
+      <div class="video">
+        <video controls *ngIf="postData.content.media.type === 'video'">
+          <source [src]="postData.content.media.files[0]" type="video/mp4" />
+          No video support.
+        </video>
+      </div>
+    </ng-container>
+
+    <ng-template #sharedPostContent>
+      <ng-container *ngIf="!postData.sharedSource.deleted; else postNotFound">
         <div
           #sharedPost
           class="shared-post-container"
@@ -121,352 +122,357 @@
             {{ postData.sharedSource.content.text }}
           </p>
         </div>
+      </ng-container>
+
+      <ng-template #postNotFound>
+        <p class="post-not-found">Shared post is no longer available</p>
       </ng-template>
+    </ng-template>
 
-      <p class="post-text" *ngIf="postData.content.text">
-        {{ postData.content.text }}
-      </p>
+    <p class="post-text" *ngIf="postData.content.text">
+      {{ postData.content.text }}
+    </p>
 
-      <div class="post-reactions">
-        <div>
-          <button
-            class="like-btn"
-            [ngClass]="{ liked: this.postData.isLiked }"
-            (click)="likeOrUnlike()"
-          >
-            <svg>
-              <use href="#like-icon"></use>
-            </svg>
-          </button>
-          <span aria-label="number of likes">{{ postData.numberOfLikes }}</span>
-        </div>
+    <div class="post-reactions">
+      <div>
+        <button
+          class="like-btn"
+          [ngClass]="{ liked: this.postData.isLiked }"
+          (click)="likeOrUnlike()"
+        >
+          <svg>
+            <use href="#like-icon"></use>
+          </svg>
+        </button>
+        <span aria-label="number of likes">{{ postData.numberOfLikes }}</span>
+      </div>
 
-        <div>
-          <button class="comment-btn" (click)="showComments(commentsSection)">
-            <svg>
-              <use href="#comment-icon"></use>
-            </svg>
-          </button>
-          <span aria-label="number of comments">{{
-            postData.numberOfComments
-          }}</span>
-        </div>
+      <div>
+        <button class="comment-btn" (click)="showComments(commentsSection)">
+          <svg>
+            <use href="#comment-icon"></use>
+          </svg>
+        </button>
+        <span aria-label="number of comments">{{
+          postData.numberOfComments
+        }}</span>
+      </div>
 
-        <div class="share-reaction">
-          <button
-            class="share-btn"
-            (click)="showSharePostPopup(sharePostPopup, sharedPostText)"
-          >
-            <img
-              src="../../../../../assets/main-module/post/share.svg"
-              alt="share"
-            />
-          </button>
-        </div>
+      <div class="share-reaction">
+        <button
+          class="share-btn"
+          (click)="showSharePostPopup(sharePostPopup, sharedPostText)"
+        >
+          <img
+            src="../../../../../assets/main-module/post/share.svg"
+            alt="share"
+          />
+        </button>
       </div>
     </div>
+  </div>
 
-    <div class="comments" #commentsSection>
-      <form
-        class="add-comment"
-        [formGroup]="addCommentForm"
-        (ngSubmit)="addComment(commentText)"
-      >
-        <input
-          type="text"
-          placeholder="Add comment"
-          formControlName="commentText"
-          #commentText
-        />
-        <button type="submit" [disabled]="!addCommentForm.valid">Post</button>
-      </form>
+  <div class="comments" #commentsSection>
+    <form
+      class="add-comment"
+      [formGroup]="addCommentForm"
+      (ngSubmit)="addComment(commentText)"
+    >
+      <input
+        type="text"
+        placeholder="Add comment"
+        formControlName="commentText"
+        #commentText
+      />
+      <button type="submit" [disabled]="!addCommentForm.valid">Post</button>
+    </form>
 
-      <div
-        style="height: 100px; position: relative"
-        *ngIf="
-          (comments.length === 0 && postData.numberOfComments != 0) ||
-          addingComment
-        "
-      >
-        <app-loading-spinner
-          [show]="true"
-          [overlay]="'component'"
-          [colored]="false"
-        ></app-loading-spinner>
-      </div>
+    <div
+      style="height: 100px; position: relative"
+      *ngIf="
+        (comments.length === 0 && postData.numberOfComments != 0) ||
+        addingComment
+      "
+    >
+      <app-loading-spinner
+        [show]="true"
+        [overlay]="'component'"
+        [colored]="false"
+      ></app-loading-spinner>
+    </div>
 
-      <div
-        class="no-comments-yet"
-        *ngIf="postData.numberOfComments === 0; else commentsTemplate"
-      >
-        <p>No comments</p>
-        <img
-          src="../../../../../assets/main-module/post/no-comments.svg"
-          alt=""
-        />
-      </div>
+    <div
+      class="no-comments-yet"
+      *ngIf="postData.numberOfComments === 0; else commentsTemplate"
+    >
+      <p>No comments</p>
+      <img
+        src="../../../../../assets/main-module/post/no-comments.svg"
+        alt=""
+      />
+    </div>
 
-      <ng-template #commentsTemplate>
-        <div class="comment-container" *ngFor="let comment of comments">
-          <div class="comment">
-            <div
-              class="comment-options"
-              *ngIf="comment.user.userName === myUserName.value"
-            >
-              <button class="options-btn" (click)="toggleOptionsList(options)">
-                <img
-                  src="../../../../../assets/main-module/post/options.svg"
-                  alt=""
-                />
-              </button>
-              <div class="options" #options>
-                <button class="delete-btn" (click)="deleteComment(comment)">
-                  Delete
-                </button>
-              </div>
-            </div>
-
-            <div class="comment__author-avatar">
+    <ng-template #commentsTemplate>
+      <div class="comment-container" *ngFor="let comment of comments">
+        <div class="comment">
+          <div
+            class="comment-options"
+            *ngIf="comment.user.userName === myUserName.value"
+          >
+            <button class="options-btn" (click)="toggleOptionsList(options)">
               <img
-                class=""
-                [src]="
-                  comment.user.avatar ||
-                  'assets/main-module/profile/default-personal-image.svg'
-                "
+                src="../../../../../assets/main-module/post/options.svg"
                 alt=""
               />
-            </div>
-
-            <div class="comment__info">
-              <p class="comment__info__author-name">
-                {{ comment.user.firstName }} {{ comment.user.lastName }}
-              </p>
-              <a
-                class="comment__info__author-username"
-                [routerLink]="['/app/profile', comment.user.userName]"
-                >@{{ comment.user.userName }}</a
-              >
-
-              <p class="comment__info__text">
-                {{ comment.text }}
-              </p>
-
-              <div class="comment-reaction">
-                <button
-                  class="like-comment-btn"
-                  [ngClass]="{ liked: comment.isLiked }"
-                  (click)="likeOrUnlikeComment(comment)"
-                >
-                  <svg>
-                    <use href="#like-icon"></use>
-                  </svg>
-                </button>
-                <span aria-label="number of comment likes">{{
-                  comment.numberOfLikes
-                }}</span>
-              </div>
+            </button>
+            <div class="options" #options>
+              <button class="delete-btn" (click)="deleteComment(comment)">
+                Delete
+              </button>
             </div>
           </div>
-        </div>
-      </ng-template>
-    </div>
-  </div>
 
-  <!-- popups -->
-
-  <div id="delete-post-popup" class="overlay-wrapper" #deletePostPopup>
-    <div class="pop-up delete-post">
-      <div>
-        <button (click)="closePopup(deletePostPopup)" class="close-btn">
-          <img src="../../../assets/main-module/Close.svg" alt="" />
-        </button>
-
-        <p class="delete">Delete Post?</p>
-        <p class="description">
-          Are you sure you want to permanently remove this post from Rafiq?
-        </p>
-
-        <button id="delete-btn" (click)="deletePost(deletePostPopup, post)">
-          Delete
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <app-loading-spinner [show]="deletingPost"></app-loading-spinner>
-
-  <div id="share-post-popup" class="overlay-wrapper" #sharePostPopup>
-    <div class="pop-up share-post">
-      <div class="scroll">
-        <button (click)="closePopup(sharePostPopup)" class="close-btn">
-          <img src="../../../assets/main-module/Close.svg" alt="" />
-        </button>
-
-        <div class="user-info">
-          <div class="user-avatar">
+          <div class="comment__author-avatar">
             <img
+              class=""
               [src]="
-                myInfo.avatar ||
+                comment.user.avatar ||
                 'assets/main-module/profile/default-personal-image.svg'
               "
               alt=""
             />
           </div>
-          <p>{{ myInfo.firstName }} {{ myInfo.lastName }}</p>
-        </div>
 
-        <div class="text-area">
-          <textarea
-            id="post-text"
-            placeholder="add text..."
-            #sharedPostText
-          ></textarea>
-        </div>
+          <div class="comment__info">
+            <p class="comment__info__author-name">
+              {{ comment.user.firstName }} {{ comment.user.lastName }}
+            </p>
+            <a
+              class="comment__info__author-username"
+              [routerLink]="['/app/profile', comment.user.userName]"
+              >@{{ comment.user.userName }}</a
+            >
 
-        <ng-container *ngIf="!postData.isShared; else sharedPostSharePopup">
-          <div class="share-post-container">
-            <div class="shared-post">
-              <div class="post-header">
-                <div class="post-author">
-                  <div class="post-author__avatar">
-                    <img [src]="postData.authorInfo.avatar" alt="" />
-                  </div>
-                  <div class="post-author__info">
-                    <p class="name">
-                      {{ postData.authorInfo.firstName }}
-                      {{ postData.authorInfo.lastName }}
-                    </p>
-                    <a
-                      class="username"
-                      [routerLink]="[
-                        '/app/profile',
-                        postData.authorInfo.userName
-                      ]"
-                      >@{{ postData.authorInfo.userName }}</a
-                    >
-                  </div>
-                </div>
-              </div>
+            <p class="comment__info__text">
+              {{ comment.text }}
+            </p>
 
-              <app-slider
-                *ngIf="postData.content.media.type === 'images'"
-                [postImages]="postData.content.media.files"
-                [postId]="postData.postId"
-                [postType]="'share-post-popup'"
-              ></app-slider>
-
-              <div class="video">
-                <video controls *ngIf="postData.content.media.type === 'video'">
-                  <source
-                    [src]="postData.content.media.files[0]"
-                    type="video/mp4"
-                  />
-                  No video support.
-                </video>
-              </div>
-
-              <p class="post-text" *ngIf="postData.content.text">
-                {{ postData.content.text }}
-              </p>
+            <div class="comment-reaction">
+              <button
+                class="like-comment-btn"
+                [ngClass]="{ liked: comment.isLiked }"
+                (click)="likeOrUnlikeComment(comment)"
+              >
+                <svg>
+                  <use href="#like-icon"></use>
+                </svg>
+              </button>
+              <span aria-label="number of comment likes">{{
+                comment.numberOfLikes
+              }}</span>
             </div>
           </div>
-        </ng-container>
-
-        <ng-template #sharedPostSharePopup>
-          <div class="share-post-container">
-            <div class="shared-post">
-              <div class="post-header">
-                <div class="post-author">
-                  <div class="post-author__avatar">
-                    <img
-                      [src]="
-                        postData.sharedSource.authorInfo.avatar ||
-                        'assets/main-module/profile/default-personal-image.svg'
-                      "
-                      alt=""
-                    />
-                  </div>
-                  <div class="post-author__info">
-                    <p class="name">
-                      {{ postData.sharedSource.authorInfo.firstName }}
-                      {{ postData.sharedSource.authorInfo.lastName }}
-                    </p>
-                    <a
-                      class="username"
-                      [routerLink]="[
-                        '/app/profile',
-                        postData.sharedSource.authorInfo.userName
-                      ]"
-                      >@{{ postData.sharedSource.authorInfo.userName }}</a
-                    >
-                  </div>
-                </div>
-              </div>
-
-              <app-slider
-                *ngIf="postData.sharedSource.content.media.type === 'images'"
-                [postImages]="postData.sharedSource.content.media.files"
-                [postId]="postData.postId"
-                [postType]="'share-post-popup'"
-              ></app-slider>
-
-              <div class="video">
-                <video
-                  controls
-                  *ngIf="postData.sharedSource.content.media.type === 'video'"
-                >
-                  <source
-                    [src]="postData.sharedSource.content.media.files[0]"
-                    type="video/mp4"
-                  />
-                  No video support.
-                </video>
-              </div>
-
-              <p class="post-text" *ngIf="postData.sharedSource.content.text">
-                {{ postData.sharedSource.content.text }}
-              </p>
-            </div>
-          </div>
-        </ng-template>
-
-        <button
-          id="share-btn"
-          (click)="sharePost(sharedPostText, sharePostPopup)"
-        >
-          Share
-        </button>
+        </div>
       </div>
+    </ng-template>
+  </div>
+</div>
+
+<!-- popups -->
+
+<div id="delete-post-popup" class="overlay-wrapper" #deletePostPopup>
+  <div class="pop-up delete-post">
+    <div>
+      <button (click)="closePopup(deletePostPopup)" class="close-btn">
+        <img src="../../../assets/main-module/Close.svg" alt="" />
+      </button>
+
+      <p class="delete">Delete Post?</p>
+      <p class="description">
+        Are you sure you want to permanently remove this post from Rafiq?
+      </p>
+
+      <button id="delete-btn" (click)="deletePost(deletePostPopup, post)">
+        Delete
+      </button>
     </div>
   </div>
+</div>
 
-  <!-- Icons -->
+<app-loading-spinner [show]="deletingPost"></app-loading-spinner>
 
-  <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
-    <symbol
-      height="100%"
-      viewBox="0 0 24 24"
-      width="100%"
-      fill="currentColor"
-      id="like-icon"
-    >
-      <path
-        d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
-        stroke="#5b618a"
-        stroke-width="1.538"
-      />
-    </symbol>
+<div id="share-post-popup" class="overlay-wrapper" #sharePostPopup>
+  <div class="pop-up share-post">
+    <div class="scroll">
+      <button (click)="closePopup(sharePostPopup)" class="close-btn">
+        <img src="../../../assets/main-module/Close.svg" alt="" />
+      </button>
 
-    <symbol
-      height="100%"
-      viewBox="0 0 24 24"
-      width="100%"
-      fill="currentColor"
-      id="comment-icon"
-    >
-      <path
-        d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"
-      />
-    </symbol>
-  </svg>
+      <div class="user-info">
+        <div class="user-avatar">
+          <img
+            [src]="
+              myInfo.value.avatar ||
+              'assets/main-module/profile/default-personal-image.svg'
+            "
+            alt=""
+          />
+        </div>
+        <p>{{ myInfo.value.firstName }} {{ myInfo.value.lastName }}</p>
+      </div>
+
+      <div class="text-area">
+        <textarea
+          id="post-text"
+          placeholder="add text..."
+          #sharedPostText
+        ></textarea>
+      </div>
+
+      <ng-container *ngIf="!postData.isShared; else sharedPostSharePopup">
+        <div class="share-post-container">
+          <div class="shared-post">
+            <div class="post-header">
+              <div class="post-author">
+                <div class="post-author__avatar">
+                  <img [src]="postData.authorInfo.avatar" alt="" />
+                </div>
+                <div class="post-author__info">
+                  <p class="name">
+                    {{ postData.authorInfo.firstName }}
+                    {{ postData.authorInfo.lastName }}
+                  </p>
+                  <a
+                    class="username"
+                    [routerLink]="[
+                      '/app/profile',
+                      postData.authorInfo.userName
+                    ]"
+                    >@{{ postData.authorInfo.userName }}</a
+                  >
+                </div>
+              </div>
+            </div>
+
+            <app-slider
+              *ngIf="postData.content.media.type === 'images'"
+              [postImages]="postData.content.media.files"
+              [postId]="postData.postId"
+              [postType]="'share-post-popup'"
+            ></app-slider>
+
+            <div class="video">
+              <video controls *ngIf="postData.content.media.type === 'video'">
+                <source
+                  [src]="postData.content.media.files[0]"
+                  type="video/mp4"
+                />
+                No video support.
+              </video>
+            </div>
+
+            <p class="post-text" *ngIf="postData.content.text">
+              {{ postData.content.text }}
+            </p>
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-template #sharedPostSharePopup>
+        <div class="share-post-container">
+          <div class="shared-post">
+            <div class="post-header">
+              <div class="post-author">
+                <div class="post-author__avatar">
+                  <img
+                    [src]="
+                      postData.sharedSource.authorInfo.avatar ||
+                      'assets/main-module/profile/default-personal-image.svg'
+                    "
+                    alt=""
+                  />
+                </div>
+                <div class="post-author__info">
+                  <p class="name">
+                    {{ postData.sharedSource.authorInfo.firstName }}
+                    {{ postData.sharedSource.authorInfo.lastName }}
+                  </p>
+                  <a
+                    class="username"
+                    [routerLink]="[
+                      '/app/profile',
+                      postData.sharedSource.authorInfo.userName
+                    ]"
+                    >@{{ postData.sharedSource.authorInfo.userName }}</a
+                  >
+                </div>
+              </div>
+            </div>
+
+            <app-slider
+              *ngIf="postData.sharedSource.content.media.type === 'images'"
+              [postImages]="postData.sharedSource.content.media.files"
+              [postId]="postData.postId"
+              [postType]="'share-post-popup'"
+            ></app-slider>
+
+            <div class="video">
+              <video
+                controls
+                *ngIf="postData.sharedSource.content.media.type === 'video'"
+              >
+                <source
+                  [src]="postData.sharedSource.content.media.files[0]"
+                  type="video/mp4"
+                />
+                No video support.
+              </video>
+            </div>
+
+            <p class="post-text" *ngIf="postData.sharedSource.content.text">
+              {{ postData.sharedSource.content.text }}
+            </p>
+          </div>
+        </div>
+      </ng-template>
+
+      <button
+        id="share-btn"
+        (click)="sharePost(sharedPostText, sharePostPopup)"
+      >
+        Share
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Icons -->
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none">
+  <symbol
+    height="100%"
+    viewBox="0 0 24 24"
+    width="100%"
+    fill="currentColor"
+    id="like-icon"
+  >
+    <path
+      d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+      stroke="#5b618a"
+      stroke-width="1.538"
+    />
+  </symbol>
+
+  <symbol
+    height="100%"
+    viewBox="0 0 24 24"
+    width="100%"
+    fill="currentColor"
+    id="comment-icon"
+  >
+    <path
+      d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"
+    />
+  </symbol>
+</svg>
 <!-- </ng-container> -->
