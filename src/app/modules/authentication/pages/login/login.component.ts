@@ -81,12 +81,6 @@ export class LoginComponent implements OnInit {
           this.tokenStorage.setUserName(username);
           this.userInfoService.myUserName.next(username);
           this.auth.isLoggedIn$.next(true);
-          this.userInfoService.getUserProfile(username).subscribe(
-            res => {
-              this.userInfoService.myInfo.next(res);
-              console.log(this.userInfoService.myInfo);
-            }
-          )
         }
 
         this.sendingRequest.next(false);
