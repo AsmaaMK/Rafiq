@@ -59,7 +59,7 @@ export class AuthService {
     this.tokenStorage.removeAccessToken();
     this.tokenStorage.removeRefreshToken();
     this.tokenStorage.removeUserName();
-    this.userInfoService.myInfo = this.userInfoService.initialUserInfo;
+    this.userInfoService.myInfo.next(this.userInfoService.initialUserInfo);
     this.isLoggedIn$.next(false);
     this.router.navigate(['/auth/login']);
   }

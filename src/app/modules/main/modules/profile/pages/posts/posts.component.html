@@ -14,8 +14,6 @@
     </p>
   </div>
   <ng-template #postsSeciton>
-    <div class="post" *ngFor="let post of posts">
-      <p>{{ post }}</p>
-    </div>
+    <app-post *ngFor="let post of posts" [postData]="post.postData"></app-post>
   </ng-template>
 </section>

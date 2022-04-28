@@ -36,7 +36,7 @@ export class UserInfoService {
     userName: '',
   };
 
-  myInfo: UserProfile = this.initialUserInfo;
+  myInfo = new BehaviorSubject(this.initialUserInfo);
 
   constructor(
     private http: HttpClient,

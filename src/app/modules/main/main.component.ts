@@ -2,8 +2,8 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ToasterType } from 'src/app/shared/models/toaster-status';
 import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
-import { PostService } from './components/post/post.service';
-import { UserInfo } from './modules/profile/models/user-info';
+import { PostService } from '../../shared/components/post/post.service';
+import { UserInfo, UserProfile } from './modules/profile/models/user-info';
 import { UserInfoService } from './modules/profile/services/user-info.service';
 
 @Component({
@@ -18,12 +18,7 @@ export class MainComponent implements OnInit {
 
   video = '';
 
-  myInfo: UserInfo = {
-    userName: '',
-    firstName: '',
-    lastName: '',
-    avatar: 'assets/main-module/profile/default-personal-image.svg',
-  };
+  myInfo: UserProfile = this.userInfoService.initialUserInfo;
 
   postData = new FormData();
 
@@ -48,11 +43,9 @@ export class MainComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.userInfoService
-      .getUserInfo(this.userInfoService.myUserName.value)
-      .subscribe((res) => {
-        this.myInfo = res;
-      });
+    this.userInfoService.myInfo.subscribe(res => {
+      this.myInfo = res;
+    });
     
     this.postDataForm = new FormGroup({
       images: new FormControl(''),

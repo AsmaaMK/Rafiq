@@ -69,7 +69,7 @@ export class HeaderComponent implements OnInit {
       }
 
       if (this.isMyProfile.value) {
-        this.userInfoService.myInfo = this.userInfo;
+        this.userInfoService.myInfo.next(this.userInfo);
       }
 
       if (this.userInfo.cover === null)

@@ -49,7 +49,7 @@ export class EditInfoComponent implements OnInit {
   }
 
   getInfo() {
-    this.myInfo = this.userInfoService.myInfo;
+    this.myInfo = this.userInfoService.myInfo.value;
 
     const socialLinks = this.myInfo.socialMedia;
     if (socialLinks)
@@ -211,7 +211,7 @@ export class EditInfoComponent implements OnInit {
     this.userInfoService
       .getUserProfile(this.userInfoService.myUserName.value)
       .subscribe((res) => {
-        this.userInfoService.myInfo = res;
+        this.userInfoService.myInfo.next(res);
         const myUrl = this.router.url;
         this.router
           .navigateByUrl('/RefreshComponent', { skipLocationChange: true })

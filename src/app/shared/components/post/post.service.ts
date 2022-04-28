@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
 import { environment } from 'src/environments/environment';
-import { UserInfoService } from '../../modules/profile/services/user-info.service';
+import { UserInfoService } from '../../../modules/main/modules/profile/services/user-info.service';
 import {
   Post,
   GetPostResponse,
@@ -11,6 +11,7 @@ import {
   PostData,
   MediaType,
   PostMedia,
+  GetPostsResponse,
 } from './post';
 
 const headers = new HttpHeaders();
@@ -41,6 +42,12 @@ export class PostService {
     return this.http
       .get<GetPostResponse>(`${this.url}/${postId}`)
       .pipe(map((res) => res.post));
+  }
+
+  getInitialPosts(): Observable<Post[]> {
+    return this.http
+      .get<GetPostsResponse>(this.url)
+      .pipe(map((res) => res.posts));
   }
 
   classifyPostMedia(postFiles: string[]): PostMedia {

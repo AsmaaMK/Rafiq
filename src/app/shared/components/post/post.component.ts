@@ -4,8 +4,11 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ToasterType } from 'src/app/shared/models/toaster-status';
 import { RouterExtService } from 'src/app/shared/services/router-ext.service';
-import { UserInfo } from '../../modules/profile/models/user-info';
-import { UserInfoService } from '../../modules/profile/services/user-info.service';
+import {
+  UserInfo,
+  UserProfile,
+} from '../../../modules/main/modules/profile/models/user-info';
+import { UserInfoService } from '../../../modules/main/modules/profile/services/user-info.service';
 import { MediaType, Post, PostComment, PostData } from './post';
 import { PostService } from './post.service';
 
@@ -15,8 +18,8 @@ import { PostService } from './post.service';
   styleUrls: ['./post.component.scss'],
 })
 export class PostComponent implements OnInit {
-  @Input() postId!: string;
-  postData: PostData = {
+  // @Input() postId!: string;
+  @Input() postData: PostData = {
     postId: '',
     authorInfo: {
       userName: '',
@@ -53,16 +56,9 @@ export class PostComponent implements OnInit {
     isLiked: false,
   };
 
-  postDataAssigned = false;
-
-  isMyProfile = false;
+  isMyPost = false;
   myUserName = this.userInfoService.myUserName;
-  myInfo: UserInfo = {
-    avatar: '',
-    userName: '',
-    lastName: '',
-    firstName: '',
-  };
+  myInfo: UserProfile = this.userInfoService.initialUserInfo;
 
   comments: PostComment[] = [];
 
@@ -87,69 +83,18 @@ export class PostComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.preparePostData();
-
-    // TODO: make the subscribtion in user service and get it's valude each time. here and in add post popup
-    this.userInfoService
-      .getUserInfo(this.myUserName.value)
-      .subscribe((res) => (this.myInfo = res));
-  }
-
-  preparePostData() {
-    this.postService.getPostById(this.postId).subscribe((res) => {
-      this.isMyProfile =
-        this.userInfoService.myUserName.value === res.authorInfo.userName;
-
-      this.postData.authorInfo = res.authorInfo;
-      this.postData.content.text = res.content.text;
-
-      if (res.content.files.length)
-        this.postData.content.media = this.postService.classifyPostMedia(
-          res.content.files
-        );
-      else this.postData.content.media = { type: 'noFiles', files: [] };
-
-      this.postData.isShared = res.isShared;
-      this.postData.numberOfLikes = res.numberOfLikes;
-      this.postData.numberOfComments = res.numberOfComments;
-      this.postData.isLiked = res.isLiked;
-
-      if (res.isShared) {
-        this.postData.sharedSource.postId = res.sharedSource.postId;
-        this.postData.sharedSource.authorInfo = res.sharedSource.authorInfo;
-
-        this.postService
-          .getPostById(res.sharedSource.postId)
-          .subscribe((sharedPostRes) => {
-            this.postData.sharedSource.content.text =
-              sharedPostRes.content.text;
-
-            if (sharedPostRes.content.files.length)
-              this.postData.sharedSource.content.media =
-                this.postService.classifyPostMedia(sharedPostRes.content.files);
-            else
-              this.postData.sharedSource.content.media = {
-                type: 'noFiles',
-                files: [],
-              };
-
-            this.postDataAssigned = true;
-          });
-      } else {
-        this.postDataAssigned = true;
-      }
-
-      this.postDataAssigned = true;
-    });
+    this.userInfoService.myInfo.subscribe((res) => (this.myInfo = res));
+    this.isMyPost =
+      this.userInfoService.myUserName.value === this.postData.authorInfo.userName;
   }
 
   likeOrUnlike() {
     if (this.postData.isLiked) {
-      this.postService.unLike(this.postId);
+      this.postService.unLike(this.postData.postId);
       this.postData.isLiked = false;
       this.postData.numberOfLikes--;
     } else {
-      this.postService.like(this.postId);
+      this.postService.like(this.postData.postId);
       this.postData.isLiked = true;
       this.postData.numberOfLikes++;
     }
@@ -170,7 +115,7 @@ export class PostComponent implements OnInit {
     formData.append('text', postText.value);
     postText.value = '';
 
-    this.postService.share(this.postId, formData).subscribe(
+    this.postService.share(this.postData.postId, formData).subscribe(
       (res) => {
         this.toasterMessage = res.results.message;
         this.toasterType = 'success';
@@ -185,7 +130,7 @@ export class PostComponent implements OnInit {
   deletePost(popup: HTMLElement, post: HTMLElement) {
     this.closePopup(popup);
     this.deletingPost = true;
-    this.postService.deletePost(this.postId).subscribe(
+    this.postService.deletePost(this.postData.postId).subscribe(
       () => {
         post.style.display = 'none';
 
@@ -230,7 +175,7 @@ export class PostComponent implements OnInit {
 
   getComments() {
     this.postService
-      .getComments(this.postId, this.postData.numberOfComments)
+      .getComments(this.postData.postId, this.postData.numberOfComments)
       .subscribe((res) => {
         for (let comment of res) {
           this.userInfoService.getUserInfo(comment.author).subscribe((res) => {
@@ -254,28 +199,39 @@ export class PostComponent implements OnInit {
     this.addCommentForm.reset();
     this.addingComment = true;
 
-    this.postService.addComment(this.postId, postText).subscribe((res) => {
-      newComment = {
-        id: res.results.commentId,
-        user: this.myInfo,
-        isLiked: false,
-        numberOfLikes: 0,
-        text: postText,
-      };
+    this.postService
+      .addComment(this.postData.postId, postText)
+      .subscribe((res) => {
+        newComment = {
+          id: res.results.commentId,
+          user: {
+            firstName: this.myInfo.firstName,
+            lastName: this.myInfo.lastName,
+            userName: this.myUserName.value,
+            avatar: this.myInfo.avatar,
+          },
+          isLiked: false,
+          numberOfLikes: 0,
+          text: postText,
+        };
 
-      this.postData.numberOfComments++;
-      this.comments.unshift(newComment);
-      this.addingComment = false;
-    });
+        this.postData.numberOfComments++;
+        this.comments.unshift(newComment);
+        this.addingComment = false;
+      });
   }
 
   likeOrUnlikeComment(comment: PostComment) {
     if (comment.isLiked) {
-      this.postService.unlikeComment(this.postId, comment.id).subscribe();
+      this.postService
+        .unlikeComment(this.postData.postId, comment.id)
+        .subscribe();
       comment.isLiked = false;
       comment.numberOfLikes--;
     } else {
-      this.postService.likeComment(this.postId, comment.id).subscribe();
+      this.postService
+        .likeComment(this.postData.postId, comment.id)
+        .subscribe();
       comment.isLiked = true;
       comment.numberOfLikes++;
     }
@@ -283,11 +239,13 @@ export class PostComponent implements OnInit {
 
   deleteComment(comment: PostComment) {
     if (comment.id) {
-      this.postService.deleteComment(this.postId, comment.id).subscribe(() => {
-        var commentIndex = this.comments.indexOf(comment);
-        this.comments.splice(commentIndex, 1);
-        this.postData.numberOfComments--;
-      });
+      this.postService
+        .deleteComment(this.postData.postId, comment.id)
+        .subscribe(() => {
+          var commentIndex = this.comments.indexOf(comment);
+          this.comments.splice(commentIndex, 1);
+          this.postData.numberOfComments--;
+        });
     }
   }
 

@@ -9,9 +9,8 @@ import { SearchComponent } from './components/search/search.component';
 import { DesktopNavbarComponent } from './components/desktop-navbar/desktop-navbar.component';
 import { MobileNavbarComponent } from './components/mobile-navbar/mobile-navbar.component';
 import { MobileHeaderComponent } from './components/mobile-header/mobile-header.component';
-import { PostComponent } from './components/post/post.component';
 import { PostPageComponent } from './pages/post-page/post-page.component';
-import { SliderComponent } from './components/slider/slider.component';
+import { SliderComponent } from '../../shared/components/slider/slider.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -25,9 +24,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     DesktopNavbarComponent,
     MobileNavbarComponent,
     MobileHeaderComponent,
-    PostComponent,
     PostPageComponent,
-    SliderComponent,
   ],
   imports: [
     CommonModule,

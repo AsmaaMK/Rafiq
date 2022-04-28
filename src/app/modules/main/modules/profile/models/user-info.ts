@@ -1,17 +1,17 @@
 export type UserProfile = {
-  numberOfFollowers?: number;
-  numberOfFollowings?: number;
-  numberOfPosts?: number;
-  firstName?: string;
-  lastName?: string;
-  userName?: string;
-  country?: string;
-  liveIn?: string;
-  dateOfBirth?: string;
-  gender?: string;
-  cover?: string;
-  avatar?: string;
-  socialMedia?: SocialWithLinks;
+  numberOfFollowers: number;
+  numberOfFollowings: number;
+  numberOfPosts: number;
+  firstName: string;
+  lastName: string;
+  userName: string;
+  country: string;
+  liveIn: string;
+  dateOfBirth: string;
+  gender: string;
+  cover: string;
+  avatar: string;
+  socialMedia: SocialWithLinks;
 };
 
 export type EditInfo = {

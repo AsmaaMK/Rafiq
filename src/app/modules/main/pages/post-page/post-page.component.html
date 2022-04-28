@@ -1,13 +1,13 @@
 <section class="post-page">
-  <!-- <app-loading-spinner
-    [show]="!postDataAssigned.value"
+  <app-loading-spinner
+    [show]="!postData"
     [overlay]="'component'"
-  ></app-loading-spinner> -->
+  ></app-loading-spinner>
   <button [routerLink]="[previousUrl]" class="back-btn">
     <img
       src="../../../../../../../assets/main-module/profile/back.svg"
       alt=""
     />
   </button>
-  <app-post [postId]="postId"></app-post>
+  <app-post *ngIf="postData" [postData]="postData"></app-post>
 </section>

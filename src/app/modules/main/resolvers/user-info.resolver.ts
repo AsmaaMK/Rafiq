@@ -19,7 +19,7 @@ export class UserInfoResolver implements Resolve<UserProfile> {
     const urlUserName = route.params['username'];
     const myUserName = this.userInfoService.myUserName.value;
 
-    if (urlUserName === myUserName && this.userInfoService.myInfo !== this.userInfoService.initialUserInfo)
+    if (urlUserName === myUserName && this.userInfoService.myInfo.value !== this.userInfoService.initialUserInfo)
       return this.userInfoService.myInfo;
 
     return this.userInfoService.getUserProfile(urlUserName);

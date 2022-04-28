@@ -1,6 +1,6 @@
-@use "~../../../../../../../styles/helpers/helpers-dir" as *;
-@use "~../../../../../../../styles/components/comments";
-@use "~../../../../../../../styles/components/share-popup";
+@use "~../../../../../../styles/helpers/helpers-dir" as *;
+@use "~../../../../../../styles/components/comments";
+@use "~../../../../../../styles/components/share-popup";
 
 .post {
   width: 70%;
@@ -59,7 +59,7 @@
         padding-left: 2rem;
 
         &::before {
-          content: url("../../../../../assets/main-module/post/delete.svg");
+          content: url("../../../../assets/main-module/post/delete.svg");
           position: absolute;
           left: 0.7em;
           top: 50%;

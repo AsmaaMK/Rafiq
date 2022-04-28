@@ -4,23 +4,27 @@ import { LoadingSpinnerComponent } from './components/loading-spinner/loading-sp
 import { ToolTipComponent } from './components/tool-tip/tool-tip.component';
 import { CapitalizePipe } from './pipes/capitalize.pipe';
 import { ToasterComponent } from './components/toaster/toaster.component';
-
-
+import { PostComponent } from './components/post/post.component';
+import { SliderComponent } from './components/slider/slider.component';
+import { RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     LoadingSpinnerComponent,
     ToolTipComponent,
     CapitalizePipe,
-    ToasterComponent
+    ToasterComponent,
+    PostComponent,
+    SliderComponent,
   ],
-  imports: [
-    CommonModule
-  ],
+  imports: [CommonModule, RouterModule, ReactiveFormsModule],
   exports: [
     LoadingSpinnerComponent,
     ToolTipComponent,
-    ToasterComponent
-  ]
+    ToasterComponent,
+    PostComponent,
+    SliderComponent,
+  ],
 })
-export class SharedModule { }
+export class SharedModule {}
