@@ -14,22 +14,52 @@
   margin: auto;
   @include padding(y, 0.01em);
 
-  .follow-btn {
-    display: none;
-    top: 40% !important;
-  }
+  .name-field {
+    margin: 1.5em;
+    @include flex(row);
 
-  .city-name {
-    font-size: $base-font-size * 1.2;
+    .for-alignment {
+      width: 2rem;
+      height: 2rem;
+      visibility: hidden;
+      margin-right: auto;
+    }
 
-    span {
-      font-size: $base-font-size * 1.5;
-      font-weight: 500;
+    .love-btn {
+      top: 40% !important;
+      width: 2rem;
+      height: 2rem;
+      padding: 0;
+      background-color: transparent;
+      margin-left: auto;
+
+      svg {
+        width: 100%;
+        height: 100%;
+        margin: auto;
+        color: transparent;
+
+        &:hover {
+          color: rgba($primary, 0.5);
+        }
+
+        &.loved {
+          color: $primary;
+        }
+      }
+    }
+
+    .city-name {
+      font-size: $base-font-size * 1.2;
+
+      span {
+        font-size: $base-font-size * 1.5;
+        font-weight: 500;
+      }
     }
   }
 
   ul.personal-info {
-
     li {
       min-width: 30% !important;
     }

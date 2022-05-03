@@ -51,9 +51,9 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.routeReuseStrategy.shouldReuseRoute = function () {
-      return false;
-    };
+    // this.route.routeReuseStrategy.shouldReuseRoute = function () {
+    //   return false;
+    // };
 
     // get user info
     this.activatedRoute.data.subscribe((res) => {

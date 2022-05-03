@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
 import { ToasterType } from 'src/app/shared/models/toaster-status';
 import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
+import { CityInfo } from '../../models/city';
+import { CityService } from '../../services/city.service';
 
 @Component({
   selector: 'app-city-header',
@@ -13,49 +14,42 @@ export class CityHeaderComponent implements OnInit {
   showToast = false;
   toastStatus: ToasterType = 'error';
   toastMessage = '';
-  defaultCoverImage: any;
+  isLoved = false;
 
-  constructor(
-    
-    private route: Router,
-    private activatedRoute: ActivatedRoute,
-    private tokenStorageService: TokenStorageService,
-  
-  ) {}
+  cityInfo!: CityInfo;
+  cityId!: string;
+  isCityAdmin = true;
+
+  constructor(private cityInfoService: CityService, private route: Router) {}
 
   ngOnInit(): void {
-    
-    this.closePopupOnClick();
+    this.getCityInfo();
   }
 
   ngAfterViewChecked() {
-    const cityCoverHeight = document.getElementById('city-cover')?.getBoundingClientRect().height;
+    this.setCoverHeight();
+  }
+
+  getCityInfo() {
+    this.cityId = this.route.url.split('/')[3];
+    this.cityInfoService
+      .getCityInfo(this.cityId)
+      .subscribe((res) => (this.cityInfo = res));
+  }
+
+  setCoverHeight() {
+    const cityCoverHeight = document
+      .getElementById('city-cover')
+      ?.getBoundingClientRect().height;
     const cityHeader = document.querySelector<HTMLElement>('.city-header');
     if (cityCoverHeight && cityHeader) {
       cityHeader.style.paddingTop = (cityCoverHeight * 0.75).toString() + 'px';
     }
   }
 
-  changeCover(event: any, popup: HTMLElement) {
-    this.closePopup(popup);
-
-    const newCover = event.target.files[0];
-    const formData = new FormData();
-    formData.append('cover', newCover, newCover.name);
-    // this.userInfoService.changeCover(formData).subscribe((res) => {
-    //   this.userInfo.cover = res.cover;
-    // });
-  }
-
-  deleteCover(popup: HTMLElement) {
-    this.closePopup(popup);
-    // this.userInfoService.deleteCover().subscribe(() => {
-    //   this.userInfo.cover = this.defaultCoverImage;
-    // });
-  }
-
-  followOrUnfollow() {
-    // this.isFollowing.value ? this.unfollow() : this.follow();
+  followOrUnfollow(icon: HTMLElement) {
+    icon.classList.toggle('loved');
+    this.isLoved ? this.unfollow() : this.follow();
   }
 
   follow() {
@@ -98,35 +92,5 @@ export class CityHeaderComponent implements OnInit {
   closePopup(popup: HTMLElement) {
     document.body.classList.remove('popup-open');
     popup.classList.remove('open');
-  }
-
-  viewPicture(imgPopup: HTMLElement, optionsPopup: HTMLElement) {
-    document.body.classList.add('popup-open');
-    imgPopup.classList.add('open');
-    optionsPopup.classList.remove('open');
-  }
-
-  onCoverClick(coverOptions: HTMLElement, coverPreview: HTMLElement) {
-    // if (this.isMyProfile.value) this.openPopup(coverOptions);
-    // else if (this.userInfo.cover !== this.defaultCoverImage)
-    //   this.viewPicture(coverPreview, coverOptions);
-  }
-
-  closePopupOnClick() {
-    const coverPopup = document.getElementById('cover-options-popup');
-    const avatarPopup = document.getElementById('avatar-options-popup');
-
-    coverPopup?.addEventListener('click', (event) => {
-      if (event.target === coverPopup) {
-        document.body.classList.remove('popup-open');
-        coverPopup.classList.remove('open');
-      }
-    });
-    avatarPopup?.addEventListener('click', (event) => {
-      if (event.target === avatarPopup) {
-        document.body.classList.remove('popup-open');
-        avatarPopup.classList.remove('open');
-      }
-    });
   }
 }

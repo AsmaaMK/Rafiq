@@ -5,7 +5,9 @@ import { environment } from 'src/environments/environment';
 import {
   ActivitiesData,
   Activity,
+  CityInfo,
   GetActivitiesResponse,
+  GetCityInfoResponse,
 } from '../models/city';
 
 const headers = new HttpHeaders();
@@ -21,8 +23,26 @@ export class CityService {
   url = `${environment.apiUrl}/api/v1/cities`;
   constructor(private http: HttpClient) {}
 
-  getCityInfo(cityId: string) {
-    this.http.get(`${this.url}/${cityId}`, { headers: headers });
+  getCityInfo(cityId: string): Observable<CityInfo> {
+    return this.http
+      .get<GetCityInfoResponse>(`${this.url}/${cityId}`, { headers: headers })
+      .pipe(
+        map((res) => {
+          let cityInfo: CityInfo = {
+            name: `${res.results.firstName} ${res.results.lastName}`,
+            cover: res.results.images[0],
+            timeZone: res.results.timeZone,
+            country: {
+              name: res.results.country.name,
+              emergencyNumbers: res.results.country.emergencyNumbers,
+            },
+            population: 0, // TODO: make it dynamic
+            temperature: 50, // TODO: make it dynamic
+          };
+
+          return cityInfo;
+        })
+      );
   }
 
   getActivities(cityId: string): Observable<Activity[]> {
