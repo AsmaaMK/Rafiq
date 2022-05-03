@@ -32,7 +32,7 @@ export class CityService {
       })
       .pipe(
         map((res) => {
-          let transformedActivities!: Activity[];
+          let transformedActivities: Activity[] = [];
           const activities = res.results.data;
 
           activities.forEach((act) => {

@@ -1,6 +1,7 @@
 @use "../../../../../../../styles/helpers/helpers-dir" as *;
 
 .attractions-section {
+  position: relative;
   height: 100%;
   overflow: auto;
   @include padding(y, 2rem);
@@ -69,7 +70,7 @@
       }
 
       .description {
-        color: $primary;
+        color: rgba($primary, 0.8);
         font-size: $base-font-size;
         @include margin(y, 0.5rem);
       }

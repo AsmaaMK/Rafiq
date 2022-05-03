@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, HostListener, OnInit } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
-import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
+import { Router } from '@angular/router';
 import { UserInfoService } from '../../services/user-info.service';
 
 @Component({
@@ -12,7 +11,6 @@ export class NavbarComponent implements OnInit, AfterViewInit {
   username = this.userInfoService.myUserName.value;
 
   constructor(
-    private tokenStorageService: TokenStorageService,
     private router: Router,
     private userInfoService: UserInfoService
   ) {}
@@ -39,6 +37,10 @@ export class NavbarComponent implements OnInit, AfterViewInit {
    */
   possitionIndicatorOnActiveLinkElement(): void {
     const currentRoute = this.router.url.split('/')[4];
+    let navbar = document.getElementById('profile-navbar');
+
+    if (!navbar) return;
+
     const linksList = document.querySelectorAll(
       'a[routerLinkActive="active-link"]'
     );
@@ -64,7 +66,7 @@ export class NavbarComponent implements OnInit, AfterViewInit {
 
     let activeLinkLeftPossition = activeLink.getBoundingClientRect().left;
     let activeLinkWidth = activeLink.getBoundingClientRect().width;
-    let indicator = document.getElementById('active-link-indicator');
+    let indicator = document.getElementById('profile-active-link-indicator');
     let navbar = document.getElementById('profile-navbar');
 
     if (indicator && navbar) {

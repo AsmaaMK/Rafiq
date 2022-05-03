@@ -1,6 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
+import { UserInfoService } from '../../../profile/services/user-info.service';
 
 @Component({
   selector: 'app-city-navbar',
@@ -8,10 +8,11 @@ import { TokenStorageService } from 'src/app/shared/services/token-storage.servi
   styleUrls: ['./city-navbar.component.scss'],
 })
 export class CityNavbarComponent implements OnInit {
+  username = this.userInfoService.myUserName.value;
 
   constructor(
-    private tokenStorageService: TokenStorageService,
     private router: Router,
+    private userInfoService: UserInfoService
   ) {}
 
   ngOnInit(): void {}
@@ -36,6 +37,10 @@ export class CityNavbarComponent implements OnInit {
    */
   possitionIndicatorOnActiveLinkElement(): void {
     const currentRoute = this.router.url.split('/')[4];
+    let navbar = document.getElementById('city-navbar');
+
+    if (!navbar) return;
+
     const linksList = document.querySelectorAll(
       'a[routerLinkActive="active-link"]'
     );
@@ -61,8 +66,8 @@ export class CityNavbarComponent implements OnInit {
 
     let activeLinkLeftPossition = activeLink.getBoundingClientRect().left;
     let activeLinkWidth = activeLink.getBoundingClientRect().width;
-    let indicator = document.getElementById('active-link-indicator');
-    let navbar = document.getElementById('profile-navbar');
+    let indicator = document.getElementById('city-active-link-indicator');
+    let navbar = document.getElementById('city-navbar');
 
     if (indicator && navbar) {
       let navbarLeftPossition = navbar.getBoundingClientRect().left;

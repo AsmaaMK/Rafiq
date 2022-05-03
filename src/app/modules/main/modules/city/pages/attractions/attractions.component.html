@@ -1,4 +1,5 @@
 <section class="attractions-section">
+  <app-loading-spinner [show]="loading" overlay="component"></app-loading-spinner>
   <div class="cards-container">
     <div class="card" *ngFor="let activity of activities">
       <div class="image">

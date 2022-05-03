@@ -12,12 +12,14 @@ import { CityService } from '../../services/city.service';
 export class AttractionsComponent implements OnInit {
   activities!: Activity[];
   cityId = this.router.url.split('/')[3];
-  
+  loading = true;
+
   constructor(private router: Router, private cityService: CityService) {}
-  
+
   ngOnInit(): void {
-    this.cityService.getActivities(this.cityId).subscribe(
-      res => this.activities = res
-    )
+    this.cityService.getActivities(this.cityId).subscribe((res) => {
+      this.activities = res;
+      this.loading = false;
+    });
   }
 }
