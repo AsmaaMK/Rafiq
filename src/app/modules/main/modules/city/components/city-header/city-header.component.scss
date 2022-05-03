@@ -19,18 +19,19 @@
     @include flex(row);
 
     .for-alignment {
-      width: 2rem;
-      height: 2rem;
+      width: 3rem;
+      height: 3rem;
       visibility: hidden;
       margin-right: auto;
     }
 
     .love-btn {
       top: 40% !important;
-      width: 2rem;
-      height: 2rem;
-      padding: 0;
-      background-color: transparent;
+      width: 3rem;
+      height: 3rem;
+      padding: 0.5em;
+      border-radius: 0.5em;
+      background-color: $secondary;
       margin-left: auto;
 
       svg {

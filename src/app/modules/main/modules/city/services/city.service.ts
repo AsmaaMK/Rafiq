@@ -36,6 +36,7 @@ export class CityService {
               name: res.results.country.name,
               emergencyNumbers: res.results.country.emergencyNumbers,
             },
+            images: res.results.images,
             population: 0, // TODO: make it dynamic
             temperature: 50, // TODO: make it dynamic
           };

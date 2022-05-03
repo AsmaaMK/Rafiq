@@ -79,6 +79,7 @@ type CityInfo = {
   name: string;
   cover: string;
   timeZone: Date;
+  images: string[];
   population: number;
   temperature: number;
   country: {

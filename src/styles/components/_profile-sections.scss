@@ -14,10 +14,13 @@
   position: relative;
   border-radius: 1em;
   overflow: hidden;
+}
 
+.profile-image,
+.video {
   &:hover {
     .post-link {
-       transform: translate(-50%, -50%) scale(1);
+      transform: translate(-50%, -50%) scale(1);
     }
 
     &::before {

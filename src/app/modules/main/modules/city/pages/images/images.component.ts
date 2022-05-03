@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { CityService } from '../../services/city.service';
 
 @Component({
   selector: 'app-images',
@@ -6,13 +8,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./images.component.scss'],
 })
 export class ImagesComponent implements OnInit {
-  images: string[] = [];
+  images!: string[];
+  cityId!: string;
 
-  constructor() {}
+  constructor(private cityService: CityService, private router: Router) {}
 
   ngOnInit(): void {
-    // for (let i = 0; i <= 100; i++) {
-    //   this.images.push(`image ${i}`);
-    // }
+    this.cityId = this.router.url.split('/')[3];
+    this.cityService.getCityInfo(this.cityId).subscribe(res => {
+      this.images = res.images
+    });
   }
 }
