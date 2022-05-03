@@ -1,63 +1,31 @@
 <section class="attractions-section">
-  <nav class="filters">
-    <ul>
-      <li>
-        <button
-          #filterAll
-          class="filter-btn active"
-          (click)="filterAttractionsArray(filterAll, 'all')"
-        >
-          All
-        </button>
-      </li>
-      <li>
-        <button
-          #filterResturant
-          class="filter-btn"
-          (click)="filterAttractionsArray(filterResturant, 'resturant')"
-        >
-          Resturants
-        </button>
-      </li>
-      <li>
-        <button
-          #filterTouristicPlace
-          class="filter-btn"
-          (click)="filterAttractionsArray(filterTouristicPlace, 'touristic place')"
-        >
-          Touristic places
-        </button>
-      </li>
-    </ul>
-  </nav>
-
   <div class="cards-container">
-    <div class="card" *ngFor="let attraction of filteredAttractions">
+    <div class="card" *ngFor="let activity of activities">
       <div class="image">
-        <img [src]="attraction.image" alt="" />
+        <img [src]="activity.picture" alt="" />
       </div>
       <div class="content">
         <div>
-          <p class="name">{{ attraction.name }}</p>
-          <p class="description">{{ attraction.description }}</p>
+          <p class="name">{{ activity.name }}</p>
+          <p class="description">{{ activity.shortDescription }}</p>
         </div>
 
         <div class="row">
           <div>
             <div class="rate">
-              <svg [ngClass]="{ filled: attraction.rate >= 1 }">
+              <svg [ngClass]="{ filled: activity.rating >= 1 }">
                 <use href="#star-icon"></use>
               </svg>
-              <svg [ngClass]="{ filled: attraction.rate >= 2 }">
+              <svg [ngClass]="{ filled: activity.rating >= 2 }">
                 <use href="#star-icon"></use>
               </svg>
-              <svg [ngClass]="{ filled: attraction.rate >= 3 }">
+              <svg [ngClass]="{ filled: activity.rating >= 3 }">
                 <use href="#star-icon"></use>
               </svg>
-              <svg [ngClass]="{ filled: attraction.rate >= 4 }">
+              <svg [ngClass]="{ filled: activity.rating >= 4 }">
                 <use href="#star-icon"></use>
               </svg>
-              <svg [ngClass]="{ filled: attraction.rate >= 5 }">
+              <svg [ngClass]="{ filled: activity.rating >= 5 }">
                 <use href="#star-icon"></use>
               </svg>
             </div>
@@ -73,8 +41,8 @@
             </a>
           </div>
           <a
-            *ngIf="attraction.type === 'resturant'"
-            href=""
+            [href]="activity.bookingLink"
+            target="_blank"
             class="book-now-link"
             >Book Now</a
           >
