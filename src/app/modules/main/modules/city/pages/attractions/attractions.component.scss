@@ -39,7 +39,7 @@
     background-color: $neutral-lighter;
     border-radius: 1em;
     width: 40%;
-    min-width: 300px;
+    min-width: 350px;
     max-width: 400px;
     overflow: hidden;
     border: 1px solid rgba($primary, 0.5);
@@ -76,7 +76,7 @@
       }
 
       .row {
-        @include flex(row, space-between, flex-end);
+        @include flex(row, space-between, center);
       }
 
       .rate {
@@ -101,6 +101,17 @@
         @include margin(y, 0.2rem);
         @include flex(row, flex-start);
         gap: 5px;
+      }
+
+      .price-and-booking {
+        @include flex(column, flex-end, space-between);
+      }
+
+      .price {
+        color: $secondary-pink;
+        font-size: $base-font-size * 1.2;
+        margin: 0;
+        font-weight: 500;
       }
 
       .book-now-link {

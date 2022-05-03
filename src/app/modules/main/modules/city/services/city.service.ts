@@ -63,6 +63,7 @@ export class CityService {
               picture: act.pictures[0],
               rating: act.rating,
               shortDescription: act.shortDescription,
+              price: act.price.amount,
             };
             transformedActivities.push(activity);
           });

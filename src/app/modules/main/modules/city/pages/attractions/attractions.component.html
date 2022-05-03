@@ -1,5 +1,8 @@
 <section class="attractions-section">
-  <app-loading-spinner [show]="loading" overlay="component"></app-loading-spinner>
+  <app-loading-spinner
+    [show]="loading"
+    overlay="component"
+  ></app-loading-spinner>
   <div class="cards-container">
     <div class="card" *ngFor="let activity of activities">
       <div class="image">
@@ -31,7 +34,16 @@
               </svg>
             </div>
 
-            <a class="location-link" href="">
+            <a
+              class="location-link"
+              target="_blank"
+              [href]="
+                'https://www.google.com/maps/search/?api=1&query=' +
+                activity.geoCode.latitude +
+                ',' +
+                activity.geoCode.longitude
+              "
+            >
               <span>
                 <img
                   src="../../../../../../../assets/main-module/city/location.svg"
@@ -41,12 +53,16 @@
               <span>Location</span>
             </a>
           </div>
-          <a
-            [href]="activity.bookingLink"
-            target="_blank"
-            class="book-now-link"
-            >Book Now</a
-          >
+
+          <div class="price-and-booking">
+            <p class="price">{{ activity.price | currency }}</p>
+            <a
+              [href]="activity.bookingLink"
+              target="_blank"
+              class="book-now-link"
+              >Book Now</a
+            >
+          </div>
         </div>
       </div>
     </div>

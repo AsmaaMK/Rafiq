@@ -33,6 +33,7 @@ type Activity = {
   rating: number;
   picture: string;
   bookingLink: string;
+  price: number;
 };
 
 type GetCityInfoResponse = {
