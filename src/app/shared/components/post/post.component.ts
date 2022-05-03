@@ -85,7 +85,8 @@ export class PostComponent implements OnInit {
 
   ngOnInit() {
     this.isMyPost =
-      this.userInfoService.myUserName.value === this.postData.authorInfo.userName;
+      this.userInfoService.myUserName.value ===
+      this.postData.authorInfo.userName;
   }
 
   likeOrUnlike() {

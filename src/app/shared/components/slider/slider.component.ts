@@ -1,11 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewChecked, Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-slider',
   templateUrl: './slider.component.html',
   styleUrls: ['./slider.component.scss'],
 })
-export class SliderComponent implements OnInit {
+export class SliderComponent implements OnInit, AfterViewChecked {
   @Input() postImages: string[] = [];
   @Input() postId!: string;
   @Input() postType: 'post' | 'shared-post' | 'share-post-popup' = 'post';
@@ -20,8 +20,7 @@ export class SliderComponent implements OnInit {
   ngOnInitCount = 0;
   ngCheckedCount = 0;
 
-  constructor() {
-  }
+  constructor() {}
 
   ngOnInit() {
     this.setSliderWidth();

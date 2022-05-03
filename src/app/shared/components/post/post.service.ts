@@ -52,6 +52,14 @@ export class PostService {
       .pipe(map((res) => res.posts));
   }
 
+  getMorePosts(userName: string, postId: string): Observable<Post[]> {
+    return this.http
+      .get<GetPostsResponse>(
+        `${environment.apiUrl}/api/v1/users/${userName}/posts/morePosts/${postId}`
+      )
+      .pipe(map((res) => res.posts));
+  }
+
   classifyPostMedia(postFiles: string[]): PostMedia {
     const mediaType: MediaType = postFiles[0].startsWith(
       'https://res.cloudinary.com/elaraby/image'
@@ -150,5 +158,17 @@ export class PostService {
     return this.http.delete(`${this.url}/${postId}/comments/${commentId}`, {
       headers: headers,
     });
+  }
+
+  increaseNumberOfViews(userName: string, postId: string) {
+    this.http
+      .post(
+        `${environment.apiUrl}/api/v1/users/${userName}/posts/${postId}/views`,
+        null,
+        {
+          headers: headers,
+        }
+      )
+      .subscribe();
   }
 }

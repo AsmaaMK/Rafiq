@@ -135,7 +135,7 @@ class POST {
       },
       deleted: false,
     },
-    isLiked: false,
+    isLiked: true,
   };
 
   constructor(res: Post, private postService: PostService) {

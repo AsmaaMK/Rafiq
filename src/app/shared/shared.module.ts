@@ -8,6 +8,7 @@ import { PostComponent } from './components/post/post.component';
 import { SliderComponent } from './components/slider/slider.component';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
+import { IncreasePostViewsDirective } from './directives/increase-post-views.directive';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ToasterComponent,
     PostComponent,
     SliderComponent,
+    IncreasePostViewsDirective,
   ],
   imports: [CommonModule, RouterModule, ReactiveFormsModule],
   exports: [
@@ -25,6 +27,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ToasterComponent,
     PostComponent,
     SliderComponent,
+    IncreasePostViewsDirective
   ],
 })
 export class SharedModule {}
