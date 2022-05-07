@@ -8,6 +8,8 @@ import {
   CityInfo,
   GetActivitiesResponse,
   GetCityInfoResponse,
+  GetHotelsResponse,
+  Hotel,
 } from '../models/city';
 
 const headers = new HttpHeaders();
@@ -74,14 +76,39 @@ export class CityService {
       );
   }
 
-  getHotels(cityId: string, paramsList: { key: string; value: string }[]) {
-    const params = new HttpParams();
+  getHotels(
+    cityId: string,
+    paramsList: { key: string; value: string }[]
+  ): Observable<Hotel[]> {
+    let url = `${this.url}/${cityId}/hotels?`;
     paramsList.forEach((param) => {
-      params.append(param.key, param.value);
+      url += `${param.key}=${param.value}&`;
     });
-    this.http.get(`${this.url}/${cityId}/activities`, {
-      headers: headers,
-      params: params,
-    });
+    url = url.slice(0, url.length - 1);
+
+    return this.http
+      .get<GetHotelsResponse>(url, {
+        headers: headers,
+      })
+      .pipe(
+        map((res) => {
+          const hotels: Hotel[] = [];
+
+          for (let hotel of res.results.data) {
+            hotels.push({
+              name: hotel.hotel_name,
+              address: hotel.address,
+              bookingLink: hotel.url,
+              image: hotel.max_1440_photo_url,
+              numberOfReviews: hotel.review_nr,
+              price: hotel.min_total_price,
+              reviewScore: hotel.review_score,
+              reviewScoreWord: hotel.review_score_word,
+            });
+          }
+
+          return hotels;
+        })
+      );
   }
 }

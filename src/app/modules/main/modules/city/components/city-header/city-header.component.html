@@ -4,115 +4,117 @@
   [message]="toastMessage"
 ></app-toaster>
 
-<header class="city-header">
-  <div class="city-cover" id="city-cover">
-    <div class="clip-path">
-      <img
-        [src]="cityInfo.cover"
-        alt="cover"
-        class="cover-image"
-        (click)="openPopup(coverPreview)"
-      />
+<ng-container *ngIf="!loading">
+  <header class="city-header">
+    <div class="city-cover" id="city-cover">
+      <div class="clip-path">
+        <img
+          [src]="cityInfo.cover || 'assets/main-module/profile/default-cover.svg'"
+          alt="cover"
+          class="cover-image"
+          (click)="openPopup(coverPreview)"
+        />
+      </div>
     </div>
-  </div>
 
-  <div class="city-info-card" id="city-info-card">
-    <div class="name-field">
-      <div class="for-alignment"></div>
-      <p class="city-name" aria-label="name">
-        <span>{{ cityInfo.name }}</span> ({{ cityInfo.country.name }})
-      </p>
-      <button class="love-btn" (click)="followOrUnfollow(loveIcon)">
-        <svg #loveIcon [ngClass]="{ loved: isLoved }">
-          <use href="#love-icon"></use>
-        </svg>
+    <div class="city-info-card" id="city-info-card">
+      <div class="name-field">
+        <div class="for-alignment"></div>
+        <p class="city-name" aria-label="name">
+          <span>{{ cityInfo.name }}</span> ({{ cityInfo.country.name }})
+        </p>
+        <button class="love-btn" (click)="followOrUnfollow(loveIcon)">
+          <svg #loveIcon [ngClass]="{ loved: isLoved }">
+            <use href="#love-icon"></use>
+          </svg>
+        </button>
+      </div>
+
+      <ul aria-label="city info" class="personal-info">
+        <li aria-label="temperature degree">
+          <img
+            src="../../../../../../../assets/main-module/city/Temp.svg"
+            alt=""
+          />
+          <p>
+            <span>{{ cityInfo.temperature }}°</span>
+            C
+          </p>
+        </li>
+        <li aria-label="time">
+          <img
+            src="../../../../../../../assets/main-module/city/clock.svg"
+            alt=""
+          />
+          <p>
+            <span>{{ cityInfo.timeZone }}</span>
+          </p>
+        </li>
+        <li aria-label="population">
+          <img
+            src="../../../../../../../assets/main-module/city/people.svg"
+            alt=""
+          />
+          <p>
+            <span>{{ cityInfo.population }}</span> people
+          </p>
+        </li>
+        <li aria-label="fire number">
+          <img
+            src="../../../../../../../assets/main-module/city/Fire.svg"
+            alt=""
+          />
+          <p>
+            <span>{{ cityInfo.country.emergencyNumbers.fire }}</span>
+          </p>
+        </li>
+        <li aria-label="police number">
+          <img
+            src="../../../../../../../assets/main-module/city/Police.svg"
+            alt=""
+          />
+          <p>
+            <span>{{ cityInfo.country.emergencyNumbers.police }}</span>
+          </p>
+        </li>
+        <li aria-label="ambulance number">
+          <img
+            src="../../../../../../../assets/main-module/city/First aid.svg"
+            alt=""
+          />
+          <p>
+            <span>{{ cityInfo.country.emergencyNumbers.ambulance }}</span>
+          </p>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+  <div class="overlay-wrapper" #coverPreview>
+    <div class="img-popup">
+      <button (click)="closePopup(coverPreview)" class="close-btn">
+        <img src="assets/main-module/Close.svg" alt="" />
       </button>
-    </div>
-
-    <ul aria-label="city info" class="personal-info">
-      <li aria-label="temperature degree">
-        <img
-          src="../../../../../../../assets/main-module/city/Temp.svg"
-          alt=""
-        />
-        <p>
-          <span>{{ cityInfo.temperature }}°</span>
-          C
-        </p>
-      </li>
-      <li aria-label="time">
-        <img
-          src="../../../../../../../assets/main-module/city/clock.svg"
-          alt=""
-        />
-        <p>
-          <span>{{ cityInfo.timeZone }}</span>
-        </p>
-      </li>
-      <li aria-label="population">
-        <img
-          src="../../../../../../../assets/main-module/city/people.svg"
-          alt=""
-        />
-        <p>
-          <span>{{ cityInfo.population }}</span> people
-        </p>
-      </li>
-      <li aria-label="fire number">
-        <img
-          src="../../../../../../../assets/main-module/city/Fire.svg"
-          alt=""
-        />
-        <p>
-          <span>{{ cityInfo.country.emergencyNumbers.fire }}</span>
-        </p>
-      </li>
-      <li aria-label="police number">
-        <img
-          src="../../../../../../../assets/main-module/city/Police.svg"
-          alt=""
-        />
-        <p>
-          <span>{{ cityInfo.country.emergencyNumbers.police }}</span>
-        </p>
-      </li>
-      <li aria-label="ambulance number">
-        <img
-          src="../../../../../../../assets/main-module/city/First aid.svg"
-          alt=""
-        />
-        <p>
-          <span>{{ cityInfo.country.emergencyNumbers.ambulance }}</span>
-        </p>
-      </li>
-    </ul>
-  </div>
-</header>
-
-<div class="overlay-wrapper" #coverPreview>
-  <div class="img-popup">
-    <button (click)="closePopup(coverPreview)" class="close-btn">
-      <img src="assets/main-module/Close.svg" alt="" />
-    </button>
-    <div class="img-preview">
-      <img [src]="cityInfo.cover" alt="cover" />
+      <div class="img-preview">
+        <img [src]="cityInfo.cover" alt="cover" />
+      </div>
     </div>
   </div>
-</div>
 
-<svg xmlns="http://www.w3.org/2000/svg" style="display: none">
-  <symbol
-    id="love-icon"
-    height="100%"
-    viewBox="0 0 24 24"
-    width="100%"
-    fill="currentColor"
-  >
-    <path d="M0 0h24v24H0z" fill="none" />
-    <path
-      d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
-      stroke="#5b618a"
-      stroke-width="1.538"
-    />
-  </symbol>
-</svg>
+  <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
+    <symbol
+      id="love-icon"
+      height="100%"
+      viewBox="0 0 24 24"
+      width="100%"
+      fill="currentColor"
+    >
+      <path d="M0 0h24v24H0z" fill="none" />
+      <path
+        d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+        stroke="#5b618a"
+        stroke-width="1.538"
+      />
+    </symbol>
+  </svg>
+</ng-container>

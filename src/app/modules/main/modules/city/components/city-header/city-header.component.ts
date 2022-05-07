@@ -19,6 +19,7 @@ export class CityHeaderComponent implements OnInit {
   cityInfo!: CityInfo;
   cityId!: string;
   isCityAdmin = true;
+  loading = true;
 
   constructor(private cityInfoService: CityService, private route: Router) {}
 
@@ -32,9 +33,10 @@ export class CityHeaderComponent implements OnInit {
 
   getCityInfo() {
     this.cityId = this.route.url.split('/')[3];
-    this.cityInfoService
-      .getCityInfo(this.cityId)
-      .subscribe((res) => (this.cityInfo = res));
+    this.cityInfoService.getCityInfo(this.cityId).subscribe((res) => {
+      this.cityInfo = res;
+      this.loading = false;
+    });
   }
 
   setCoverHeight() {

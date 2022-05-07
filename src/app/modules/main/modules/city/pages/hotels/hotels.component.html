@@ -1,1 +1,202 @@
-<p>hotels works!</p>
+<section class="hotels-section">
+  <p class="title">Let's find the best hotels for you</p>
+  <form [formGroup]="findHotelForm">
+    <div class="row">
+      <div class="check-in-field">
+        <label for="check-in-date">Check-in Date</label>
+        <div class="input-date">
+          <input
+            formControlName="checkin_date"
+            id="check-in-date"
+            type="date"
+          />
+          <img
+            src="../../../../../../../assets/auth-module/icons/calander.svg"
+            alt=""
+          />
+        </div>
+      </div>
+
+      <div class="check-out-field">
+        <label for="check-out-date">Check-out Date</label>
+
+        <div class="input-date">
+          <input
+            formControlName="checkout_date"
+            id="check-out-date"
+            type="date"
+          />
+          <img
+            src="../../../../../../../assets/auth-module/icons/calander.svg"
+            alt=""
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="rooms-field">
+        <label for="rooms">Rooms</label>
+        <div class="input-wrapper">
+          <input
+            formControlName="room_number"
+            id="rooms"
+            type="number"
+            min="1"
+            max="30"
+          />
+          <span class="number-wrapper">
+            <button class="down-arrow">
+              <img
+                src="../../../../../../../assets/main-module/city/arrow-down.svg"
+                alt=""
+              />
+            </button>
+            <button class="up-arrow">
+              <img
+                src="../../../../../../../assets/main-module/city/arrow-top.svg"
+                alt=""
+              />
+            </button>
+          </span>
+        </div>
+      </div>
+
+      <div class="adults-field">
+        <label for="adults">Adults</label>
+        <div class="input-wrapper">
+          <input
+            formControlName="adults_number"
+            id="adults"
+            type="number"
+            min="1"
+            max="30"
+            value="1"
+          />
+          <span class="number-wrapper">
+            <button class="down-arrow">
+              <img
+                src="../../../../../../../assets/main-module/city/arrow-down.svg"
+                alt=""
+              />
+            </button>
+            <button class="up-arrow">
+              <img
+                src="../../../../../../../assets/main-module/city/arrow-top.svg"
+                alt=""
+              />
+            </button>
+          </span>
+        </div>
+      </div>
+
+      <div class="children-field">
+        <div class="children-number-field">
+          <label for="children">Children</label>
+          <div class="input-wrapper">
+            <input
+              id="children"
+              type="number"
+              min="0"
+              max="10"
+              value="0"
+              formControlName="children_number"
+              #numberOfChildrenInput
+              (change)="changeNumberOfChildren(+numberOfChildrenInput.value)"
+            />
+            <span class="number-wrapper">
+              <button class="down-arrow">
+                <img
+                  src="../../../../../../../assets/main-module/city/arrow-down.svg"
+                  alt=""
+                />
+              </button>
+              <button class="up-arrow">
+                <img
+                  src="../../../../../../../assets/main-module/city/arrow-top.svg"
+                  alt=""
+                />
+              </button>
+            </span>
+          </div>
+        </div>
+
+        <div class="children-ages-field" formArrayName="children_ages">
+          <div
+            class="child-age-field"
+            *ngFor="let child of children_ages.controls; index as i"
+          >
+            <label for="child-{{ i }}-age">Child-{{ i + 1 }}</label>
+            <div class="input-wrapper">
+              <input
+                [formControlName]="i"
+                id="child-{{ i + 1 }}-age"
+                type="number"
+                min="0"
+                max="17"
+              />
+              <span class="number-wrapper">
+                <button class="down-arrow">
+                  <img
+                    src="../../../../../../../assets/main-module/city/arrow-down.svg"
+                    alt=""
+                  />
+                </button>
+                <button class="up-arrow">
+                  <img
+                    src="../../../../../../../assets/main-module/city/arrow-top.svg"
+                    alt=""
+                  />
+                </button>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <button
+        type="submit"
+        [disabled]="!findHotelForm.valid"
+        (click)="onSubmit()"
+      >
+        Find
+      </button>
+    </div>
+  </form>
+
+  <section class="hotels" *ngIf="hotels.length">
+    <div class="hotel-card" *ngFor="let hotel of hotels">
+      <img [src]="hotel.image" alt="" />
+      <p class="hotel-name">{{ hotel.name }}</p>
+      <p class="hotel-address">{{ hotel.address }}</p>
+
+      <div class="row">
+        <div class="col review">
+          <p class="number-of-reviews" *ngIf="hotel.numberOfReviews">
+            <span>{{ hotel.numberOfReviews }}</span> Reviews
+          </p>
+
+          <p
+            class="score"
+            [ngClass]="{
+              green: hotel.reviewScore >= 8,
+              orange: hotel.reviewScore < 8 && hotel.reviewScore >= 5,
+              red: hotel.reviewScore < 5
+            }"
+            *ngIf="hotel.reviewScore"
+          >
+            <span class="score-number">{{ hotel.reviewScore }}</span>
+            <span class="score-word">{{ hotel.reviewScoreWord }}</span>
+          </p>
+        </div>
+
+        <div class="col booking">
+          <p class="price">{{ hotel.price | currency }}/night</p>
+          <a [href]="hotel.bookingLink" target="_blank">Book Now</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>

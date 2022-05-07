@@ -92,10 +92,50 @@ type CityInfo = {
   };
 };
 
+type GetHotelsResponse = {
+  success: true;
+  results: {
+    data: {
+      url: string;
+      hotel_name: string;
+      checkin: {
+        until: string;
+        from: string;
+      };
+      checkout: {
+        until: string;
+        from: string;
+      };
+      hotel_id: number;
+      review_score: number;
+      review_score_word: string;
+      review_nr: number;
+      address: string;
+      min_total_price: number;
+      main_photo_url: string;
+      max_photo_url: string;
+      max_1440_photo_url: string;
+    }[];
+  };
+};
+
+type Hotel = {
+  name: string;
+  bookingLink: string;
+  reviewScore: number;
+  reviewScoreWord: string;
+  numberOfReviews: number;
+  address: string;
+  price: number;
+  image: string;
+};
+
 export {
   GetActivitiesResponse,
   Activity,
   ActivitiesData,
   CityInfo,
   GetCityInfoResponse,
+  GetHotelsResponse,
+  Hotel
 };

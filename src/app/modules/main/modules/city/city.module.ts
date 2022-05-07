@@ -10,6 +10,7 @@ import { PostsComponent } from './pages/posts/posts.component';
 import { ImagesComponent } from './pages/images/images.component';
 import { AttractionsComponent } from './pages/attractions/attractions.component';
 import { HotelsComponent } from './pages/hotels/hotels.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { HotelsComponent } from './pages/hotels/hotels.component';
   imports: [
     CommonModule,
     CityRoutingModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule
   ]
 })
 export class CityModule { }

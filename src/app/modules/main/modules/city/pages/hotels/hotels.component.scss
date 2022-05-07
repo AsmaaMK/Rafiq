@@ -1,0 +1,284 @@
+@use "../../../../../../../styles/helpers/helpers-dir" as *;
+
+.hotels-section {
+  height: 100%;
+  overflow: auto;
+  padding: 1rem;
+
+  p.title {
+    color: $primary;
+    font-weight: 500;
+    font-size: $base-font-size * 1.5;
+    text-align: center;
+  }
+
+  form {
+    max-width: 40rem;
+    margin: 3rem auto;
+    @include flex(column, stretch, flex-start);
+    gap: 2em;
+
+    .row {
+      @include flex(row, stretch, space-between);
+      gap: 2em;
+
+      @include respond-to(less-than-medium) {
+        flex-direction: column;
+      }
+    }
+
+    .check-in-field,
+    .check-out-field,
+    .rooms-field,
+    .adults-field {
+      flex: 1;
+    }
+
+    [class$="-field"] {
+      label {
+        display: block;
+        color: $primary;
+        font-weight: 500;
+        font-size: $base-font-size;
+        padding-left: 0.5em;
+      }
+
+      input {
+        width: 100%;
+        color: $primary;
+        background-color: #acacc5;
+        border: none;
+        font-weight: 500;
+        font-size: $base-font-size;
+        padding: 0.5em;
+        border-radius: 0.5em;
+      }
+
+      .input-date {
+        position: relative;
+
+        img {
+          width: 1.5rem;
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          right: 0.5rem;
+          pointer-events: none;
+        }
+      }
+    }
+
+    .children-field {
+      flex: 2;
+    }
+
+    .children-ages-field {
+      @include margin(y, 1rem);
+      @include flex(row);
+      flex-wrap: wrap;
+      gap: 1em;
+
+      .child-age-field {
+        width: 40%;
+      }
+    }
+
+    button[type="submit"] {
+      background-color: $primary;
+      color: $secondary;
+      font-size: $base-font-size * 1.2;
+      padding: 0.5em 2em;
+      border-radius: 0.35em;
+      margin: auto;
+      box-shadow: 0px 3px 9px #5b618a;
+
+      &:disabled {
+        cursor: default;
+        opacity: 0.6;
+      }
+    }
+  }
+
+  .hotels {
+    margin-bottom: 3rem;
+    @include flex(row, center, stretch);
+    flex-wrap: wrap;
+    gap: 2em;
+
+    .hotel-card {
+      width: 100%;
+      min-width: 300px;
+      max-width: 350px;
+      border-radius: 1em;
+      background-color: $neutral-lighter;
+      overflow: hidden;
+      box-shadow: 4px 3px 6px #5b618a;
+
+      @include respond-to(medium) {
+        width: 40%;
+      }
+
+      img {
+        height: 180px;
+        width: 100%;
+        object-fit: cover;
+      }
+
+      .hotel-name {
+        color: $primary;
+        font-weight: 500;
+        font-size: $base-font-size * 1.1;
+        margin: 0.5rem 1rem;
+      }
+
+      .hotel-address {
+        color: $primary;
+        font-size: $base-font-size;
+        margin: 0.5rem 1rem;
+      }
+
+      .row {
+        margin: 1rem;
+        @include flex(row, space-between, stretch);
+
+        .col {
+          flex: 1;
+          gap: 0.25rem;
+
+          p {
+            margin: 0;
+          }
+
+          &.review {
+            @include flex(column, flex-start, space-between);
+
+            .number-of-reviews {
+              color: $primary;
+              font-size: $base-font-size;
+
+              span {
+                font-weight: 500;
+              }
+            }
+
+            .score {
+              font-size: $base-font-size;
+
+              .score-number {
+                color: $neutral-lighter;
+                padding: 0.25em;
+                margin-right: 0.5rem;
+                border-radius: 5px;
+              }
+
+              .score-word {
+                color: $invalid;
+                font-weight: 500;
+              }
+
+              &.red {
+                .score-number {
+                  background-color: $invalid;
+                }
+                .score-word {
+                  color: $invalid;
+                }
+              }
+
+              &.orange {
+                .score-number {
+                  background-color: #e6880d;
+                }
+                .score-word {
+                  color: #e6880d;
+                }
+              }
+
+              &.green {
+                .score-number {
+                  background-color: #618a5b;
+                }
+                .score-word {
+                  color: #618a5b;
+                }
+              }
+            }
+          }
+
+          &.booking {
+            @include flex(column, flex-end);
+
+            p.price {
+              color: $primary;
+              font-weight: 500;
+              font-size: $base-font-size;
+            }
+
+            a {
+              text-decoration: none;
+              color: $secondary;
+              background-color: $primary;
+              padding: 0.5em 1em;
+              border-radius: 0.5em;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0;
+  cursor: pointer;
+}
+
+input[type="number"] {
+  width: 100%;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  opacity: 0;
+  cursor: pointer;
+}
+
+.input-wrapper {
+  position: relative;
+}
+
+.number-wrapper {
+  position: absolute;
+  width: 1.5rem;
+  height: 50%;
+  top: 50%;
+  bottom: 0;
+  right: 5px;
+  pointer-events: none;
+  transform: translateY(-50%);
+
+  .down-arrow,
+  .up-arrow {
+    position: absolute;
+    right: 0;
+    padding: 0;
+    height: 50%;
+    width: 100%;
+    background-color: transparent;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .up-arrow {
+    top: 0;
+  }
+
+  .down-arrow {
+    bottom: 0;
+  }
+}
