@@ -113,6 +113,7 @@
       background-color: $neutral-lighter;
       overflow: hidden;
       box-shadow: 4px 3px 6px #5b618a;
+      @include flex(column, stretch, stretch);
 
       @include respond-to(medium) {
         width: 40%;
@@ -122,6 +123,11 @@
         height: 180px;
         width: 100%;
         object-fit: cover;
+      }
+
+      .card-content {
+        @include flex(column, stretch, flex-start);
+        flex: 1;
       }
 
       .hotel-name {
@@ -135,10 +141,13 @@
         color: $primary;
         font-size: $base-font-size;
         margin: 0.5rem 1rem;
+        margin-bottom: 1rem;
       }
 
       .row {
         margin: 1rem;
+        margin-top: auto;
+        justify-self: flex-end;
         @include flex(row, space-between, stretch);
 
         .col {

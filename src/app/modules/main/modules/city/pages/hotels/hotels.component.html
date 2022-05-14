@@ -169,32 +169,34 @@
   <section class="hotels" *ngIf="hotels.length">
     <div class="hotel-card" *ngFor="let hotel of hotels">
       <img [src]="hotel.image" alt="" />
-      <p class="hotel-name">{{ hotel.name }}</p>
-      <p class="hotel-address">{{ hotel.address }}</p>
+      <div class="card-content">
+        <p class="hotel-name">{{ hotel.name }}</p>
+        <p class="hotel-address">{{ hotel.address }}</p>
 
-      <div class="row">
-        <div class="col review">
-          <p class="number-of-reviews" *ngIf="hotel.numberOfReviews">
-            <span>{{ hotel.numberOfReviews }}</span> Reviews
-          </p>
+        <div class="row">
+          <div class="col review">
+            <p class="number-of-reviews" *ngIf="hotel.numberOfReviews && hotel.reviewScore">
+              <span>{{ hotel.numberOfReviews }}</span> Reviews
+            </p>
 
-          <p
-            class="score"
-            [ngClass]="{
-              green: hotel.reviewScore >= 8,
-              orange: hotel.reviewScore < 8 && hotel.reviewScore >= 5,
-              red: hotel.reviewScore < 5
-            }"
-            *ngIf="hotel.reviewScore"
-          >
-            <span class="score-number">{{ hotel.reviewScore }}</span>
-            <span class="score-word">{{ hotel.reviewScoreWord }}</span>
-          </p>
-        </div>
+            <p
+              class="score"
+              [ngClass]="{
+                green: hotel.reviewScore >= 8,
+                orange: hotel.reviewScore < 8 && hotel.reviewScore >= 5,
+                red: hotel.reviewScore < 5
+              }"
+              *ngIf="hotel.reviewScore"
+            >
+              <span class="score-number">{{ hotel.reviewScore }}</span>
+              <span class="score-word">{{ hotel.reviewScoreWord }}</span>
+            </p>
+          </div>
 
-        <div class="col booking">
-          <p class="price">{{ hotel.price | currency }}/night</p>
-          <a [href]="hotel.bookingLink" target="_blank">Book Now</a>
+          <div class="col booking">
+            <p class="price">{{ hotel.price | currency }}/night</p>
+            <a [href]="hotel.bookingLink" target="_blank">Book Now</a>
+          </div>
         </div>
       </div>
     </div>

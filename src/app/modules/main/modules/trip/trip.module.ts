@@ -3,15 +3,23 @@ import { CommonModule } from '@angular/common';
 
 import { TripRoutingModule } from './trip-routing.module';
 import { TripComponent } from './trip.component';
+import { TripsFilterComponent } from './pages/trips-filter/trips-filter.component';
+import { CreateTripComponent } from './pages/create-trip/create-trip.component';
+import { TripDetailsComponent } from './pages/trip-details/trip-details.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
   declarations: [
-    TripComponent
+    TripComponent,
+    TripsFilterComponent,
+    CreateTripComponent,
+    TripDetailsComponent
   ],
   imports: [
     CommonModule,
-    TripRoutingModule
+    TripRoutingModule,
+    SharedModule
   ]
 })
 export class TripModule { }

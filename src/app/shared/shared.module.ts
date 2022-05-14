@@ -9,6 +9,7 @@ import { SliderComponent } from './components/slider/slider.component';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { IncreasePostViewsDirective } from './directives/increase-post-views.directive';
+import { DropDownComponent } from './components/drop-down/drop-down.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { IncreasePostViewsDirective } from './directives/increase-post-views.dir
     PostComponent,
     SliderComponent,
     IncreasePostViewsDirective,
+    DropDownComponent,
   ],
   imports: [CommonModule, RouterModule, ReactiveFormsModule],
   exports: [
@@ -27,7 +29,8 @@ import { IncreasePostViewsDirective } from './directives/increase-post-views.dir
     ToasterComponent,
     PostComponent,
     SliderComponent,
-    IncreasePostViewsDirective
+    IncreasePostViewsDirective,
+    DropDownComponent
   ],
 })
 export class SharedModule {}

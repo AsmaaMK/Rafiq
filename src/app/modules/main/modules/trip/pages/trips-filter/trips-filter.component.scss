@@ -1,0 +1,55 @@
+@use "../../../../../../../styles/helpers/helpers-dir" as *;
+
+nav.trips-navbar {
+  width: 90%;
+  margin: 1em auto;
+
+  @include flex(row);
+  gap: 1em;
+  flex-wrap: wrap;
+
+  p {
+    color: $primary;
+    font-weight: 500;
+    font-size: $base-font-size * 1.5;
+    margin: 0;
+  }
+
+  .search-field {
+    position: relative;
+
+    input {
+      font-size: $base-font-size;
+      width: 200px;
+      color: $primary;
+      padding: 1rem;
+      border: 1px solid $primary;
+      border-radius: 1rem;
+      background-color: $secondary;
+      padding-left: 2.5rem;
+    }
+
+    &::before {
+      content: url("../../../../../../../assets/main-module/trips/search.svg");
+      position: absolute;
+      left: 0.7rem;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+
+  button.create-trip-btn {
+    margin-left: auto;
+    color: $secondary;
+    background-color: $primary;
+    padding: 1rem;
+    font-size: $base-font-size;
+    border-radius: 1rem;
+    @include flex(row);
+    gap: 0.5rem;
+
+    img {
+      width: 1rem;
+    }
+  }
+}
