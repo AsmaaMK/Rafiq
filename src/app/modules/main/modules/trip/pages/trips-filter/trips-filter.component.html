@@ -1,14 +1,20 @@
-<nav class="trips-navbar">
-  <p>Trips</p>
-  <app-drop-down></app-drop-down>
-  <div class="search-field">
-    <input search-trips type="text" />
-    <label for="search-trips" hidden>Search Trips</label>
+<div class="trip-filter-container">
+  <nav class="trips-navbar">
+    <p>Trips</p>
+    <app-drop-down></app-drop-down>
+    <div class="search-field">
+      <input search-trips type="text" />
+      <label for="search-trips" hidden>Search Trips</label>
+    </div>
+    <button class="create-trip-btn" routerLink="./create-trip">
+      <img
+        src="../../../../../../../assets/main-module/trips/plus.svg"
+        alt=""
+      /><span> Create Trip </span>
+    </button>
+  </nav>
+  
+  <div class="trips-container">
+    <app-trip-card *ngFor="let trip of trips" [tripInfo]="trip"></app-trip-card>
   </div>
-  <button class="create-trip-btn" routerLink="./create-trip">
-    <img
-      src="../../../../../../../assets/main-module/trips/plus.svg"
-      alt=""
-    /><span> Create Trip </span>
-  </button>
-</nav>
+</div>

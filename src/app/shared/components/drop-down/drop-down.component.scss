@@ -1,16 +1,18 @@
 @use "../../../../styles/helpers/helpers-dir" as *;
 
+$focus: #e1cce5;
+
 .dropdown {
   background-color: $secondary;
   padding-left: 0;
   list-style: none;
   position: relative;
-  // padding: 1rem;
   width: 200px;
   border-radius: 1rem;
   cursor: pointer;
-  @include flex(row, space-between);
   border: 1px solid $primary;
+
+  @include flex(row, space-between);
 
   &.open {
     border-radius: 1rem 1rem 0 0;
@@ -21,6 +23,10 @@
       &::after {
         transform: rotate(180deg) translateY(calc(-50% + 0.5rem));
       }
+    }
+
+    .dropdown__list-container {
+      display: block;
     }
   }
 
@@ -47,16 +53,7 @@
     }
 
     &:focus {
-      background-color: #e1cce5;
-    }
-  }
-
-  #dropdown__arrow {
-    color: $primary;
-    @include animation;
-
-    &.open {
-      transform: rotate(180deg);
+      background-color: $focus;
     }
   }
 
@@ -81,15 +78,11 @@
     width: 200px;
     overflow: hidden;
 
-    &.open {
-      display: flex;
-    }
-
     .dropdown__list {
       padding-left: 0;
       list-style: none;
       width: 100%;
-      // border-top: 1px solid $primary;
+
       li {
         padding: 1rem;
         background-color: $secondary;
@@ -98,7 +91,7 @@
 
         &:hover,
         &:focus {
-          background-color: #e1cce5;
+          background-color: $focus;
         }
       }
     }

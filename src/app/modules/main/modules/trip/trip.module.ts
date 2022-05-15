@@ -7,6 +7,7 @@ import { TripsFilterComponent } from './pages/trips-filter/trips-filter.componen
 import { CreateTripComponent } from './pages/create-trip/create-trip.component';
 import { TripDetailsComponent } from './pages/trip-details/trip-details.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { TripCardComponent } from './components/trip-card/trip-card.component';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
     TripComponent,
     TripsFilterComponent,
     CreateTripComponent,
-    TripDetailsComponent
+    TripDetailsComponent,
+    TripCardComponent
   ],
   imports: [
     CommonModule,

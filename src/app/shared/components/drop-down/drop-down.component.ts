@@ -52,7 +52,6 @@ export class DropDownComponent implements OnInit {
 
   closeList(list: HTMLElement) {
     list.classList.remove('open');
-    document.getElementById('dropdown__arrow')?.classList.remove('open');
     document.querySelector('.dropdown')?.classList.remove('open');
     list.setAttribute('aria-expanded', 'false');
   }

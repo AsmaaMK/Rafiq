@@ -1,0 +1,69 @@
+<div class="card">
+  <div class="card__img">
+    <img [src]="tripInfo.img" alt="" />
+  </div>
+  <div class="card__info">
+    <div class="card__info__header">
+      <p class="place">{{ tripInfo.city }}, {{ tripInfo.country }}</p>
+      <p class="price">{{ tripInfo.totalPrice | currency }}</p>
+    </div>
+    <div class="card__info__body">
+      <p class="description">{{ tripInfo.description }}</p>
+    </div>
+    <div class="card__info__footer">
+      <div class="col1">
+        <p class="transportation">
+          I traveled to it by <span>{{ tripInfo.transportation }}</span> for
+          <span>{{ tripInfo.transportationPrice | currency}}</span>
+        </p>
+        <p class="owner">
+          Created by
+          <a [routerLink]="['/app/profile', tripInfo.owner.username]"
+            >{{ tripInfo.owner.firstName }} {{ tripInfo.owner.lastName }}</a
+          >
+        </p>
+      </div>
+      <div class="col2">
+        <a [routerLink]="[tripInfo.tripId]" class="trip-etails">see trip days</a>
+        <div class="rate">
+          <svg [ngClass]="{ filled: tripInfo.rate >= 1 }">
+                <use href="#star-icon"></use>
+              </svg>
+              <svg [ngClass]="{ filled: tripInfo.rate >= 2 }">
+                <use href="#star-icon"></use>
+              </svg>
+              <svg [ngClass]="{ filled: tripInfo.rate >= 3 }">
+                <use href="#star-icon"></use>
+              </svg>
+              <svg [ngClass]="{ filled: tripInfo.rate >= 4 }">
+                <use href="#star-icon"></use>
+              </svg>
+              <svg [ngClass]="{ filled: tripInfo.rate >= 5 }">
+                <use href="#star-icon"></use>
+              </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none">
+  <symbol
+    id="star-icon"
+    enable-background="new 0 0 24 24"
+    height="24px"
+    viewBox="0 0 24 24"
+    width="24px"
+  >
+    <g>
+      <rect fill="none" height="24" width="24" x="0" />
+      <polygon
+        fill="currentColor"
+        stroke="#F8B400"
+        stroke-width="1.2"
+        points="14.43,10 12,2 9.57,10 2,10 8.18,14.41 5.83,22 12,17.31 18.18,22 15.83,14.41 22,10"
+      />
+    </g>
+  </symbol>
+</svg>

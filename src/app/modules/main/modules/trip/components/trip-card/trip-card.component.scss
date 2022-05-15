@@ -1,0 +1,100 @@
+@use "../../../../../../../styles/helpers/helpers-dir" as *;
+
+.card {
+  background-color: $neutral-lighter;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 4px 3px 6px #5B618A;
+  margin: 1.5rem auto;
+  @include flex(column, stretch, stretch);
+  
+  @include respond-to(medium) {
+    width: 90%;
+    flex-direction: row;
+  }
+  
+  &__img {
+    height: 200px;
+    
+    @include respond-to(medium) {
+      width: 35%;
+      height: auto;
+    }
+
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+  
+  &__info {
+    padding: 1rem;
+    flex: 2;
+
+    &__header {
+      @include flex(row, space-between);
+      
+      .place,
+      .price {
+        color: $primary;
+        font-weight: 500;
+        font-size: $base-font-size * 1.2 ;
+        margin: 0;
+      }
+    }
+
+    &__body {
+      p {
+        color: $primary;
+        font-size: $base-font-size;
+      }
+    }
+
+    &__footer {
+      @include flex(column, stretch, space-between);
+      gap: 1rem;
+      
+      .col1, .col2 {
+        @include flex(column, stretch);
+        gap: 0.5rem;
+      }
+
+      @include respond-to(medium) {
+        flex-direction: row;
+
+        .col2 {
+          align-items: flex-end;
+        }
+      }
+
+      p {
+        color: $primary;
+        font-size: $base-font-size;
+        margin: 0;
+
+        span {
+          font-weight: 500;
+        }
+      }
+
+      a {
+        font-size: $base-font-size;
+        color: $primary;
+      }
+    }
+  }
+}
+
+.rate {
+  svg {
+    display: inline;
+    width: 24px;
+    height: 24px;
+    color: transparent;
+
+    &.filled {
+      color: #f8b400;
+    }
+  }
+}

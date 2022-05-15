@@ -1,7 +1,22 @@
 @use "../../../../../../../styles/helpers/helpers-dir" as *;
 
+.trip-filter-container {
+  @include flex;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+
+  @include respond-to(medium) {
+    border-radius: 1em;
+    box-shadow: 0px 3px 6px #666666;
+    background-color: $secondary;
+    @include main-gradient;
+  }
+}
+
 nav.trips-navbar {
   width: 90%;
+  height: 90px;
   margin: 1em auto;
 
   @include flex(row);
@@ -52,4 +67,9 @@ nav.trips-navbar {
       width: 1rem;
     }
   }
+}
+
+.trips-container {
+  height: calc(100% - 90px);
+  overflow: auto;
 }
