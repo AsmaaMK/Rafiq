@@ -1,1 +1,85 @@
-<p>trip-details works!</p>
+<div class="trip-page">
+  <div class="card">
+    <div class="card__img">
+      <img [src]="trip.tripInfo.img" alt="" />
+    </div>
+    <div class="card__info">
+      <div class="card__info__header">
+        <p class="place">
+          {{ trip.tripInfo.city }}, {{ trip.tripInfo.country }}
+        </p>
+        <p class="price">{{ trip.tripInfo.totalPrice | currency }}</p>
+      </div>
+      <div class="card__info__body">
+        <p class="description">{{ trip.tripInfo.description }}</p>
+      </div>
+      <div class="card__info__footer">
+        <div class="col1">
+          <p class="transportation">
+            I traveled to it by
+            <span>{{ trip.tripInfo.transportation }}</span> for
+            <span>{{ trip.tripInfo.transportationPrice | currency }}</span>
+          </p>
+          <p class="owner">
+            Created by
+            <a [routerLink]="['/app/profile', trip.tripInfo.owner.username]"
+              >{{ trip.tripInfo.owner.firstName }}
+              {{ trip.tripInfo.owner.lastName }}</a
+            >
+          </p>
+        </div>
+        <div class="col2">
+          <a [routerLink]="[trip.tripInfo.tripId]" class="trip-etails"
+            >see trip days</a
+          >
+          <div class="rate">
+            <svg [ngClass]="{ filled: trip.tripInfo.rate >= 1 }">
+              <use href="#star-icon"></use>
+            </svg>
+            <svg [ngClass]="{ filled: trip.tripInfo.rate >= 2 }">
+              <use href="#star-icon"></use>
+            </svg>
+            <svg [ngClass]="{ filled: trip.tripInfo.rate >= 3 }">
+              <use href="#star-icon"></use>
+            </svg>
+            <svg [ngClass]="{ filled: trip.tripInfo.rate >= 4 }">
+              <use href="#star-icon"></use>
+            </svg>
+            <svg [ngClass]="{ filled: trip.tripInfo.rate >= 5 }">
+              <use href="#star-icon"></use>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="day" *ngFor="let day of trip.days; let i = index">
+    <p class="day-title">Day {{ i + 1 }}</p>
+    <div class="row">
+      <p class="place">{{ day.place }}</p>
+      <p class="price">{{ day.price | currency }}</p>
+    </div>
+    <p class="description">{{ day.description }}</p>
+  </div>
+</div>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none">
+  <symbol
+    id="star-icon"
+    enable-background="new 0 0 24 24"
+    height="24px"
+    viewBox="0 0 24 24"
+    width="24px"
+  >
+    <g>
+      <rect fill="none" height="24" width="24" x="0" />
+      <polygon
+        fill="currentColor"
+        stroke="#F8B400"
+        stroke-width="1.2"
+        points="14.43,10 12,2 9.57,10 2,10 8.18,14.41 5.83,22 12,17.31 18.18,22 15.83,14.41 22,10"
+      />
+    </g>
+  </symbol>
+</svg>

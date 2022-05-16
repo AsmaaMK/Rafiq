@@ -32,7 +32,7 @@ $focus: #e1cce5;
 
   #dropdown__selected {
     color: $primary;
-    padding: 1rem;
+    padding: 0.8rem;
     width: 100%;
     position: relative;
     outline: none;
@@ -71,7 +71,7 @@ $focus: #e1cce5;
   &__list-container {
     display: none;
     position: absolute;
-    top: 50px;
+    top: 43px;
     left: -1px;
     border-radius: 0 0 1rem 1rem;
     border: 1px solid $primary;
@@ -84,7 +84,7 @@ $focus: #e1cce5;
       width: 100%;
 
       li {
-        padding: 1rem;
+        padding: 0.8rem;
         background-color: $secondary;
         outline: none;
         width: 100%;

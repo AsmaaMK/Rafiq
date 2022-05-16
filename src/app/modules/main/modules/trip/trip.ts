@@ -15,4 +15,10 @@ type TripInfo = {
   img: string;
 };
 
-export {TripInfo}
+type TripDay = {
+  place: string;
+  price: number;
+  description: string;
+}
+
+export {TripInfo, TripDay}

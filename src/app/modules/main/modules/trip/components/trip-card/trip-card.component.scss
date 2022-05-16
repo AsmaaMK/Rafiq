@@ -4,18 +4,19 @@
   background-color: $neutral-lighter;
   border-radius: 1rem;
   overflow: hidden;
-  box-shadow: 4px 3px 6px #5B618A;
-  margin: 1.5rem auto;
+  box-shadow: 4px 3px 6px #5b618a;
+  margin: auto 1rem;
   @include flex(column, stretch, stretch);
-  
+
   @include respond-to(medium) {
     width: 90%;
+    margin: auto;
     flex-direction: row;
   }
-  
+
   &__img {
     height: 200px;
-    
+
     @include respond-to(medium) {
       width: 35%;
       height: auto;
@@ -27,19 +28,19 @@
       object-fit: cover;
     }
   }
-  
+
   &__info {
     padding: 1rem;
     flex: 2;
 
     &__header {
       @include flex(row, space-between);
-      
+
       .place,
       .price {
         color: $primary;
         font-weight: 500;
-        font-size: $base-font-size * 1.2 ;
+        font-size: $base-font-size * 1.2;
         margin: 0;
       }
     }
@@ -54,8 +55,9 @@
     &__footer {
       @include flex(column, stretch, space-between);
       gap: 1rem;
-      
-      .col1, .col2 {
+
+      .col1,
+      .col2 {
         @include flex(column, stretch);
         gap: 0.5rem;
       }
