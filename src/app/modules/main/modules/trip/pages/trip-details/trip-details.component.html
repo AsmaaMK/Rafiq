@@ -14,12 +14,13 @@
         <p class="description">{{ trip.tripInfo.description }}</p>
       </div>
       <div class="card__info__footer">
-        <div class="col1">
-          <p class="transportation">
-            I traveled to it by
-            <span>{{ trip.tripInfo.transportation }}</span> for
-            <span>{{ trip.tripInfo.transportationPrice | currency }}</span>
-          </p>
+        <p class="transportation">
+          I traveled to it by
+          <span>{{ trip.tripInfo.transportation }}</span> for
+          <span>{{ trip.tripInfo.transportationPrice | currency }}</span>
+        </p>
+
+        <div class="row">
           <p class="owner">
             Created by
             <a [routerLink]="['/app/profile', trip.tripInfo.owner.username]"
@@ -27,11 +28,6 @@
               {{ trip.tripInfo.owner.lastName }}</a
             >
           </p>
-        </div>
-        <div class="col2">
-          <a [routerLink]="[trip.tripInfo.tripId]" class="trip-etails"
-            >see trip days</a
-          >
           <div class="rate">
             <svg [ngClass]="{ filled: trip.tripInfo.rate >= 1 }">
               <use href="#star-icon"></use>
