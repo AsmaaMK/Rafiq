@@ -1,13 +1,15 @@
 @use "../../../../styles/helpers/helpers-dir" as *;
 
 $focus: #e1cce5;
+$height: 2.8rem;
 
 .dropdown {
   background-color: $secondary;
   padding-left: 0;
   list-style: none;
   position: relative;
-  width: 200px;
+  // width: 250px;
+  height: $height;
   border-radius: 1rem;
   cursor: pointer;
   border: 1px solid $primary;
@@ -34,9 +36,12 @@ $focus: #e1cce5;
     color: $primary;
     padding: 0.8rem;
     width: 100%;
+    height: 100%;
     position: relative;
     outline: none;
     border-radius: 1rem;
+    display: flex;
+    align-items: center;
 
     &::after {
       content: "";
@@ -55,6 +60,21 @@ $focus: #e1cce5;
     &:focus {
       background-color: $focus;
     }
+
+    input {
+      border: none;
+      outline: none;
+      background-color: transparent;
+      display: block;
+      width: 100%;
+      height: 100%;
+      font-size: $base-font-size;
+      color: $primary;
+
+      &::placeholder {
+        color: $primary;
+      }
+    }
   }
 
   li {
@@ -71,21 +91,24 @@ $focus: #e1cce5;
   &__list-container {
     display: none;
     position: absolute;
-    top: 43px;
+    top: calc($height - 2px);
     left: -1px;
     border-radius: 0 0 1rem 1rem;
     border: 1px solid $primary;
-    width: 200px;
+    width: calc(100% + 2px);
     overflow: hidden;
-
+    
     .dropdown__list {
+      min-height: 50px;
+      max-height: 400px;
+      overflow: auto;
       padding-left: 0;
       list-style: none;
       width: 100%;
+      background-color: $secondary;
 
       li {
         padding: 0.8rem;
-        background-color: $secondary;
         outline: none;
         width: 100%;
 
@@ -93,6 +116,11 @@ $focus: #e1cce5;
         &:focus {
           background-color: $focus;
         }
+      }
+
+      &::-webkit-scrollbar {
+        background-color: $secondary;
+        width: 6px;
       }
     }
   }

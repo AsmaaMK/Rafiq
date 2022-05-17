@@ -7,9 +7,10 @@ import { ToasterComponent } from './components/toaster/toaster.component';
 import { PostComponent } from './components/post/post.component';
 import { SliderComponent } from './components/slider/slider.component';
 import { RouterModule } from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IncreasePostViewsDirective } from './directives/increase-post-views.directive';
 import { DropDownComponent } from './components/drop-down/drop-down.component';
+import { FilterPipe } from './pipes/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -21,8 +22,9 @@ import { DropDownComponent } from './components/drop-down/drop-down.component';
     SliderComponent,
     IncreasePostViewsDirective,
     DropDownComponent,
+    FilterPipe,
   ],
-  imports: [CommonModule, RouterModule, ReactiveFormsModule],
+  imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule],
   exports: [
     LoadingSpinnerComponent,
     ToolTipComponent,

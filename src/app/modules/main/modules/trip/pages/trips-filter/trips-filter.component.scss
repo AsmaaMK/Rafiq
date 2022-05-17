@@ -1,5 +1,6 @@
 @use "../../../../../../../styles/helpers/helpers-dir" as *;
 
+
 .trip-filter-container {
   height: calc(100vh - 6.5rem);
   position: relative;
@@ -29,6 +30,10 @@ nav.trips-navbar {
     font-weight: 500;
     font-size: $base-font-size * 1.5;
     margin: 0;
+  }
+
+  .drop-down {
+    width: 200px;
   }
 
   .search-field {

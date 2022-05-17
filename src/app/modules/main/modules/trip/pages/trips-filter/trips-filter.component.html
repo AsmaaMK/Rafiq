@@ -1,7 +1,9 @@
 <div class="trip-filter-container">
   <nav class="trips-navbar">
     <p>Trips</p>
-    <app-drop-down></app-drop-down>
+    <div class="drop-down">
+      <app-drop-down [label]="'filter by'" [selected]="'Filter By'" [dropDownItems]="['Best Rated', 'Price', 'Created By']"></app-drop-down>
+    </div>
     <div class="search-field">
       <input search-trips type="text" />
       <label for="search-trips" hidden>Search Trips</label>

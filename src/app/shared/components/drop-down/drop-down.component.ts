@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-drop-down',
@@ -6,21 +7,18 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./drop-down.component.scss'],
 })
 export class DropDownComponent implements OnInit {
-  @Input() label = 'Filter By';
-  @Input() dropDownItems = [
-    {
-      icon: '',
-      value: 'Best Rated',
-    },
-    {
-      icon: '',
-      value: 'Country',
-    },
-    {
-      icon: '',
-      value: 'City',
-    },
-  ];
+  @Input() label = '';
+  @Input() selected = '';
+  @Input() dropDownItems: string[] = [];
+  @Output() selectedValue = new EventEmitter<string>();
+
+  @ViewChild('inputSelected') inputSelected: any;
+
+  filterInput = '';
+
+  updateSelectedValue() {
+    this.selectedValue.emit(this.inputSelected.nativeElement.value);
+  }
 
   constructor() {}
 
@@ -38,13 +36,11 @@ export class DropDownComponent implements OnInit {
 
   setSelectedListItem(
     event: any,
-    selectedItem: HTMLElement,
+    selectedItem: HTMLInputElement,
     list: HTMLElement
   ) {
-    selectedItem.innerHTML =
-      event.target.nodeName === 'LI'
-        ? event.target.innerHTML
-        : event.target.parentNode.innerHTML;
+    selectedItem.value = event.target.innerHTML;
+    this.updateSelectedValue();
 
     this.closeList(list);
     document.getElementById('dropdown__selected')?.focus();
@@ -54,6 +50,12 @@ export class DropDownComponent implements OnInit {
     list.classList.remove('open');
     document.querySelector('.dropdown')?.classList.remove('open');
     list.setAttribute('aria-expanded', 'false');
+  }
+
+  openList(list: HTMLElement) {
+    list.classList.add('open');
+    document.querySelector('.dropdown')?.classList.add('open');
+    list.setAttribute('aria-expanded', 'true');
   }
 
   focusPreviousListItem(event: any, currentIndex: number) {

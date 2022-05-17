@@ -1,1 +1,21 @@
-<p>create-trip works!</p>
+<div class="create-trip-page">
+  <p>Create Trip</p>
+  <div class="row">
+    <button class="add-image">
+      <img src="../../../../../../../assets/main-module/trips/img.svg" alt="" />
+      <p>add image</p>
+    </button>
+
+    <form>
+      <div class="drop-down-field">
+        <label for="">Country</label>
+        <app-drop-down
+          selected="Country"
+          [label]="'Country'"
+          [dropDownItems]="countries"
+          (selectedValue)="setSelectedValue($event)"
+        ></app-drop-down>
+      </div>
+    </form>
+  </div>
+</div>
