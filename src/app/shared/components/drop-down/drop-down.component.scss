@@ -97,6 +97,7 @@ $height: 2.8rem;
     border: 1px solid $primary;
     width: calc(100% + 2px);
     overflow: hidden;
+    z-index: $index-3;
     
     .dropdown__list {
       min-height: 50px;

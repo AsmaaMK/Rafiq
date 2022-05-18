@@ -13,6 +13,7 @@ export class DropDownComponent implements OnInit {
   @Output() selectedValue = new EventEmitter<string>();
 
   @ViewChild('inputSelected') inputSelected: any;
+  @ViewChild('dropDown') dropDown: any;
 
   filterInput = '';
 
@@ -26,8 +27,7 @@ export class DropDownComponent implements OnInit {
 
   toggleListVisibility(list: HTMLElement) {
     list.classList.toggle('open');
-    document.getElementById('dropdown__arrow')?.classList.toggle('open');
-    document.querySelector('.dropdown')?.classList.toggle('open');
+    this.dropDown.nativeElement.classList.toggle('open');
     list.setAttribute(
       'aria-expanded',
       list.classList.contains('open').toString()
@@ -41,20 +41,18 @@ export class DropDownComponent implements OnInit {
   ) {
     selectedItem.value = event.target.innerHTML;
     this.updateSelectedValue();
-
     this.closeList(list);
-    document.getElementById('dropdown__selected')?.focus();
   }
 
   closeList(list: HTMLElement) {
     list.classList.remove('open');
-    document.querySelector('.dropdown')?.classList.remove('open');
+    this.dropDown.nativeElement.classList.remove('open');
     list.setAttribute('aria-expanded', 'false');
   }
 
   openList(list: HTMLElement) {
     list.classList.add('open');
-    document.querySelector('.dropdown')?.classList.add('open');
+    this.dropDown.nativeElement.classList.add('open');
     list.setAttribute('aria-expanded', 'true');
   }
 

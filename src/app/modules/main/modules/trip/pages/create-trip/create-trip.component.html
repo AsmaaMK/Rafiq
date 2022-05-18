@@ -7,14 +7,86 @@
     </button>
 
     <form>
-      <div class="drop-down-field">
-        <label for="">Country</label>
+      <div class="form-field">
+        <p>Country</p>
+        <input type="hidden" #countryInput />
         <app-drop-down
-          selected="Country"
           [label]="'Country'"
           [dropDownItems]="countries"
-          (selectedValue)="setSelectedValue($event)"
+          (selectedValue)="setSelectedValue($event, countryInput)"
         ></app-drop-down>
+      </div>
+
+      <div class="form-field">
+        <p>City</p>
+        <input type="hidden" #cityInput />
+        <app-drop-down
+          [label]="'City'"
+          [dropDownItems]="countries"
+          (selectedValue)="setSelectedValue($event, cityInput)"
+        ></app-drop-down>
+      </div>
+
+      <div class="form-field">
+        <p>Transportation</p>
+        <input type="hidden" #transportationInput />
+        <app-drop-down
+          [label]="'Transportation'"
+          [dropDownItems]="countries"
+          (selectedValue)="setSelectedValue($event, transportationInput)"
+        ></app-drop-down>
+      </div>
+
+      <div class="form-field">
+        <label for="price-input">Price</label>
+        <input id="price-input" type="text" #priceInput />
+        <div class="currency-drop-down">
+          <app-drop-down
+            [label]="'currency'"
+            [selected]="'USD'"
+            [dropDownItems]="[]"
+            (selectedValue)="setSelectedValue($event, priceInput)"
+          ></app-drop-down>
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label for="days-input">Trip Days</label>
+        <input id="days-input" type="number" />
+      </div>
+
+      <div class="form-field">
+        <label for="description-input">Description</label>
+        <textarea id="description-input"></textarea>
+      </div>
+
+      <p>Days</p>
+
+      <div class="day-field">
+        <p>Day 1</p>
+
+        <div class="form-field">
+          <label for="place-input">Place</label>
+          <input id="place-input" type="text" />
+        </div>
+
+        <div class="form-field">
+          <label for="price-input">Price</label>
+          <input id="price-input" type="text" #priceInput />
+          <div class="currency-drop-down">
+            <app-drop-down
+              [label]="'currency'"
+              [selected]="'USD'"
+              [dropDownItems]="[]"
+              (selectedValue)="setSelectedValue($event, priceInput)"
+            ></app-drop-down>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label for="description-input">Description</label>
+          <textarea id="description-input"></textarea>
+        </div>
       </div>
     </form>
   </div>

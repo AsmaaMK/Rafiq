@@ -9,15 +9,13 @@ import { CountriesService } from 'src/app/shared/services/countries.service';
 export class CreateTripComponent implements OnInit {
   countries!: string[];
 
-  country: string = '';
-
   constructor(private countriesService: CountriesService) {}
 
   ngOnInit(): void {
     this.countries = this.countriesService.getAllCountries();
   }
 
-  setSelectedValue(value: any) {
-    this.country = value;
+  setSelectedValue(value: any, input: HTMLInputElement) {
+    input.value = value;
   }
 }
