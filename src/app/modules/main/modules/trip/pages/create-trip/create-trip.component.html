@@ -1,14 +1,14 @@
 <div class="create-trip-page">
-  <p>Create Trip</p>
+  <p class="title header">Create Trip</p>
   <div class="row">
     <button class="add-image">
       <img src="../../../../../../../assets/main-module/trips/img.svg" alt="" />
-      <p>add image</p>
+      <p>Upload Image</p>
     </button>
 
-    <form>
+    <div class="form">
       <div class="form-field">
-        <p>Country</p>
+        <label for="">Country</label>
         <input type="hidden" #countryInput />
         <app-drop-down
           [label]="'Country'"
@@ -18,7 +18,7 @@
       </div>
 
       <div class="form-field">
-        <p>City</p>
+        <label for="">City</label>
         <input type="hidden" #cityInput />
         <app-drop-down
           [label]="'City'"
@@ -28,7 +28,7 @@
       </div>
 
       <div class="form-field">
-        <p>Transportation</p>
+        <label for="">Transportation</label>
         <input type="hidden" #transportationInput />
         <app-drop-down
           [label]="'Transportation'"
@@ -37,16 +37,19 @@
         ></app-drop-down>
       </div>
 
-      <div class="form-field">
+      <div class="form-field price">
         <label for="price-input">Price</label>
-        <input id="price-input" type="text" #priceInput />
-        <div class="currency-drop-down">
-          <app-drop-down
-            [label]="'currency'"
-            [selected]="'USD'"
-            [dropDownItems]="[]"
-            (selectedValue)="setSelectedValue($event, priceInput)"
-          ></app-drop-down>
+
+        <div class="price-input-field">
+          <input id="price-input" type="text" #priceInput />
+          <div class="currency-drop-down">
+            <app-drop-down
+              [label]="'currency'"
+              [selected]="'USD'"
+              [dropDownItems]="[]"
+              (selectedValue)="setSelectedValue($event, priceInput)"
+            ></app-drop-down>
+          </div>
         </div>
       </div>
 
@@ -60,34 +63,53 @@
         <textarea id="description-input"></textarea>
       </div>
 
-      <p>Days</p>
+      <p class="title">Days</p>
 
       <div class="day-field">
-        <p>Day 1</p>
-
-        <div class="form-field">
-          <label for="place-input">Place</label>
-          <input id="place-input" type="text" />
+        <div class="day-header">
+          <p>Day 1</p>
+          <button
+            class="open"
+            #openBtn
+            (click)="openDayField(openBtn, dayContent)"
+          >
+            <img
+              src="../../../../../../../assets/main-module/trips/arrow-down.svg"
+              alt=""
+            />
+          </button>
         </div>
 
-        <div class="form-field">
-          <label for="price-input">Price</label>
-          <input id="price-input" type="text" #priceInput />
-          <div class="currency-drop-down">
-            <app-drop-down
-              [label]="'currency'"
-              [selected]="'USD'"
-              [dropDownItems]="[]"
-              (selectedValue)="setSelectedValue($event, priceInput)"
-            ></app-drop-down>
+        <div #dayContent class="day-content open">
+          <div class="form-field">
+            <label for="place-input">Place</label>
+            <input id="place-input" type="text" />
+          </div>
+
+          <div class="form-field">
+            <label for="price-input">Price</label>
+
+            <div class="price-input-field">
+              <input id="price-input" type="text" #priceInput />
+              <div class="currency-drop-down">
+                <app-drop-down
+                  [label]="'currency'"
+                  [selected]="'USD'"
+                  [dropDownItems]="[]"
+                  (selectedValue)="setSelectedValue($event, priceInput)"
+                ></app-drop-down>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-field">
+            <label for="description-input">Description</label>
+            <textarea id="description-input"></textarea>
           </div>
         </div>
-
-        <div class="form-field">
-          <label for="description-input">Description</label>
-          <textarea id="description-input"></textarea>
-        </div>
       </div>
-    </form>
+
+      <button type="submit">Create</button>
+    </div>
   </div>
 </div>

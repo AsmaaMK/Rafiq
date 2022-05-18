@@ -18,4 +18,9 @@ export class CreateTripComponent implements OnInit {
   setSelectedValue(value: any, input: HTMLInputElement) {
     input.value = value;
   }
+
+  openDayField(btn: HTMLElement, div: HTMLElement) {
+    btn.classList.toggle('open');
+    div.classList.toggle('open');
+  }
 }

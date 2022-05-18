@@ -13,6 +13,7 @@ $height: 2.8rem;
   border-radius: 1rem;
   cursor: pointer;
   border: 1px solid $primary;
+  margin: 0;
 
   @include flex(row, space-between);
 

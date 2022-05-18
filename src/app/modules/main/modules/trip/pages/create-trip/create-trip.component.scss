@@ -1,0 +1,153 @@
+@use "../../../../../../../styles/helpers/helpers-dir" as *;
+
+.create-trip-page {
+  padding: 1rem;
+  box-shadow: 0px 3px 6px #666666;
+
+  @include respond-to(medium) {
+    padding: 1rem 3rem;
+    background-color: $secondary;
+    border-radius: 1rem;
+    @include main-gradient;
+  }
+
+  .row {
+    @include respond-to(medium) {
+      max-width: 800px;
+      margin: auto;
+      @include flex(row, space-between, flex-start);
+      gap: 1rem;
+    }
+  }
+
+  .title {
+    color: $primary;
+    font-size: $base-font-size * 1.5;
+    text-align: center;
+    font-weight: 500;
+    margin-bottom: 0;
+
+    &.header {
+      @include respond-to(medium) {
+        font-size: $base-font-size * 1.7;
+        margin-bottom: 2rem;
+      }
+    }
+  }
+
+  button.add-image {
+    background-color: $secondary;
+    border: 2px dashed $primary;
+    width: 100%;
+    height: 20vh;
+    margin: 1rem auto;
+    flex: 1;
+
+    img {
+      display: block;
+      margin: auto;
+    }
+
+    p {
+      color: $primary;
+      font-size: $base-font-size;
+    }
+  }
+
+  .form {
+    width: 100%;
+    flex: 3;
+    @include flex(column, stretch, stretch);
+    gap: 1rem;
+
+    label {
+      display: block;
+      color: $primary;
+      font-size: $base-font-size;
+      font-weight: 500;
+      margin: 0.25rem 1rem;
+    }
+
+    input,
+    textarea {
+      display: block;
+      width: 100%; //
+      padding: 0.8rem;
+      color: $primary;
+      font-size: $base-font-size;
+      border: 1px solid $primary;
+      background-color: $secondary;
+      border-radius: 1rem;
+    }
+
+    textarea {
+      height: 6rem;
+      outline: none;
+    }
+
+    .price-input-field {
+      @include flex(row);
+      gap: 1rem;
+
+      input {
+        flex: 2;
+      }
+
+      .currency-drop-down {
+        flex: 1;
+      }
+    }
+
+    .day-field {
+      @include flex(column, stretch, stretch);
+  
+      border: 1px solid $primary;
+      border-radius: 1rem;
+
+      .day-header {
+        @include flex(row, space-between);
+        margin: 0.5rem 1rem;
+
+        button {
+          width: 1rem;
+          padding: 0;
+          background-color: transparent;
+          @include animation;
+
+          &.open {
+            transform: rotate(180deg);
+          }
+        }
+
+        p {
+          color: $primary;
+          font-size: $base-font-size * 1.2;
+
+          @include margin(y, 00.25rem);
+        }
+      }
+
+      .day-content {
+        display: none;
+        margin: 0.5rem 1rem 1rem;
+
+        &.open {
+          display: block;
+        }
+      }
+    }
+
+    button[type="submit"] {
+      background-color: $primary;
+      color: $secondary;
+      font-size: $base-font-size;
+      font-weight: 500;
+      padding: 1rem 2rem;
+      margin: auto;
+      margin-bottom: 5rem;
+      border-radius: 1rem;
+      width: fit-content;
+      box-shadow: 0px 3px 9px $primary;
+    }
+  }
+}
