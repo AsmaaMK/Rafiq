@@ -1,10 +1,14 @@
 <ul aria-label="navigation links">
   <li>
-    <button aria-label="search">
+    <a
+      [routerLink]="['./search']"
+      routerLinkActive="active"
+      aria-label="search"
+    >
       <svg>
         <use xlink:href="#search-icon"></use>
       </svg>
-    </button>
+    </a>
   </li>
   <li>
     <button aria-label="notifications">

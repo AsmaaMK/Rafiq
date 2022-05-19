@@ -1,0 +1,133 @@
+@use "~../../../../../../../styles/helpers/helpers-dir" as *;
+
+.search-page {
+  min-height: 100vh;
+  position: relative;
+  padding: 1em;
+
+  @include respond-to(medium) {
+    overflow: hidden;
+    border-radius: 1em;
+    box-shadow: 0px 3px 6px #666666;
+    background-color: $secondary;
+    @include main-gradient;
+  }
+
+  .search-field {
+    max-width: 500px;
+    margin: auto;
+    width: 100%;
+    @include flex(row, stretch, stretch);
+
+    label {
+      background-color: $primary;
+      padding: 0.5rem;
+      border-radius: 1rem;
+      margin-left: 0.5rem;
+      cursor: pointer;
+
+      img {
+        height: 1.8rem;
+        width: 1.8rem;
+      }
+    }
+
+    input {
+      flex: 1;
+      width: 100px;
+      font-size: $base-font-size;
+      padding-left: 0.8rem;
+      background-color: $secondary;
+      border-radius: 1rem 0 0 1rem;
+      border: 1px solid $primary;
+      color: $primary;
+
+      &::placeholder {
+        color: $primary;
+      }
+    }
+  }
+
+  .no-results {
+    margin: 5rem auto;
+
+    p {
+      color: $primary;
+      font-weight: 500;
+      font-size: $base-font-size * 1.5;
+      margin: 1rem;
+      text-align: center;
+
+      @include respond-to(medium) {
+        font-size: $base-font-size * 2;
+      }
+    }
+
+    img {
+      margin: auto;
+    }
+  }
+
+  .results {
+    @include flex;
+    gap: 1rem;
+    margin: 3rem auto;
+    width: 100%;
+    max-width: 500px;
+  }
+
+  a.result {
+    text-decoration: none;
+    background-color: rgba($secondary, 0.6);
+    border-radius: 1rem;
+    padding: 1rem;
+    width: 100%;
+    @include animation;
+    @include flex(row, stretch, stretch);
+    gap: 1rem;
+
+    &:hover {
+      // background-color: rgba$primary;
+      @include main-gradient(90deg);
+    }
+
+    @include respond-to(medium) {
+      background-color: rgba(white, 0.1);
+    }
+
+    img {
+      border-radius: 1rem;
+      width: 50px;
+      height: 50px;
+      object-fit: cover;
+    }
+
+    .info {
+      flex: 1;
+      @include flex(row, space-between, center);
+      gap: 1rem;
+
+      p {
+        color: $primary;
+        font-weight: 500;
+        font-size: $base-font-size;
+        margin: 0;
+      }
+
+      a {
+        display: block;
+        height: 100%;
+        transform: scale(0.8);
+        @include animation;
+
+        img {
+          width: 100%;
+        }
+
+        &:hover {
+          transform: scale(1);
+        }
+      }
+    }
+  }
+}

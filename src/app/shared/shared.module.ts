@@ -11,6 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IncreasePostViewsDirective } from './directives/increase-post-views.directive';
 import { DropDownComponent } from './components/drop-down/drop-down.component';
 import { FilterPipe } from './pipes/filter.pipe';
+import { SearchDropDownComponent } from './components/search-drop-down/search-drop-down.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { FilterPipe } from './pipes/filter.pipe';
     IncreasePostViewsDirective,
     DropDownComponent,
     FilterPipe,
+    SearchDropDownComponent,
   ],
   imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule],
   exports: [
@@ -32,7 +34,8 @@ import { FilterPipe } from './pipes/filter.pipe';
     PostComponent,
     SliderComponent,
     IncreasePostViewsDirective,
-    DropDownComponent
+    DropDownComponent,
+    SearchDropDownComponent,
   ],
 })
 export class SharedModule {}

@@ -1,26 +1,16 @@
 <ul #dropDown class="dropdown">
-  <li id="dropdown-label" class="dropdown__label" #labelText hidden>
-    {{ label }}
-  </li>
+  <li id="dropdown-label" class="dropdown__label" #labelText hidden>{{label}}</li>
 
   <li
     aria-labelledby="dropdown-label"
     tabindex="0"
+    #selectedInput
     id="dropdown__selected"
     (click)="toggleListVisibility(dropDownListContainer)"
     (keydown.enter)="toggleListVisibility(dropDownListContainer)"
     (keydown.esc)="closeList(dropDownListContainer)"
   >
-    <input
-      type="text"
-      [value]="selected"
-      role="button"
-      autocomplete="lkjlkj"
-      [(ngModel)]="filterInput"
-      #inputSelected
-      (ngModelChange)="openList(dropDownListContainer)"
-      (ngModelChange)="updateSelectedValue()"
-    />
+    {{ selected }}
   </li>
 
   <li
@@ -36,16 +26,18 @@
         tabindex="0"
         #item
         id="option-{{ i }}"
-        *ngFor="let item of dropDownItems | filter: filterInput; let i = index"
+        *ngFor="let item of dropDownItems; let i = index"
         (click)="
-          setSelectedListItem($event, inputSelected, dropDownListContainer)
+          setSelectedListItem($event, selectedInput, dropDownListContainer)
         "
         (keydown.enter)="
-          setSelectedListItem($event, inputSelected, dropDownListContainer)
+          setSelectedListItem($event, selectedInput, dropDownListContainer)
         "
         (keydown.arrowup)="focusPreviousListItem($event, i)"
         (keydown.arrowdown)="focusNextListItem($event, i)"
-      >{{ item }}</li>
+      >
+        {{ item }}
+      </li>
     </ul>
   </li>
 </ul>

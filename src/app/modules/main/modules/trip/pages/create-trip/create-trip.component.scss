@@ -2,9 +2,9 @@
 
 .create-trip-page {
   padding: 1rem;
-  box-shadow: 0px 3px 6px #666666;
-
+  
   @include respond-to(medium) {
+    box-shadow: 0px 3px 6px #666666;
     padding: 1rem 3rem;
     background-color: $secondary;
     border-radius: 1rem;

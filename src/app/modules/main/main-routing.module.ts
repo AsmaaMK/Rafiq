@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { MainComponent } from './main.component';
 import { HomeComponent } from './pages/home/home.component';
 import { PostPageComponent } from './pages/post-page/post-page.component';
+import { SearchComponent } from './pages/search/search.component';
 import { UserInfoResolver } from './resolvers/user-info.resolver';
 
 const routes: Routes = [
@@ -35,6 +36,10 @@ const routes: Routes = [
         path: 'trip',
         loadChildren: () =>
           import('./modules/trip/trip.module').then((m) => m.TripModule),
+      },
+      {
+        path: 'search',
+        component: SearchComponent,
       },
       {
         path: '',

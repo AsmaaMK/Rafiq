@@ -1,0 +1,37 @@
+<div class="search-page">
+  <div class="search-field">
+    <input type="text" placeholder="Search" />
+    <app-search-drop-down
+      [label]="'search'"
+      [selected]="'Users'"
+      [dropDownItems]="['Users', 'Cities']"
+      (selectedValue)="setSearchType($event)"
+    ></app-search-drop-down>
+    <label for="select-search-image" *ngIf="searchType === ' Cities '">
+      <img src="../../../../../assets/main-module/search/camera.svg" alt="" />
+    </label>
+
+    <input type="file" name="" id="select-search-image" hidden />
+  </div>
+
+  <div class="no-results" *ngIf="searchResults.length === 0; else results">
+    <p>No results yet</p>
+    <img src="../../../../../assets/main-module/search/search.svg" alt="" />
+  </div>
+
+  <ng-template #results>
+    <div class="results">
+      <a [routerLink]="['/app/city', result.cityId]" class="result" *ngFor="let result of searchResults">
+        <img [src]="result.image" alt="" />
+        <div class="info">
+          <p>{{result.city}}, {{result.country}}</p>
+          <a [href]="'https://www.google.com/maps/search/?api=1&query=' +
+                  result.location.lat +
+                  ',' +
+                  result.location.lng" target="_blank">
+                <img src="../../../../../assets/main-module/city/location.svg" alt=""></a>
+        </div>
+      </a>
+    </div>
+  </ng-template>
+</div>

@@ -1,16 +1,14 @@
 <ul>
   <li class="search-field">
-    <form>
-      <button aria-label="search">
-        <svg>
-          <use href="#search-icon"></use>
-        </svg>
-      </button>
-      <input
-        type="text"
-        aria-label="search"
-      >
-    </form>
+    <a
+      [routerLink]="['./search']"
+      routerLinkActive="active"
+      aria-label="search"
+    >
+      <svg>
+        <use xlink:href="#search-icon"></use>
+      </svg>
+    </a>
   </li>
 
   <li class="logout-btn">
