@@ -28,14 +28,16 @@
   <div
     class="no-results"
     *ngIf="
-      citySearchResults.length === 0 && userSearchResults.length === 0;
-      else results
+      citySearchResults.length === 0 && userSearchResults.length === 0 && !searching
     "
   >
     <p>No results yet</p>
     <img src="../../../../../assets/main-module/search/search.svg" alt="" />
   </div>
 
+  <div *ngIf="searching; else results">
+    <app-loading-spinner [show]="true" [colored]="false" [overlay]="'component'"></app-loading-spinner>
+  </div>
   <ng-template #results>
     <div class="results">
       <ng-container *ngIf="searchType === ' Cities '; else searchUser">
