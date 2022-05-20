@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CitySearchResult, UserSearchResult } from './search';
+import { SearchService } from './search.service';
 
 @Component({
   selector: 'app-search',
@@ -7,60 +9,69 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchComponent implements OnInit {
   searchType = 'Users';
-  searchResults = [
+  citySearchResults: CitySearchResult[] = [
     {
-      cityId: '1608618140',
-      country: 'Egypt',
-      city: 'Cairo',
-      location: {
-        lng: 123,
-        lat: 240,
-      },
+      city: 'cairo',
+      country: 'egypt',
+      cityId: 123,
       image: '../../../../../assets/main-module/search/img.png',
+      location: {
+        lat: 0,
+        lng: 0,
+      },
     },
     {
-      country: 'Egypt',
-      city: 'Cairo',
-      location: {
-        lng: 123,
-        lat: 240,
-      },
+      city: 'cairo',
+      country: 'egypt',
+      cityId: 123,
       image: '../../../../../assets/main-module/search/img.png',
-    },
-    {
-      country: 'Egypt',
-      city: 'Cairo',
       location: {
-        lng: 12,
-        lat: 240,
+        lat: 0,
+        lng: 0,
       },
-      image: '../../../../../assets/main-module/search/img.png',
-    },
-    {
-      country: 'Egypt',
-      city: 'Cairo',
-      location: {
-        lng: 123,
-        lat: 240,
-      },
-      image: '../../../../../assets/main-module/search/img.png',
-    },
-    {
-      country: 'Egypt',
-      city: 'Cairo',
-      location: {
-        lng: 123,
-        lat: 240,
-      },
-      image: '../../../../../assets/main-module/search/img.png',
     },
   ];
 
-  constructor() {}
+  userSearchResults: UserSearchResult[] = [
+    {
+      name: 'Asmaa Mahmoud',
+      username: 'asmaamk',
+      avatar: '../../../../../assets/main-module/search/img.png',
+    },
+    {
+      name: 'Asmaa Mahmoud',
+      username: 'asmaamk',
+      avatar: '../../../../../assets/main-module/search/img.png',
+    },
+  ];
+
+  constructor(private searchService: SearchService) {}
+
+  ngOnInit(): void {}
+
+  searchByImage(event: any) {
+    const image = event.target.files[0];
+    const formData = new FormData();
+    formData.append('query', image);
+
+    this.searchService
+      .searchByImage(formData)
+      .subscribe((res) => (this.citySearchResults = res));
+  }
 
   setSearchType(searchType: string) {
     this.searchType = searchType;
+    this.citySearchResults = [];
+    this.userSearchResults = [];
   }
 
-  ngOnInit(): void {}
+  onTyping(searchKeyWord: string) {
+    this.searchType === ' Users '
+      ? this.searchService
+          .searchUser(searchKeyWord)
+          .subscribe((res) => (this.userSearchResults = res))
+      : this.searchService
+          .searchCity(searchKeyWord)
+          .subscribe((res) => (this.citySearchResults = res));
+  }
 }
