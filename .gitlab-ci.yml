@@ -9,6 +9,6 @@ pages:
     - npm run bp
   artifacts:
     paths:
-      - dist
+      - public
   only:
     - main
