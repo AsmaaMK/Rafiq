@@ -6,7 +6,7 @@ pages:
   script:
     - npm install -g @angular/cli
     - npm install
-    - npm run buildProd
+    - npm run bp
   artifacts:
     paths:
       - dist
