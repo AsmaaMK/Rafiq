@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "bp": "ng build --source-map --base-href=/frontend/",
+    "bp": "ng build",
     "sp": "ng serve --configuration production",
     "doc": "compodoc -p tsconfig.doc.json -s --watch"
   },
