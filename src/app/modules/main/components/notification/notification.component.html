@@ -1,1 +1,30 @@
-<p>notification works!</p>
+<div appPossissionNotification *ngIf="show" class="notification-container">
+  <div class="header">
+    <p class="title">Notifications</p>
+    <button (click)="toggleNotifications()" [ngClass]="{'off': notificationsOn === false}" class="turn-on-off-btn"><span>{{ notificationsOn ? "ON" : "OFF" }}</span></button>
+  </div>
+  <div class="content">
+    <div class="notifications">
+      <div class="notification" *ngFor="let notification of notifications">
+        <div class="notification__avatar">
+          <img
+            [src]="
+              notification.avatar ||
+              'assets/main-module/profile/default-personal-image.svg'
+            "
+            alt=""
+          />
+        </div>
+        <div class="notification__content">
+          <p class="title">{{ notification.title }}</p>
+          <p class="description">{{ notification.description }}</p>
+          <p class="date">{{ notification.date }}</p>
+        </div>
+        <button class="notification__delete-btn">
+          <img src="../../../../../assets/main-module/Close.svg" alt="" />
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="notification-indicator"></div>
+</div>

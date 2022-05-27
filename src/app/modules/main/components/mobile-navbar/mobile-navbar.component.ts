@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
 import { UserInfoService } from '../../modules/profile/services/user-info.service';
+import { NotificationService } from '../notification/notification.service';
 
 @Component({
   selector: 'app-mobile-navbar',
@@ -9,11 +9,14 @@ import { UserInfoService } from '../../modules/profile/services/user-info.servic
 })
 export class MobileNavbarComponent implements OnInit {
   username = this.userInfoService.myUserName.value;
-
   constructor(
-    private tokenStorageService: TokenStorageService,
+    private notificationService: NotificationService,
     private userInfoService: UserInfoService
   ) {}
 
   ngOnInit(): void {}
+
+  toggleNotificationView() {
+    this.notificationService.toggleNotificationView();
+  }
 }

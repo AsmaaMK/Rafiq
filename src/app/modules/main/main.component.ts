@@ -1,9 +1,8 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ToasterType } from 'src/app/shared/models/toaster-status';
-import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
 import { PostService } from '../../shared/components/post/post.service';
-import { UserInfo, UserProfile } from './modules/profile/models/user-info';
+import { NotificationService } from './components/notification/notification.service';
 import { UserInfoService } from './modules/profile/services/user-info.service';
 
 @Component({
@@ -13,13 +12,9 @@ import { UserInfoService } from './modules/profile/services/user-info.service';
 })
 export class MainComponent implements OnInit {
   screenWidth = window.innerWidth;
-
   images: any[] = [];
-
   video = '';
-
   myInfo = this.userInfoService.myInfo;
-
   postData = new FormData();
 
   showToaster = false;
@@ -27,7 +22,6 @@ export class MainComponent implements OnInit {
   toasterType: ToasterType = 'error';
 
   creatingPost = false;
-
   postDataForm!: FormGroup;
 
   @HostListener('window:resize', ['$event'])
@@ -38,19 +32,21 @@ export class MainComponent implements OnInit {
 
   constructor(
     private userInfoService: UserInfoService,
-    private tokenStorageService: TokenStorageService,
+    private notificationService: NotificationService,
     private postService: PostService
   ) {}
 
   ngOnInit(): void {
-    this.userInfoService.getUserProfile(this.userInfoService.myUserName.value).subscribe((res) => {
-      this.userInfoService.myInfo.next(res);
-    });
+    this.userInfoService
+      .getUserProfile(this.userInfoService.myUserName.value)
+      .subscribe((res) => {
+        this.userInfoService.myInfo.next(res);
+      });
 
     this.postDataForm = new FormGroup({
       images: new FormControl(''),
       video: new FormControl(''),
-      text: new FormControl('')
+      text: new FormControl(''),
     });
   }
 
@@ -115,10 +111,7 @@ export class MainComponent implements OnInit {
     }
   }
 
-  createPost(
-    postTextArea: HTMLTextAreaElement,
-    popup: HTMLElement
-  ) {
+  createPost(postTextArea: HTMLTextAreaElement, popup: HTMLElement) {
     this.toasterType = 'uploading';
     this.toasterMessage = 'uploading post files';
     this.showToaster = true;

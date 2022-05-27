@@ -13,7 +13,7 @@ import { PostPageComponent } from './pages/post-page/post-page.component';
 import { SliderComponent } from '../../shared/components/slider/slider.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { PossissionNotificationDirective } from './components/notification/possission-notification.directive';
 
 @NgModule({
   declarations: [
@@ -25,6 +25,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MobileNavbarComponent,
     MobileHeaderComponent,
     PostPageComponent,
+    PossissionNotificationDirective,
   ],
   imports: [
     CommonModule,

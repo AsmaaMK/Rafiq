@@ -3,12 +3,18 @@
   [status]="toasterType"
   [message]="toasterMessage"
 ></app-toaster>
+
 <app-loading-spinner [show]="creatingPost"></app-loading-spinner>
+
+<app-notification></app-notification>
 
 <!-- app layout in desktop version -->
 <ng-container *ngIf="screenWidth >= 800; else mobileLayout">
   <div class="desktop-container">
-    <nav class="desktop-navbar"><app-desktop-navbar></app-desktop-navbar></nav>
+    <nav class="desktop-navbar">
+      <app-desktop-navbar></app-desktop-navbar>
+    </nav>
+
     <main class="desktop-main">
       <router-outlet></router-outlet>
       <button
@@ -30,6 +36,7 @@
     <header class="mobile-header">
       <app-mobile-header></app-mobile-header>
     </header>
+
     <main class="mobile-main">
       <router-outlet></router-outlet>
       <button
@@ -42,7 +49,10 @@
         </svg>
       </button>
     </main>
-    <nav class="mobile-navbar"><app-mobile-navbar></app-mobile-navbar></nav>
+
+    <nav class="mobile-navbar">
+      <app-mobile-navbar></app-mobile-navbar>
+    </nav>
   </div>
 </ng-template>
 
@@ -72,9 +82,7 @@
     </div>
 
     <div class="media-video" *ngIf="video">
-      <video
-        [src]="video"
-      ></video>
+      <video [src]="video"></video>
     </div>
 
     <div class="add-media">
