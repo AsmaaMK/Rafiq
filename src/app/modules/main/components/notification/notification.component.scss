@@ -1,7 +1,5 @@
 @use "../../../../../styles/helpers/helpers-dir" as *;
 
-$notificationBg: #a8aac3;
-
 .notification-container {
   position: fixed;
   width: 95%;
@@ -9,7 +7,7 @@ $notificationBg: #a8aac3;
   top: 3.5rem;
   bottom: 4.5rem;
   z-index: $index-6;
-  background-color: $notificationBg;
+  background-color: $secondary-lavender;
   border-radius: 1rem;
 
   @include respond-to(medium) {
@@ -18,7 +16,7 @@ $notificationBg: #a8aac3;
     width: 30rem;
     top: 15px;
     left: 80px;
-    box-shadow: 3px 3px 2px $notificationBg;
+    box-shadow: 3px 3px 2px $secondary-lavender;
   }
 
   .notification-indicator {
@@ -28,7 +26,7 @@ $notificationBg: #a8aac3;
     position: absolute;
     z-index: $index-6;
     left: calc(-1 * $size / 2);
-    background-color: $notificationBg;
+    background-color: $secondary-lavender;
     border-radius: 0 0.25rem;
     transform: rotate(45deg);
     pointer-events: none;
@@ -74,9 +72,8 @@ $notificationBg: #a8aac3;
       padding: 0.25rem;
       background-color: $primary;
       position: relative;
-      border: 1px solid $primary;
+      // border: 1px solid $primary;
       @include animation;
-      // @include flex(row, center, center);
 
       &::before {
         content: "";
@@ -99,7 +96,7 @@ $notificationBg: #a8aac3;
       }
 
       &.off {
-        background-color: transparent;
+        background-color: $secondary;
 
         span {
           margin-right: 0;
@@ -122,9 +119,13 @@ $notificationBg: #a8aac3;
     .notification {
       padding: 0.5rem;
       position: relative;
-      background-color: #cfcbdc;
+      background-color: $secondary;
       border-radius: 0.5rem;
       @include flex(row, flex-start, flex-start);
+
+      &:hover {
+        @include main-gradient(90deg);
+      }
 
       &__avatar {
         width: 3rem;
