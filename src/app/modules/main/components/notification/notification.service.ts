@@ -10,4 +10,13 @@ export class NotificationService {
   toggleNotificationView() {
     this.notificationIsShown.next(!this.notificationIsShown.value);
   }
+
+  closeNotification() {
+    if (this.notificationIsShown.value === true)
+      this.notificationIsShown.next(false);
+  }
+
+  isOpen() {
+    return this.notificationIsShown.value;
+  }
 }

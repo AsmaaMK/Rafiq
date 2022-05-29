@@ -48,6 +48,8 @@ export class MainComponent implements OnInit {
       video: new FormControl(''),
       text: new FormControl(''),
     });
+
+    this.listenToBodyClicks();
   }
 
   ngAfterViewInit() {
@@ -136,5 +138,15 @@ export class MainComponent implements OnInit {
         });
       }
     );
+  }
+
+  listenToBodyClicks() {
+    document.addEventListener('click', (e: any) => {
+      const isClosest = e.target.closest('.notification-container');
+
+      if (!isClosest && this.notificationService.isOpen() === true) {
+        this.notificationService.closeNotification();
+      }
+    });
   }
 }

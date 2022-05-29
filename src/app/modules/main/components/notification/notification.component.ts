@@ -13,9 +13,11 @@ export class NotificationComponent implements OnInit {
     {
       id: 1,
       title: 'New Post',
-      description: 'New post is created',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
       date: '2020-01-01 4:00 PM',
       avatar: '',
+      visited: false,
+      link: 'app/profile/aaa',
     },
     {
       id: 1,
@@ -23,6 +25,8 @@ export class NotificationComponent implements OnInit {
       description: 'New post is created',
       date: '2020-01-01 4:00 PM',
       avatar: '',
+      visited: false,
+      link: 'app/profile/2',
     },
     {
       id: 1,
@@ -30,6 +34,8 @@ export class NotificationComponent implements OnInit {
       description: 'New post is created',
       date: '2020-01-01 4:00 PM',
       avatar: '',
+      visited: false,
+      link: 'app/profile/amrma',
     },
     {
       id: 1,
@@ -37,6 +43,8 @@ export class NotificationComponent implements OnInit {
       description: 'New post is created',
       date: '2020-01-01 4:00 PM',
       avatar: '',
+      visited: true,
+      link: 'app/city/1',
     },
     {
       id: 1,
@@ -44,6 +52,8 @@ export class NotificationComponent implements OnInit {
       description: 'New post is created',
       date: '2020-01-01 4:00 PM',
       avatar: '',
+      visited: true,
+      link: 'app/profile/asmaamk',
     },
   ];
 

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { RouterModule } from '@angular/router';
 import { MainRoutingModule } from './main-routing.module';
 import { MainComponent } from './main.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -10,7 +10,6 @@ import { DesktopNavbarComponent } from './components/desktop-navbar/desktop-navb
 import { MobileNavbarComponent } from './components/mobile-navbar/mobile-navbar.component';
 import { MobileHeaderComponent } from './components/mobile-header/mobile-header.component';
 import { PostPageComponent } from './pages/post-page/post-page.component';
-import { SliderComponent } from '../../shared/components/slider/slider.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PossissionNotificationDirective } from './components/notification/possission-notification.directive';
@@ -31,7 +30,8 @@ import { PossissionNotificationDirective } from './components/notification/possi
     CommonModule,
     MainRoutingModule,
     SharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule
   ]
 })
 export class MainModule { }

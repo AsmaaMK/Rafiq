@@ -72,7 +72,6 @@
       padding: 0.25rem;
       background-color: $primary;
       position: relative;
-      // border: 1px solid $primary;
       @include animation;
 
       &::before {
@@ -119,12 +118,19 @@
     .notification {
       padding: 0.5rem;
       position: relative;
-      background-color: $secondary;
-      border-radius: 0.5rem;
+      background-color: rgba($secondary, 0.5);
+      border-radius: 1rem;
+      text-decoration: none;
+      transition: background-color 0.2s ease-in-out;
       @include flex(row, flex-start, flex-start);
+      
+      &.visited {
+        background-color: rgba($secondary, 0.2);
+        opacity: 0.9;
+      }
 
       &:hover {
-        @include main-gradient(90deg);
+        background-color: rgba($secondary, 0.7);
       }
 
       &__avatar {
@@ -157,10 +163,12 @@
           font-size: $base-font-size * 0.8;
           color: $primary;
           margin: 0;
+          padding-right: 1.8rem;
+          padding-bottom: 0.35rem;
         }
 
         .date {
-          font-size: $base-font-size * 0.8;
+          font-size: $base-font-size * 0.7;
           color: $primary;
           font-weight: 500;
           margin: 0;
