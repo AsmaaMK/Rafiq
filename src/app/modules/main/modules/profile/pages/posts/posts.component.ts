@@ -1,4 +1,12 @@
-import { AfterViewChecked, AfterViewInit, Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  QueryList,
+  ViewChildren,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { POST } from 'src/app/shared/components/post/post';
 import { PostService } from 'src/app/shared/components/post/post.service';
@@ -16,7 +24,8 @@ export class PostsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   posts: POST[] = [];
 
-  @ViewChildren('lastElement', { read: ElementRef }) lastElement!: QueryList<ElementRef>;
+  @ViewChildren('lastElement', { read: ElementRef })
+  lastElement!: QueryList<ElementRef>;
   observer!: IntersectionObserver;
 
   constructor(
@@ -55,7 +64,7 @@ export class PostsComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     this.postService
-      .getMorePosts(this.myUserName, lastPostId)
+      .getMorePosts(this.urlUserName, lastPostId)
       .subscribe((posts) => {
         for (let post of posts) {
           const newPost = new POST(post, this.postService);

@@ -144,9 +144,9 @@ export class MainComponent implements OnInit {
     document.addEventListener('click', (e: any) => {
       const isClosest = e.target.closest('.notification-container');
 
-      if (!isClosest && this.notificationService.isOpen() === true) {
-        this.notificationService.closeNotification();
-      }
+      // if (!isClosest && this.notificationService.isOpen() === true) {
+      //   this.notificationService.closeNotification();
+      // }
     });
   }
 }

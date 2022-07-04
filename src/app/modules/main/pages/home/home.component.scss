@@ -13,3 +13,23 @@
     @include main-gradient;
   }
 }
+
+.splash {
+  position: fixed;
+  z-index: 100;
+  // top: -100px;
+  // left: -200px;
+  right: -10px;
+  top: -22%;
+  width: 300vw;
+  left: auto;
+  bottom: auto;
+  // height: auto;
+
+  transition: all 2s ease;
+  transition-delay: 1s;
+
+  &.fly {
+    transform: translate3d(60%, -40%, 0);
+  }
+}

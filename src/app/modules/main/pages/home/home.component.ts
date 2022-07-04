@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { PostData } from '../../../../shared/components/post/post';
 import { PostService } from '../../../../shared/components/post/post.service';
 
 @Component({
@@ -14,7 +12,18 @@ export class HomeComponent implements OnInit {
   posts!: string[];
 
   ngOnInit(): void {
-    this.posts = [
-    ];
+    const splash = document.querySelector('.splash');
+    setTimeout(() => {
+      splash?.classList.add('fly');
+    }, 1000);
+    // const svg = document.getElementById('map-svg');
+    // console.log(svg);
+    
+    // svg?.addEventListener('click', (event: any) => {
+    //   if (event.target.nodeName === 'path') {
+    //     const shape = event.target.parentNode;
+    //     shape.classList.toggle('active');
+    //   }
+    // });
   }
 }

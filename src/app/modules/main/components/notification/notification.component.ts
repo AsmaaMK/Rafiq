@@ -60,9 +60,9 @@ export class NotificationComponent implements OnInit {
   constructor(private notificationService: NotificationService) {}
 
   ngOnInit(): void {
-    this.notificationService.notificationIsShown.subscribe(
-      (res) => (this.show = res)
-    );
+    this.notificationService.notificationIsShown.subscribe((res) => {
+      this.show = res;
+    });
   }
 
   toggleNotifications() {
