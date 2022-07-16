@@ -83,10 +83,13 @@ nav {
 }
 
 .row:nth-child(even) {
+  width: 100%;
+  overflow: hidden;
+
   @include respond-to(medium) {
     @include flex(row);
     gap: 2rem;
-
+    
     .content {
       flex: 0.9;
       margin-left: $align;
@@ -98,20 +101,38 @@ nav {
     }
   }
 
+  .content {
+    transform: translateX(-100vw);
+    transition: transform ease-in-out 500ms;
+
+    &.show {
+      transform: translateX(0);
+    }
+  }
+
   .image {
     flex: 1;
     padding-left: 1rem;
+    transform: translateX(100vw);
+    transition: transform ease-in-out 500ms;
+
+    &.show {
+      transform: translateX(0);
+    }
   }
 }
 
 .row:nth-child(odd) {
+  width: 100%;
+  overflow: hidden;
+
   @include respond-to(medium) {
     @include flex(row-reverse);
     gap: 2rem;
 
     .content {
-      margin-right: $align;
       flex: 0.9;
+      margin-right: $align;
 
       h2,
       p {
@@ -120,8 +141,23 @@ nav {
     }
   }
 
+  .content {
+    transform: translateX(100vw);
+    transition: transform ease-in-out 500ms;
+
+    &.show {
+      transform: translateX(0);
+    }
+  }
+
   .image {
     flex: 1;
     padding-right: 1rem;
+    transform: translateX(-100vw);
+    transition: transform ease-in-out 500ms;
+
+    &.show {
+      transform: translateX(0);
+    }
   }
 }
