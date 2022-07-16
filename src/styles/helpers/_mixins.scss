@@ -85,7 +85,12 @@
     flex-direction: column;
     justify-content: $align-y; // main axis
     align-items: $align-x; // cross axis
-  } @else {
+  } @else if $direction row-reverse {
+    flex-direction: row-reverse;
+    justify-content: $align-x; // main axis
+    align-items: $align-y; // cross axis
+  }
+  @else {
     @error "Unknown flex direction #{$direction}.";
   }
 }

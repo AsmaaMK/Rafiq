@@ -5,29 +5,27 @@
   font-family: "Courgette", cursive !important;
 }
 
-.about-us-page {
-  // background-image: url("../../../../assets/about-us/cloud.svg");
-  // background-repeat: no-repeat;
-  // background-size: 25vw;
-  // background-position-x: -20px;
-}
+$align: 10vw;
 
 nav {
-  margin-bottom: 50px;
+  margin-bottom: 3rem;
 
   ul {
     list-style: none;
     margin: 0;
-    padding-left: 0;
+    padding: 1rem;
     @include flex(row, space-between);
+    gap: 1rem;
+
     @include respond-to(medium) {
-      @include padding(x, 5vw);
+      @include padding(x, $align);
     }
 
-
     li {
-      padding: 1.5rem 1rem;
       font-size: $base-font-size * 1.2;
+      @include respond-to(large) {
+        font-size: $base-font-size * 1.4;
+      }
 
       a {
         font-size: $base-font-size;
@@ -57,21 +55,73 @@ nav {
   }
 }
 
-.row {
+.row + .row {
   @include margin(y, 5rem);
+}
 
+.row {
   h2 {
     color: $primary;
     font-weight: bold;
-    font-size: $base-font-size * 2;
+    font-size: $base-font-size * 2.8;
     text-align: center;
-    margin: 0.5em;
+    @include respond-to(less-than-medium) {
+      margin: 0.5em;
+      font-size: $base-font-size * 2;
+    }
   }
 
   p {
     color: $primary;
-    font-size: $base-font-size * 1.2;
+    font-size: $base-font-size * 1.7;
     text-align: center;
-    margin: 1em;
+    @include respond-to(less-than-medium) {
+      margin: 1em;
+      font-size: $base-font-size * 1.2;
+    }
+  }
+}
+
+.row:nth-child(even) {
+  @include respond-to(medium) {
+    @include flex(row);
+    gap: 2rem;
+
+    .content {
+      flex: 0.9;
+      margin-left: $align;
+
+      h2,
+      p {
+        text-align: left;
+      }
+    }
+  }
+
+  .image {
+    flex: 1;
+    padding-left: 1rem;
+  }
+}
+
+.row:nth-child(odd) {
+  @include respond-to(medium) {
+    @include flex(row-reverse);
+    gap: 2rem;
+
+    .content {
+      margin-right: $align;
+      flex: 0.9;
+
+      h2,
+      p {
+        text-align: right;
+      }
+    }
+  }
+
+  .image {
+    flex: 1;
+    padding-right: 1rem;
   }
 }
