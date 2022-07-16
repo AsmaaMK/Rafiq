@@ -1,2 +1,18 @@
 <section class="home-page">
+  <ng-container *ngFor="let post of posts; let i = index">
+    <app-post
+      appIncreasePostViews
+      [postId]="post.postData.postId"
+      #lastElement
+      *ngIf="i === posts.length - 6; else allPosts"
+      [postData]="post.postData"
+    ></app-post>
+    <ng-template #allPosts>
+      <app-post
+        appIncreasePostViews
+        [postId]="post.postData.postId"
+        [postData]="post.postData"
+      ></app-post>
+    </ng-template>
+  </ng-container>
 </section>

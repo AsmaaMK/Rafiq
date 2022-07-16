@@ -86,24 +86,9 @@ nav {
   width: 100%;
   overflow: hidden;
 
-  @include respond-to(medium) {
-    @include flex(row);
-    gap: 2rem;
-    
-    .content {
-      flex: 0.9;
-      margin-left: $align;
-
-      h2,
-      p {
-        text-align: left;
-      }
-    }
-  }
-
   .content {
     transform: translateX(-100vw);
-    transition: transform ease-in-out 500ms;
+    @include animation(0.7s);
 
     &.show {
       transform: translateX(0);
@@ -114,10 +99,30 @@ nav {
     flex: 1;
     padding-left: 1rem;
     transform: translateX(100vw);
-    transition: transform ease-in-out 500ms;
+    @include animation(0.7s);
 
     &.show {
       transform: translateX(0);
+    }
+  }
+
+  @include respond-to(medium) {
+    @include flex(row);
+    gap: 2rem;
+
+    .content {
+      flex: 0.9;
+      margin-left: $align;
+      transform: translateX(-60vw);
+
+      h2,
+      p {
+        text-align: left;
+      }
+    }
+
+    .image {
+      transform: translateX(60vw);
     }
   }
 }
@@ -126,24 +131,9 @@ nav {
   width: 100%;
   overflow: hidden;
 
-  @include respond-to(medium) {
-    @include flex(row-reverse);
-    gap: 2rem;
-
-    .content {
-      flex: 0.9;
-      margin-right: $align;
-
-      h2,
-      p {
-        text-align: right;
-      }
-    }
-  }
-
   .content {
     transform: translateX(100vw);
-    transition: transform ease-in-out 500ms;
+    @include animation(0.7s);
 
     &.show {
       transform: translateX(0);
@@ -154,10 +144,30 @@ nav {
     flex: 1;
     padding-right: 1rem;
     transform: translateX(-100vw);
-    transition: transform ease-in-out 500ms;
+    @include animation(0.7s);
 
     &.show {
       transform: translateX(0);
+    }
+  }
+
+  @include respond-to(medium) {
+    @include flex(row-reverse);
+    gap: 2rem;
+
+    .content {
+      flex: 0.9;
+      margin-right: $align;
+      transform: translateX(60vw);
+
+      h2,
+      p {
+        text-align: right;
+      }
+    }
+
+    .image {
+      transform: translateX(-60vw);
     }
   }
 }

@@ -12,6 +12,7 @@ import {
   MediaType,
   PostMedia,
   GetPostsResponse,
+  GetNewsfeedResponse,
 } from './post';
 
 const headers = new HttpHeaders();
@@ -58,6 +59,12 @@ export class PostService {
         `${environment.apiUrl}/api/v1/users/${userName}/posts/morePosts/${postId}`
       )
       .pipe(map((res) => res.posts));
+  }
+
+  getNewsfeed(): Observable<Post[]> {
+    return this.http
+      .get<GetNewsfeedResponse>(`${environment.apiUrl}/api/v1/newsFeed`)
+      .pipe(map((res) => res.newsFeed));
   }
 
   classifyPostMedia(postFiles: string[]): PostMedia {

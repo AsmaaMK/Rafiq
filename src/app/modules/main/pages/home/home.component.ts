@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { POST } from 'src/app/shared/components/post/post';
 import { PostService } from '../../../../shared/components/post/post.service';
 
 @Component({
@@ -9,7 +10,13 @@ import { PostService } from '../../../../shared/components/post/post.service';
 export class HomeComponent implements OnInit {
   constructor(private postService: PostService) {}
 
-  posts!: string[];
+  posts: POST[] = [];
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.postService.getNewsfeed().subscribe((res) => {
+      res.forEach((post) => {
+        this.posts.push(new POST(post, this.postService));
+      });
+    });
+  }
 }

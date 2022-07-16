@@ -1,8 +1,8 @@
 @use "./colors" as *;
 @use "./variables" as *;
 
-@mixin animation($anim: all) {
-  transition: $anim 0.3s ease-in-out;
+@mixin animation($time: 0.3s, $anim: all) {
+  transition: $anim $time ease-in-out;
 }
 
 /// Mixin makes a gradient background with specific degree

@@ -67,6 +67,10 @@ type GetPostsResponse = {
   posts: Post[];
 }
 
+type GetNewsfeedResponse = {
+  newsFeed: Post[];
+};
+
 type MediaType = 'images' | 'video' | 'noFiles';
 
 type PostMedia = {
@@ -191,5 +195,6 @@ export {
   CommentsResponse,
   PostData,
   GetPostsResponse,
-  POST
+  POST,
+  GetNewsfeedResponse,
 };
