@@ -34,6 +34,13 @@ nav {
 
     li:nth-child(1) {
       color: $primary;
+      img {
+        width: 6rem;
+
+        @include respond-to(medium) {
+          width: 9rem;
+        }
+      }
     }
 
     li:nth-child(2) {
