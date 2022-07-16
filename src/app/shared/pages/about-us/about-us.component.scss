@@ -1,0 +1,77 @@
+@use "../../../../styles/helpers/helpers-dir" as *;
+@import url("https://fonts.googleapis.com/css2?family=Courgette&display=swap");
+
+* {
+  font-family: "Courgette", cursive !important;
+}
+
+.about-us-page {
+  // background-image: url("../../../../assets/about-us/cloud.svg");
+  // background-repeat: no-repeat;
+  // background-size: 25vw;
+  // background-position-x: -20px;
+}
+
+nav {
+  margin-bottom: 50px;
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding-left: 0;
+    @include flex(row, space-between);
+    @include respond-to(medium) {
+      @include padding(x, 5vw);
+    }
+
+
+    li {
+      padding: 1.5rem 1rem;
+      font-size: $base-font-size * 1.2;
+
+      a {
+        font-size: $base-font-size;
+      }
+    }
+
+    li:nth-child(1) {
+      color: $primary;
+    }
+
+    li:nth-child(2) {
+      margin-left: auto;
+      a {
+        color: $primary;
+      }
+    }
+
+    li:nth-child(3) {
+      a {
+        text-decoration: none;
+        background-color: $primary;
+        color: $neutral-lighter;
+        padding: 0.5em 1em;
+        border-radius: 0.5rem;
+      }
+    }
+  }
+}
+
+.row {
+  @include margin(y, 5rem);
+
+  h2 {
+    color: $primary;
+    font-weight: bold;
+    font-size: $base-font-size * 2;
+    text-align: center;
+    margin: 0.5em;
+  }
+
+  p {
+    color: $primary;
+    font-size: $base-font-size * 1.2;
+    text-align: center;
+    margin: 1em;
+  }
+}
