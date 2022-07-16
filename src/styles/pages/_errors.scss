@@ -1,0 +1,51 @@
+@use "../helpers/helpers-dir" as *;
+
+.error-page {
+  min-height: 100vh;
+  padding: 1rem;
+
+  background-color: $secondary-lavender;
+  background-image: url("../../assets/shared/Clouds.svg");
+  background-repeat: no-repeat;
+  background-position-y: bottom;
+  background-size: 100vw;
+  
+  img {
+    margin: auto;
+  }
+  
+  p {
+    color: $primary;
+    font-weight: bold;
+    font-size: $base-font-size * 1.5;
+    text-align: center;
+  }
+  
+  a {
+    display: block;
+    width: fit-content;
+    text-decoration: none;
+    background-color: $primary;
+    color: $neutral-lighter;
+    padding: 1rem 2rem;
+    border-radius: 1rem;
+    margin: 3rem auto;
+    font-size: $base-font-size;
+  }
+
+  @include respond-to(medium) {
+    background-image: url("../../assets/shared/Clouds-disktop.svg");
+
+    p {
+      font-size: $base-font-size * 2;
+    }
+
+    img {
+      width: 40%;
+    }
+
+    a {
+      font-size: $base-font-size * 1.2;
+    }
+  }
+}
