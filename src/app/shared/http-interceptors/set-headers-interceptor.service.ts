@@ -37,7 +37,7 @@ export class SetHeadersInterceptorService implements HttpInterceptor {
 
         } else if (error instanceof HttpErrorResponse && error.status === 403) {
           console.warn('403 found!!');
-          this.auth.logoutUser();
+          this.auth.unauthorizedUser();
         }
         return throwError(error);
       }));

@@ -45,7 +45,7 @@ export class PostsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.observer.disconnect();
+    this.observer?.disconnect();
   }
 
   getInitialPosts() {

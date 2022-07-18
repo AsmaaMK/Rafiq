@@ -1,13 +1,13 @@
 <app-toaster [show]="editInfoShowToast" [status]="infoSuccess" [message]="infoMessage"></app-toaster>
 <app-toaster [show]="editPasswordShowToast" [status]="passwordSuccess" [message]="passwordMessage"></app-toaster>
 
-<div class="edit-info-container" *ngIf="show">
-  <button (click)="closeEditInfo()" class="back-btn">
+<div class="edit-info-container">
+  <a [routerLink]="['..']" class="back-btn">
     <img
       src="../../../../../../../assets/main-module/profile/back.svg"
       alt=""
     />
-  </button>
+  </a>
   <h2>Edit your profile</h2>
   <form class="form" [formGroup]="editInfoForm">
     <div class="name-field">

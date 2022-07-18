@@ -41,12 +41,12 @@
     </div>
 
     <div class="edit-info" *ngIf="isMyProfile.value; else follow">
-      <button class="edit-btn" (click)="showEditInfo()">
+      <a routerLink="edit" class="edit-btn">
         <img
           src="../../../../../../../assets/main-module/profile/edit.svg"
           alt="edit info"
         />
-      </button>
+      </a>
     </div>
     <ng-template #follow>
       <button class="follow-btn" (click)="followOrUnfollow()">

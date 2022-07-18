@@ -182,10 +182,6 @@ export class HeaderComponent implements OnInit {
       this.viewPicture(avatarPreview, avatarOptions);
   }
 
-  showEditInfo() {
-    this.editInfoService.showEditInfo.next(true);
-  }
-
   closePopupOnClick() {
     const coverPopup = document.getElementById('cover-options-popup');
     const avatarPopup = document.getElementById('avatar-options-popup');

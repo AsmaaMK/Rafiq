@@ -64,6 +64,15 @@ export class AuthService {
     this.router.navigate(['/auth/login']);
   }
 
+  unauthorizedUser(): void {
+    this.tokenStorage.removeAccessToken();
+    this.tokenStorage.removeRefreshToken();
+    this.tokenStorage.removeUserName();
+    this.userInfoService.myInfo.next(this.userInfoService.initialUserInfo);
+    this.isLoggedIn$.next(false);
+    this.router.navigate(['/unauthorized']);
+  }
+
   forgetPassword(body: ForgotPasswordRequest) {
     return this.http.post<null>(
       `${this.url}/forgotPassword`,

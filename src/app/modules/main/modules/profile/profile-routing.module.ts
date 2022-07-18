@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { EditInfoComponent } from './components/edit-info/edit-info.component';
 import { ImagesComponent } from './pages/images/images.component';
 import { MapComponent } from './pages/map/map.component';
 import { PostsComponent } from './pages/posts/posts.component';
@@ -18,11 +19,11 @@ const routes: Routes = [
       {
         path: 'videos',
         component: VideosComponent,
-      }, 
+      },
       {
         path: 'images',
         component: ImagesComponent,
-      }, 
+      },
       {
         path: 'map',
         component: MapComponent,
@@ -30,13 +31,18 @@ const routes: Routes = [
       {
         path: '',
         redirectTo: 'posts',
-        pathMatch: 'full'
-      }
-    ]
-  }];
+        pathMatch: 'full',
+      },
+    ],
+  },
+  {
+    path: 'edit',
+    component: EditInfoComponent,
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class ProfileRoutingModule { }
+export class ProfileRoutingModule {}

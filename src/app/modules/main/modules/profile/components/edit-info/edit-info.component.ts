@@ -14,7 +14,6 @@ import { UserInfoService } from '../../services/user-info.service';
   styleUrls: ['./edit-info.component.scss'],
 })
 export class EditInfoComponent implements OnInit {
-  @Input() show = this.editInfoService.showEditInfo.value;
   seenPasswordImage = new BehaviorSubject(
     '../../../../../../../assets/auth-module/icons/Seen.svg'
   );
@@ -203,22 +202,6 @@ export class EditInfoComponent implements OnInit {
   }
   get tiktok() {
     return this.editInfoForm.get('tiktok');
-  }
-
-  closeEditInfo() {
-    this.editInfoService.showEditInfo.next(false);
-    // window.location.reload();
-    this.userInfoService
-      .getUserProfile(this.userInfoService.myUserName.value)
-      .subscribe((res) => {
-        this.userInfoService.myInfo.next(res);
-        const myUrl = this.router.url;
-        this.router
-          .navigateByUrl('/RefreshComponent', { skipLocationChange: true })
-          .then(() => {
-            this.router.navigate([myUrl]);
-          });
-      });
   }
 
   toggleSeenPassword(passwordField: HTMLInputElement) {

@@ -7,8 +7,6 @@ import { UserInfoService } from '../../../modules/main/modules/profile/services/
 import {
   Post,
   GetPostResponse,
-  CommentsResponse,
-  PostData,
   MediaType,
   PostMedia,
   GetPostsResponse,
@@ -25,7 +23,7 @@ headers
   providedIn: 'root',
 })
 export class PostService {
-  private url = `${environment.apiUrl}/api/v1/users/${this.userInfoService.myUserName.value}/posts`;
+  private url = `${environment.apiUrl}/api/v1/users`;
 
   constructor(
     private http: HttpClient,
@@ -34,29 +32,33 @@ export class PostService {
   ) {}
 
   createPost(postData: any) {
-    return this.http.post(this.url, postData, {
-      headers: headers,
-    });
+    return this.http.post(
+      `${this.url}/${this.userInfoService.myUserName.value}/posts`,
+      postData,
+      {
+        headers: headers,
+      }
+    );
   }
 
   getPostById(postId: string): Observable<Post> {
     return this.http
-      .get<GetPostResponse>(`${this.url}/${postId}`)
+      .get<GetPostResponse>(
+        `${this.url}/${this.userInfoService.myUserName.value}/posts/${postId}`
+      )
       .pipe(map((res) => res.post));
   }
 
   getInitialPosts(userName: string): Observable<Post[]> {
     return this.http
-      .get<GetPostsResponse>(
-        `${environment.apiUrl}/api/v1/users/${userName}/posts`
-      )
+      .get<GetPostsResponse>(`${this.url}/${userName}/posts`)
       .pipe(map((res) => res.posts));
   }
 
   getMorePosts(userName: string, postId: string): Observable<Post[]> {
     return this.http
       .get<GetPostsResponse>(
-        `${environment.apiUrl}/api/v1/users/${userName}/posts/morePosts/${postId}`
+        `${this.url}/${userName}/posts/morePosts/${postId}`
       )
       .pipe(map((res) => res.posts));
   }
@@ -82,16 +84,28 @@ export class PostService {
 
   getIsLiked(postId: string) {
     return this.http
-      .get<any>(`${this.url}/${postId}/isLiked`, { headers: headers })
+      .get<any>(
+        `${this.url}/${this.userInfoService.myUserName.value}/posts/${postId}/isLiked`,
+        { headers: headers }
+      )
       .pipe(map((res) => res.results));
   }
 
   like(postId: string) {
-    this.http.put(`${this.url}/${postId}/like`, null).subscribe();
+    this.http
+      .put(
+        `${this.url}/${this.userInfoService.myUserName.value}/posts/${postId}/like`,
+        null
+      )
+      .subscribe();
   }
 
   unLike(postId: string) {
-    this.http.delete(`${this.url}/${postId}/like`).subscribe();
+    this.http
+      .delete(
+        `${this.url}/${this.userInfoService.myUserName.value}/posts/${postId}/like`
+      )
+      .subscribe();
   }
 
   share(postId: string, postText: FormData) {
@@ -102,31 +116,41 @@ export class PostService {
         'Access-Control-Allow-Methods',
         'GET,PUT,POST,DELETE,PATCH,OPTIONS'
       );
-    return this.http.post<any>(`${this.url}/${postId}/share`, postText, {
-      headers: shareHeaders,
-    });
+    return this.http.post<any>(
+      `${this.url}/${this.userInfoService.myUserName.value}/posts/${postId}/share`,
+      postText,
+      {
+        headers: shareHeaders,
+      }
+    );
   }
 
   getLikes(postId: string) {
     return this.http
-      .get<any>(`${this.url}/${postId}/likes`, {
-        headers: headers,
-      })
+      .get<any>(
+        `${this.url}/${this.userInfoService.myUserName.value}/posts/${postId}/likes`,
+        {
+          headers: headers,
+        }
+      )
       .pipe(map((res) => res.results.likes));
   }
 
   deletePost(postId: string) {
-    return this.http.delete(`${this.url}/${postId}`, {
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-      },
-    });
+    return this.http.delete(
+      `${this.url}/${this.userInfoService.myUserName.value}/posts/${postId}`,
+      {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+        },
+      }
+    );
   }
 
   addComment(postId: string, comment: string) {
     return this.http.post<any>(
-      `${this.url}/${postId}/comments`,
+      `${this.url}/${this.userInfoService.myUserName.value}/posts/${postId}/comments`,
       {
         text: comment,
       },
@@ -136,15 +160,18 @@ export class PostService {
 
   getComments(postId: string, numberOfComments: number) {
     return this.http
-      .get<any>(`${this.url}/${postId}/comments?limit=1,${numberOfComments}`, {
-        headers: headers,
-      })
+      .get<any>(
+        `${this.url}/${this.userInfoService.myUserName.value}/posts/${postId}/comments?limit=1,${numberOfComments}`,
+        {
+          headers: headers,
+        }
+      )
       .pipe(map((res) => res.comments));
   }
 
   likeComment(postId: string, commentId: string) {
     return this.http.put(
-      `${this.url}/${postId}/comments/${commentId}/like`,
+      `${this.url}/${this.userInfoService.myUserName.value}/posts/${postId}/comments/${commentId}/like`,
       null,
       {
         headers: headers,
@@ -154,7 +181,7 @@ export class PostService {
 
   unlikeComment(postId: string, commentId: string) {
     return this.http.delete(
-      `${this.url}/${postId}/comments/${commentId}/like`,
+      `${this.url}/${this.userInfoService.myUserName.value}/posts/${postId}/comments/${commentId}/like`,
       {
         headers: headers,
       }
@@ -162,20 +189,19 @@ export class PostService {
   }
 
   deleteComment(postId: string, commentId: string) {
-    return this.http.delete(`${this.url}/${postId}/comments/${commentId}`, {
-      headers: headers,
-    });
+    return this.http.delete(
+      `${this.url}/${this.userInfoService.myUserName.value}/posts/${postId}/comments/${commentId}`,
+      {
+        headers: headers,
+      }
+    );
   }
 
   increaseNumberOfViews(userName: string, postId: string) {
     this.http
-      .post(
-        `${environment.apiUrl}/api/v1/users/${userName}/posts/${postId}/views`,
-        null,
-        {
-          headers: headers,
-        }
-      )
+      .post(`${this.url}/${userName}/posts/${postId}/views`, null, {
+        headers: headers,
+      })
       .subscribe();
   }
 }

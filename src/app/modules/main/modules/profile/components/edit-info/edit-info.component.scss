@@ -2,22 +2,22 @@
 @use "~../../../../../../../../../styles/components/forms";
 
 .edit-info-container {
-  position: absolute;
-  z-index: $index-5;
-  width: 100%;
-  height: auto;
+  // position: absolute;
+  // z-index: $index-5;
+  // width: 100%;
+  // height: auto;
   min-height: 100%;
-  top: 0;
-  left: 0;
+  // top: 0;
+  // left: 0;
   background-color: $secondary;
   box-shadow: 0px 3px 6px #666666;
   padding: 1em;
   @include main-gradient;
 
-  @include respond-to(medium) {
-    width: 102%;
-    left: -1%;
-  }
+  // @include respond-to(medium) {
+  //   width: 102%;
+  //   left: -1%;
+  // }
 
   .back-btn {
     position: absolute;

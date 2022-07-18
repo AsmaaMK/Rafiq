@@ -15,8 +15,6 @@ export class ProfileComponent implements OnInit {
   myUserName = this.userInfoService.myUserName.value;
   isMyProfile = this.urlUserName === this.myUserName;
 
-  showEditInfo = this.editInfoService.showEditInfo;
-
   constructor(
     private userInfoService: UserInfoService,
     private route: Router,
@@ -26,7 +24,6 @@ export class ProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (!this.isMyProfile) this.showEditInfo.next(false);
   }
 
   @HostListener('window:resize', ['$event'])

@@ -17,8 +17,6 @@ headers
 export class EditInfoService {
   private url = `${environment.apiUrl}/api/v1/users`;
 
-  showEditInfo = new BehaviorSubject(false);
-
   constructor(
     private http: HttpClient,
     private tokenStorageService: TokenStorageService,

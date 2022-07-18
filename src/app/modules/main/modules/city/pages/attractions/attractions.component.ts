@@ -10,7 +10,9 @@ import { CityService } from '../../services/city.service';
   styleUrls: ['./attractions.component.scss'],
 })
 export class AttractionsComponent implements OnInit {
+
   activities!: Activity[];
+  
   cityId = this.router.url.split('/')[3];
   loading = true;
 

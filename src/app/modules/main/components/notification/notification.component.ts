@@ -17,7 +17,7 @@ export class NotificationComponent implements OnInit {
       date: '2020-01-01 4:00 PM',
       avatar: '',
       visited: false,
-      link: 'app/profile/aaa',
+      link: '/app/profile/aaa',
     },
     {
       id: 1,
@@ -26,7 +26,7 @@ export class NotificationComponent implements OnInit {
       date: '2020-01-01 4:00 PM',
       avatar: '',
       visited: false,
-      link: 'app/profile/2',
+      link: '/app/profile/2',
     },
     {
       id: 1,
@@ -35,7 +35,7 @@ export class NotificationComponent implements OnInit {
       date: '2020-01-01 4:00 PM',
       avatar: '',
       visited: false,
-      link: 'app/profile/amrma',
+      link: '/app/profile/amrma',
     },
     {
       id: 1,
@@ -44,7 +44,7 @@ export class NotificationComponent implements OnInit {
       date: '2020-01-01 4:00 PM',
       avatar: '',
       visited: true,
-      link: 'app/city/1',
+      link: '/app/city/1',
     },
     {
       id: 1,
@@ -53,7 +53,7 @@ export class NotificationComponent implements OnInit {
       date: '2020-01-01 4:00 PM',
       avatar: '',
       visited: true,
-      link: 'app/profile/asmaamk',
+      link: '/app/profile/asmaamk',
     },
   ];
 
