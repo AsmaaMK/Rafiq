@@ -13,3 +13,17 @@
     @include main-gradient;
   }
 }
+
+.newsfeed-empty {
+  p {
+    color: $primary;
+    font-size: $base-font-size * 1.5;
+    margin: 3rem 15vw 0;
+    text-align: center;
+  }
+
+  img {
+    width: 50%;
+    margin: auto;
+  }
+}

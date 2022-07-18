@@ -1,4 +1,14 @@
 <section class="home-page">
+  <ng-container *ngIf="posts.length === 0">
+    <div class="newsfeed-empty">
+      <p>
+        Newsfeed is empty! Follow people or cities to see their future posts
+        here.
+      </p>
+      <img src="../../../../../assets/main-module/Following-pana.svg" alt="" />
+    </div>
+  </ng-container>
+  
   <ng-container *ngFor="let post of posts; let i = index">
     <app-post
       appIncreasePostViews
