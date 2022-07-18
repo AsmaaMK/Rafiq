@@ -11,9 +11,6 @@ import { CityService } from '../../services/city.service';
   styleUrls: ['./city-header.component.scss'],
 })
 export class CityHeaderComponent implements OnInit {
-  showToast = false;
-  toastStatus: ToasterType = 'error';
-  toastMessage = '';
   isLoved = false;
 
   cityInfo!: CityInfo;

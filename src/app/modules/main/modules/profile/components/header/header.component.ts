@@ -3,6 +3,7 @@ import { Component, OnInit, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
+import { ToasterService } from 'src/app/shared/components/toaster/toaster.service';
 import { ToasterType } from 'src/app/shared/models/toaster-status';
 import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
 import { UserProfile } from '../../models/user-info';
@@ -37,17 +38,12 @@ export class HeaderComponent implements OnInit {
     tiktok: '../../../../../../../assets/main-module/profile/tiktok.svg',
   };
 
-  showToast = false;
-  toastStatus: ToasterType = 'error';
-  toastMessage = '';
-
   constructor(
     private userInfoService: UserInfoService,
     private route: Router,
     private activatedRoute: ActivatedRoute,
-    private tokenStorageService: TokenStorageService,
-    private editInfoService: EditInfoService,
-    private followingService: FollowingsService
+    private followingService: FollowingsService,
+    private toasterService: ToasterService
   ) {}
 
   ngOnInit(): void {
@@ -125,15 +121,11 @@ export class HeaderComponent implements OnInit {
   follow() {
     this.followingService.follow(this.urlUserName).subscribe(
       (res) => {
-        this.toastMessage = res.results.message;
-        this.toastStatus = 'success';
-        this.showToast = true;
+        this.toasterService.showToaster('success', res.results.message);
         this.isFollowing.next(true);
       },
       (err) => {
-        this.toastMessage = err.error.error.message;
-        this.toastStatus = 'error';
-        this.showToast = true;
+        this.toasterService.showToaster('error', err.error.error.message);
       }
     );
   }
@@ -141,15 +133,11 @@ export class HeaderComponent implements OnInit {
   unfollow() {
     this.followingService.unfollow(this.urlUserName).subscribe(
       (res) => {
-        this.toastMessage = res.results.message;
-        this.toastStatus = 'success';
-        this.showToast = true;
+        this.toasterService.showToaster('success', res.results.message);
         this.isFollowing.next(false);
       },
       (err) => {
-        this.toastMessage = err.error.error.message;
-        this.toastStatus = 'error';
-        this.showToast = true;
+        this.toasterService.showToaster('error', err.error.error.message);
       }
     );
   }

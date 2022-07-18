@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Loader } from '@googlemaps/js-api-loader';
 import { BehaviorSubject } from 'rxjs';
+import { ToasterService } from 'src/app/shared/components/toaster/toaster.service';
 import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
 import { MapService } from '../../services/map.service';
 import { UserInfoService } from '../../services/user-info.service';
@@ -20,9 +21,6 @@ enum markerIcons {
   styleUrls: ['./map.component.scss'],
 })
 export class MapComponent implements OnInit {
-  showToaster = false;
-  toasterMessage = '';
-
   canAddMarker: boolean = false;
   canDelete: boolean = false;
 
@@ -38,7 +36,8 @@ export class MapComponent implements OnInit {
     private mapService: MapService,
     private tokenStorageService: TokenStorageService,
     private route: Router,
-    public userInfoService: UserInfoService
+    public userInfoService: UserInfoService,
+    private toasterService: ToasterService
   ) {}
 
   ngOnInit(): void {
@@ -176,23 +175,28 @@ export class MapComponent implements OnInit {
 
   createInitialMarkers(): void {
     let initMarkares = [];
-    this.mapService.getAllMarkers(this.urlUserName).subscribe((res) => {
-      initMarkares = res.results.travelMap;
-      console.log(initMarkares);
-      for (let marker of initMarkares) {
-        const createdMarker = this.createMarker({
-          type: marker.type,
-          _id: marker._id,
-          possition: {
-            lat: marker.latitude,
-            lng: marker.longitude,
-          },
-        });
+    this.mapService.getAllMarkers(this.urlUserName).subscribe(
+      (res) => {
+        initMarkares = res.results.travelMap;
+        console.log(initMarkares);
+        for (let marker of initMarkares) {
+          const createdMarker = this.createMarker({
+            type: marker.type,
+            _id: marker._id,
+            possition: {
+              lat: marker.latitude,
+              lng: marker.longitude,
+            },
+          });
+        }
+      },
+      () => {
+        this.toasterService.showToaster(
+          'error',
+          `Error: can't download initial markers`
+        );
       }
-    }, () => {
-      this.toasterMessage = `Error: can't download initial markers`;
-      this.showToaster = true;
-    });
+    );
   }
 
   createNewMarker(markerData: MarkerData): void {
@@ -202,8 +206,10 @@ export class MapComponent implements OnInit {
         this.createMarker({ _id: markerId, ...markerData });
       },
       () => {
-        this.toasterMessage = `Error: can't create this marker`;
-        this.showToaster = true;
+        this.toasterService.showToaster(
+          'error',
+          `Error: can't create this marker`
+        );
       }
     );
   }
@@ -223,8 +229,10 @@ export class MapComponent implements OnInit {
           },
           () => {
             this.markers[index].marker.setVisible(true); // make it visible again
-            this.toasterMessage = `Error: can't delete this marker`;
-            this.showToaster = true;
+            this.toasterService.showToaster(
+              'error',
+              `Error: can't delete this marker`
+            );
           }
         );
 

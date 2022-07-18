@@ -9,6 +9,7 @@ import {
   UserProfile,
 } from '../../../modules/main/modules/profile/models/user-info';
 import { UserInfoService } from '../../../modules/main/modules/profile/services/user-info.service';
+import { ToasterService } from '../toaster/toaster.service';
 import { MediaType, Post, PostComment, PostData } from './post';
 import { PostService } from './post.service';
 
@@ -70,17 +71,14 @@ export class PostComponent implements OnInit {
   deletingPost = false;
   addingComment = false;
 
-  showToaster = false;
-  toasterMessage = '';
-  toasterType: ToasterType = 'error';
-
   subscription!: Subscription;
 
   constructor(
     private postService: PostService,
     private router: Router,
     private routerExt: RouterExtService,
-    private userInfoService: UserInfoService
+    private userInfoService: UserInfoService,
+    private toasterService: ToasterService
   ) {}
 
   ngOnInit() {
@@ -108,9 +106,7 @@ export class PostComponent implements OnInit {
   sharePost(postText: HTMLTextAreaElement, popup: HTMLElement) {
     this.closePopup(popup);
 
-    this.toasterMessage = 'Sharing post';
-    this.toasterType = 'uploading';
-    this.showToaster = true;
+    this.toasterService.showToaster('uploading', 'Sharing Post');
 
     let formData = new FormData();
     formData.append('text', postText.value);
@@ -118,12 +114,10 @@ export class PostComponent implements OnInit {
 
     this.postService.share(this.postData.postId, formData).subscribe(
       (res) => {
-        this.toasterMessage = res.results.message;
-        this.toasterType = 'success';
+        this.toasterService.showToaster('success', res.results.message);
       },
       (err) => {
-        this.toasterMessage = err.error.message;
-        this.toasterType = 'error';
+        this.toasterService.showToaster('error', err.error.message);
       }
     );
   }
@@ -143,9 +137,7 @@ export class PostComponent implements OnInit {
         this.deletingPost = false;
       },
       () => {
-        this.toasterMessage = `Error when deleting post`;
-        this.toasterType = 'error';
-        this.showToaster = true;
+        this.toasterService.showToaster('error', `Error when deleting post`);
         this.deletingPost = false;
       }
     );

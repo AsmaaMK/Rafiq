@@ -1,5 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { ToasterService } from 'src/app/shared/components/toaster/toaster.service';
 import { ToasterType } from 'src/app/shared/models/toaster-status';
 import { PostService } from '../../shared/components/post/post.service';
 import { NotificationService } from './components/notification/notification.service';
@@ -17,10 +18,6 @@ export class MainComponent implements OnInit {
   myInfo = this.userInfoService.myInfo;
   postData = new FormData();
 
-  showToaster = false;
-  toasterMessage = '';
-  toasterType: ToasterType = 'error';
-
   creatingPost = false;
   postDataForm!: FormGroup;
 
@@ -32,8 +29,8 @@ export class MainComponent implements OnInit {
 
   constructor(
     private userInfoService: UserInfoService,
-    private notificationService: NotificationService,
-    private postService: PostService
+    private postService: PostService,
+    private toasterService: ToasterService
   ) {}
 
   ngOnInit(): void {
@@ -114,24 +111,20 @@ export class MainComponent implements OnInit {
   }
 
   createPost(postTextArea: HTMLTextAreaElement, popup: HTMLElement) {
-    this.toasterType = 'uploading';
-    this.toasterMessage = 'uploading post files';
-    this.showToaster = true;
+    this.toasterService.showToaster('uploading', 'uploading post files');
     this.closePopup(popup);
 
     this.postData.append('text', postTextArea.value);
     this.postService.createPost(this.postData).subscribe(
       (res) => {
-        this.toasterMessage = 'Post created successfully';
-        this.toasterType = 'success';
+        this.toasterService.showToaster('success', 'Post created successfully');
 
         this.postData.forEach((val, key, parent) => {
           this.postData.delete(key);
         });
       },
       (err) => {
-        this.toasterMessage = 'Failed to create this post';
-        this.toasterType = 'error';
+        this.toasterService.showToaster('error', 'Failed to create this post');
 
         this.postData.forEach((val, key, parent) => {
           this.postData.delete(key);

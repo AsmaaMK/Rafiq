@@ -2,6 +2,7 @@ import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
+import { ToasterService } from 'src/app/shared/components/toaster/toaster.service';
 import { ToasterType } from 'src/app/shared/models/toaster-status';
 import { CountriesService } from 'src/app/shared/services/countries.service';
 import { EditInfo, SocialLinks, UserProfile } from '../../models/user-info';
@@ -25,21 +26,14 @@ export class EditInfoComponent implements OnInit {
   updatedInfo: EditInfo = {};
   newPassword: string = '';
 
-  editInfoShowToast = false;
-  infoSuccess: ToasterType = 'error';
-  infoMessage = '';
-
-  editPasswordShowToast = false;
-  passwordSuccess: ToasterType = 'error';
-  passwordMessage = '';
-
   updated = false;
 
   constructor(
     private editInfoService: EditInfoService,
     private countriesService: CountriesService,
     private userInfoService: UserInfoService,
-    private router: Router
+    private router: Router,
+    private toasterService: ToasterService
   ) {}
 
   ngOnInit(): void {
@@ -140,15 +134,11 @@ export class EditInfoComponent implements OnInit {
       this.updated = false;
       this.editInfoService.editInfo(this.updatedInfo).subscribe(
         (res) => {
-          this.infoSuccess = 'success';
-          this.infoMessage = res.results.message;
-          this.editInfoShowToast = true;
+          this.toasterService.showToaster('success', res.results.message);
           this.updatedInfo = {};
         },
         (err) => {
-          this.infoSuccess = 'error';
-          this.infoMessage = err.error.error.message;
-          this.editInfoShowToast = true;
+          this.toasterService.showToaster('error', err.error.error.message);
         }
       );
     }
@@ -156,15 +146,11 @@ export class EditInfoComponent implements OnInit {
     if (this.newPassword !== '') {
       this.editInfoService.editPassword(this.newPassword).subscribe(
         (res) => {
-          this.passwordSuccess = 'success';
-          this.passwordMessage = res.results.message;
-          this.editPasswordShowToast = true;
+          this.toasterService.showToaster('success', res.results.message);
           this.newPassword = '';
         },
         (err) => {
-          this.passwordSuccess = 'error';
-          this.passwordMessage = err.error.error.message;
-          this.editPasswordShowToast = true;
+          this.toasterService.showToaster('error', err.error.error.message);
         }
       );
     }

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ToasterType } from '../../models/toaster-status';
+import { ToasterService } from './toaster.service';
 
 @Component({
   selector: 'app-toaster',
@@ -7,13 +8,19 @@ import { ToasterType } from '../../models/toaster-status';
   styleUrls: ['./toaster.component.scss'],
 })
 export class ToasterComponent implements OnInit {
-  @Input() show = false;
-  @Input() status: ToasterType = 'error';
-  @Input() message = '';
+  show = false;
+  status: ToasterType = 'error';
+  message = '';
 
-  constructor() {}
+  constructor(private toasterService: ToasterService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.toasterService.toasterInfo.subscribe((info) => {
+      this.show = info.show;
+      this.status = info.type;
+      this.message = info.message;
+    });
+  }
 
   close() {
     this.show = false;
