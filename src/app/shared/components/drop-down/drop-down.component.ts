@@ -1,5 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-drop-down',
@@ -23,7 +22,9 @@ export class DropDownComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.filterInput = this.selected;
+  }
 
   toggleListVisibility(list: HTMLElement) {
     list.classList.toggle('open');

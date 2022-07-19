@@ -16,7 +16,9 @@
     content: url("../../../assets/auth-module/icons/arrow.svg");
     pointer-events: none;
     position: absolute;
-    top: 1.2em;
-    right: 1em;
+    top: 50%;
+    right: 0.5em;
+    width: 2rem;
+    transform: translateY(-50%);
   }
 }

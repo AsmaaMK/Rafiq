@@ -18,12 +18,19 @@
   p {
     color: $primary;
     font-size: $base-font-size * 1.5;
-    margin: 3rem 15vw 0;
     text-align: center;
+    
+    @include respond-to(medium) {
+      margin: 3rem 15vw 0;
+    }
   }
 
   img {
-    width: 50%;
-    margin: auto;
+    margin: 0.5rem;
+    
+    @include respond-to(medium) {
+      margin: 3rem auto;
+      width: 60%;
+    }
   }
 }

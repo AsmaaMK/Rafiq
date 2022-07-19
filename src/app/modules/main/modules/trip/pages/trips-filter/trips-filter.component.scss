@@ -1,12 +1,11 @@
 @use "../../../../../../../styles/helpers/helpers-dir" as *;
 
-
 .trip-filter-container {
   height: calc(100vh - 6.5rem);
   position: relative;
   overflow: hidden;
   @include flex;
-  
+
   @include respond-to(medium) {
     height: 100vh;
     border-radius: 1em;
@@ -18,12 +17,17 @@
 
 nav.trips-navbar {
   width: 90%;
-  height: 90px;
+  min-height: 90px;
   margin: 1em auto;
 
   @include flex(row);
   gap: 1em;
   flex-wrap: wrap;
+
+  @include respond-to(less-than-medium) {
+    justify-content: stretch;
+    margin-bottom: 2rem;
+  }
 
   p {
     color: $primary;
@@ -34,14 +38,25 @@ nav.trips-navbar {
 
   .drop-down {
     width: 200px;
+
+    @include respond-to(less-than-medium) {
+      min-width: 150px;
+      flex: 1;
+    }
   }
 
   .search-field {
     position: relative;
+    width: 200px;
+    
+    @include respond-to(less-than-medium) {
+       min-width: 150px;
+      flex: 1;
+    }
 
     input {
+      width: 100%;
       font-size: $base-font-size;
-      width: 200px;
       color: $primary;
       padding: 0.8rem;
       border: 1px solid $primary;
@@ -82,4 +97,16 @@ nav.trips-navbar {
 
   @include flex(column, stretch, stretch);
   gap: 1.5rem;
+}
+
+.trip-filter-empty {
+  width: 100%;
+
+  img {
+    margin: 5rem auto;
+    
+    @include respond-to(medium) {
+      width: 60%;
+    }
+  }
 }
