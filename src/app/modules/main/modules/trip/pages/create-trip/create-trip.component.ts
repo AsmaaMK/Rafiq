@@ -8,6 +8,7 @@ import { CountriesService } from 'src/app/shared/services/countries.service';
 })
 export class CreateTripComponent implements OnInit {
   countries!: string[];
+  numberOfDays = 1;
 
   constructor(private countriesService: CountriesService) {}
 
@@ -22,5 +23,9 @@ export class CreateTripComponent implements OnInit {
   openDayField(btn: HTMLElement, div: HTMLElement) {
     btn.classList.toggle('open');
     div.classList.toggle('open');
+  }
+
+  changeNumberOfDays(number: number) {
+    this.numberOfDays = number;
   }
 }

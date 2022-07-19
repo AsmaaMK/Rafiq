@@ -5,6 +5,8 @@
       <app-drop-down
         [label]="'filter by'"
         [dropDownItems]="['Best Rated', 'Low Price', 'High Price']"
+        (selectedValue)="selectFilter($event)"
+
       ></app-drop-down>
     </div>
     <div class="search-field">

@@ -2,7 +2,7 @@
 
 .create-trip-page {
   padding: 1rem;
-  
+
   @include respond-to(medium) {
     box-shadow: 0px 3px 6px #666666;
     padding: 1rem 3rem;
@@ -100,7 +100,7 @@
 
     .day-field {
       @include flex(column, stretch, stretch);
-  
+
       border: 1px solid $primary;
       border-radius: 1rem;
 
@@ -130,9 +130,10 @@
       .day-content {
         display: none;
         margin: 0.5rem 1rem 1rem;
-
+        
         &.open {
-          display: block;
+          @include flex(column, stretch, stretch);
+          gap: 1rem;
         }
       }
     }

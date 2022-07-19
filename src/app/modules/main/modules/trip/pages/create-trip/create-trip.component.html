@@ -55,7 +55,7 @@
 
       <div class="form-field">
         <label for="days-input">Trip Days</label>
-        <input id="days-input" type="number" />
+        <input id="days-input" value="1" type="number" #days (change)="changeNumberOfDays(+days.value)"/>
       </div>
 
       <div class="form-field">
@@ -65,11 +65,10 @@
 
       <p class="title">Days</p>
 
-      <div class="day-field">
+      <div class="day-field" *ngFor="let day of [].constructor(numberOfDays); let i = index">
         <div class="day-header">
-          <p>Day 1</p>
+          <p>Day {{ i + 1 }}</p>
           <button
-            class="open"
             #openBtn
             (click)="openDayField(openBtn, dayContent)"
           >
@@ -80,7 +79,7 @@
           </button>
         </div>
 
-        <div #dayContent class="day-content open">
+        <div #dayContent class="day-content">
           <div class="form-field">
             <label for="place-input">Place</label>
             <input id="place-input" type="text" />
