@@ -19,14 +19,17 @@
     </button>
   </nav>
 
-  <div class="trip-filter-empty" *ngIf="trips.length === 0; else tripsTemplate">
-    <img
-      src="../../../../../../../assets/main-module/trips/Trip-filter.svg"
-      alt=""
-    />
-  </div>
-
   <div class="trips-container">
+    <div
+      class="trip-filter-empty"
+      *ngIf="trips.length === 0; else tripsTemplate"
+    >
+      <img
+        src="../../../../../../../assets/main-module/trips/Trip-filter.svg"
+        alt=""
+      />
+    </div>
+
     <ng-template #tripsTemplate>
       <app-trip-card
         *ngFor="let trip of trips"
