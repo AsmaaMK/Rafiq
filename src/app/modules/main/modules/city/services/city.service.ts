@@ -33,14 +33,14 @@ export class CityService {
           let cityInfo: CityInfo = {
             name: `${res.results.firstName} ${res.results.lastName}`,
             cover: res.results.images[0],
-            timeZone: res.results.timeZone,
+            timeZone: '22:13',
             country: {
               name: res.results.country.name,
               emergencyNumbers: res.results.country.emergencyNumbers,
             },
             images: res.results.images,
-            population: 0, // TODO: make it dynamic
-            temperature: 50, // TODO: make it dynamic
+            population: res.results.population, 
+            temperature: 30, // TODO: make it dynamic
           };
 
           return cityInfo;

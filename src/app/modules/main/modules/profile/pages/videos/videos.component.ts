@@ -9,12 +9,14 @@ import { UserInfoService } from '../../services/user-info.service';
 })
 export class VideosComponent implements OnInit {
   videos: string[] = [];
+  showSpinner = true;
   userName = this.router.url.split('/')[3];
   constructor(private userService: UserInfoService, private router: Router) {}
 
   ngOnInit(): void {
-    this.userService
-      .getUserVideos(this.userName)
-      .subscribe((res) => (this.videos = res));
+    this.userService.getUserVideos(this.userName).subscribe((res) => {
+      this.videos = res;
+      this.showSpinner = false;
+    });
   }
 }

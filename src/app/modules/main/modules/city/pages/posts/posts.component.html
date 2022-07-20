@@ -5,17 +5,25 @@
       'my-profile-no-posts': isAdmin,
       'not-my-profile-no-posts': !isAdmin
     }"
-    *ngIf="posts.length === 0; else postsSeciton"
+    *ngIf="posts.length === 0 && showSpinner === false"
   >
     <h2>No posts yet</h2>
-    <p *ngIf="isAdmin">
+    <!-- <p *ngIf="isAdmin">
       Press on plus <br />
       to add a new post
-    </p>
+    </p> -->
   </div>
-  <ng-template #postsSeciton>
-    <div class="post" *ngFor="let post of posts">
-      <p>{{ post }}</p>
-    </div>
-  </ng-template>
+
+  <app-loading-spinner
+    [show]="showSpinner"
+    [overlay]="'component'"
+  ></app-loading-spinner>
+
+  <ng-container *ngIf="posts.length">
+    <app-post
+      appIncreasePostViews
+      [postId]="posts[0].postId"
+      [postData]="posts[0]"
+    ></app-post>
+  </ng-container>
 </section>

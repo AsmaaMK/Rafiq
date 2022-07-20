@@ -5,7 +5,7 @@
       'my-profile-no-posts': isMyProfile,
       'not-my-profile-no-posts': !isMyProfile
     }"
-    *ngIf="posts.length === 0; else postsSeciton"
+    *ngIf="posts.length === 0 && !showSpinner; else postsSeciton"
   >
     <h2>No posts yet</h2>
     <p *ngIf="isMyProfile">
@@ -13,6 +13,13 @@
       to add a new post
     </p>
   </div>
+
+  <app-loading-spinner
+    [show]="showSpinner"
+    [overlay]="'component'"
+  ></app-loading-spinner>
+
+
   <ng-template #postsSeciton>
     <ng-container *ngFor="let post of posts; let i = index">
       <app-post

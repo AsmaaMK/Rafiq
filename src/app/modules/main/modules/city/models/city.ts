@@ -37,57 +37,64 @@ type Activity = {
 };
 
 type GetCityInfoResponse = {
-  success: true;
+  success: boolean;
   results: {
     _id: string;
     firstName: string;
     lastName: string;
+    ascii_name: string;
+    native_name: string;
     images: string[];
     location: {
       latitude: number;
       longitude: number;
     };
-    timeZone: Date;
+    timeZone: string | null;
     country: {
+      _id: string;
+      ISONumeric: string;
+      name: string;
+      flag: string;
+      capital: string;
       language: {
         code: string;
         name: string;
+        _id: string;
       };
       currency: {
         code: string;
         name: string;
         symbol: string;
-      };
-      _id: string;
-      name: string;
-      flag: string;
-      capital: string;
-      region: string;
-      emergencyNumbers: {
-        police: number[];
-        ambulance: number[];
-        fire: number[];
         _id: string;
       };
-      __v: 0;
+      region: string;
+      emergencyNumbers: {
+        police: string[];
+        ambulance: string[];
+        fire: string[];
+        _id: string;
+      };
+      __v: number;
     };
-    __v: 0;
+    population: number;
+    __v: number;
+    isAdmin: boolean;
   };
 };
 
 type CityInfo = {
   name: string;
   cover: string;
-  timeZone: Date;
+  timeZone: string | null;
   images: string[];
   population: number;
   temperature: number;
   country: {
     name: string;
     emergencyNumbers: {
-      police: number[];
-      ambulance: number[];
-      fire: number[];
+      police: string[];
+      ambulance: string[];
+      fire: string[];
     };
   };
 };
@@ -137,5 +144,5 @@ export {
   CityInfo,
   GetCityInfoResponse,
   GetHotelsResponse,
-  Hotel
+  Hotel,
 };

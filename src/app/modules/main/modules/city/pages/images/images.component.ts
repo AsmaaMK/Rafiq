@@ -10,13 +10,15 @@ import { CityService } from '../../services/city.service';
 export class ImagesComponent implements OnInit {
   images!: string[];
   cityId!: string;
-
+  showSpinner = true;
+  
   constructor(private cityService: CityService, private router: Router) {}
 
   ngOnInit(): void {
     this.cityId = this.router.url.split('/')[3];
-    this.cityService.getCityInfo(this.cityId).subscribe(res => {
-      this.images = res.images
+    this.cityService.getCityInfo(this.cityId).subscribe((res) => {
+      this.images = res.images;
+      this.showSpinner = false;
     });
   }
 }

@@ -1,7 +1,7 @@
 <section class="images-section">
   <div
     class="no-images-section"
-    *ngIf="images.length === 0; else imagesSeciton"
+    *ngIf="images.length === 0 && showSpinner === false; else imagesSeciton"
   >
     <h2>No images yet</h2>
     <img
@@ -9,13 +9,16 @@
       alt=""
     />
   </div>
+
+  <app-loading-spinner
+    [show]="showSpinner"
+    [overlay]="'component'"
+  ></app-loading-spinner>
+
   <ng-template #imagesSeciton>
-    <div class="images" >
+    <div class="images">
       <div class="image" *ngFor="let image of images">
-        <img
-          [src]="image"
-          alt=""
-        />
+        <img [src]="image" alt="" />
       </div>
     </div>
   </ng-template>

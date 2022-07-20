@@ -2,6 +2,7 @@
 @use "../../components/profile-sections";
 
 .images-section {
+  position: relative;
   height: 100%;
   overflow: auto;
 }

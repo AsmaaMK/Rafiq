@@ -9,12 +9,14 @@ import { UserInfoService } from '../../services/user-info.service';
 })
 export class ImagesComponent implements OnInit {
   images: string[] = [];
+  showSpinner = true;
   userName = this.router.url.split('/')[3];
   constructor(private userService: UserInfoService, private router: Router) {}
 
   ngOnInit(): void {
-    this.userService
-      .getUserImages(this.userName)
-      .subscribe((res) => (this.images = res));
+    this.userService.getUserImages(this.userName).subscribe((res) => {
+      this.images = res;
+      this.showSpinner = false;
+    });
   }
 }

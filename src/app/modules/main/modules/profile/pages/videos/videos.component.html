@@ -1,7 +1,7 @@
 <section class="videos-section">
   <div
     class="no-videos-section"
-    *ngIf="videos.length === 0; else videosSeciton"
+    *ngIf="videos.length === 0 && !showSpinner; else videosSeciton"
   >
     <h2>No videos yet</h2>
     <img
@@ -9,6 +9,12 @@
       alt=""
     />
   </div>
+
+   <app-loading-spinner
+    [show]="showSpinner"
+    [overlay]="'component'"
+  ></app-loading-spinner>
+
   <ng-template #videosSeciton>
     <div class="videos">
       <div class="video" *ngFor="let video of videos">

@@ -166,7 +166,13 @@
     </div>
   </form>
 
-  <app-loading-spinner [show]="showSpinner" [overlay]="'component'"></app-loading-spinner>
+  <div style="height: 100px; position: relative" *ngIf="showSpinner">
+    <app-loading-spinner
+      [show]="showSpinner"
+      [overlay]="'component'"
+      [colored]="false"
+    ></app-loading-spinner>
+  </div>
 
   <section class="hotels" *ngIf="hotels.length">
     <div class="hotel-card" *ngFor="let hotel of hotels">

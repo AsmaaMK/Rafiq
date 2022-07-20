@@ -23,6 +23,7 @@ export class PostsComponent implements OnInit, AfterViewInit, OnDestroy {
   isMyProfile = this.myUserName === this.urlUserName;
 
   posts: POST[] = [];
+  showSpinner = true;
 
   @ViewChildren('lastElement', { read: ElementRef })
   lastElement!: QueryList<ElementRef>;
@@ -53,6 +54,7 @@ export class PostsComponent implements OnInit, AfterViewInit, OnDestroy {
       for (let post of posts) {
         const newPost = new POST(post, this.postService);
         this.posts.push(newPost);
+        this.showSpinner = false;
       }
     });
   }
