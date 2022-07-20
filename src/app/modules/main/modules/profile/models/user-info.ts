@@ -53,3 +53,12 @@ export type UserInfo = {
   userName: string;
   avatar: string;
 };
+
+export type GetUserImagesResponse = {
+  success: boolean;
+  results: {
+    data: {
+      url: string;
+    }[];
+  };
+};

@@ -28,6 +28,8 @@ export class HeaderComponent implements OnInit {
   defaultPersonalImage =
     'assets/main-module/profile/default-personal-image.svg';
   defaultCoverImage = 'assets/main-module/profile/default-cover.svg';
+  showCoverSpinner = false;
+  showAvatarSpinner = false;
 
   userInfo!: UserProfile;
 
@@ -47,9 +49,9 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // this.route.routeReuseStrategy.shouldReuseRoute = function () {
-    //   return false;
-    // };
+    this.route.routeReuseStrategy.shouldReuseRoute = function () {
+      return false;
+    };
 
     // get user info
     this.activatedRoute.data.subscribe((res) => {
@@ -80,11 +82,13 @@ export class HeaderComponent implements OnInit {
 
   changeCover(event: any, popup: HTMLElement) {
     this.closePopup(popup);
+    this.showCoverSpinner = true;
 
     const newCover = event.target.files[0];
     const formData = new FormData();
     formData.append('cover', newCover, newCover.name);
     this.userInfoService.changeCover(formData).subscribe((res) => {
+      this.showCoverSpinner = false;
       this.userInfo.cover = res.cover;
     });
   }
@@ -98,11 +102,13 @@ export class HeaderComponent implements OnInit {
 
   changeAvatar(event: any, popup: HTMLElement) {
     this.closePopup(popup);
+    this.showAvatarSpinner = true;
 
     const newAvatar = event.target.files[0];
     const formData = new FormData();
     formData.append('avatar', newAvatar, newAvatar.name);
     this.userInfoService.changeAvatar(formData).subscribe((res) => {
+      this.showAvatarSpinner = false;
       this.userInfo.avatar = res.avatar;
     });
   }

@@ -1,6 +1,7 @@
 <header class="profile-header">
   <div class="profile-cover" id="profile-cover">
     <div class="clip-path">
+      <app-loading-spinner [show]="showCoverSpinner"></app-loading-spinner>
       <img
         [src]="userInfo.cover"
         alt="cover"
@@ -19,6 +20,7 @@
 
   <div class="profile-info-card" id="profile-info-card">
     <div class="personal-image">
+      <app-loading-spinner [show]="showAvatarSpinner"></app-loading-spinner>
       <img
         [src]="userInfo.avatar"
         alt="personal-image"

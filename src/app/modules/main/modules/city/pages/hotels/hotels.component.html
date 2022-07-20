@@ -166,6 +166,8 @@
     </div>
   </form>
 
+  <app-loading-spinner [show]="showSpinner" [overlay]="'component'"></app-loading-spinner>
+
   <section class="hotels" *ngIf="hotels.length">
     <div class="hotel-card" *ngFor="let hotel of hotels">
       <img [src]="hotel.image" alt="" />
@@ -175,7 +177,10 @@
 
         <div class="row">
           <div class="col review">
-            <p class="number-of-reviews" *ngIf="hotel.numberOfReviews && hotel.reviewScore">
+            <p
+              class="number-of-reviews"
+              *ngIf="hotel.numberOfReviews && hotel.reviewScore"
+            >
               <span>{{ hotel.numberOfReviews }}</span> Reviews
             </p>
 

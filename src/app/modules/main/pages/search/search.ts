@@ -47,6 +47,30 @@ type CitySearchResponse = {
   };
 };
 
+export type CitySearch = {
+  success: boolean;
+  results: {
+    suggestions: {
+      location: {
+        latitude: number;
+        longitude: number;
+      };
+      numberOfFollowers: number;
+      _id: string;
+      firstName: string;
+      lastName: string;
+      ascii_name: string;
+      native_name: string;
+      images: string[];
+      timeZone: string;
+      country: string;
+      admins: string[];
+      population: number;
+      __v: 0;
+    }[];
+  };
+};
+
 type UserSearchResponse = {
   success: true;
   results: {

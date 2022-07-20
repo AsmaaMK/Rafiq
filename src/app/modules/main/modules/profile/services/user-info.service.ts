@@ -4,7 +4,11 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
 import { environment } from 'src/environments/environment';
-import { GetUserInfoResponse, UserProfile } from '../models/user-info';
+import {
+  GetUserImagesResponse,
+  GetUserInfoResponse,
+  UserProfile,
+} from '../models/user-info';
 
 const headers = new HttpHeaders();
 headers
@@ -83,5 +87,29 @@ export class UserInfoService {
     return this.http.delete(`${this.url}/${this.myUserName.value}/avatar`, {
       headers: headers,
     });
+  }
+
+  getUserImages(userName: string): Observable<string[]> {
+    return this.http
+      .get<GetUserImagesResponse>(`${this.url}/${userName}/posts/images`)
+      .pipe(
+        map((res) => {
+          return res.results.data.map((url) => {
+            return url.url;
+          });
+        })
+      );
+  }
+
+  getUserVideos(userName: string): Observable<string[]> {
+    return this.http
+      .get<GetUserImagesResponse>(`${this.url}/${userName}/posts/videos`)
+      .pipe(
+        map((res) => {
+          return res.results.data.map((url) => {
+            return url.url;
+          });
+        })
+      );
   }
 }

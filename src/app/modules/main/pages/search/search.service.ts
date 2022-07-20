@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import {
+  CitySearch,
   CitySearchResponse,
   CitySearchResult,
   UserSearchResponse,
@@ -74,21 +75,18 @@ export class SearchService {
 
   searchCity(searchKeyWord: string): Observable<CitySearchResult[]> {
     return this.http
-      .get<CitySearchResponse>(
-        `${this.url}/liveSearch?type=city&q=${searchKeyWord}`,
-        {
-          headers: headers.append('content-type', 'application/json'),
-        }
-      )
+      .get<CitySearch>(`${this.url}/liveSearch?type=city&q=${searchKeyWord}`, {
+        headers: headers.append('content-type', 'application/json'),
+      })
       .pipe(
         map((res) => {
           const searchResults: CitySearchResult[] = [];
           res.results.suggestions.forEach((result) => {
             searchResults.push({
               city: `${result.firstName} ${result.lastName}`,
-              country: result.country.name,
-              cityId: result._id,
-              image: result.matchedImage,
+              country: result.country,
+              cityId: +result._id,
+              image: result.images[0],
               location: {
                 lat: result.location.latitude,
                 lng: result.location.longitude,

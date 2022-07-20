@@ -7,6 +7,11 @@
   position: absolute;
   z-index: $index-1;
   top: 0;
+
+  img {
+    height: 100%;
+    object-fit: cover;
+  }
 }
 
 .city-info-card {

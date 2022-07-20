@@ -1,7 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
-import { EditInfoService } from './services/edit-info.service';
+import { Router } from '@angular/router';
 import { UserInfoService } from './services/user-info.service';
 
 @Component({
@@ -17,13 +15,11 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private userInfoService: UserInfoService,
-    private route: Router,
-    private activatedRoute: ActivatedRoute,
-    private tokenStorageService: TokenStorageService,
-    private editInfoService: EditInfoService
+    private route: Router
   ) {}
 
   ngOnInit(): void {
+    
   }
 
   @HostListener('window:resize', ['$event'])

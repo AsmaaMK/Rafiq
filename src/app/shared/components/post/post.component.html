@@ -329,7 +329,13 @@
             <div class="post-header">
               <div class="post-author">
                 <div class="post-author__avatar">
-                  <img [src]="postData.authorInfo.avatar" alt="" />
+                  <img
+                    [src]="
+                      postData.authorInfo.avatar ||
+                      'assets/main-module/profile/default-personal-image.svg'
+                    "
+                    alt=""
+                  />
                 </div>
                 <div class="post-author__info">
                   <p class="name">

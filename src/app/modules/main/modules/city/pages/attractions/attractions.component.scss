@@ -30,9 +30,30 @@
   }
 
   .cards-container {
+    // width: 100%;
     @include flex(row, center, stretch);
     flex-wrap: wrap;
     gap: 2rem;
+
+    .no-activities {
+      width: 100%;
+
+      p {
+        color: $primary;
+        font-size: $base-font-size * 1.6;
+        font-weight: bold;
+        text-align: center;
+      }
+
+      img {
+        width: 90%;
+        margin: auto;
+  
+        @include respond-to(medium) {
+          width: 50%;
+        }
+      }
+    }
   }
 
   .card {
@@ -57,7 +78,7 @@
     }
 
     .content {
-      // height: 60%;
+      width: 100%;
       flex: 1;
       padding: 1em;
       @include flex(column, space-between, space-between);

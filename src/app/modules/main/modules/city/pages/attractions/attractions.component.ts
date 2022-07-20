@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { LatLng } from '../../../profile/pages/map/marker';
 import { Activity } from '../../models/city';
@@ -10,9 +10,7 @@ import { CityService } from '../../services/city.service';
   styleUrls: ['./attractions.component.scss'],
 })
 export class AttractionsComponent implements OnInit {
-
   activities!: Activity[];
-  
   cityId = this.router.url.split('/')[3];
   loading = true;
 

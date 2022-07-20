@@ -51,7 +51,7 @@
                 alt=""
               />
             </div>
-            <p>{{ result.city }}, {{ result.country }}</p>
+            <p>{{ result.city }}{{ result.country? ', ' + result.country: '' }}</p>
           </a>
           <a
             class="map-link"

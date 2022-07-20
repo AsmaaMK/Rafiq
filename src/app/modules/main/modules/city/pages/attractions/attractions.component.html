@@ -4,6 +4,10 @@
     overlay="component"
   ></app-loading-spinner>
   <div class="cards-container">
+    <div class="no-activities" *ngIf="activities?.length === 0">
+      <p>No Activities Found</p>
+      <img src="../../../../../../../assets/main-module/city/Empty street-rafiki.svg" alt="">
+    </div>
     <div class="card" *ngFor="let activity of activities">
       <div class="image">
         <img [src]="activity.picture" alt="" />
@@ -11,7 +15,7 @@
       <div class="content">
         <div>
           <p class="name">{{ activity.name }}</p>
-          <p class="description">{{ activity.shortDescription }}</p>
+          <p class="description" [innerHTML]="activity.shortDescription"></p>
         </div>
 
         <div class="row">
