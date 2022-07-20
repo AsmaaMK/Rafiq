@@ -5,6 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 import { ToasterService } from 'src/app/shared/components/toaster/toaster.service';
 import { ToasterType } from 'src/app/shared/models/toaster-status';
 import { CountriesService } from 'src/app/shared/services/countries.service';
+import { RouterExtService } from 'src/app/shared/services/router-ext.service';
 import { EditInfo, SocialLinks, UserProfile } from '../../models/user-info';
 import { EditInfoService } from '../../services/edit-info.service';
 import { UserInfoService } from '../../services/user-info.service';
@@ -33,12 +34,28 @@ export class EditInfoComponent implements OnInit {
     private countriesService: CountriesService,
     private userInfoService: UserInfoService,
     private router: Router,
+    private routerExtService: RouterExtService,
     private toasterService: ToasterService
   ) {}
 
   ngOnInit(): void {
     this.getInfo();
     this.formInit();
+  }
+
+  back() {
+    const prevURL = this.routerExtService.getPreviousUrl();
+    this.userInfoService
+      .getUserProfile(this.userInfoService.myUserName.value)
+      .subscribe((res) => {
+        this.userInfoService.myInfo.next(res);
+        const myUrl = this.router.url;
+        this.router
+          .navigateByUrl('/RefreshComponent', { skipLocationChange: true })
+          .then(() => {
+            this.router.navigate([myUrl]);
+          });
+      });
   }
 
   getInfo() {

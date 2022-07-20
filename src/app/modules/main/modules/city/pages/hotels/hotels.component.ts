@@ -71,64 +71,16 @@ export class HotelsComponent implements OnInit {
       params.push({ key: key, value: paramValue });
     }
 
-    this.cityService.getHotels(this.cityId, params).subscribe((res) => {
-      this.hotels = res;
+    // this.cityService.getHotels(this.cityId, params).subscribe((res) => {
+    //   this.hotels = res;
+    //   this.showSpinner = false;
+    // });
+
+    setTimeout(() => {
       this.showSpinner = false;
-      
-      if (this.hotels.length === 0)
-        this.hotels = [
-          {
-            address: 'Agouza, Cairo',
-            bookingLink: '',
-            image: 'assets/main-module/city/hotel1.webp',
-            name: 'Zayed Hotel',
-            numberOfReviews: 604,
-            price: 35.065,
-            reviewScore: 7.9,
-            reviewScoreWord: 'Good',
-          },
-          {
-            address: 'Al Mamurah, Alexandria',
-            bookingLink: '',
-            image: 'assets/main-module/city/hotel2.webp',
-            name: 'Helnan Mamoura Hotel & Events Center',
-            numberOfReviews: 9,
-            price: 86.093,
-            reviewScore: 9.9,
-            reviewScoreWord: 'Good',
-          },
-          {
-            address: 'Ras Sedr',
-            bookingLink: '',
-            image: 'assets/main-module/city/hotel3.webp',
-            name: 'Mousa Coast Chalets & Villas (Managed By Mousa Coast)',
-            numberOfReviews: 28.905,
-            price: 157,
-            reviewScore: 4.5,
-            reviewScoreWord: 'Bad',
-          },
-          {
-            address: 'address address address address',
-            bookingLink: '',
-            image: 'assets/main-module/post-images/Albania2.png',
-            name: 'Hotel Soka',
-            numberOfReviews: 4,
-            price: 455,
-            reviewScore: 23,
-            reviewScoreWord: 'good',
-          },
-          {
-            address: 'address address address address',
-            bookingLink: '',
-            image: 'assets/main-module/post-images/Albania2.png',
-            name: 'Hotel Soka',
-            numberOfReviews: 4,
-            price: 455,
-            reviewScore: 23,
-            reviewScoreWord: 'good',
-          },
-        ];
-    });
+      this.hotels = this.cityService.findHotels();
+    }, 1000);
+
   }
 
   changeNumberOfChildren(number: number) {
