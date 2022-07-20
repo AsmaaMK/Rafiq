@@ -59,7 +59,7 @@
           </div>
 
           <div class="price-and-booking">
-            <p class="price">{{ activity.price | currency }}</p>
+            <p class="price" *ngIf="activity.price > 0">{{ activity.price | currency }}</p>
             <a
               [href]="activity.bookingLink"
               target="_blank"
