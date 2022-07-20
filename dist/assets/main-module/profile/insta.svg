@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_556" data-name="Rectangle 556" width="32" height="32" transform="translate(898 1034)" fill="#fff" stroke="#707070" stroke-width="1"/>
+    </clipPath>
+    <linearGradient id="linear-gradient" x1="0.5" y1="-0.007" x2="0.5" y2="1.017" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#5b618a"/>
+      <stop offset="0.49" stop-color="#bcb5cd"/>
+      <stop offset="0.734" stop-color="#be8cd5"/>
+      <stop offset="1" stop-color="#c415ec"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="0.5" y1="-0.032" x2="0.5" y2="1.026" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#5b618a"/>
+      <stop offset="0.674" stop-color="#bd7ecf"/>
+      <stop offset="1" stop-color="#ba15e6"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-3" y1="-0.375" y2="1.342" xlink:href="#linear-gradient-2"/>
+  </defs>
+  <g id="insta" transform="translate(-898 -1034)" clip-path="url(#clip-path)">
+    <g id="instagram" transform="translate(898 1034)">
+      <path id="Path_5881" data-name="Path 5881" d="M28.71,36.977H13.447A8.277,8.277,0,0,1,5.18,28.71V13.447A8.277,8.277,0,0,1,13.447,5.18H28.71a8.277,8.277,0,0,1,8.267,8.267V28.71A8.277,8.277,0,0,1,28.71,36.977ZM13.447,6.9A6.264,6.264,0,0,0,6.9,13.447V28.71a6.264,6.264,0,0,0,6.549,6.548H28.71a6.264,6.264,0,0,0,6.548-6.548V13.447A6.264,6.264,0,0,0,28.71,6.9Z" transform="translate(-5.18 -5.18)" fill="url(#linear-gradient)"/>
+      <path id="Path_5882" data-name="Path 5882" d="M22.327,30.594a8.267,8.267,0,1,1,8.267-8.267A8.277,8.277,0,0,1,22.327,30.594Zm0-13.991a5.723,5.723,0,1,0,5.723,5.723A5.73,5.73,0,0,0,22.327,16.6Z" transform="translate(-6.429 -6.429)" fill="url(#linear-gradient-2)"/>
+      <path id="Path_5883" data-name="Path 5883" d="M33.728,11.1a1.908,1.908,0,1,0,1.908,1.908A1.908,1.908,0,0,0,33.728,11.1Z" transform="translate(-8.926 -6.013)" fill="url(#linear-gradient-3)"/>
+    </g>
+  </g>
+</svg>

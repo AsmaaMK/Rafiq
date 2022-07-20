@@ -21,4 +21,25 @@ type TripDay = {
   description: string;
 }
 
-export {TripInfo, TripDay}
+type TripData = {
+  creatorInfo: {
+    userName: string;
+    firstName: string;
+    lastName: string;
+    avatar: string;
+  };
+  images: string[];
+  country: string;
+  city: string;
+  description: string;
+  totalPrice: number;
+  rating: number;
+  locations: {
+    coordinates: string;
+    description: string;
+    transportation: string;
+    price: number;
+  }[];
+};
+
+export {TripInfo, TripDay, TripData}

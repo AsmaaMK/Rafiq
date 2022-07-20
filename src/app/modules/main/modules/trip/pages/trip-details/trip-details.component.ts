@@ -12,12 +12,9 @@ export class TripDetailsComponent implements OnInit {
     days: TripDay[];
   } = {
     tripInfo: {
-      city: 'Ismailia',
+      city: 'Aswan',
       country: 'Egypt',
-      description: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga voluptates
-        nostrum necessitatibus! Voluptatem eligendi vitae temporibus in odio
-        sunt! At saepe placeat voluptatibus alias ad minus necessitatibus
-        mollitia ipsa facere.`,
+      description: `Aswan is known for its beautiful Nile Valley scenery, significant archaeological sites and its peaceful aura. Its weather is warm all year round, which makes it a perfect winter destination.`,
       owner: {
         username: 'asmaamk',
         firstName: 'Asmaa',
@@ -32,14 +29,18 @@ export class TripDetailsComponent implements OnInit {
     },
     days: [
       {
-        place: 'Abu Simbel',
+        place: 'Full-Day Guided Tour of Abu Simbel Temples',
         price: 50,
-        description: `Built by Ramses II, and saved from destruction by a remarkable UNESCO rescue project in the 1970s, Abu Simbel is not only a triumph of ancient architecture, but also of modern engineering.`,
+        description: `
+Aswan: Full-Day Guided Tour of Abu Simbel Temples
+Explore the 2 temples of Abu Simbel, on this full-day tour of the Nubian Monuments. Learn about the fascinating history of Egyptian Pharaoh Ramses II from your expert local guide.`,
       },
       {
-        place: 'Abu Simbel',
-        price: 50,
-        description: `Built by Ramses II, and saved from destruction by a remarkable UNESCO rescue project in the 1970s, Abu Simbel is not only a triumph of ancient architecture, but also of modern engineering.`,
+        place: 'Boat Trip to the Nubian Village',
+        price: 250,
+        description: `
+Aswan: Boat Trip to the Nubian Village
+Take a trip through the Nile to visit the Nubian village. Experience the local life, enjoy a Nubian drink in one of the houses and get to pet the crocodiles.`,
       },
     ],
   };
