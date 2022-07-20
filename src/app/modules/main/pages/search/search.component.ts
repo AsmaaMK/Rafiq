@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CitySearchResult, UserSearchResult } from './search';
 import { SearchService } from './search.service';
 
@@ -13,7 +14,7 @@ export class SearchComponent implements OnInit {
   userSearchResults: UserSearchResult[] = [];
   searching = false;
 
-  constructor(private searchService: SearchService) {}
+  constructor(private searchService: SearchService, private router: Router) {}
 
   ngOnInit(): void {}
 
@@ -23,7 +24,9 @@ export class SearchComponent implements OnInit {
     const formData = new FormData();
     formData.append('query', image);
 
-    this.searchService.searchByImage(formData).subscribe((res) => {
+    const url = window.location.href;
+
+    this.searchService.searchByImage(url, formData).subscribe((res) => {
       this.citySearchResults = res;
       event.target.value = '';
       this.searching = false;

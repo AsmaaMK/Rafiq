@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { hosts } from 'src/environments/hosts';
 import {
   CitySearch,
   CitySearchResponse,
@@ -23,9 +24,13 @@ export class SearchService {
 
   constructor(private http: HttpClient) {}
 
-  searchByImage(image: FormData): Observable<CitySearchResult[]> {
+  searchByImage(url: string, image: FormData): Observable<CitySearchResult[]> {
+    const host = url.includes('http://localhost')
+      ? hosts.localhost
+      : hosts.remotehost;
+
     return this.http
-      .post<CitySearchResponse>(`${this.url}/image`, image, {
+      .post<CitySearchResponse>(`${host}/api/v1/search/image`, image, {
         headers: headers,
       })
       .pipe(
