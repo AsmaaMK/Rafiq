@@ -65,6 +65,8 @@ export class ResetPasswordComponent implements OnInit {
     const password = this.resetPasswordForm.value.password;
     const confirmPassword = this.resetPasswordForm.value.confirmPassword;
 
+    this.router.navigate(['/auth/login']);
+
     this.auth.resetPassword({ resetToken, password, confirmPassword })
       .subscribe(
         res => {

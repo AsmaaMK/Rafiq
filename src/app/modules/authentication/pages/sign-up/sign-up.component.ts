@@ -137,7 +137,7 @@ export class SignUpComponent implements OnInit {
           this.auth.isLoggedIn$.next(true);
         }
 
-        this.router.navigate(['/app/home']);
+        this.router.navigate(['/auth/login']);
       },
       err => {
         console.warn(err.error?.error.message);

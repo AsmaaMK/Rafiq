@@ -51,10 +51,10 @@ export class PostsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   getInitialPosts() {
     this.postService.getInitialPosts(this.urlUserName).subscribe((posts) => {
+      this.showSpinner = false;
       for (let post of posts) {
         const newPost = new POST(post, this.postService);
         this.posts.push(newPost);
-        this.showSpinner = false;
       }
     });
   }

@@ -8,15 +8,18 @@ import { PostService } from '../../../../shared/components/post/post.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  constructor(private postService: PostService) {}
-
   posts: POST[] = [];
+  showSpinner = true;
+
+  constructor(private postService: PostService) {}
 
   ngOnInit(): void {
     this.postService.getNewsfeed().subscribe((res) => {
       res.forEach((post) => {
         this.posts.push(new POST(post, this.postService));
       });
+
+      this.showSpinner = false;
     });
   }
 }
