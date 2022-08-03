@@ -1,8 +1,8 @@
 # Rafiq
 Online platform to connect travel geeks, it has social media and other tools to help travelers.
 
-<!-- ![Design preview for Rafiq webapp](./src/assets/preview.png) -->
-![Video preview](./src/assets/preview.mp4)
+![Design preview for Rafiq webapp](./src/assets/preview.png)
+<!-- ![Video preview](./src/assets/preview.mp4) -->
 
 
 ## Links
